@@ -4,8 +4,8 @@ Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.5
-Stable tag: 7.1.2
+Tested up to: 6.6
+Stable tag: 7.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -256,9 +256,13 @@ How to install Ajax Load More.
 2. Repeater Templates: Manage the front-end display and styling of Ajax loaded content.
 3. Custom Repeaters: Unlock the ability to create an infinite number of Repeater Templates.
 4. Shortcode Builder: Create complex WordPress queries in seconds using the intuitive Shortcode Builder.
-5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress content editor or a theme template file.
+5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.1.3 - October 1, 2024 =
+* UPDATE: Various security fixes.
+
 
 = 7.1.2 - May 30, 2024 =
 * FIX: Fixed issue with full article loading in Next Page add-on.

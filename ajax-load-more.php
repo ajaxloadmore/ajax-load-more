@@ -7,7 +7,7 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.1.2
+ * Version: 7.1.3
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
@@ -40,8 +40,8 @@ NEXT PAGE
 
 */
 
-define( 'ALM_VERSION', '7.1.2' );
-define( 'ALM_RELEASE', 'May 30, 2024' );
+define( 'ALM_VERSION', '7.1.3' );
+define( 'ALM_RELEASE', 'October 1, 2024' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
@@ -188,11 +188,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_TABS_ITEM_NAME' ) ) {
 				define( 'ALM_TABS_ITEM_NAME', '54855' );
 			}
+			if ( ! defined( 'ALM_TEMPLATES_ITEM_NAME' ) ) {
+				define( 'ALM_TEMPLATES_ITEM_NAME', '0000' );
+			}
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
-			}
-			if ( ! defined( 'ALM_TEMPLATES_ITEM_NAME' ) ) {
-				define( 'ALM_TEMPLATES_ITEM_NAME', '8860' );
 			}
 			if ( ! defined( 'ALM_USERS_ITEM_NAME' ) ) {
 				define( 'ALM_USERS_ITEM_NAME', '32311' );
