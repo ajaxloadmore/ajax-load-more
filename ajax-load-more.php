@@ -78,7 +78,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ &$this, 'alm_shortcode' ] );
-			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 		}
 
 		/**
