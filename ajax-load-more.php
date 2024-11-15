@@ -4,18 +4,17 @@
  * Plugin URI: https://connekthq.com/plugins/ajax-load-more
  * Description: The ultimate solution to add infinite scroll and load more functionality to your website.
  * Text Domain: ajax-load-more
- * Author: Darren Cooney
- * Twitter: @KaptonKaos
+ * Author: Erick Danzer
  * Author URI: https://connekthq.com
  * Version: 7.1.4
  * License: GPL
- * Copyright: Darren Cooney & Connekt Media
+ * Copyright: Erick Danzer & AjaxWP LLC
  *
  * @package AjaxLoadMore
  */
 
 define( 'ALM_VERSION', '7.1.4' );
-define( 'ALM_RELEASE', 'October 1, 2024' );
+define( 'ALM_RELEASE', 'November 14, 2024' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
