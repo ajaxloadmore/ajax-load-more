@@ -28,7 +28,7 @@
 		"and_chr >= 2.3"
 	],
 	"dependencies": {
-		"crypto-js": "^4.1.1",
+		"crypto-js": "^4.2.0",
 		"focus-options-polyfill": "^1.4.0"
 	},
 	"devDependencies": {
