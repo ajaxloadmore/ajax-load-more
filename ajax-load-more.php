@@ -7,58 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.1.3
+ * Version: 7.1.4
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-/*
-* UPDATE: Updated Axios HTTP library to latest version.
-* UPDATE: Added feature to re-save default Repeater Template if template was deleted from the filesystem.
-* UDPATE: Modified the `alm` db columns to match upcoming Templates add-on requirements.
-* UPDATE: Added functionality required for Elementor Add-on update to support loading previous posts on paged results.
-* UPDATE: Started integration with Query Loop block and Ajax Load More.
-* FIX: Fixed z-index issue with ALM navigation in WP admin.
-* FIX: Added fix for `load_plugin_textdomain` php notice.
-* FIX: Fixed issue with Preloaded amount being 0 and no post remaining.
-* FIX: Fixed issue with Comments add-on and allowing for a default post ID.
-* UPDATE: Code cleanup and other minor bug fixes.
-* UPDATE: Various admin UI/UX updates.
-
-ADD-ONS
-
-ELEMENTOR
-* NEW: Added new functionality to load previous posts on paged results.
-* UPDATE: Code cleanup.
-* TODO: Updated Elementor tested up to version.
-
-NEXT PAGE
-* UPDATE: Add default Next Page shortcode when selecting a post type in the ALM setting section.
-* FIX: Fixed issue with Next page settings not functioning correctly.
-
-SINGLE POSTS - 1.7.1
-* FIX: Fixed issue with reading progress bar not working correctly on Elementor single templates.
-* UPDATE: Code cleanup.
-
-COMMENTS
-* UPDATE: Added fix to set the default `comments_post_id` to the current post ID.
-* UPDATE: Code cleanup.
-
-
-TODO:
-- Cache button not updating with Elementor and Query Loop add-ons.
-  - This is tricky, might have to remove the Cache functionality from Elementor and QueryLoop as we don't parse the page content.
-  - Might need to pass additional parameters to the cache file, which might not be ideal.
-- Fix issue with loading Query Loop and Ajax Load More in the WP admin. [DONE]
-- Create Query Loop add-on plugin
-- Add JS to update the URL
-- Add Previous post loader if hitting a paged url.
-*/
-
-define( 'ALM_VERSION', '7.1.3' );
-define( 'ALM_RELEASE', 'October 1, 2024' );
+define( 'ALM_VERSION', '7.1.4' );
+define( 'ALM_RELEASE', 'December 4, 2024' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
