@@ -85,8 +85,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'nested'                       => false,
 						'woo'                          => false,
 						'woo_template'                 => '',
-						'query_loop'                   => false,
-						'query_loop_id'                => false,
+						'queryloop'                    => false,
 						'layouts'                      => false,
 						'layouts_cols'                 => '3',
 						'layouts_gap'                  => 'default',
@@ -258,8 +257,8 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$id   = sanitize_key( $id );
 			$vars = self::alm_strip_tags( $vars );
 
-			// Query Loop
-			$query_loop = $query_loop === 'true';
+			// Query Loop.
+			$queryloop = $queryloop === 'true';
 
 			// Elementor.
 			$elementor = $elementor === 'true' ? 'single' : $elementor;
@@ -556,7 +555,12 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			// ALM Direction.
 			$alm_direction = $scroll_direction ? ' alm-' . $scroll_direction : '';
 
-			// Append Inline CSS.
+			// Start $ajaxloadmore element.
+			$ajaxloadmore .= '<div id="' . esc_attr( $div_id ) . '" class="' . esc_attr( $alm_wrapper_class ) . esc_attr( $wrapper_classes ) . esc_attr( $alm_loading_style ) . esc_attr( $paging_color ) . esc_attr( $alm_layouts ) . esc_attr( $alm_direction ) . '" ' . $unique_id . ' data-alm-id="" data-canonical-url="' . esc_attr( $canonical_url ) . '" data-slug="' . esc_attr( $slug ) . '" data-post-id="' . esc_attr( $post_id ) . '" ' . wp_kses_post( $is_search ) . esc_attr( $is_nested ) . ' data-localized="' . alm_convert_dashes_to_underscore( $localize_id ) . '_vars" data-alm-object="' . alm_convert_dashes_to_underscore( $localize_id ) . '">';
+
+			/**
+			 * ALM Inline CSS.
+			 */
 			$ajaxloadmore .= $inline_css . $inline_layouts_css . $inline_paging_css . $inline_single_posts_css;
 
 			// Horizontal Scroll CSS.
@@ -564,9 +568,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				// Add style for overflow style of the container.
 				$ajaxloadmore .= '<style>' . $scroll_container . '{ height: auto; width: 100%; overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch; }</style>';
 			}
-
-			// Start $ajaxloadmore element.
-			$ajaxloadmore .= '<div id="' . esc_attr( $div_id ) . '" class="' . esc_attr( $alm_wrapper_class ) . esc_attr( $wrapper_classes ) . esc_attr( $alm_loading_style ) . esc_attr( $paging_color ) . esc_attr( $alm_layouts ) . esc_attr( $alm_direction ) . '" ' . $unique_id . ' data-alm-id="" data-canonical-url="' . esc_attr( $canonical_url ) . '" data-slug="' . esc_attr( $slug ) . '" data-post-id="' . esc_attr( $post_id ) . '" ' . wp_kses_post( $is_search ) . esc_attr( $is_nested ) . ' data-localized="' . alm_convert_dashes_to_underscore( $localize_id ) . '_vars" data-alm-object="' . alm_convert_dashes_to_underscore( $localize_id ) . '">';
 
 			// Masonry Hook (Before).
 			$ajaxloadmore .= apply_filters( 'alm_masonry_before', $transition );
@@ -844,9 +845,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			// Build container data atts.
 
-			if( $query_loop && $query_loop_id ) {
+			// Query loop.
+			if( $queryloop) {
 				$ajaxloadmore .= ' data-query-loop="true"';
-				$ajaxloadmore .= ' data-query-loop-id="' . esc_attr( $query_loop_id ) . '"';
 			}
 
 			// Advanced Custom Fields Extension.

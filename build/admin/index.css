@@ -698,7 +698,7 @@ disabled look for disabled choices in the results dropdown
     padding: 0;
     border: 1px solid #efefef;
     border-right: none;
-    border-radius: 8px 8px 0 8px;
+    border-radius: 6px 6px 0 6px;
     position: relative;
     z-index: 1;
     margin: 0;
@@ -727,7 +727,7 @@ disabled look for disabled choices in the results dropdown
   }
   .ajax-load-more .alm-tabbed-wrapper--nav ul li:first-of-type button {
     border-top: 1px solid #efefef;
-    border-radius: 8px 0 0 0;
+    border-radius: 6px 0 0 0;
   }
 }
 @media screen and (max-width: 640px) {
@@ -796,7 +796,7 @@ disabled look for disabled choices in the results dropdown
 }
 @media screen and (min-width: 640px) {
   .ajax-load-more .alm-tabbed-wrapper--sections {
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 6px 6px 0;
   }
 }
 .ajax-load-more .alm-tabbed-wrapper--section {
@@ -861,28 +861,28 @@ disabled look for disabled choices in the results dropdown
   cursor: default;
 }
 
-.alm-cache {
+.alm-cache .cnkt-main {
   /* Live Search */
   /* Directory Listing */
 }
-.alm-cache .group .row {
+.alm-cache .cnkt-main .group .row {
   overflow: visible;
 }
-.alm-cache .row:first-of-type {
+.alm-cache .cnkt-main .row:first-of-type {
   margin-top: 0 !important;
 }
-.alm-cache h3.heading {
+.alm-cache .cnkt-main h3.heading {
   padding-right: 90px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.alm-cache .alm-cache-search-wrap {
+.alm-cache .cnkt-main .alm-cache-search-wrap {
   position: relative;
   display: block;
   margin: 0 0 15px;
 }
-.alm-cache .alm-cache-search-wrap input {
+.alm-cache .cnkt-main .alm-cache-search-wrap input {
   width: 100% !important;
   margin: 0 !important;
   padding: 13px 20px;
@@ -891,7 +891,7 @@ disabled look for disabled choices in the results dropdown
   border-radius: 3px;
   background-color: #f7f7f7;
 }
-.alm-cache .alm-cache-search-wrap i {
+.alm-cache .cnkt-main .alm-cache-search-wrap i {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -900,49 +900,49 @@ disabled look for disabled choices in the results dropdown
   font-size: 16px;
   z-index: 1;
 }
-.alm-cache .alm-cache-listing {
+.alm-cache .cnkt-main .alm-cache-listing {
   position: relative;
 }
-.alm-cache .alm-cache-listing .toggle-all {
+.alm-cache .cnkt-main .alm-cache-listing .toggle-all {
   right: 0;
   top: -45px;
 }
-.alm-cache hr {
+.alm-cache .cnkt-main hr {
   margin: 32px 0 25px;
   border-top-color: #efefef;
   border-bottom: none;
 }
-.alm-cache .alm-dir-listing {
+.alm-cache .cnkt-main .alm-dir-listing {
   border: 1px solid #e7e7e7;
   border-radius: 3px;
   overflow: hidden;
   padding: 0;
   margin: 10px 0 0;
 }
-.alm-cache .alm-dir-listing--nested {
+.alm-cache .cnkt-main .alm-dir-listing--nested {
   padding: 0 15px 15px;
 }
-.alm-cache .alm-dir-listing--nested .alm-dir-listing {
+.alm-cache .cnkt-main .alm-dir-listing--nested .alm-dir-listing {
   margin: 0;
 }
-.alm-cache .alm-dir-listing.deleting {
+.alm-cache .cnkt-main .alm-dir-listing.deleting {
   opacity: 0.5;
   background: #fff url(../admin/img/ui/loader-unlimited.gif) no-repeat center center;
 }
-.alm-cache .alm-dir-listing .dir-title {
+.alm-cache .cnkt-main .alm-dir-listing .dir-title {
   margin: 0 0 5px;
   position: relative;
 }
-.alm-cache .alm-dir-listing h3.heading {
+.alm-cache .cnkt-main .alm-dir-listing h3.heading {
   padding-left: 40px !important;
 }
-.alm-cache .alm-dir-listing h3.heading::after {
+.alm-cache .cnkt-main .alm-dir-listing h3.heading::after {
   content: "\f07c";
 }
-.alm-cache .alm-dir-listing h3.heading.open:after {
+.alm-cache .cnkt-main .alm-dir-listing h3.heading.open:after {
   content: "\f07b";
 }
-.alm-cache .alm-dir-listing .dir-title .delete {
+.alm-cache .cnkt-main .alm-dir-listing .dir-title .delete {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -954,17 +954,17 @@ disabled look for disabled choices in the results dropdown
   color: #ccc;
   border-radius: 3px;
 }
-.alm-cache .alm-dir-listing:hover .dir-title .delete {
+.alm-cache .cnkt-main .alm-dir-listing:hover .dir-title .delete {
   border-color: #e7e7e7;
   background-color: #fff;
   color: #666;
 }
-.alm-cache .alm-dir-listing:hover .dir-title .delete:hover, .alm-cache .alm-dir-listing:hover .dir-title .delete:focus {
+.alm-cache .cnkt-main .alm-dir-listing:hover .dir-title .delete:hover, .alm-cache .cnkt-main .alm-dir-listing:hover .dir-title .delete:focus {
   background-color: #c94141;
   border-color: #c94141;
   color: #fff;
 }
-.alm-cache .cache-page-title {
+.alm-cache .cnkt-main .cache-page-title {
   font-size: 12px;
   display: block;
   width: 100%;
@@ -972,18 +972,18 @@ disabled look for disabled choices in the results dropdown
   font-weight: 700;
   text-transform: uppercase;
 }
-.alm-cache .cache-page-wrap {
+.alm-cache .cnkt-main .cache-page-wrap {
   padding: 5px 12px 20px;
 }
-ß .alm-cache .cache-page-wrap ul {
+ß .alm-cache .cnkt-main .cache-page-wrap ul {
   max-height: 300px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
-.alm-cache .cache-full-path {
+.alm-cache .cnkt-main .cache-full-path {
   display: none;
 }
-.alm-cache .cache-full-path-button {
+.alm-cache .cnkt-main .cache-full-path-button {
   border: 1px solid #efefef;
   border-radius: 3px;
   background: #fff;
@@ -994,16 +994,16 @@ disabled look for disabled choices in the results dropdown
   font-size: 13px;
   padding: 2px 4px;
 }
-.alm-cache .cache-full-path-button:hover, .alm-cache .cache-full-path-button:focus {
+.alm-cache .cnkt-main .cache-full-path-button:hover, .alm-cache .cnkt-main .cache-full-path-button:focus {
   border-color: #e7e7e7;
 }
-.alm-cache .alm-dir-listing ul.cache-details {
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details {
   display: block;
   padding: 20px 15px 0;
   margin: 0;
   border: none;
 }
-.alm-cache .alm-dir-listing ul.cache-details li {
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details li {
   position: relative;
   display: block;
   width: 100%;
@@ -1011,24 +1011,24 @@ disabled look for disabled choices in the results dropdown
   padding: 0 10px 0 28px;
   margin: 0 0 10px;
 }
-.alm-cache .alm-dir-listing ul.cache-details li i {
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details li i {
   color: #999;
   font-size: 16px;
   position: absolute;
   top: 1px;
   left: 5px;
 }
-.alm-cache .alm-dir-listing ul.cache-details li a {
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details li a {
   word-break: break-word;
 }
-.alm-cache p.cache-stats {
+.alm-cache .cnkt-main p.cache-stats {
   min-height: 38px;
   line-height: 37px;
   display: block;
   padding: 0;
   margin: 0;
 }
-.alm-cache p.cache-stats span {
+.alm-cache .cnkt-main p.cache-stats span {
   display: inline-block;
   width: 38px;
   height: 38px;
@@ -1063,6 +1063,9 @@ disabled look for disabled choices in the results dropdown
 }
 .ajax-load-more .CodeMirror pre {
   padding: 0 10px;
+}
+.ajax-load-more .CodeMirror .CodeMirror-scroll {
+  padding-bottom: 50px !important;
 }
 
 .ajax-load-more .cm-readonly .CodeMirror {
@@ -1160,7 +1163,7 @@ disabled look for disabled choices in the results dropdown
 .ajax-load-more .alm-cta-upgrade {
   padding: 5px;
   border: 1px solid #e7e7e7;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: #fff;
 }
 .ajax-load-more .alm-cta-upgrade a {
@@ -2108,7 +2111,7 @@ disabled look for disabled choices in the results dropdown
   border-top: 1px solid #e7e7e7;
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.025);
   background: #f7f7f7;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 6px 6px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -2367,10 +2370,9 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.notice-success,
 .ajax-load-more div.notice-updated,
 .ajax-load-more div.notice-error {
-  margin: 5px 0;
-  border-radius: 3px;
+  border-radius: 6px;
   overflow: hidden;
-  padding: 5px 10px;
+  padding: 10px 15px;
 }
 .ajax-load-more .notice p,
 .ajax-load-more div.updated p,
@@ -2378,7 +2380,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.notice-success p,
 .ajax-load-more div.notice-updated p,
 .ajax-load-more div.notice-error p {
-  margin: 0.5em 0;
+  margin: 10px 0;
 }
 .ajax-load-more .notice .notice-dismiss,
 .ajax-load-more div.updated .notice-dismiss,
@@ -3663,7 +3665,7 @@ hr.indented {
   background: #fff;
   padding: 20px;
   border: 1px solid #e7e7e7;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-bottom: 30px;
 }
 @media screen and (min-width: 900px) {
@@ -3699,7 +3701,7 @@ hr.indented {
 .ajax-load-more .cnkt-main .alm-content-wrap {
   border: 1px solid #e7e7e7;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 20px;
   position: relative;
 }
@@ -3821,7 +3823,7 @@ hr.indented {
   margin-bottom: 20px;
   background-color: #f7f7f7;
   box-shadow: inset 0 0 0 10px #fff;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 10px;
 }
 @media screen and (min-width: 640px) {
@@ -3859,7 +3861,7 @@ hr.indented {
 }
 #alm-add-ons .group.highlighted a, #alm-add-ons .group.extend a, #alm-add-ons .group.alm-pro-hero a {
   background: #f7f7f7;
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: inset 0 0 0 10px #fff;
 }
 #alm-add-ons .group.highlighted img, #alm-add-ons .group.extend img, #alm-add-ons .group.alm-pro-hero img {
@@ -4029,7 +4031,7 @@ hr.indented {
 .ajax-load-more .call-out {
   background: #bb8dd2;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -4215,7 +4217,7 @@ span.cnkt-button.installed,
   position: relative;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.035);
   border: 1px solid #e7e7e7;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 .ajax-load-more .cnkt-sidebar .cta:first-of-type {
   margin-top: 0;
@@ -4255,14 +4257,14 @@ span.cnkt-button.installed,
 }
 
 .ajax-load-more .cnkt-sidebar h3 {
-  padding: 20px 0;
+  padding: 15px 0;
   margin: 0;
   display: block;
   font-size: 15px;
   text-transform: none;
   border-bottom: 1px solid #efefef;
   margin: 0 20px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .ajax-load-more .cnkt-sidebar .item {

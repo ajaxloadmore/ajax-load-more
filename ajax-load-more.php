@@ -15,29 +15,46 @@
  */
 
 /*
-
 * UPDATE: Updated Axios HTTP library to latest version.
-* UPDATE: Various admin UI/UX updates.
 * UPDATE: Added feature to re-save default Repeater Template if template was deleted from the filesystem.
-* UDPATE: Modified the `alm` db columns to match new Templates add-on requirements.
+* UDPATE: Modified the `alm` db columns to match upcoming Templates add-on requirements.
+* UPDATE: Added functionality required for Elementor Add-on update to support loading previous posts on paged results.
+* UPDATE: Started integration with Query Loop block and Ajax Load More.
 * FIX: Fixed z-index issue with ALM navigation in WP admin.
-* UPDATE: Added functionality requred for Elementor Add-on update to support loading previous posts on paged results.
-
-TODO:
-- Update ALM_TEMPLATES_ITEM_NAME by creating a new item in the store.
-- Remove templates load line -> alm_get_current_repeater() in functions.php
+* FIX: Added fix for `load_plugin_textdomain` php notice.
+* FIX: Fixed issue with Preloaded amount being 0 and no post remaining.
+* FIX: Fixed issue with Comments add-on and allowing for a default post ID.
+* UPDATE: Code cleanup and other minor bug fixes.
+* UPDATE: Various admin UI/UX updates.
 
 ADD-ONS
 
 ELEMENTOR
 * NEW: Added new functionality to load previous posts on paged results.
-* Code cleanup.
+* UPDATE: Code cleanup.
 * TODO: Updated Elementor tested up to version.
 
 NEXT PAGE
-* UPDATE - Add default Next Page shortcode when selecting a post type in the ALM setting section.
-* FIX - Fixed issue with Next page settings not functioning correctly.
+* UPDATE: Add default Next Page shortcode when selecting a post type in the ALM setting section.
+* FIX: Fixed issue with Next page settings not functioning correctly.
 
+SINGLE POSTS - 1.7.1
+* FIX: Fixed issue with reading progress bar not working correctly on Elementor single templates.
+* UPDATE: Code cleanup.
+
+COMMENTS
+* UPDATE: Added fix to set the default `comments_post_id` to the current post ID.
+* UPDATE: Code cleanup.
+
+
+TODO:
+- Cache button not updating with Elementor and Query Loop add-ons.
+  - This is tricky, might have to remove the Cache functionality from Elementor and QueryLoop as we don't parse the page content.
+  - Might need to pass additional parameters to the cache file, which might not be ideal.
+- Fix issue with loading Query Loop and Ajax Load More in the WP admin. [DONE]
+- Create Query Loop add-on plugin
+- Add JS to update the URL
+- Add Previous post loader if hitting a paged url.
 */
 
 define( 'ALM_VERSION', '7.1.3' );
@@ -103,6 +120,15 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ &$this, 'alm_shortcode' ] );
+			add_action( 'init', [ &$this, 'alm_init' ] );
+		}
+
+		/**
+		 * Initialize the plugin.
+		 *
+		 * @return void
+		 */
+		public function alm_init() {
 			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 		}
 
@@ -187,9 +213,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			}
 			if ( ! defined( 'ALM_TABS_ITEM_NAME' ) ) {
 				define( 'ALM_TABS_ITEM_NAME', '54855' );
-			}
-			if ( ! defined( 'ALM_TEMPLATES_ITEM_NAME' ) ) {
-				define( 'ALM_TEMPLATES_ITEM_NAME', '0000' );
 			}
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
@@ -372,9 +395,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 * @since 2.0.0
 		 */
 		public function alm_enqueue_scripts() {
-			// Get ALM Options.
-			$options = get_option( 'alm_settings' );
-
 			// Core ALM JS.
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_register_script( 'ajax-load-more', plugins_url( '/build/frontend/ajax-load-more' . $suffix . '.js', __FILE__ ), [], ALM_VERSION, true );
@@ -487,7 +507,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$is_filters        = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
 			$filters_target    = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
 			$filters_facets    = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
-			$filters_startpage = isset( $params['filters_startpage'] ) && $is_filters ? $params['filters_startpage'] : 0;
 
 			// Cache.
 			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false;
@@ -508,15 +527,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$posts_per_page = isset( $params['posts_per_page'] ) ? $params['posts_per_page'] : 5;
 			$page           = isset( $params['page'] ) ? $params['page'] : 0;
 
-			// Advanced Custom Fields.
-			$acf_data = isset( $params['acf'] ) ? $params['acf'] : false;
-			if ( $acf_data ) {
-				$acf            = isset( $acf_data['acf'] ) ? $acf_data['acf'] : false;
-				$acf_post_id    = isset( $acf_data['post_id'] ) ? $acf_data['post_id'] : '';
-				$acf_field_type = isset( $acf_data['field_type'] ) ? $acf_data['field_type'] : '';
-				$acf_field_name = isset( $acf_data['field_name'] ) ? $acf_data['field_name'] : '';
-			}
-
 			// Paging Add-on.
 			$paging = isset( $params['paging'] ) ? $params['paging'] : 'false';
 
@@ -532,7 +542,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			// CTA Add-on.
 			$cta      = false;
 			$cta_data = isset( $params['cta'] ) ? $params['cta'] : false;
-
 			if ( $cta_data ) {
 				$cta                = true;
 				$cta_position       = isset( $cta_data['cta_position'] ) ? $cta_data['cta_position'] : 'before:1';
@@ -550,17 +559,10 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( $single_post_data ) {
 				$single_post      = true;
 				$single_post_id   = isset( $single_post_data['id'] ) ? $single_post_data['id'] : '';
-				$single_post_slug = isset( $single_post_data['slug'] ) ? $single_post_data['slug'] : '';
 			}
 
 			// SEO Add-on.
 			$seo_start_page = isset( $params['seo_start_page'] ) ? $params['seo_start_page'] : 1;
-
-			// WooCommerce Add-on.
-			$woocommerce = isset( $params['woocommerce'] ) ? $params['woocommerce'] : false;
-			if ( $woocommerce ) {
-				$woocommerce_template = isset( $woocommerce['template'] ) ? sanitize_file_name( $cta_data['template'] ) : null;
-			}
 
 			// Set up initial WP_Query $args.
 			$args = ALM_QUERY_ARGS::alm_build_queryargs( $params, true );
@@ -612,7 +614,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$alm_query = apply_filters( 'alm_query_after_' . $id, $alm_query, $post_id );
 
 			// If preloaded, update loop counter and total posts.
-			if ( has_action( 'alm_preload_installed' ) && 'true' === $preloaded ) {
+			if ( has_action( 'alm_preload_installed' ) && $preloaded === 'true' ) {
 				$alm_total_posts = $alm_query->found_posts - $offset + $preloaded_amount;
 				if ( $old_offset > 0 ) {
 					$alm_loop_count = $old_offset;
@@ -626,11 +628,9 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 			if ( $query_type === 'totalposts' ) {
 				// Paging add-on.
-				wp_send_json(
-					[
-						'totalposts' => $alm_total_posts,
-					]
-				);
+				wp_send_json( [
+					'totalposts' => $alm_total_posts,
+				] );
 
 			} else {
 
@@ -642,7 +642,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				$debug = apply_filters( 'alm_debug', false ) ? $args : false;
 
 				if ( $alm_query->have_posts() ) {
-
 					$alm_found_posts = $alm_total_posts;
 					$alm_post_count  = $alm_query->post_count;
 					$alm_current     = 0;
@@ -745,7 +744,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 endif;
 
 /**
- * Ajax Load More public redner function.
+ * Ajax Load More public render function.
  *
  * @param array $args The shortcode args.
  * @since 4.2.0

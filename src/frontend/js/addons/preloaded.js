@@ -9,18 +9,19 @@ import { addSEOAttributes } from './seo';
  * @return {Object}    The modified object.
  */
 export function preloadedCreateParams(alm) {
-	const { listing } = alm;
+	const { listing, addons } = alm;
 	alm.addons.preloaded = listing.dataset.preloaded === 'true';
 	alm.addons.preloaded_amount = listing?.dataset?.preloadedAmount ? parseInt(listing.dataset.preloadedAmount) : alm.posts_per_page;
 	if (!alm.addons.preloaded) {
 		alm.addons.preloaded_amount = 0;
 	}
 
-	if (alm.addons.preloaded) {
-		if (alm?.localize?.total_posts) {
+	if (addons.preloaded) {
+		if (alm?.localize) {
 			// Disable ALM if total_posts is equal to or less than preloaded_amount.
-			if (parseInt(alm.localize.total_posts) <= alm.addons.preloaded_amount) {
-				alm.addons.preloaded_total_posts = parseInt(alm.localize.total_posts);
+			const { total_posts = 0 } = alm.localize;
+			if (parseInt(total_posts) <= addons.preloaded_amount) {
+				alm.addons.preloaded_total_posts = parseInt(total_posts);
 				alm.disable_ajax = true;
 			}
 		}
@@ -36,10 +37,8 @@ export function preloadedCreateParams(alm) {
  */
 export function setPreloadedParams(alm) {
 	const { addons, listing } = alm;
-
 	if (addons.paging) {
-		// Exit if paging.
-		return;
+		return; // Exit if paging.
 	}
 
 	// Parse preloaded data into array of HTML elements.

@@ -15,6 +15,9 @@
 	pre {
 		padding: 0 10px;
 	}
+	.CodeMirror-scroll {
+		padding-bottom: 50px !important;
+	}
 }
 // Readonly
 .ajax-load-more .cm-readonly .CodeMirror {

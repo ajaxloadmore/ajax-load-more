@@ -84,7 +84,7 @@ function alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts = '', $al
 	}
 
 	if ( $theme_repeater !== 'null' && has_filter( 'alm_get_theme_repeater' ) ) {
-		// Theme Repeaters.
+		// Theme Repeater.
 		do_action( 'alm_get_theme_repeater', $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
 
 	} else {

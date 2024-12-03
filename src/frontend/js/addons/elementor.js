@@ -67,7 +67,6 @@ export function elementorCreateParams(alm) {
  * Set up the instance on Elementor
  *
  * @param {Object} alm
- * @since 5.3.0
  */
 export function elementorInit(alm) {
 	const { addons } = alm;
@@ -125,7 +124,6 @@ export function elementorInit(alm) {
  * @param {Object} response   Query response.
  * @param {string} cache_slug The cache slug.
  * @return {Object}           Results data.
- * @since 5.4.0
  */
 export function elementorGetContent(alm, url, response, cache_slug) {
 	const data = API_DATA_SHAPE; // Default data object.
@@ -196,7 +194,6 @@ export function elementorGetContent(alm, url, response, cache_slug) {
  *
  * @param {HTMLElement} content The HTML data.
  * @param {Object}      alm     The alm object.
- * @since 5.3.0
  */
 export function elementor(content, alm) {
 	if (!content || !alm) {
@@ -239,28 +236,22 @@ export function elementor(content, alm) {
  * Elementor loaded and dispatch actions.
  *
  * @param {Object} alm The alm object.
- * @since 5.5.0
  */
 export function elementorLoaded(alm) {
 	const { page, AjaxLoadMore, addons } = alm;
 	const nextPage = page + 1;
+	const { elementor_max_pages } = addons;
 
-	const max_pages = addons.elementor_max_pages;
+	lazyImages(alm); // Lazy load images if necessary.
 
-	// Lazy load images if necessary.
-	lazyImages(alm);
-
-	// Trigger almComplete.
 	if (typeof almComplete === 'function' && alm.transition !== 'masonry') {
-		window.almComplete(alm);
+		window.almComplete(alm); // Trigger almComplete.
 	}
 
-	// End transitions.
-	AjaxLoadMore.transitionEnd();
+	AjaxLoadMore.transitionEnd(); // End transitions.
 
-	// ALM Done.
-	if (nextPage >= max_pages) {
-		AjaxLoadMore.triggerDone();
+	if (nextPage >= elementor_max_pages) {
+		AjaxLoadMore.triggerDone(); // ALM Done.
 	}
 
 	dispatchScrollEvent();
@@ -421,9 +412,9 @@ export function elementorGetPagedURL(alm, content, dir = 'next') {
 	// Locate the pagination container.
 	const element = content?.querySelector(addons?.elementor_pagination_class) || content?.querySelector(`.${addons?.elementor_settings?.pagination_class}`);
 
-	// Get the next URL from the pagination element.
+	// Get URL from the pagination element.
 	const page = element?.querySelector(`a.${dir}`)?.href;
 
-	// Return the next page URL.
+	// Return the paged URL element.
 	return page ? page : false;
 }
