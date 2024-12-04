@@ -4,8 +4,8 @@ Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.6
-Stable tag: 7.1.3
+Tested up to: 6.7
+Stable tag: 7.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -259,6 +259,20 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.1.4 -  December 4, 2024 =
+* UPDATE: Updated Axios HTTP library to latest version.
+* UPDATE: Added feature to re-save default Repeater Template if template was deleted from the filesystem.
+* UDPATE: Modified the `alm` db columns to match upcoming Templates add-on requirements.
+* UPDATE: Added functionality required for Elementor Add-on update to support loading previous posts on paged results.
+* UPDATE: Started integration with Query Loop block and Ajax Load More.
+* FIX: Fixed z-index issue with ALM navigation in WP admin.
+* FIX: Added fix for `load_plugin_textdomain` php notice.
+* FIX: Fixed issue with Preloaded amount being 0 and no post remaining.
+* FIX: Fixed issue with Comments add-on and allowing for a default post ID.
+* UPDATE: Code cleanup and other minor bug fixes.
+* UPDATE: Various admin UI/UX updates.
+
 
 = 7.1.3 - October 1, 2024 =
 * UPDATE: Various security fixes.

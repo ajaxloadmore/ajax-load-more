@@ -96,7 +96,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 
 .ajax-load-more-inner-wrapper {
 	display: block;
-	padding: calc($padding/2) $padding $padding;
+	padding: calc($padding_lg/2) $padding_lg $padding_lg;
 	max-width: 1600px;
 	position: relative;
 	width: 100%;
@@ -116,12 +116,11 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 .ajax-load-more div.notice-success,
 .ajax-load-more div.notice-updated,
 .ajax-load-more div.notice-error {
-	margin: 5px 0;
-	border-radius: $radius;
+	border-radius: 6px;
 	overflow: hidden;
-	padding: 5px 10px;
+	padding: 10px 15px;
 	p {
-		margin: 0.5em 0;
+		margin: 10px 0;
 	}
 	.notice-dismiss {
 		top: 2px;
@@ -142,7 +141,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	}
 	button {
 		transform: translateY(-50%);
-		top: 50%;
+		top: 50% !important;
 	}
 }
 
@@ -1369,7 +1368,7 @@ hr.indented {
 .ajax-load-more .cnkt-main {
 	width: 100%;
 	@media screen and (min-width: $break) {
-		width: 70%;
+		width: 69%;
 	}
 	background: #fff;
 	padding: $padding;
@@ -1691,12 +1690,12 @@ hr.indented {
 // Warning callout.
 .ajax-load-more p.warning-callout {
 	background-color: $blue_light;
-	border-left: 6px solid $blue;
+	border-left: 8px solid $blue;
 	color: #333;
-	font-size: 12px;
+	font-size: 13px;
 	margin: 0;
 	display: block;
-	padding: 18px 100px 18px 18px;
+	padding: 20px 100px 20px 20px;
 	border-radius: 3px;
 	margin: 10px;
 	width: auto;
@@ -1727,8 +1726,8 @@ hr.indented {
 		border-radius: 2px;
 	}
 	&.notify {
-		background-color: #da5858;
-		border-color: #b94848;
+		background-color: #e25656;
+		border-color: #ab3838;
 		color: #fff;
 		strong {
 			background-color: #9a4343;
@@ -1950,7 +1949,7 @@ span.cnkt-button.installed,
 }
 
 .ajax-load-more .cnkt-sidebar .cta-inner {
-	padding: $padding_sm;
+	padding: $padding;
 	display: block;
 	.cta-inner {
 		background-color: $light_grey;
@@ -1969,14 +1968,14 @@ span.cnkt-button.installed,
 	margin-top: 0;
 }
 .ajax-load-more .cnkt-sidebar h3 {
-	padding: $padding_sm 0;
+	padding: 15px 0;
 	margin: 0;
 	display: block;
 	font-size: 15px;
 	text-transform: none;
 	border-bottom: 1px solid $light_border;
-	margin: 0 $padding_sm;
-	font-weight: 500;
+	margin: 0 $padding;
+	font-weight: 600;
 }
 
 .ajax-load-more .cnkt-sidebar .item {

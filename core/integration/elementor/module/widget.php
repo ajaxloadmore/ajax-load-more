@@ -115,7 +115,7 @@ class ALMElementor extends Widget_Base {
    * @access protected
    */
   protected function render() {
-	  	$this->add_inline_editing_attributes( 'alm_shortcode', 'none' );
+		$this->add_inline_editing_attributes( 'alm_shortcode', 'none' );
 		$shortcode = $this->get_settings_for_display( 'alm_shortcode' );
 		$shortcode = do_shortcode( shortcode_unautop( $shortcode ) );
 		if( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {

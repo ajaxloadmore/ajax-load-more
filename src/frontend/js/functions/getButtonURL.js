@@ -25,11 +25,11 @@ export function getButtonURL(alm, rel = 'next') {
  * @param {string}  url    The URL for updating.
  */
 export function setButtonAtts(button, page, url) {
-	if (!button) {
+	if (!button || page === 0) {
 		return;
 	}
 
-	if (button.rel && button.rel === 'prev') {
+	if (button?.rel === 'prev') {
 		button.href = url;
 	}
 

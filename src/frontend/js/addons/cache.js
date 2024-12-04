@@ -1,5 +1,6 @@
 import MD5 from 'crypto-js/md5';
 import { api } from '../functions/api';
+import { getButtonURL } from '../functions/getButtonURL';
 
 /**
  * Create add-on params for ALM.
@@ -28,11 +29,17 @@ export function cacheCreateParams(alm) {
 export function getCacheSlug(alm, data) {
 	const { addons, pagePrev, page, rel = 'next' } = alm;
 	if (addons.nextpage) {
-		return `page-${page + addons.nextpage_startpage}`; // Nextpage.
+		// Nextpage.
+		return `page-${page + addons.nextpage_startpage}`;
 	} else if (addons.single_post) {
-		return addons.single_post_id; // Single Post.
+		// Single Post.
+		return addons.single_post_id;
+	} else if (addons.queryloop) {
+		// Query Loop, use the button URL.
+		return MD5(JSON.stringify(getButtonURL(alm, alm.rel))).toString();
 	} else if (addons.woocommerce || addons.elementor) {
-		return rel === 'prev' ? `page-${pagePrev}` : `page-${page + 1}`; // WooCommerce || Elementor.
+		// WooCommerce || Elementor.
+		return rel === 'prev' ? `page-${pagePrev}` : `page-${page + 1}`;
 	}
 	return MD5(JSON.stringify(data)).toString(); // Standard.
 }

@@ -84,7 +84,7 @@ function alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts = '', $al
 	}
 
 	if ( $theme_repeater !== 'null' && has_filter( 'alm_get_theme_repeater' ) ) {
-		// Theme Repeaters.
+		// Theme Repeater.
 		do_action( 'alm_get_theme_repeater', $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
 
 	} else {
@@ -111,25 +111,26 @@ function alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts = '', $al
 function alm_get_current_repeater( $repeater, $type ) {
 	$template = $repeater;
 	$include  = '';
+	// $content = get_the_content(null, null, 8879);
+	// $new_html = preg_replace("/(^<div[^>]*>|<\/div>$)/i", "", $content);
+	//echo apply_filters( 'the_content', $new_html );
 
-	if ( 'repeater' === $type && has_action( 'alm_repeater_installed' ) ) {
+	if ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1.
 		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
 		if ( ! file_exists( $include ) ) {
 			alm_get_default_repeater(); // Confirm file exists.
 		}
-	} elseif ( 'template_' === $type && has_action( 'alm_unlimited_installed' ) ) {
+	} elseif ( $type === 'template_' && has_action( 'alm_unlimited_installed' ) ) {
 		// Custom Repeaters 2.5+.
 		if ( ALM_UNLIMITED_VERSION >= '2.5' ) {
 			// Get path to repeater (alm_templates).
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
 			$include  = $base_dir . '/' . $template . '.php';
-
 		} else {
 			global $wpdb;
 			$blog_id = $wpdb->blogid;
 			$include = ( $blog_id > 1 ) ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $template . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $template . '.php';
-
 		}
 
 		if ( ! file_exists( $include ) ) {
@@ -155,21 +156,20 @@ function alm_get_current_repeater( $repeater, $type ) {
  * @since 2.5.0
  */
 function alm_get_default_repeater() {
-	global $wpdb;
 	$file         = null;
-	$template_dir = apply_filters( 'alm_template_path', 'alm_templates' );
+	$dir = apply_filters( 'alm_template_path', 'alm_templates' );
 
 	// Allow user to load template from theme directory.
 
 	// Load repeater template from current theme folder.
 	if ( is_child_theme() ) {
-		$template_theme_file = get_stylesheet_directory() . '/' . $template_dir . '/default.php';
+		$template_theme_file = get_stylesheet_directory() . '/' . $dir . '/default.php';
 		// If child theme does not have repeater template, then use the parent theme dir.
 		if ( ! file_exists( $template_theme_file ) ) {
-			$template_theme_file = get_template_directory() . '/' . $template_dir . '/default.php';
+			$template_theme_file = get_template_directory() . '/' . $dir . '/default.php';
 		}
 	} else {
-		$template_theme_file = get_template_directory() . '/' . $template_dir . '/default.php';
+		$template_theme_file = get_template_directory() . '/' . $dir . '/default.php';
 	}
 
 	// If theme or child theme contains the template, use that file.

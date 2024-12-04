@@ -70,9 +70,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			 * Set default shortcode values that can be over written via shortcode atts
 			 * ALM Core Filter Hook
 			 *
-			 * @return $atts;
+			 * @return array
 			 */
-			$default_atts = apply_filters( 'alm_shortcode_defaults', '' );
+			$default_atts = apply_filters( 'alm_shortcode_defaults', [] );
 
 			// Merge arrays. Allows for defaults to be overwritten by the shortcode.
 			$atts = $default_atts ? array_merge( $default_atts, $atts ) : $atts;
@@ -85,6 +85,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'nested'                       => false,
 						'woo'                          => false,
 						'woo_template'                 => '',
+						'queryloop'                    => false,
 						'layouts'                      => false,
 						'layouts_cols'                 => '3',
 						'layouts_gap'                  => 'default',
@@ -255,6 +256,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			$id   = sanitize_key( $id );
 			$vars = self::alm_strip_tags( $vars );
+
+			// Query Loop.
+			$queryloop = $queryloop === 'true';
 
 			// Elementor.
 			$elementor = $elementor === 'true' ? 'single' : $elementor;
@@ -551,7 +555,12 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			// ALM Direction.
 			$alm_direction = $scroll_direction ? ' alm-' . $scroll_direction : '';
 
-			// Append Inline CSS.
+			// Start $ajaxloadmore element.
+			$ajaxloadmore .= '<div id="' . esc_attr( $div_id ) . '" class="' . esc_attr( $alm_wrapper_class ) . esc_attr( $wrapper_classes ) . esc_attr( $alm_loading_style ) . esc_attr( $paging_color ) . esc_attr( $alm_layouts ) . esc_attr( $alm_direction ) . '" ' . $unique_id . ' data-alm-id="" data-canonical-url="' . esc_attr( $canonical_url ) . '" data-slug="' . esc_attr( $slug ) . '" data-post-id="' . esc_attr( $post_id ) . '" ' . wp_kses_post( $is_search ) . esc_attr( $is_nested ) . ' data-localized="' . alm_convert_dashes_to_underscore( $localize_id ) . '_vars" data-alm-object="' . alm_convert_dashes_to_underscore( $localize_id ) . '">';
+
+			/**
+			 * ALM Inline CSS.
+			 */
 			$ajaxloadmore .= $inline_css . $inline_layouts_css . $inline_paging_css . $inline_single_posts_css;
 
 			// Horizontal Scroll CSS.
@@ -559,9 +568,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				// Add style for overflow style of the container.
 				$ajaxloadmore .= '<style>' . $scroll_container . '{ height: auto; width: 100%; overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch; }</style>';
 			}
-
-			// Start $ajaxloadmore element.
-			$ajaxloadmore .= '<div id="' . esc_attr( $div_id ) . '" class="' . esc_attr( $alm_wrapper_class ) . esc_attr( $wrapper_classes ) . esc_attr( $alm_loading_style ) . esc_attr( $paging_color ) . esc_attr( $alm_layouts ) . esc_attr( $alm_direction ) . '" ' . $unique_id . ' data-alm-id="" data-canonical-url="' . esc_attr( $canonical_url ) . '" data-slug="' . esc_attr( $slug ) . '" data-post-id="' . esc_attr( $post_id ) . '" ' . wp_kses_post( $is_search ) . esc_attr( $is_nested ) . ' data-localized="' . alm_convert_dashes_to_underscore( $localize_id ) . '_vars" data-alm-object="' . alm_convert_dashes_to_underscore( $localize_id ) . '">';
 
 			// Masonry Hook (Before).
 			$ajaxloadmore .= apply_filters( 'alm_masonry_before', $transition );
@@ -839,6 +845,11 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			// Build container data atts.
 
+			// Query loop.
+			if( $queryloop) {
+				$ajaxloadmore .= ' data-query-loop="true"';
+			}
+
 			// Advanced Custom Fields Extension.
 			if ( has_action( 'alm_acf_installed' ) && $acf === 'true' ) {
 				$acf_return    = apply_filters(
@@ -1071,21 +1082,18 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				$ajaxloadmore .= wp_kses_post( $woo_return );
 			}
 
-			// Elementor Add-on.
-			$elementor_page_link = '';
-
 			// phpcs:ignore
 			if ( $elementor === 'posts' && $elementor_target && has_action( 'alm_elementor_params' ) && in_array( 'elementor-pro/elementor-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 				$elementor_params = [
-					'target'    => $elementor_target,
-					'url'       => $elementor_url,
-					'paged'     => $elementor_woo_paged !== 1 ? $elementor_woo_paged : $elementor_paged,
-					'controls'  => $elementor_controls,
-					'scrolltop' => $elementor_scrolltop,
+					'target'     => $elementor_target,
+					'url'        => $elementor_url,
+					'paged'      => $elementor_woo_paged !== 1 ? $elementor_woo_paged : $elementor_paged,
+					'controls'   => $elementor_controls,
+					'scrolltop'  => $elementor_scrolltop,
+					'prev_label' => $elementor_link_label
 				];
 
-				$elementor_page_link = apply_filters( 'alm_elementor_page_link', $elementor_params['paged'], $elementor_link_label );
-				$elementor_return    = apply_filters( 'alm_elementor_params', $elementor_params );
+				$elementor_return = apply_filters( 'alm_elementor_params', $elementor_params );
 
 				$ajaxloadmore .= ' data-elementor="posts"';
 				$ajaxloadmore .= wp_kses_post( $elementor_return );
@@ -1315,7 +1323,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$ajaxloadmore .= apply_filters( 'alm_before_button', '' );
 
 			// Create Load More button and button wrapper.
-			$ajaxloadmore .= self::alm_render_button( $paging, $button_classname, $button_label, $elementor_page_link, $div_id );
+			$ajaxloadmore .= self::alm_render_button( $paging, $button_classname, $button_label, $div_id );
 
 			/**
 			 * After Button
@@ -1411,17 +1419,15 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 		 * @param  string $paging         Is this for the Paging add-on.
 		 * @param  string $classname      Custom classnames.
 		 * @param  string label           The label for the button.
-		 * @param  string $elementor_link Elementor paged link.
 		 * @param  string $id             ALM div ID.
 		 * @return string                 The button html and wrapper.
 		 * @since  3.3.2
 		 */
-		public static function alm_render_button( $paging, $classname, $label, $elementor_link, $id ) {
+		public static function alm_render_button( $paging, $classname, $label, $id ) {
 			$classes = has_filter( 'alm_button_wrap_classes' ) ? ' ' . apply_filters( 'alm_button_wrap_classes', '' ) : '';
 			$html    = '<div class="alm-btn-wrap' . $classes . '" style="visibility: hidden;" data-rel="' . esc_attr( $id ) . '">';
 
 			if ( $paging !== 'true' ) {
-				$html .= ! empty( $elementor_link ) ? $elementor_link : ''; // Elementor Page Link.
 				$html .= '<button class="alm-load-more-btn more' . esc_attr( $classname ) . '" rel="next" type="button">' . self::alm_strip_tags( $label ) . '</button>';
 			}
 

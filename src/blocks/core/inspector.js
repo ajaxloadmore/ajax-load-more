@@ -20,7 +20,7 @@ export default function (props) {
 					placeholder={'[ajax_load_more]'}
 					value={attributes?.shortcode}
 					onChange={(data) => setAttributes({ shortcode: data })}
-					help={__('Note: Scroll is disabled within the WP block editor.', 'ajax-load-more')}
+					help={__('Note: Infinite scroll is disabled within the Block Editor.', 'ajax-load-more')}
 					rows={6}
 				/>
 				<Flex

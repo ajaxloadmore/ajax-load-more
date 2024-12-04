@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { API_DATA_SHAPE } from '../functions/constants';
 import dispatchScrollEvent from '../functions/dispatchScrollEvent';
 import { setButtonAtts } from '../functions/getButtonURL';
+import { setContentContainersParams } from '../functions/setContentParams';
 import { lazyImages } from '../modules/lazyImages';
 import loadItems from '../modules/loadItems';
 import { createLoadPreviousButton } from '../modules/loadPrevious';
@@ -34,6 +36,14 @@ export function wooInit(alm) {
 		return false;
 	}
 
+	const container = document.querySelector(alm.addons.woocommerce_settings.container); // Get `ul.products`
+	if (!container) {
+		console.warn(
+			'ALM WooCommerce: Unable to locate container element. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_container'
+		);
+		return;
+	}
+
 	alm.button.dataset.page = alm.addons.woocommerce_settings.paged + 1; // Page
 
 	// Get upcoming URL.
@@ -44,49 +54,37 @@ export function wooInit(alm) {
 		alm.button.dataset.url = '';
 	}
 
-	// Set up URL and class parameters on first item in product listing
-	const container = document.querySelector(alm.addons.woocommerce_settings.container); // Get `ul.products`
-	if (container) {
-		const count = getContainerCount(alm.addons.woocommerce_settings.container);
-		const currentPage = alm.addons.woocommerce_settings.paged;
+	const count = countContainers(alm.addons.woocommerce_settings.container);
+	const page = alm.addons.woocommerce_settings.paged;
 
-		if (count > 1) {
-			// Display warning if multiple containers were found.
-			console.warn(
-				'ALM WooCommerce: Multiple containers with the same classname or ID found. The WooCommerce add-on requires a single container to be defined. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/'
-			);
-		}
+	if (count > 1) {
+		// Display warning if multiple containers were found.
+		console.warn(
+			'ALM WooCommerce: Multiple containers with the same classname or ID found. The WooCommerce add-on requires a single container to be defined. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/'
+		);
+	}
 
-		container.setAttribute('aria-live', 'polite');
-		container.setAttribute('aria-atomic', 'true');
+	// Set attributes on containers.
+	setContentContainersParams(container, alm.listing);
 
-		alm.listing.removeAttribute('aria-live');
-		alm.listing.removeAttribute('aria-atomic');
-
-		const products = container.querySelector(alm.addons.woocommerce_settings.products); // Get first `.product` item
-		if (products) {
-			products.classList.add('alm-woocommerce');
-			products.dataset.url = alm.addons.woocommerce_settings.paged_urls[alm.addons.woocommerce_settings.paged - 1];
-			products.dataset.page = alm.page;
-			products.dataset.pageTitle = document.title;
-		} else {
-			console.warn(
-				'ALM WooCommerce: Unable to locate products. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_products'
-			);
-		}
-
-		// Paged URL: Create previous button.
-		if (currentPage > 1) {
-			if (alm.addons.woocommerce_settings.settings.previous_products) {
-				const prevURL = alm.addons.woocommerce_settings.paged_urls[currentPage - 2];
-				const label = alm.addons.woocommerce_settings.settings.previous_products;
-				createLoadPreviousButton(alm, container, currentPage - 1, prevURL, label);
-			}
-		}
+	// Set data attributes on first item.
+	const item = container.querySelector(alm.addons.woocommerce_settings.products); // Get first `.product` item
+	if (item) {
+		item.classList.add('alm-woocommerce');
+		item.dataset.url = alm.addons.woocommerce_settings.paged_urls[alm.addons.woocommerce_settings.paged - 1];
+		item.dataset.page = alm.page;
+		item.dataset.pageTitle = document.title;
 	} else {
 		console.warn(
-			'ALM WooCommerce: Unable to locate container element. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_container'
+			'ALM WooCommerce: Unable to locate products. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_products'
 		);
+	}
+
+	// Paged URL: Create previous button.
+	if (page > 1 && alm.addons.woocommerce_settings.settings.previous_products) {
+		const prevURL = alm.addons.woocommerce_settings.paged_urls[page - 2];
+		const label = alm.addons.woocommerce_settings.settings.previous_products;
+		createLoadPreviousButton(alm, container, page - 1, prevURL, label);
 	}
 }
 
@@ -113,8 +111,8 @@ export function woocommerce(content, alm) {
 		if (container && products) {
 			const wooProducts = Array.prototype.slice.call(products); // Convert NodeList to Array.
 
+			// Load the items.
 			(async function () {
-				// Load the Products.
 				await loadItems(container, wooProducts, alm, waitForImages);
 				resolve(true);
 			})().catch((e) => {
@@ -140,32 +138,27 @@ export function woocommerce(content, alm) {
  * @since 5.3.0
  */
 export function wooGetContent(alm, url, response, cache_slug) {
-	// Default data object.
-	const data = {
-		html: '',
-		meta: {
-			postcount: 0,
-			totalposts: 0,
-		},
-	};
+	const data = API_DATA_SHAPE; // Default data object.
 
 	// Successful response.
 	if (response.status === 200 && response.data) {
 		const { addons, pagePrev, rel = 'next', page, localize } = alm;
 		const { total_posts } = localize;
 		const { woocommerce_settings = {} } = addons;
-		const currentPage = rel === 'prev' ? pagePrev : page + 1; // Get the page number.
+
+		// Get the page number.
+		const currentPage = rel === 'prev' ? pagePrev : page + 1;
 
 		// Create temp div to hold response data.
-		const div = document.createElement('div');
-		div.innerHTML = response.data;
+		const content = document.createElement('div');
+		content.innerHTML = response.data;
 
 		// Get Page Title
-		const title = div.querySelector('title').innerHTML;
+		const title = content.querySelector('title').innerHTML;
 		data.pageTitle = title;
 
 		// Get WooCommerce products container.
-		const container = div.querySelector(woocommerce_settings.container);
+		const container = content.querySelector(woocommerce_settings.container);
 		if (!container) {
 			console.warn(`Ajax Load More WooCommerce: Unable to find WooCommerce ${woocommerce_settings.container} element.`);
 			return data;
@@ -193,7 +186,7 @@ export function wooGetContent(alm, url, response, cache_slug) {
 		}
 
 		// Results Text
-		almWooCommerceResultsText(div, alm);
+		almWooCommerceResultsText(content, alm);
 	}
 
 	return data;
@@ -206,15 +199,15 @@ export function wooGetContent(alm, url, response, cache_slug) {
  * @since 5.5.0
  */
 export function woocommerceLoaded(alm) {
-	const nextPageNum = alm.page + 2;
-	const nextPage = alm.addons.woocommerce_settings.paged_urls[nextPageNum - 1]; // Get URL.
+	const { addons } = alm;
 
-	// Set button data attributes.
+	const nextPageNum = alm.page + 2;
+	const nextPage = addons.woocommerce_settings.paged_urls[nextPageNum - 1]; // Get URL.
+
+	// Set button state & URL.
 	if (alm.rel === 'prev' && alm.buttonPrev) {
-		const prevPageNum = alm.pagePrev - 1;
-		const prevPage = alm.addons.woocommerce_settings.paged_urls[alm.pagePrev - 2];
-		setButtonAtts(alm.buttonPrev, prevPageNum, prevPage);
-		dispatchScrollEvent(true);
+		const prevPage = addons.woocommerce_settings.paged_urls[alm.pagePrev - 2];
+		setButtonAtts(alm.buttonPrev, parseInt(alm.pagePrev) - 1, prevPage);
 	} else {
 		setButtonAtts(alm.button, nextPageNum, nextPage);
 	}
@@ -237,6 +230,8 @@ export function woocommerceLoaded(alm) {
 	if (alm.rel === 'next' && nextPageNum > parseInt(alm.addons.woocommerce_settings.pages)) {
 		alm.AjaxLoadMore.triggerDone();
 	}
+
+	dispatchScrollEvent();
 }
 
 /**
@@ -336,15 +331,16 @@ function returnButton(text, link, label, seperator) {
  * Get total count of WooCommerce containers.
  *
  * @param {string} container The container class.
- * @return {number}          The total umber of containers.
+ * @return {number}          The total number of containers.
  */
-function getContainerCount(container) {
+function countContainers(container) {
 	if (!container) {
 		return 0;
 	}
+
 	const containers = document.querySelectorAll(container); // Get all containers.
-	if (containers) {
-		return containers.length;
+	if (!containers) {
+		return 0;
 	}
-	return 0;
+	return containers.length;
 }

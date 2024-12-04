@@ -6,6 +6,7 @@
  */
 
 $shortcode = $attributes['shortcode'];
+
 if ( $shortcode ) {
 	echo do_shortcode( $shortcode );
 

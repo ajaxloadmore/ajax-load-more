@@ -23,10 +23,11 @@
 				height: 10px;
 				border-radius: 100%;
 				background: $red;
-				box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-				margin-right: 8px;
+				box-shadow: 0 0 0 3px rgba($red, 0.2);
+				margin-right: 10px;
 				&.valid {
 					background-color: $green;
+					box-shadow: 0 0 0 3px rgba($green, 0.2);
 				}
 			}
 			h3 {
@@ -36,7 +37,7 @@
 				font-weight: 600;
 				line-height: 1;
 			}
-			.fa.tooltip{
+			.fa.tooltip {
 				top: 0;
 				margin-left: auto;
 			}
@@ -118,7 +119,7 @@
 			background-color: #fff;
 			border-radius: 0 0 $radius $radius;
 		}
-		.license-wrap{
+		.license-wrap {
 			label {
 				font-weight: 600;
 				top: -3px;
@@ -131,11 +132,11 @@
 				min-height: 0;
 				border-color: $border;
 				line-height: 1;
-				&[disabled]{
+				&[disabled] {
 					color: #ccc;
 					cursor: not-allowed;
 				}
-				&:focus{
+				&:focus {
 					border-color: $border_hover;
 				}
 			}
@@ -164,9 +165,11 @@
 		}
 		.license-key-field .status.active {
 			background-color: $green;
+			box-shadow: 0 0 0 3px rgba($green, 0.2);
 		}
 		.license-key-field .status.inactive {
 			background-color: $red;
+			box-shadow: 0 0 0 3px rgba($red, 0.2);
 		}
 
 		.ajax-load-more .alm-nav {

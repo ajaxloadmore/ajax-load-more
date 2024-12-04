@@ -36,4 +36,5 @@ if ( $alm_menu_items ) {
 	<h1>
 		<span class="offscreen"><?php echo wp_kses_post( $alm_admin_heading ); ?></span>
 	</h1>
+	<hr class="wp-header-end" />
 </div>

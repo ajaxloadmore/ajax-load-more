@@ -278,11 +278,11 @@ function alm_container_type_callback() {
 	?>
 	<input type="radio" id="_alm_container_type_one" name="alm_settings[_alm_container_type]" value="1" <?php echo checked( 1, $value, false ); ?> />
 	<label for="_alm_container_type_one">
-		&lt;ul&gt; <span style="padding-top: 2px;">&lt;!--<?php esc_attr_e( 'Ajax Posts Here', 'ajax-load-more' ); ?>--&gt;</span> &lt;/ul&gt;
+		&lt;ul&gt; <span style="padding-top: 2px;">&lt;!--<em><?php esc_attr_e( 'Ajax Posts Here', 'ajax-load-more' ); ?></em>--&gt;</span> &lt;/ul&gt;
 	</label>
 	<input type="radio" id="_alm_container_type_two" name="alm_settings[_alm_container_type]" value="2" <?php echo checked( 2, $value, false ); ?> />
 	<label for="_alm_container_type_two">
-		&lt;div&gt; <span style="padding-top: 2px;">&lt;!--<?php esc_attr_e( 'Ajax Posts Here', 'ajax-load-more' ); ?>--&gt;</span> &lt;/div&gt;
+		&lt;div&gt; <span style="padding-top: 2px;">&lt;!--<em><?php esc_attr_e( 'Ajax Posts Here', 'ajax-load-more' ); ?></em>--&gt;</span> &lt;/div&gt;
 	</label>
 	<label style="cursor: default !important">
 		<span style="display:block"><?php esc_attr_e( 'You can modify the container type when building a shortcode.', 'ajax-load-more' ); ?></span>

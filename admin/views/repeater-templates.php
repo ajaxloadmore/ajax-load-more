@@ -147,18 +147,17 @@ $alm_theme_repeaters = isset( $_GET['theme-repeaters'] ) ? true : false;
 				} else {
 					// Custom Repeaters.
 					if ( has_action( 'alm_custom_repeaters' ) || has_action( 'alm_unlimited_repeaters' ) ) {
-						// Expand/Collapse toggle.
-						include ALM_PATH . 'admin/includes/components/toggle-all-button.php';
+						include ALM_PATH . 'admin/includes/components/toggle-all-button.php'; // Expand/Collapse toggle.
 					}
 					?>
 
 				<!-- Default Template -->
 				<div class="row template default-repeater" id="default-template">
 					<?php
-						// Check for local repeater template.
-						$alm_local_template = false;
-						$alm_read_only      = 'false';
-						$alm_template_dir   = 'alm_templates';
+					// Check for local repeater template.
+					$alm_local_template = false;
+					$alm_read_only      = 'false';
+					$alm_template_dir   = 'alm_templates';
 					if ( is_child_theme() ) {
 						$alm_template_theme_file = get_stylesheet_directory() . '/' . $alm_template_dir . '/default.php';
 						if ( ! file_exists( $alm_template_theme_file ) ) {
@@ -174,12 +173,15 @@ $alm_theme_repeaters = isset( $_GET['theme-repeaters'] ) ? true : false;
 					}
 
 					$filename = alm_get_default_repeater(); // Get default repeater template.
-					$handle   = fopen( $filename, 'r' ); // Open file.
-					$contents = '';
-					if ( filesize( $filename ) != 0 ) {
-						$contents = fread( $handle, filesize( $filename ) );
-					}
+					$content  = '';
+					if ( file_exists( $filename ) ) {
+						// phpcs:ignore
+						$handle   = fopen( $filename, 'r' );
+						// phpcs:ignore
+						$content = filesize( $filename ) !== 0 ? fread( $handle, filesize( $filename ) ) : '';
+						// phpcs:ignore
 						fclose( $handle );
+					}
 					?>
 					<h3 class="heading" tabindex="0"><?php esc_attr_e( 'Default Template', 'ajax-load-more' ); ?></h3>
 					<div class="expand-wrap">
@@ -209,7 +211,20 @@ $alm_theme_repeaters = isset( $_GET['theme-repeaters'] ) ? true : false;
 							?>
 							<div class="alm-row">
 								<div class="column">
-									<textarea rows="10" id="template-default" class="_alm_repeater"><?php echo $contents; // phpcs:ignore ?></textarea>
+									<?php
+									// Add warning if template doesn't exist in filesystem.
+									if ( ! $content ) {
+										// Get content from DB.
+										global $wpdb;
+										$table_name = $wpdb->prefix . 'alm';
+										$row        = $wpdb->get_row( "SELECT * FROM $table_name WHERE repeaterType = 'default'" ); // Get first result only
+										$content    = ! empty ( $row ) && $row->repeaterDefault ? $row->repeaterDefault : '';
+									?>
+									<p class="warning-callout notify missing-template" style="margin: 10px 0 20px;">
+										<?php esc_attr_e( 'This default ALM template is missing from the filesystem! Click the "Save Template" button to save the template.', 'ajax-load-more' ); ?>
+									</p>
+									<?php } ?>
+									<textarea rows="10" id="template-default" class="_alm_repeater"><?php echo $content; // phpcs:ignore ?></textarea>
 									<script>
 										var editor_default = CodeMirror.fromTextArea(document.getElementById("template-default"), {
 											mode:  "application/x-httpd-php",

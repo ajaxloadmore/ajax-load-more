@@ -1,5 +1,6 @@
 // ALM Modules
 import axios from 'axios';
+import '../scss/ajax-load-more.scss';
 import { cacheCreateParams, getCache } from './addons/cache';
 import { ctaCreateParams } from './addons/call-to-actions';
 import { commentsCreateParams } from './addons/comments';
@@ -8,6 +9,7 @@ import { filtersCreateParams } from './addons/filters';
 import { nextpageCreateParams } from './addons/next-page';
 import { pagingComplete, pagingCreateParams } from './addons/paging';
 import { preloadedCreateParams, setPreloadedParams } from './addons/preloaded';
+import { queryLoopCreateParams, queryLoopGetContent, queryLoopInit, queryloop, queryloopLoaded } from './addons/queryLoop';
 import { createSEOOffset, seoCreateParams } from './addons/seo';
 import { singlepostsCreateParams, singlepostsHTML } from './addons/singleposts';
 import { wooCreateParams, wooGetContent, wooInit, wooReset, woocommerce, woocommerceLoaded } from './addons/woocommerce';
@@ -30,8 +32,6 @@ import placeholder from './modules/placeholder';
 import * as resultsText from './modules/resultsText';
 import setLocalizedVars from './modules/setLocalizedVars';
 import { tableOfContents } from './modules/tableofcontents';
-
-import '../scss/ajax-load-more.scss';
 
 // External packages.
 const qs = require('qs');
@@ -174,6 +174,7 @@ let alm_is_filtering = false;
 
 		// Add-on Shortcode Params
 
+		alm = queryLoopCreateParams(alm); // Query Loop add-on
 		alm = elementorCreateParams(alm); // Elementor add-on
 		alm = wooCreateParams(alm); // WooCommerce add-on
 		alm = cacheCreateParams(alm); // Cache add-on
@@ -416,8 +417,8 @@ let alm_is_filtering = false;
 				params = '';
 			}
 
-			// WooCommerce || Elementor.
-			if (alm.addons.woocommerce || (alm.addons.elementor && alm.addons.elementor_type === 'posts')) {
+			// Query Loop || WooCommerce || Elementor.
+			if (alm.addons.queryloop || alm.addons.woocommerce || (alm.addons.elementor && alm.addons.elementor_type === 'posts')) {
 				ajaxurl = getButtonURL(alm, alm.rel);
 				params = '';
 			}
@@ -435,6 +436,9 @@ let alm_is_filtering = false;
 					} else if (alm.addons.elementor) {
 						// Elementor
 						return elementorGetContent(alm, ajaxurl, response, cache_slug);
+					} else if (alm.addons.queryloop) {
+						// Query Loop
+						return queryLoopGetContent(alm, ajaxurl, response, cache_slug);
 					}
 
 					// Standard ALM - Get data from response.
@@ -574,9 +578,6 @@ let alm_is_filtering = false;
 						// Reset container opacity.
 						alm.addons.paging_container.style.opacity = 0;
 
-						// Inject content.
-						//alm.addons.paging_container.innerHTML = alm.html;
-
 						// Start paging functionaity.
 						alm.AjaxLoadMore.pagingInit();
 					}
@@ -643,7 +644,7 @@ let alm_is_filtering = false;
 				/**
 				 * WooCommerce || Elementor Add-on
 				 */
-				if (alm.addons.woocommerce || alm.addons.elementor) {
+				if (alm.addons.woocommerce || alm.addons.elementor || alm.addons.queryloop) {
 					const temp = document.createElement('div');
 					temp.innerHTML = html;
 
@@ -656,12 +657,19 @@ let alm_is_filtering = false;
 							await elementor(temp, alm);
 							elementorLoaded(alm);
 						}
+						if (alm.addons.queryloop) {
+							await queryloop(temp, alm);
+							queryloopLoaded(alm);
+						}
 					})().catch((e) => {
 						if (alm.addons.woocommerce) {
-							console.warn('Ajax Load More: There was an error loading woocommerce products.', e);
+							console.warn('Ajax Load More: There was an error loading WooCommerce products.', e);
 						}
 						if (alm.addons.elementor) {
-							console.warn('Ajax Load More: There was an error loading elementor items.', e);
+							console.warn('Ajax Load More: There was an error loading Clementor items.', e);
+						}
+						if (alm.addons.queryloop) {
+							console.warn('Ajax Load More: There was an error loading Query Loop items.', e);
 						}
 					});
 
@@ -1054,7 +1062,7 @@ let alm_is_filtering = false;
 
 			if (!alm.addons.paging) {
 				alm.buttonPrev.classList.add('done');
-				alm.buttonPrev.removeAttribute('rel');
+				alm.buttonPrev.style.opacity = '0.5';
 				alm.buttonPrev.disabled = true;
 			}
 
@@ -1395,6 +1403,11 @@ let alm_is_filtering = false;
 				}, 250);
 			}
 
+			// Query Loop Add-on.
+			if (alm.addons.queryloop && alm.addons.queryloop_settings) {
+				queryLoopInit(alm);
+			}
+
 			// Preloaded + SEO && !Paging.
 			if (alm.addons.preloaded && alm.addons.seo && !alm.addons.paging) {
 				// Add delay for setup and scripts to load.
@@ -1610,7 +1623,7 @@ let alm_is_filtering = false;
 		setTimeout(function () {
 			alm.proceed = true;
 			alm.AjaxLoadMore.scrollSetup();
-		}, 500);
+		}, 1000);
 
 		// Init Ajax Load More
 		alm.AjaxLoadMore.init();

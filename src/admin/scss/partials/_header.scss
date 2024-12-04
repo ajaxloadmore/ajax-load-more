@@ -5,7 +5,7 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		padding: $padding;
+		padding: $padding_sm $padding_lg;
 		background-color: $alm_red;
 		&--logo {
 			display: flex;
@@ -71,7 +71,7 @@
 		@media screen and (min-width: $wp_mobile) {
 			position: sticky;
 			top: 32px;
-			z-index: 9999;
+			z-index: 999;
 		}
 		nav {
 			width: 100%;
@@ -107,7 +107,7 @@
 
 	// Hidden H1 for notices.
 	.alm-admin-h1-wrap {
-		padding: 0 $padding;
+		padding: 0 $padding_lg;
 		h1 {
 			margin: 5px 0;
 			padding: 0;

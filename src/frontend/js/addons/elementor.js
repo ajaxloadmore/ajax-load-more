@@ -1,6 +1,10 @@
+import { API_DATA_SHAPE } from '../functions/constants';
+import dispatchScrollEvent from '../functions/dispatchScrollEvent';
 import { setButtonAtts } from '../functions/getButtonURL';
+import { setContentContainersParams } from '../functions/setContentParams';
 import { lazyImages } from '../modules/lazyImages';
 import loadItems from '../modules/loadItems';
+import { createLoadPreviousButton } from '../modules/loadPrevious';
 import { createCache } from './cache';
 
 /**
@@ -11,10 +15,9 @@ import { createCache } from './cache';
  */
 export function elementorCreateParams(alm) {
 	const { listing } = alm;
-
 	alm.addons.elementor = listing.dataset.elementor === 'posts' && listing.dataset.elementorSettings;
+
 	if (alm.addons.elementor) {
-		// Get Settings
 		alm.addons.elementor_type = 'posts';
 		alm.addons.elementor_settings = JSON.parse(alm.listing.dataset.elementorSettings);
 
@@ -32,9 +35,11 @@ export function elementorCreateParams(alm) {
 		alm.addons.elementor_controls = alm.addons.elementor_settings.controls;
 		alm.addons.elementor_controls = alm.addons.elementor_controls === 'true' ? true : false;
 		alm.addons.elementor_scrolltop = parseInt(alm.addons.elementor_settings.scrolltop);
+		alm.addons.elementor_prev_label = alm.addons.elementor_settings.prev_label || '';
 
 		// Get next page URL.
-		alm.addons.elementor_next_page = elementorGetNextUrl(alm, alm.addons.elementor_element);
+		alm.addons.elementor_next_page = elementorGetPagedURL(alm, alm.addons.elementor_element);
+		alm.addons.elementor_prev_page = elementorGetPagedURL(alm, alm.addons.elementor_element, 'prev');
 
 		// Get the max pages.
 		alm.addons.elementor_max_pages = alm.addons.elementor_element.querySelector('.e-load-more-anchor');
@@ -62,49 +67,52 @@ export function elementorCreateParams(alm) {
  * Set up the instance on Elementor
  *
  * @param {Object} alm
- * @since 5.3.0
  */
 export function elementorInit(alm) {
-	if (!alm.addons.elementor || !alm.addons.elementor_type || !alm.addons.elementor_type === 'posts') {
+	const { addons } = alm;
+	if (!addons.elementor || !addons.elementor_type || !addons.elementor_type === 'posts') {
 		return false;
 	}
-	const target = alm.addons.elementor_element;
 
-	if (target) {
-		// Set button data attributes
-		alm.button.dataset.page = alm.addons.elementor_paged;
+	const container = addons.elementor_element;
+	if (!container) {
+		return false;
+	}
 
-		// Set button URL
-		const nextPage = alm.addons.elementor_next_page;
-		alm.button.dataset.url = nextPage ? nextPage : '';
+	alm.button.dataset.page = addons.elementor_paged; // Set button data attributes
 
-		// Set a11y attributes
-		target.setAttribute('aria-live', 'polite');
-		target.setAttribute('aria-atomic', 'true');
-		alm.listing.removeAttribute('aria-live');
-		alm.listing.removeAttribute('aria-atomic');
+	// Set button URL
+	const nextPage = addons.elementor_next_page;
+	alm.button.dataset.url = nextPage ? nextPage : '';
 
-		// Set data atts on 1st grid item
-		const item = target.querySelector(`.${alm.addons.elementor_item_class}`); // Get first `.product` item
-		if (item) {
-			item.classList.add('alm-elementor');
-			item.dataset.url = window.location;
-			item.dataset.page = alm.addons.elementor_paged;
-			item.dataset.pageTitle = document.title;
-		}
+	// Set attributes on containers.
+	setContentContainersParams(container, alm.listing);
 
-		// Masonry Window Resize. Delay for masonry to be added via Elementor.
-		if (alm.addons.elementor_masonry) {
-			let resizeTimeout;
-			setTimeout(function () {
-				window.addEventListener('resize', function () {
-					clearTimeout(resizeTimeout);
-					resizeTimeout = setTimeout(function () {
-						positionMasonryItems(alm, `.${alm.addons.elementor_container_class}`, `.${alm.addons.elementor_item_class}`);
-					}, 100);
-				});
-			}, 250);
-		}
+	// Set data attributes on first item.
+	const item = container.querySelector(`.${addons.elementor_item_class}`); // Get first item
+	if (item) {
+		item.classList.add('alm-elementor');
+		item.dataset.url = window.location;
+		item.dataset.page = addons.elementor_paged;
+		item.dataset.pageTitle = document.title;
+	}
+
+	// Paged URL: Create previous button.
+	if (addons.elementor_paged > 1 && addons.elementor_prev_page && addons.elementor_prev_label) {
+		createLoadPreviousButton(alm, container, addons.elementor_paged, addons.elementor_prev_page, addons.elementor_prev_label);
+	}
+
+	// Masonry Window Resize. Delay for masonry to be added via Elementor.
+	if (addons.elementor_masonry) {
+		let resizeTimeout;
+		setTimeout(function () {
+			window.addEventListener('resize', function () {
+				clearTimeout(resizeTimeout);
+				resizeTimeout = setTimeout(function () {
+					positionMasonryItems(alm, `.${addons.elementor_container_class}`, `.${addons.elementor_item_class}`);
+				}, 100);
+			});
+		}, 250);
 	}
 }
 
@@ -116,57 +124,58 @@ export function elementorInit(alm) {
  * @param {Object} response   Query response.
  * @param {string} cache_slug The cache slug.
  * @return {Object}           Results data.
- * @since 5.4.0
  */
 export function elementorGetContent(alm, url, response, cache_slug) {
-	// Default data object.
-	const data = {
-		html: '',
-		meta: {
-			postcount: 0,
-			totalposts: 0,
-		},
-	};
+	const data = API_DATA_SHAPE; // Default data object.
 
 	// Successful response.
 	if (response.status === 200 && response.data) {
-		const { addons, page, button } = alm;
+		const { addons, page, button, buttonPrev, rel } = alm;
+		const { elementor_target, elementor_container_class, elementor_item_class } = addons;
 
 		// Create temp div to hold response data.
 		const content = document.createElement('div');
 		content.innerHTML = response.data;
 
-		// Set button URL.
-		const nextURL = elementorGetNextUrl(alm, content);
-		if (nextURL) {
-			setButtonAtts(button, page + 1, nextURL);
+		// Set button state & URL.
+		if (rel === 'prev' && buttonPrev) {
+			const prevURL = elementorGetPagedURL(alm, content, 'prev');
+			if (prevURL) {
+				setButtonAtts(buttonPrev, page - 1, prevURL);
+			} else {
+				alm.AjaxLoadMore.triggerDonePrev();
+			}
 		} else {
-			// Disable button if no next page.
-			alm.AjaxLoadMore.triggerDone();
+			const nextURL = elementorGetPagedURL(alm, content);
+			if (nextURL) {
+				setButtonAtts(button, page + 1, nextURL);
+			} else {
+				alm.AjaxLoadMore.triggerDone();
+			}
 		}
 
 		// Get Page Title
 		const title = content.querySelector('title').innerHTML;
 		data.pageTitle = title;
 
-		// Get Elementor Items container.
-		const container = content.querySelector(`${addons.elementor_target} .${addons.elementor_container_class}`);
+		// Get Elementor container.
+		const container = content.querySelector(`${elementor_target} .${elementor_container_class}`);
 		if (!container) {
 			console.warn(`Ajax Load More Elementor: Unable to find Elementor container element.`);
 			return data;
 		}
 
 		// Get the first item and append data attributes.
-		const item = container ? container.querySelector(`.${addons.elementor_item_class}`) : null;
+		const item = container ? container.querySelector(`.${elementor_item_class}`) : null;
 		if (item) {
 			item.classList.add('alm-elementor');
 			item.dataset.url = url;
-			item.dataset.page = addons.elementor_paged;
+			item.dataset.page = rel === 'next' ? page + 1 : page - 1;
 			item.dataset.pageTitle = title;
 		}
 
 		// Count the number of returned items.
-		const items = container.querySelectorAll(`.${addons.elementor_item_class}`);
+		const items = container.querySelectorAll(`.${elementor_item_class}`);
 		if (items) {
 			// Set the html to the elementor container data.
 			data.html = container ? container.innerHTML : '';
@@ -185,7 +194,6 @@ export function elementorGetContent(alm, url, response, cache_slug) {
  *
  * @param {HTMLElement} content The HTML data.
  * @param {Object}      alm     The alm object.
- * @since 5.3.0
  */
 export function elementor(content, alm) {
 	if (!content || !alm) {
@@ -206,15 +214,14 @@ export function elementor(content, alm) {
 				window.almElementorLoaded(ElementorItems);
 			}
 
+			// Load the items.
 			(async function () {
-				// Load the items.
 				await loadItems(container, ElementorItems, alm);
 				if (addons.elementor_masonry) {
 					setTimeout(function () {
 						positionMasonryItems(alm, `.${addons.elementor_container_class}`, `.${addons.elementor_item_class}`);
 					}, 125);
 				}
-
 				resolve(true);
 			})().catch((e) => {
 				console.warn(e, 'There was an error with Elementor'); // eslint-disable-line no-console
@@ -229,29 +236,25 @@ export function elementor(content, alm) {
  * Elementor loaded and dispatch actions.
  *
  * @param {Object} alm The alm object.
- * @since 5.5.0
  */
 export function elementorLoaded(alm) {
 	const { page, AjaxLoadMore, addons } = alm;
 	const nextPage = page + 1;
+	const { elementor_max_pages } = addons;
 
-	const max_pages = addons.elementor_max_pages;
+	lazyImages(alm); // Lazy load images if necessary.
 
-	// Lazy load images if necessary.
-	lazyImages(alm);
-
-	// Trigger almComplete.
 	if (typeof almComplete === 'function' && alm.transition !== 'masonry') {
-		window.almComplete(alm);
+		window.almComplete(alm); // Trigger almComplete.
 	}
 
-	// End transitions.
-	AjaxLoadMore.transitionEnd();
+	AjaxLoadMore.transitionEnd(); // End transitions.
 
-	// ALM Done.
-	if (nextPage >= max_pages) {
-		AjaxLoadMore.triggerDone();
+	if (nextPage >= elementor_max_pages) {
+		AjaxLoadMore.triggerDone(); // ALM Done.
 	}
+
+	dispatchScrollEvent();
 }
 
 /**
@@ -388,10 +391,8 @@ function elementorGetWidgetType(target) {
 
 	// Get Elementor type based on container class.
 	if (target.classList.contains('elementor-wc-products')) {
-		// WooCommerce.
 		return 'woocommerce';
 	} else if (target.classList.contains('elementor-widget-loop-grid')) {
-		// Loop Grid.
 		return 'loop-grid';
 	}
 	return 'posts';
@@ -402,17 +403,18 @@ function elementorGetWidgetType(target) {
  *
  * @param {Object}  alm     The alm object.
  * @param {Element} content The HTML content to search.
+ * @param {string}  dir     the direction, next of prev.
  * @return {HTMLElement}    The pagination element.
  */
-export function elementorGetNextUrl(alm, content) {
+export function elementorGetPagedURL(alm, content, dir = 'next') {
 	const { addons = {} } = alm;
 
 	// Locate the pagination container.
 	const element = content?.querySelector(addons?.elementor_pagination_class) || content?.querySelector(`.${addons?.elementor_settings?.pagination_class}`);
 
-	// Get the next page URL from the pagination element.
-	const nextpage = element?.querySelector('a.next')?.href;
+	// Get URL from the pagination element.
+	const page = element?.querySelector(`a.${dir}`)?.href;
 
-	// Return the next page URL.
-	return nextpage ? nextpage : false;
+	// Return the paged URL element.
+	return page ? page : false;
 }

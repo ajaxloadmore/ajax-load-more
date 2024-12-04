@@ -24,8 +24,7 @@ require_once ALM_PATH . 'admin/functions/settings.php';
 function alm_admin_hooks() {
 	require_once plugin_dir_path( __FILE__ ) . '/classes/class-nag.php';
 }
-// phpcs:ignore
-// add_action( 'admin_init', 'alm_admin_hooks' );
+add_action( 'admin_init', 'alm_admin_hooks' );
 
 /**
  * Render a notification in the dashboard.

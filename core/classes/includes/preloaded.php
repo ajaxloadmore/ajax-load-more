@@ -51,7 +51,8 @@ if ( $comments ) {
 		 */
 		$preloaded_comments = apply_filters( 'alm_comments_preloaded', $query_args ); // located in comments add-on
 
-		$total_comments = wp_count_comments( $comments_post_id );
+		// Count the comments.
+		$total_comments = wp_count_comments( $comments_post_id ? $comments_post_id : $post_id );
 
 		// Add localized ALM JS variables.
 		ALM_LOCALIZE::add_localized_var( 'total_posts', $total_comments->approved, $localize_id );

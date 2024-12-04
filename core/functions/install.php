@@ -32,9 +32,8 @@ function alm_create_table() {
 		// phpcs:enable
 	}
 
-	// Exit if Repeater Templates are disabled, we don't want to create the table.
 	if ( defined( 'ALM_DISABLE_REPEATER_TEMPLATES' ) && ALM_DISABLE_REPEATER_TEMPLATES ) {
-		return;
+		return;  // Exit if disabled, we don't want to create the table.
 	}
 
 	// Create table, if it doesn't already exist.
@@ -46,7 +45,6 @@ function alm_create_table() {
 			name text NOT NULL,
 			repeaterDefault longtext NOT NULL,
 			repeaterType text NOT NULL,
-			pluginVersion text NOT NULL,
 			UNIQUE KEY id (id)
 		);";
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -59,7 +57,6 @@ function alm_create_table() {
 				'name'            => 'default',
 				'repeaterDefault' => $repeater,
 				'repeaterType'    => 'default',
-				'pluginVersion'   => ALM_VERSION,
 			]
 		);
 	}

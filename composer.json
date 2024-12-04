@@ -25,8 +25,8 @@
 		"squizlabs/php_codesniffer": "*"
 	},
 	"scripts": {
-		"format": "./vendor/bin/phpcbf --standard=.phpcs.xml --report=summary,source",
-		"lint": "./vendor/bin/phpcs --standard=.phpcs.xml --report=summary,source",
+		"format": "./vendor/bin/phpcbf --standard=phpcs.xml --report=summary,source",
+		"lint": "./vendor/bin/phpcs --standard=phpcs.xml --report=summary,source",
 		"pot": "./vendor/wp-cli/wp-cli/bin/wp i18n make-pot . lang/ajax-load-more.pot --exclude=build,node_modules,vendor --allow-root"
 	}
 }
