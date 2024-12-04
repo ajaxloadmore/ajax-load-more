@@ -2,22 +2,22 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.1.3\n"
+"Project-Id-Version: Ajax Load More 7.1.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-01T13:26:40+00:00\n"
+"POT-Creation-Date: 2024-12-04T13:46:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: ajax-load-more\n"
 
 #. Plugin Name of the plugin
-#: admin/admin.php:556
+#: admin/admin.php:555
 #: core/integration/elementor/elementor.php:19
-#: src/blocks/core/render.php:15
+#: src/blocks/core/render.php:16
 msgid "Ajax Load More"
 msgstr ""
 
@@ -37,190 +37,190 @@ msgstr ""
 msgid "https://connekthq.com"
 msgstr ""
 
-#: admin/admin.php:76
-#: admin/admin.php:592
+#: admin/admin.php:75
+#: admin/admin.php:591
 #: admin/functions/layouts.php:18
 #: admin/functions/licensing.php:19
 #: admin/functions/repeater-templates.php:20
-#: admin/functions/repeater-templates.php:130
+#: admin/functions/repeater-templates.php:125
 msgid "You don't belong here."
 msgstr ""
 
-#: admin/admin.php:81
-#: admin/admin.php:596
+#: admin/admin.php:80
+#: admin/admin.php:595
 #: admin/functions/layouts.php:23
 #: admin/functions/licensing.php:25
 #: admin/functions/repeater-templates.php:25
-#: admin/functions/repeater-templates.php:135
+#: admin/functions/repeater-templates.php:130
 msgid "Error - unable to verify nonce, please try again."
 msgstr ""
 
-#: admin/admin.php:89
+#: admin/admin.php:88
 msgid "Transient set successfully"
 msgstr ""
 
-#: admin/admin.php:107
+#: admin/admin.php:106
 msgid "License"
 msgstr ""
 
-#: admin/admin.php:107
+#: admin/admin.php:106
 #: admin/views/filters.php:10
 #: admin/views/licenses.php:9
 #: admin/views/licenses.php:10
 msgid "Licenses"
 msgstr ""
 
+#: admin/admin.php:120
 #: admin/admin.php:121
-#: admin/admin.php:122
-#: admin/admin.php:130
+#: admin/admin.php:129
 #: admin/views/settings.php:9
-#: ajax-load-more.php:312
+#: ajax-load-more.php:317
 #: src/blocks/core/inspector.js:17
 #: src/blocks/filters/inspector.js:28
 msgid "Settings"
 msgstr ""
 
+#: admin/admin.php:136
 #: admin/admin.php:137
-#: admin/admin.php:138
-#: admin/admin.php:146
+#: admin/admin.php:145
 #: admin/views/repeater-templates.php:9
 msgid "Templates"
 msgstr ""
 
+#: admin/admin.php:152
 #: admin/admin.php:153
-#: admin/admin.php:154
-#: admin/admin.php:162
+#: admin/admin.php:161
 #: admin/views/shortcode-builder.php:9
 msgid "Shortcode Builder"
 msgstr ""
 
+#: admin/admin.php:168
 #: admin/admin.php:169
-#: admin/admin.php:170
-#: admin/admin.php:178
+#: admin/admin.php:177
 #: admin/shortcode-builder/components/filters.php:10
 #: admin/views/filters.php:9
 msgid "Filters"
 msgstr ""
 
+#: admin/admin.php:185
 #: admin/admin.php:186
-#: admin/admin.php:187
-#: admin/admin.php:197
+#: admin/admin.php:196
 #: admin/shortcode-builder/components/cache.php:3
 msgid "Cache"
 msgstr ""
 
+#: admin/admin.php:205
 #: admin/admin.php:206
-#: admin/admin.php:207
-#: admin/admin.php:216
+#: admin/admin.php:215
 msgid "WooCommerce"
 msgstr ""
 
+#: admin/admin.php:225
 #: admin/admin.php:226
-#: admin/admin.php:227
-#: admin/admin.php:235
+#: admin/admin.php:234
 #: admin/shortcode-builder/shortcode-builder.php:25
 #: admin/shortcode-builder/shortcode-builder.php:46
 #: admin/views/add-ons.php:9
 msgid "Add-ons"
 msgstr ""
 
+#: admin/admin.php:245
 #: admin/admin.php:246
-#: admin/admin.php:247
-#: admin/admin.php:255
+#: admin/admin.php:254
 #: admin/shortcode-builder/shortcode-builder.php:28
 #: admin/shortcode-builder/shortcode-builder.php:78
 #: admin/views/extensions.php:9
 msgid "Extensions"
 msgstr ""
 
+#: admin/admin.php:262
 #: admin/admin.php:263
-#: admin/admin.php:264
-#: admin/admin.php:272
-#: admin/admin.php:278
+#: admin/admin.php:271
+#: admin/admin.php:277
 msgid "Pro"
 msgstr ""
 
-#: admin/admin.php:279
-#: admin/admin.php:287
+#: admin/admin.php:278
+#: admin/admin.php:286
 #: admin/views/licenses.php:154
 msgid "Go Pro"
 msgstr ""
 
+#: admin/admin.php:310
 #: admin/admin.php:311
-#: admin/admin.php:312
-#: admin/admin.php:320
+#: admin/admin.php:319
 #: admin/views/help.php:9
 msgid "Help"
 msgstr ""
 
-#: admin/admin.php:557
+#: admin/admin.php:556
 #: admin/views/licenses.php:97
 msgid "Active"
 msgstr ""
 
-#: admin/admin.php:558
+#: admin/admin.php:557
 #: admin/views/licenses.php:99
 msgid "Inactive"
 msgstr ""
 
-#: admin/admin.php:559
+#: admin/admin.php:558
 msgid "Applying Layout"
 msgstr ""
 
-#: admin/admin.php:560
-#: admin/views/repeater-templates.php:432
+#: admin/admin.php:559
+#: admin/views/repeater-templates.php:447
 msgid "Template Updated"
 msgstr ""
 
-#: admin/admin.php:562
+#: admin/admin.php:561
 msgid "Select Author(s)"
 msgstr ""
 
-#: admin/admin.php:563
+#: admin/admin.php:562
 msgid "Select Categories"
 msgstr ""
 
-#: admin/admin.php:564
+#: admin/admin.php:563
 msgid "Select Tags"
 msgstr ""
 
-#: admin/admin.php:565
+#: admin/admin.php:564
 msgid "Select"
 msgstr ""
 
-#: admin/admin.php:566
+#: admin/admin.php:565
 msgid "Jump to Option"
 msgstr ""
 
-#: admin/admin.php:567
+#: admin/admin.php:566
 msgid "Jump to Template"
 msgstr ""
 
-#: admin/admin.php:568
+#: admin/admin.php:567
 msgid "Are you sure you want to install this Ajax Load More extension?"
 msgstr ""
 
-#: admin/admin.php:569
+#: admin/admin.php:568
 msgid "Install Now"
 msgstr ""
 
-#: admin/admin.php:570
+#: admin/admin.php:569
 msgid "Activate"
 msgstr ""
 
-#: admin/admin.php:571
+#: admin/admin.php:570
 msgid "Saving Settings"
 msgstr ""
 
-#: admin/admin.php:572
+#: admin/admin.php:571
 msgid "Settings Saved Successfully"
 msgstr ""
 
-#: admin/admin.php:573
+#: admin/admin.php:572
 msgid "Error Saving Settings"
 msgstr ""
 
-#: admin/admin.php:574
+#: admin/admin.php:573
 msgid "There is a maximum of 3 tax_query objects while using the shortcode builder"
 msgstr ""
 
@@ -267,20 +267,20 @@ msgstr ""
 msgid "%1$sRegister%2$s your copy of %3$s to receive access to automatic upgrades and support. Need a license key? %4$sPurchase one now%5$s."
 msgstr ""
 
-#: admin/functions/repeater-templates.php:110
+#: admin/functions/repeater-templates.php:105
 msgid "Template Saved Successfully"
 msgstr ""
 
-#: admin/functions/repeater-templates.php:112
+#: admin/functions/repeater-templates.php:107
 msgid "Error Writing File"
 msgstr ""
 
-#: admin/functions/repeater-templates.php:112
-#: admin/views/repeater-templates.php:376
+#: admin/functions/repeater-templates.php:107
+#: admin/views/repeater-templates.php:391
 msgid "Something went wrong and the data could not be saved."
 msgstr ""
 
-#: admin/functions/repeater-templates.php:179
+#: admin/functions/repeater-templates.php:174
 msgid "Something isn't right here..."
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr ""
 #: admin/functions/settings.php:374
 #: admin/shortcode-builder/shortcode-builder.php:168
 #: admin/shortcode-builder/shortcode-builder.php:387
-#: ajax-load-more.php:417
+#: ajax-load-more.php:419
 msgid "Load More"
 msgstr ""
 
@@ -1821,7 +1821,7 @@ msgstr ""
 #: admin/views/filters.php:41
 #: admin/views/go-pro.php:63
 #: admin/views/repeater-templates.php:133
-#: admin/views/repeater-templates.php:482
+#: admin/views/repeater-templates.php:497
 msgid "Learn More"
 msgstr ""
 
@@ -2650,7 +2650,7 @@ msgid "Theme Repeaters"
 msgstr ""
 
 #: admin/views/repeater-templates.php:93
-#: admin/views/repeater-templates.php:255
+#: admin/views/repeater-templates.php:270
 msgid "Location"
 msgstr ""
 
@@ -2666,43 +2666,47 @@ msgstr ""
 msgid "Manage Settings"
 msgstr ""
 
-#: admin/views/repeater-templates.php:184
+#: admin/views/repeater-templates.php:186
 msgid "Default Template"
 msgstr ""
 
-#: admin/views/repeater-templates.php:199
+#: admin/views/repeater-templates.php:201
 msgid "Template Code:"
 msgstr ""
 
-#: admin/views/repeater-templates.php:200
+#: admin/views/repeater-templates.php:202
 msgid "Enter the PHP and HTML markup for this template."
 msgstr ""
 
-#: admin/views/repeater-templates.php:236
+#: admin/views/repeater-templates.php:224
+msgid "This default ALM template is missing from the filesystem! Click the \"Save Template\" button to save the template."
+msgstr ""
+
+#: admin/views/repeater-templates.php:251
 msgid "Save Template"
 msgstr ""
 
-#: admin/views/repeater-templates.php:253
+#: admin/views/repeater-templates.php:268
 msgid "It appears you are loading the <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/#default-template\" target=\"_blank\"><b>default template</b></a> (<em>default.php</em>) from your current theme directory. To modify this template, you must edit the file directly on your server."
 msgstr ""
 
-#: admin/views/repeater-templates.php:265
+#: admin/views/repeater-templates.php:280
 msgid "Repeater Templates editing has been disabled for this instance of Ajax Load More. To enable the template editing, please remove the <strong>ALM_DISABLE_REPEATER_TEMPLATES</strong> PHP constant from your wp-config.php (or functions.php) and re-activate the plugin."
 msgstr ""
 
-#: admin/views/repeater-templates.php:340
+#: admin/views/repeater-templates.php:355
 msgid "Saving template..."
 msgstr ""
 
-#: admin/views/repeater-templates.php:411
+#: admin/views/repeater-templates.php:426
 msgid "Updating Template"
 msgstr ""
 
-#: admin/views/repeater-templates.php:476
+#: admin/views/repeater-templates.php:491
 msgid "What's a Repeater Template?"
 msgstr ""
 
-#: admin/views/repeater-templates.php:478
+#: admin/views/repeater-templates.php:493
 msgid "A <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/\" target=\"_blank\">Repeater Template</a> is a snippet of code that will execute over and over within a <a href=\"https://developer.wordpress.org/themes/basics/the-loop/\" target=\"_blank\">WordPress loop</a>"
 msgstr ""
 
@@ -2726,15 +2730,15 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:289
+#: ajax-load-more.php:294
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:401
+#: ajax-load-more.php:403
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:402
+#: ajax-load-more.php:404
 msgid "No results found."
 msgstr ""
 
@@ -2967,7 +2971,7 @@ msgstr ""
 msgid "%1$sBuild Shortcode%2$s"
 msgstr ""
 
-#: src/blocks/core/render.php:16
+#: src/blocks/core/render.php:17
 msgid "You must enter an Ajax Load More shortcode."
 msgstr ""
 
@@ -2985,7 +2989,7 @@ msgid "You must enter an Ajax Load More target for this filter."
 msgstr ""
 
 #: src/blocks/core/inspector.js:23
-msgid "Note: Scroll is disabled within the WP block editor."
+msgid "Note: Infinite scroll is disabled within the Block Editor."
 msgstr ""
 
 #: src/blocks/core/inspector.js:34
