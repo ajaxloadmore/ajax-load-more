@@ -165,11 +165,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_PREV_POST_ITEM_NAME' ) ) {
 				define( 'ALM_PREV_POST_ITEM_NAME', '9686' );
 			}
+			if ( ! defined( 'ALM_QUERY_LOOP_ITEM_NAME' ) ) {
+				define( 'ALM_QUERY_LOOP_ITEM_NAME', '120900' );
+			}
 			if ( ! defined( 'ALM_SEO_ITEM_NAME' ) ) {
 				define( 'ALM_SEO_ITEM_NAME', '3482' );
-			}
-			if ( ! defined( 'ALM_TABS_ITEM_NAME' ) ) {
-				define( 'ALM_TABS_ITEM_NAME', '54855' );
 			}
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );

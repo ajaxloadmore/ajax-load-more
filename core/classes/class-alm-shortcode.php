@@ -85,7 +85,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'nested'                       => false,
 						'woo'                          => false,
 						'woo_template'                 => '',
-						'queryloop'                    => false,
 						'layouts'                      => false,
 						'layouts_cols'                 => '3',
 						'layouts_gap'                  => 'default',
@@ -256,9 +255,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			$id   = sanitize_key( $id );
 			$vars = self::alm_strip_tags( $vars );
-
-			// Query Loop.
-			$queryloop = $queryloop === 'true';
 
 			// Elementor.
 			$elementor = $elementor === 'true' ? 'single' : $elementor;
@@ -844,11 +840,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$ajaxloadmore .= $paging_transition;
 
 			// Build container data atts.
-
-			// Query loop.
-			if( $queryloop) {
-				$ajaxloadmore .= ' data-query-loop="true"';
-			}
 
 			// Advanced Custom Fields Extension.
 			if ( has_action( 'alm_acf_installed' ) && $acf === 'true' ) {

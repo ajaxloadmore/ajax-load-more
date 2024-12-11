@@ -9,7 +9,7 @@ import { filtersCreateParams } from './addons/filters';
 import { nextpageCreateParams } from './addons/next-page';
 import { pagingComplete, pagingCreateParams } from './addons/paging';
 import { preloadedCreateParams, setPreloadedParams } from './addons/preloaded';
-import { queryLoopCreateParams, queryLoopGetContent, queryLoopInit, queryloop, queryloopLoaded } from './addons/queryLoop';
+import { queryLoop, queryLoopCreateParams, queryLoopGetContent, queryLoopInit, queryLoopLoaded } from './addons/query-loop';
 import { createSEOOffset, seoCreateParams } from './addons/seo';
 import { singlepostsCreateParams, singlepostsHTML } from './addons/singleposts';
 import { wooCreateParams, wooGetContent, wooInit, wooReset, woocommerce, woocommerceLoaded } from './addons/woocommerce';
@@ -57,6 +57,8 @@ require('focus-options-polyfill');
 
 // Global filtering state.
 let alm_is_filtering = false;
+
+const isBlockEditor = document.body.classList.contains('wp-admin');
 
 // Start ALM
 (function () {
@@ -658,8 +660,8 @@ let alm_is_filtering = false;
 							elementorLoaded(alm);
 						}
 						if (alm.addons.queryloop) {
-							await queryloop(temp, alm);
-							queryloopLoaded(alm);
+							await queryLoop(temp, alm);
+							queryLoopLoaded(alm);
 						}
 					})().catch((e) => {
 						if (alm.addons.woocommerce) {
@@ -1093,6 +1095,10 @@ let alm_is_filtering = false;
 		 * @since 4.2.0
 		 */
 		alm.AjaxLoadMore.click = function (e) {
+			if (isBlockEditor && alm.addons.queryloop) {
+				return; //
+			}
+
 			const button = e.currentTarget || e.target;
 			alm.rel = 'next';
 			if (alm.pause === 'true') {
@@ -1625,7 +1631,7 @@ let alm_is_filtering = false;
 			alm.AjaxLoadMore.scrollSetup();
 		}, 1000);
 
-		// Init Ajax Load More
+		// Init Ajax Load More.
 		alm.AjaxLoadMore.init();
 	};
 

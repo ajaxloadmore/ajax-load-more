@@ -37,6 +37,7 @@
 		"@wordpress/components": "^26.0.0",
 		"@wordpress/data": "^9.21.0",
 		"@wordpress/dom-ready": "^3.51.0",
+		"@wordpress/i18n": "^5.14.0",
 		"@wordpress/scripts": "^26.0.0",
 		"@wordpress/server-side-render": "^4.28.0",
 		"axios": "^1.7.2",
