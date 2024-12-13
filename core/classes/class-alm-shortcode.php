@@ -226,6 +226,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'button_label'                 => AjaxLoadMore::alm_default_button_label(),
 						'button_loading_label'         => '',
 						'button_done_label'            => '',
+						'prev_button_label'            => AjaxLoadMore::alm_default_prev_button_label(),
+						'prev_button_loading_label'    => '',
+						'prev_button_done_label'       => '',
 						'wrapper_classes'              => '',
 						'css_classes'                  => '',
 						'container_type'               => '',
@@ -237,6 +240,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'no_results_text'              => '',
 						'placeholder'                  => '',
 						'lazy_images'                  => false,
+						'urls'      					    => 'true',
 						'archive'                      => false,
 						'woocommerce'                  => false,
 						'elementor'                    => false,
@@ -1099,6 +1103,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			// Woocommerce.
 			$ajaxloadmore .= $woocommerce ? ' data-woocommerce="true"' : '';
 
+			// URL Updates.
+			$ajaxloadmore .= $urls !== 'true'  ? ' data-urls="false"' : '';
+
 			// Repeaters.
 			if ( ! $woo && $elementor !== 'posts' ) {
 				$ajaxloadmore .= $theme_repeater === 'null' ? ' data-repeater="' . esc_attr( $repeater ) . '"' : '';
@@ -1188,10 +1195,13 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			// Pause.
 			$ajaxloadmore .= $pause === 'true' ? ' data-pause="true"' : '';
 
-			// Button.
+			// Button labels.
 			$ajaxloadmore .= ' data-button-label="' . self::alm_strip_tags( $button_label ) . '"';
 			$ajaxloadmore .= $button_loading_label ? ' data-button-loading-label="' . self::alm_strip_tags( $button_loading_label ) . '"' : '';
 			$ajaxloadmore .= $button_done_label ? ' data-button-done-label="' . self::alm_strip_tags( $button_done_label ) . '"' : '';
+			$ajaxloadmore .= ' data-prev-button-label="' . self::alm_strip_tags( $prev_button_label ) . '"';
+			$ajaxloadmore .= $prev_button_loading_label ? ' data-prev-button-loading-label="' . self::alm_strip_tags( $prev_button_loading_label ) . '"' : '';
+			$ajaxloadmore .= $prev_button_done_label ? ' data-prev-button-done-label="' . self::alm_strip_tags( $prev_button_done_label ) . '"' : '';
 
 			// Destroy After.
 			$ajaxloadmore .= $destroy_after ? ' data-destroy-after="' . esc_attr( $destroy_after ) . '"' : '';

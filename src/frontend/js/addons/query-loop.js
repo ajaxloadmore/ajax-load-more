@@ -26,7 +26,7 @@ export function queryLoopCreateParams(alm) {
 	}
 
 	// Pluck the queryId from the config.
-	const { queryId = false, paged = 1, prev } = getQueryLoopConfig(container);
+	const { queryId = false, paged = 1 } = getQueryLoopConfig(container);
 	if (!queryId) {
 		console.warn('Ajax Load More: Unable to locate Query Loop ID.');
 		return alm;
@@ -44,6 +44,7 @@ export function queryLoopCreateParams(alm) {
 		},
 	};
 
+	alm.page = parseInt(paged);
 	alm.pause = 'true'; // Pause ALM by default.
 	return alm;
 }
@@ -58,14 +59,14 @@ export function queryLoopInit(alm) {
 
 	// Create Load Previous button.
 	if (container && paged > 1 && prev) {
-		createLoadPreviousButton(alm, container, paged, prev, __('Load Previous', 'ajax-load-more'));
+		createLoadPreviousButton(alm, container, paged - 1, prev, alm?.prev_button_labels?.default);
 	}
 
 	// Config first element in list.
 	if (first) {
 		first.classList.add('alm-query-loop');
 		first.dataset.url = window.location.href;
-		first.dataset.page = alm.page + 1;
+		first.dataset.page = alm.page;
 		first.dataset.title = document.querySelector('title').innerHTML;
 	}
 
@@ -73,8 +74,10 @@ export function queryLoopInit(alm) {
 	setButtonURLs(alm);
 
 	// Attach scroll events.
-	window.addEventListener('touchstart', queryOnLoopScroll);
-	window.addEventListener('scroll', queryOnLoopScroll);
+	if (alm.urls) {
+		window.addEventListener('touchstart', onScroll);
+		window.addEventListener('scroll', onScroll);
+	}
 }
 
 /**
@@ -84,13 +87,13 @@ export function queryLoopInit(alm) {
  * @param {HTMLElement} element The element to search.
  */
 function setButtonURLs(alm, element = document) {
-	const { rel, button, buttonPrev, page } = alm;
+	const { rel, button, buttonPrev, page, pagePrev = 1 } = alm;
 	const { next = '', prev = '' } = getQueryLoopConfig(element);
 
 	// Set button state & URL.
 	if (rel === 'prev' && buttonPrev) {
 		if (prev) {
-			setButtonAtts(buttonPrev, page - 1, prev);
+			setButtonAtts(buttonPrev, pagePrev - 1, prev);
 		} else {
 			alm.AjaxLoadMore.triggerDonePrev();
 		}
@@ -117,15 +120,12 @@ export function queryLoopGetContent(alm, url, response, cache_slug) {
 
 	// Successful response.
 	if (response.status === 200 && response.data) {
-		const { addons, page, rel } = alm;
+		const { addons, canonical_url } = alm;
 		const { queryloop_settings = {} } = addons;
 
 		// Create temp div to hold response data.
 		const content = document.createElement('div');
 		content.innerHTML = response.data;
-
-		// Set the button URLs.
-		setButtonURLs(alm, content);
 
 		// Get container.
 		const container = content?.querySelector(`${queryloop_settings?.classes?.container} ${queryloop_settings?.classes?.listing}`);
@@ -137,9 +137,12 @@ export function queryLoopGetContent(alm, url, response, cache_slug) {
 		// Get the first item and append data attributes.
 		const item = container ? container.querySelector(queryloop_settings?.classes?.element) : null;
 		if (item) {
+			// Get current page from config settings.
+			const { paged = 1 } = getQueryLoopConfig(content);
+
 			item.classList.add('alm-query-loop');
-			item.dataset.url = url;
-			item.dataset.page = rel === 'next' ? page + 1 : page - 1;
+			item.dataset.url = paged > 1 ? url : canonical_url;
+			item.dataset.page = paged;
 			item.dataset.title = content.querySelector('title').innerHTML;
 		}
 
@@ -154,6 +157,10 @@ export function queryLoopGetContent(alm, url, response, cache_slug) {
 			// Create cache file.
 			createCache(alm, data, cache_slug);
 		}
+
+		// Set the button URLs.
+		alm.page = alm.page + 1;
+		setButtonURLs(alm, content);
 	}
 	return data;
 }
@@ -241,15 +248,20 @@ function getQueryLoopConfig(element) {
  *
  * @since 2.0
  */
-function queryOnLoopScroll() {
+function onScroll() {
 	const scrollTop = window.scrollY;
 	const disabled = false;
 	if (!disabled) {
-		// Get container scroll position
-		const fromTop = scrollTop;
-
 		// Get all elements.
 		const posts = document.querySelectorAll('.alm-query-loop');
+		if (!posts) {
+			return;
+		}
+
+		const first = posts[0]?.dataset?.url;
+
+		// Get container scroll position
+		const fromTop = scrollTop;
 
 		// Loop all posts
 		const current = Array.prototype.filter.call(posts, function (n) {
@@ -261,12 +273,17 @@ function queryOnLoopScroll() {
 
 		// Get the data attributes of the current element.
 		const currentPost = current[current.length - 1];
-		const permalink = currentPost ? currentPost.dataset.url : '';
 		const title = currentPost ? currentPost.dataset.title : '';
+		const permalink = currentPost ? currentPost.dataset.url : '';
 
-		// Set URL if current post doesn't match the browser URL.
-		if (window.location.href !== permalink) {
-			setURL(title, permalink);
+		// Get the current page number.
+		const page = getCurrentPageNum(permalink);
+
+		const url = permalink || first;
+
+		if (window.location.href !== url) {
+			// Set URL if current post doesn't match the browser URL.
+			setURL(title, url);
 		}
 	}
 }
@@ -283,4 +300,17 @@ function setURL(title, permalink) {
 		title: title,
 	};
 	history.replaceState(state, title, permalink);
+}
+
+/**
+ * Get the current page number from the URL.
+ * @param {string} url The url.
+ * @return {number} The current page number.
+ */
+function getCurrentPageNum(url) {
+	if (!url) {
+		return 1;
+	}
+	const parts = url.split('page=');
+	return parts?.length > 1 ? parseInt(parts[parts.length - 1]) : 1;
 }

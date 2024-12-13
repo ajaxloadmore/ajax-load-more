@@ -30,7 +30,7 @@ function alm_get_pro_addon() {
 			'url'            => $url_prefix,
 			'item_id'        => ALM_PRO_ITEM_NAME,
 			'version'        => 'ALM_PRO_VERSION',
-			'path'           => $path_prefix .'pro',
+			'path'           => $path_prefix . 'pro',
 			'slug'           => 'pro'
 		)
 	);
@@ -57,10 +57,10 @@ function alm_get_addons(){
          'status' => 'alm_cache_license_status',
          'settings_field' => 'alm_cache_license',
          'img' => 'img/add-ons/cache-add-on.jpg',
-         'url' => $url_prefix .'cache/',
+         'url' => $url_prefix . 'cache/',
          'item_id' => ALM_CACHE_ITEM_NAME,
          'version' => 'ALM_CACHE_VERSION',
-	   	'path' => $path_prefix .'cache',
+	   	'path' => $path_prefix . 'cache',
 	   	'slug' => 'cache'
       ),
       array(
@@ -72,10 +72,10 @@ function alm_get_addons(){
          'status' => 'alm_cta_license_status',
          'settings_field' => 'alm_cta_license',
          'img' => 'img/add-ons/cta-add-on.jpg',
-         'url' => $url_prefix .'call-to-actions/',
+         'url' => $url_prefix . 'call-to-actions/',
          'item_id' => ALM_CTA_ITEM_NAME,
          'version' => 'ALM_CTA_VERSION',
-	   	'path' => $path_prefix .'call-to-actions',
+	   	'path' => $path_prefix . 'call-to-actions',
 	   	'slug' => 'call-to-actions'
       ),
       array(
@@ -87,10 +87,10 @@ function alm_get_addons(){
          'status' => 'alm_comments_license_status',
          'settings_field' => 'alm_comments_license',
          'img' => 'img/add-ons/comments-add-on.jpg',
-         'url' => $url_prefix .'comments/',
+         'url' => $url_prefix . 'comments/',
          'item_id' => ALM_COMMENTS_ITEM_NAME,
          'version' => 'ALM_COMMENTS_VERSION',
-	   	'path' => $path_prefix .'comments',
+	   	'path' => $path_prefix . 'comments',
 	   	'slug' => 'comments'
       ),
       array(
@@ -102,10 +102,10 @@ function alm_get_addons(){
          'status' => 'alm_unlimited_license_status',
          'settings_field' => 'alm_unlimited_license',
          'img' => 'img/add-ons/unlimited-add-ons.jpg',
-         'url' => $url_prefix .'custom-repeaters/',
+         'url' => $url_prefix . 'custom-repeaters/',
          'item_id' => ALM_UNLIMITED_ITEM_NAME,
          'version' => 'ALM_UNLIMITED_VERSION',
-	   	'path' => $path_prefix .'repeaters-v2',
+	   	'path' => $path_prefix . 'repeaters-v2',
 	   	'slug' => 'repeaters-v2'
       ),
       array(
@@ -117,10 +117,10 @@ function alm_get_addons(){
          'status' => 'alm_elementor_license_status',
          'settings_field' => 'alm_elementor_license',
          'img' => 'img/add-ons/elementor-add-on.jpg',
-         'url' => $url_prefix .'elementor/',
+         'url' => $url_prefix . 'elementor/',
          'item_id' => ALM_ELEMENTOR_ITEM_NAME,
          'version' => 'ALM_ELEMENTOR_VERSION',
-	   	'path' => $path_prefix .'elementor',
+	   	'path' => $path_prefix . 'elementor',
 	   	'slug' => 'elementor'
       ),
       array(
@@ -132,10 +132,10 @@ function alm_get_addons(){
          'status' => 'alm_filters_license_status',
          'settings_field' => 'alm_filters_license',
          'img' => 'img/add-ons/filters-add-on.jpg',
-         'url' => $url_prefix .'filters/',
+         'url' => $url_prefix . 'filters/',
          'item_id' => ALM_FILTERS_ITEM_NAME,
          'version' => 'ALM_FILTERS_VERSION',
-	   	'path' => $path_prefix .'filters',
+	   	'path' => $path_prefix . 'filters',
 	   	'slug' => 'filters'
       ),
       array(
@@ -147,10 +147,10 @@ function alm_get_addons(){
          'status' => 'alm_layouts_license_status',
          'settings_field' => 'alm_layouts_license',
          'img' => 'img/add-ons/layouts-add-on.jpg',
-         'url' => $url_prefix .'layouts/',
+         'url' => $url_prefix . 'layouts/',
          'item_id' => ALM_LAYOUTS_ITEM_NAME,
          'version' => 'ALM_LAYOUTS_VERSION',
-	   	'path' => $path_prefix .'layouts',
+	   	'path' => $path_prefix . 'layouts',
 	   	'slug' => 'layouts'
       ),
       array(
@@ -162,10 +162,10 @@ function alm_get_addons(){
          'status' => 'alm_nextpage_license_status',
          'settings_field' => 'alm_nextpage_license',
          'img' => 'img/add-ons/next-page-add-on.jpg',
-         'url' => $url_prefix .'nextpage/',
+         'url' => $url_prefix . 'nextpage/',
          'item_id' => ALM_NEXTPAGE_ITEM_NAME,
          'version' => 'ALM_NEXTPAGE_VERSION',
-	   	'path' => $path_prefix .'next-page',
+	   	'path' => $path_prefix . 'next-page',
 	   	'slug' => 'next-page'
       ),
       array(
@@ -177,10 +177,10 @@ function alm_get_addons(){
          'status' => 'alm_paging_license_status',
          'settings_field' => 'alm_paging_license',
          'img' => 'img/add-ons/paging-add-ons.jpg',
-         'url' => $url_prefix .'paging/',
+         'url' => $url_prefix . 'paging/',
          'item_id' => ALM_PAGING_ITEM_NAME,
          'version' => 'ALM_PAGING_VERSION',
-	   	'path' => $path_prefix .'paging',
+	   	'path' => $path_prefix . 'paging',
 	   	'slug' => 'paging'
       ),
       array(
@@ -192,11 +192,26 @@ function alm_get_addons(){
          'status' => 'alm_preloaded_license_status',
          'settings_field' => 'alm_preloaded_license',
          'img' => 'img/add-ons/preloaded-add-ons.jpg',
-         'url' => $url_prefix .'preloaded/',
+         'url' => $url_prefix . 'preloaded/',
          'item_id' => ALM_PRELOADED_ITEM_NAME,
          'version' => 'ALM_PRELOADED_VERSION',
-	   	'path' => $path_prefix .'preloaded',
+	   	'path' => $path_prefix . 'preloaded',
 	   	'slug' => 'preloaded'
+      ),
+      array(
+         'name' => __(' Query Loop', 'ajax-load-more' ),
+         'intro' => __('Infinite scroll the core WordPress Query Loop block.', 'ajax-load-more' ),
+         'desc' => __(' The Query Loop add-on will enable Ajax loading and infinite scrolling of the Query Loop block.', 'ajax-load-more' ),
+         'action' => 'alm_query_loop_installed',
+         'key' => 'alm_query_loop_license_key',
+         'status' => 'alm_query_loop_license_status',
+         'settings_field' => 'alm_query_loop_license',
+         'img' => 'img/add-ons/preloaded-add-ons.jpg',
+         'url' => $url_prefix . 'query-loop/',
+         'item_id' => ALM_QUERY_LOOP_ITEM_NAME,
+         'version' => 'ALM_QUERY_LOOP_VERSION',
+	   	'path' => $path_prefix . 'query-loop',
+	   	'slug' => 'query-loop'
       ),
       array(
          'name' => __(' Search Engine Optimization', 'ajax-load-more' ),
@@ -207,10 +222,10 @@ function alm_get_addons(){
          'status' => 'alm_seo_license_status',
          'settings_field' => 'alm_seo_license',
          'img' => 'img/add-ons/seo-add-ons.jpg',
-         'url' => $url_prefix .'search-engine-optimization/',
+         'url' => $url_prefix . 'search-engine-optimization/',
          'item_id' => ALM_SEO_ITEM_NAME,
          'version' => 'ALM_SEO_VERSION',
-	   	'path' => $path_prefix .'seo',
+	   	'path' => $path_prefix . 'seo',
 	   	'slug' => 'seo'
       ),
       array(
@@ -222,10 +237,10 @@ function alm_get_addons(){
          'status' => 'alm_prev_post_license_status',
          'settings_field' => 'alm_prev_post_license',
          'img' => 'img/add-ons/prev-post-add-on.jpg',
-         'url' => $url_prefix .'single-post/',
+         'url' => $url_prefix . 'single-post/',
          'item_id' => ALM_PREV_POST_ITEM_NAME,
          'version' => 'ALM_PREV_POST_VERSION',
-	   	'path' => $path_prefix .'previous-post',
+	   	'path' => $path_prefix . 'previous-post',
 	   	'slug' => 'previous-post'
       ),
       array(
@@ -237,10 +252,10 @@ function alm_get_addons(){
          'status' => 'alm_theme_repeaters_license_status',
          'settings_field' => 'alm_theme_repeaters_license',
          'img' => 'img/add-ons/theme-repeater-add-on.jpg',
-         'url' => $url_prefix .'theme-repeaters/',
+         'url' => $url_prefix . 'theme-repeaters/',
          'item_id' => ALM_THEME_REPEATERS_ITEM_NAME,
          'version' => 'ALM_THEME_REPEATERS_VERSION',
-	   	'path' => $path_prefix .'theme-repeaters',
+	   	'path' => $path_prefix . 'theme-repeaters',
 	   	'slug' => 'theme-repeaters'
       ),
       array(
@@ -252,10 +267,10 @@ function alm_get_addons(){
          'status' => 'alm_users_license_status',
          'settings_field' => 'alm_users_license',
          'img' => 'img/add-ons/users-add-on.jpg',
-         'url' => $url_prefix .'users/',
+         'url' => $url_prefix . 'users/',
          'item_id' => ALM_USERS_ITEM_NAME,
          'version' => 'ALM_USERS_VERSION',
-	   	'path' => $path_prefix .'users',
+	   	'path' => $path_prefix . 'users',
 	   	'slug' => 'users'
       ),
       array(
@@ -267,10 +282,10 @@ function alm_get_addons(){
          'status' => 'alm_woocommerce_license_status',
          'settings_field' => 'alm_woocommerce_license',
          'img' => 'img/add-ons/woocommerce-add-on.jpg',
-         'url' => $url_prefix .'woocommerce/',
+         'url' => $url_prefix . 'woocommerce/',
          'item_id' => ALM_WOO_ITEM_NAME,
          'version' => 'ALM_WOO_VERSION',
-	   	'path' => $path_prefix .'woocommerce',
+	   	'path' => $path_prefix . 'woocommerce',
 	   	'slug' => 'woocommerce'
       )
    );

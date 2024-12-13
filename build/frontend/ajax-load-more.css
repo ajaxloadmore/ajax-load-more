@@ -319,7 +319,7 @@
   cursor: pointer;
 }
 .alm-btn-wrap--prev a.alm-load-more-btn--prev.done {
-  display: none !important;
+  display: none;
 }
 
 .alm-listing,

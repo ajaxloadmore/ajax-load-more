@@ -151,6 +151,13 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			loading: alm?.listing?.dataset?.buttonLoadingLabel || null,
 			done: alm?.listing?.dataset?.buttonDoneLabel || null,
 		};
+		alm.prev_button_labels = {
+			default: alm?.listing?.dataset?.prevButtonLabel,
+			loading: alm?.listing?.dataset?.prevButtonLoadingLabel || null,
+			done: alm?.listing?.dataset?.prevButtonDoneLabel || null,
+		};
+
+		alm.urls = alm?.listing?.dataset?.urls === 'false' ? false : true;
 
 		alm.placeholder = alm.main.querySelector('.alm-placeholder') || false;
 
@@ -359,6 +366,9 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			if (!alm.addons.paging) {
 				if (alm.rel === 'prev') {
 					alm.buttonPrev.classList.add('loading');
+					if (alm.prev_button_labels.loading) {
+						alm.buttonPrev.innerHTML = alm.prev_button_labels.loading;
+					}
 				} else {
 					alm.button.classList.add('loading');
 					if (alm.button_labels.loading) {
@@ -1066,6 +1076,11 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				alm.buttonPrev.classList.add('done');
 				alm.buttonPrev.style.opacity = '0.5';
 				alm.buttonPrev.disabled = true;
+				if (alm.prev_button_labels.done) {
+					setTimeout(function () {
+						alm.buttonPrev.innerHTML = alm.prev_button_labels.done;
+					}, 75);
+				}
 			}
 
 			// almDonePrev Callback.
@@ -1085,6 +1100,9 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		alm.AjaxLoadMore.resetBtnText = function () {
 			if (alm.button && alm.button_labels.loading) {
 				alm.button.innerHTML = alm.button_labels.default;
+			}
+			if (alm.buttonPrev && alm.prev_button_labels.loading) {
+				alm.buttonPrev.innerHTML = alm.prev_button_labels.default;
 			}
 		};
 

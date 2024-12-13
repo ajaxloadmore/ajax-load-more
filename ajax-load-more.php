@@ -14,6 +14,18 @@
  * @package AjaxLoadMore
  */
 
+/*
+TODO:
+- Update Query loop addon image.
+- Is it possible to use Paging add-on?
+- Create settings panel for Query Loop. Load Previous button. [DONE]
+- New shortcode params.
+  - urls
+  - prev_button_label
+  - prev_button_loading_label
+  - prev_button_done_label
+*/
+
 define( 'ALM_VERSION', '7.1.4' );
 define( 'ALM_RELEASE', 'December 4, 2024' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
@@ -417,6 +429,15 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 */
 		public static function alm_default_button_label() {
 			return apply_filters( 'alm_button_label', __( 'Load More', 'ajax-load-more' ) );
+		}
+
+		/**
+		 * Get default previous button label.
+		 *
+		 * @since 7.0.0
+		 */
+		public static function alm_default_prev_button_label() {
+			return apply_filters( 'alm_prev_button_label', __( 'Load Previous', 'ajax-load-more' ) );
 		}
 
 		/**

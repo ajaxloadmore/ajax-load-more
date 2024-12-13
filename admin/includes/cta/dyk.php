@@ -43,7 +43,7 @@
 			<img src="<?php echo ALM_ADMIN_URL; ?>img/add-ons/prev-post-add-on.jpg">
 		</div>
 		<div class="text">
-			<p class="lg">You can lazy load single posts with Ajax Load More!</p>
+			<p class="lg">You can infinite scroll single posts with Ajax Load More!</p>
 			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Single Post</a> add-on will load single posts as you scroll and update the browser URL to the current post.</p>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 		</div>
 		<div class="text">
 			<p class="lg">You can infinite scroll just about anything with the Next Page add-on!</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Next Page</a> add-on will allow you to split post content into pages using the <span style="display: inline-block; font-style: italic; color: #999;">&lt;!--nextpage--&gt;</span> <a href="https://codex.wordpress.org/Write_Post_SubPanel#Quicktags" target="_blank">Quicktag</a> and load the generated pages on demand.</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Next Page</a> add-on will allow you to split post content into pages using the Page Break block or the <span style="display: inline-block; font-style: italic; color: #999;">&lt;!--nextpage--&gt;</span> <a href="https://codex.wordpress.org/Write_Post_SubPanel#Quicktags" target="_blank">Quicktag</a> and load the generated pages on demand.</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
