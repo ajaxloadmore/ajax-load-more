@@ -10,7 +10,7 @@ import { clearTOC } from './tableofcontents';
  * @param {string} type       Type of filter.
  * @since 2.6.1
  */
-export default function almFilter(transition, speed = 150, data, type = 'filter') {
+export default function almFilter(transition, speed = 200, data, type = 'filter') {
 	if (data.target) {
 		// Target has been specified.
 		const alm = document.querySelectorAll('.ajax-load-more-wrap[data-id="' + data.target.toLowerCase() + '"]');

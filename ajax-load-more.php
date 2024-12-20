@@ -15,6 +15,10 @@
  */
 
 /*
+
+* NEW: Added required updates for the new [Query Loop add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/).
+* NEW: Added new `alm_single_post_querystring` hook to remove the querystring from Single Post add-on URLs.
+
 TODO:
 - Update Query loop addon image.
 - Is it possible to use Paging add-on?

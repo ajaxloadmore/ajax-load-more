@@ -393,6 +393,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				$single_post = false;
 				$seo         = false;
 				$nextpage    = false;
+
 				if ( defined( 'ALM_FILTERS_PATH' ) ) {
 					include ALM_FILTERS_PATH . 'includes/initial-state-params.php';
 				}
@@ -1253,7 +1254,10 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				$repeater_type = $theme_repeater !== 'null' && has_filter( 'alm_get_theme_repeater' ) ? null : $repeater_type;
 
 				// Get current permalink - (including querystring).
-				$single_post_permanlink = $_SERVER['QUERY_STRING'] ? get_permalink( $single_post_id ) . '?' . esc_attr( $_SERVER['QUERY_STRING'] ) : get_permalink( $single_post_id );
+				$single_post_permanlink = get_permalink( $single_post_id );
+				if ( $_SERVER['QUERY_STRING'] && apply_filters( 'alm_single_post_querystring', true ) ) {
+					$single_post_permanlink = $single_post_permanlink . '?' . esc_attr( $_SERVER['QUERY_STRING'] );
+				}
 
 				// Get previous post include, build output from the next post filter.
 				$single_post_output = '<div class="alm-single-post post-' . $single_post_id . '" data-url="' . $single_post_permanlink . '" data-title="' . wp_strip_all_tags( get_the_title( $single_post_id ) ) . '" data-id="' . $single_post_id . '" data-page="0">';
@@ -1389,10 +1393,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			/**
 			 * Build localized script variables for each ALM instance.
 			 */
-
-			// Add basic localized vars.
 			ALM_LOCALIZE::add_localized_var( 'id', $master_id, $localize_id );
 			ALM_LOCALIZE::add_localized_var( 'script', alm_convert_dashes_to_underscore( $localize_id ) . '_vars', $localize_id );
+			ALM_LOCALIZE::add_localized_var( 'defaults', $atts, $localize_id ); // Default shortcode atts.
 
 			// Get the localized data.
 			$localized_data = ALM_LOCALIZE::return_localized_data( $localize_id );
@@ -1410,8 +1413,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				}
 			);
 
-			// End $ajaxloadmore element.
-			return $ajaxloadmore;
+			return $ajaxloadmore; // End $ajaxloadmore element.
 		}
 
 		/**

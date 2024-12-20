@@ -93,6 +93,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		alm.finished = false;
 		alm.timer = null;
 		alm.rel = 'next';
+		alm.defaults = {};
 
 		alm.ua = window.navigator.userAgent ? window.navigator.userAgent : ''; // Browser User Agent
 		alm.vendor = window.navigator.vendor ? window.navigator.vendor : ''; // Browser Vendor
@@ -1687,7 +1688,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
  * @param {Object} data       Query data as an object.
  * @since 5.0
  */
-export const filter = function (transition = 'fade', speed = '200', data = '') {
+export const filter = function (transition = 'fade', speed = 200, data = '') {
 	if (!transition || !speed || !data) {
 		return false;
 	}
