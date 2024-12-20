@@ -113,8 +113,8 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<h4><?php _e( 'ID', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding a unique ID will allow you target this specific Ajax Load More instance with the alm_query_args_id() filter', 'ajax-load-more' ); ?>."></a></h4>
 								<p>
-									<?php _e( 'Set a unique ID for this Ajax Load More instance.', 'ajax-load-more' ); ?>
-									<small>e.g. my_alm_list etc...</small>
+									<?php _e( 'Set a unique ID for this Ajax Load More instance. Lowercase alphanumeric characters only.', 'ajax-load-more' ); ?>
+									<small>e.g. my_alm_listing</small>
 								</p>
 								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_query_args" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a></p>
 							</div>
