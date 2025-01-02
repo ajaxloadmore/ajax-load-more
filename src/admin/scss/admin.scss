@@ -116,14 +116,31 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 .ajax-load-more div.notice-success,
 .ajax-load-more div.notice-updated,
 .ajax-load-more div.notice-error {
-	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 10px;
+	border-radius: 5px;
 	overflow: hidden;
-	padding: 10px 15px;
-	p {
-		margin: 10px 0;
+	padding: 15px !important;
+	&.is-dismissible {
+		padding: 7px 7px 7px 15px !important;
 	}
-	.notice-dismiss {
-		top: 2px;
+
+	p {
+		margin: 0 15px 0 0;
+		display: flex;
+		gap: 5px;
+		align-items: center;
+		width: 100%;
+		& svg {
+			width: 22px;
+			height: 22px;
+		}
+	}
+	button.notice-dismiss {
+		position: static !important;
+		margin-left: auto;
 	}
 }
 

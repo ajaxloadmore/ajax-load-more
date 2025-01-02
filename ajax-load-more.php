@@ -15,7 +15,6 @@
  */
 
 /*
-
 * NEW: Added required updates for the new [Query Loop add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/).
 * NEW: Added new `alm_single_post_querystring` hook to remove the querystring from Single Post add-on URLs.
 
@@ -24,10 +23,10 @@ TODO:
 - Is it possible to use Paging add-on?
 - Create settings panel for Query Loop. Load Previous button. [DONE]
 - New shortcode params.
-  - urls
-  - prev_button_label
-  - prev_button_loading_label
-  - prev_button_done_label
+	- urls
+	- prev_button_label
+	- prev_button_loading_label
+	- prev_button_done_label
 */
 
 define( 'ALM_VERSION', '7.1.4' );
@@ -486,9 +485,9 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$query_type = isset( $params['query_type'] ) ? $params['query_type'] : 'standard'; // 'standard' or 'totalposts' - totalposts returns $alm_found_posts.
 
 			// Filters.
-			$is_filters        = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
-			$filters_target    = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
-			$filters_facets    = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
+			$is_filters     = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
+			$filters_target = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
+			$filters_facets = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
 
 			// Cache.
 			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false;
@@ -539,8 +538,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$single_post      = false;
 			$single_post_data = isset( $params['single_post'] ) ? $params['single_post'] : false;
 			if ( $single_post_data ) {
-				$single_post      = true;
-				$single_post_id   = isset( $single_post_data['id'] ) ? $single_post_data['id'] : '';
+				$single_post    = true;
+				$single_post_id = isset( $single_post_data['id'] ) ? $single_post_data['id'] : '';
 			}
 
 			// SEO Add-on.
@@ -610,9 +609,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 			if ( $query_type === 'totalposts' ) {
 				// Paging add-on.
-				wp_send_json( [
-					'totalposts' => $alm_total_posts,
-				] );
+				wp_send_json(
+					[
+						'totalposts' => $alm_total_posts,
+					]
+				);
 
 			} else {
 
@@ -672,7 +673,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					// Get filter facet options.
 					$facets = [];
 					if ( $is_filters && $filters_target && $filters_facets && function_exists( 'alm_filters_get_facets' ) ) {
-						$facets = alm_filters_get_facets( $args, $filters_target );
+						$facets           = alm_filters_get_facets( $args, $filters_target );
 						$return['facets'] = $facets;
 					}
 

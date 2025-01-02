@@ -5,7 +5,6 @@ import { lazyImages } from '../modules/lazyImages';
 import loadItems from '../modules/loadItems';
 import { createLoadPreviousButton } from '../modules/loadPrevious';
 import { createCache } from './cache';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Create add-on params for ALM.
@@ -214,7 +213,7 @@ export function queryLoop(content, alm) {
  * @param {Object} alm The alm object.
  */
 export function queryLoopLoaded(alm) {
-	const { page, AjaxLoadMore, addons } = alm;
+	const { AjaxLoadMore } = alm;
 
 	lazyImages(alm); // Lazy load images if necessary.
 
@@ -230,13 +229,10 @@ export function queryLoopLoaded(alm) {
  * Get the `<pre/>` config element.
  *
  * @param {HTMLElement} element The element to search.
- * @return {Object|null}        The config object.
+ * @return {Object|void}        The config object.
  */
 function getQueryLoopConfig(element) {
-	if (!element) {
-		return;
-	}
-	const raw = element.querySelector('pre[data-rel="ajax-load-more"]');
+	const raw = element?.querySelector('pre[data-rel="ajax-load-more"]');
 	if (!raw) {
 		return;
 	}
@@ -276,9 +272,6 @@ function onScroll() {
 		const title = currentPost ? currentPost.dataset.title : '';
 		const permalink = currentPost ? currentPost.dataset.url : '';
 
-		// Get the current page number.
-		const page = getCurrentPageNum(permalink);
-
 		const url = permalink || first;
 
 		if (window.location.href !== url) {
@@ -291,26 +284,13 @@ function onScroll() {
 /**
  * Set the URL in the browser.
  *
- * @param {string} title Page title.
+ * @param {string} title     Page title.
  * @param {string} permalink The permalink.
  */
 function setURL(title, permalink) {
 	const state = {
-		permalink: permalink,
-		title: title,
+		permalink,
+		title,
 	};
 	history.replaceState(state, title, permalink);
-}
-
-/**
- * Get the current page number from the URL.
- * @param {string} url The url.
- * @return {number} The current page number.
- */
-function getCurrentPageNum(url) {
-	if (!url) {
-		return 1;
-	}
-	const parts = url.split('page=');
-	return parts?.length > 1 ? parseInt(parts[parts.length - 1]) : 1;
 }

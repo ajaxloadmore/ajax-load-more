@@ -2370,9 +2370,21 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.notice-success,
 .ajax-load-more div.notice-updated,
 .ajax-load-more div.notice-error {
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  border-radius: 5px;
   overflow: hidden;
-  padding: 10px 15px;
+  padding: 15px !important;
+}
+.ajax-load-more .notice.is-dismissible,
+.ajax-load-more div.updated.is-dismissible,
+.ajax-load-more div.error.is-dismissible,
+.ajax-load-more div.notice-success.is-dismissible,
+.ajax-load-more div.notice-updated.is-dismissible,
+.ajax-load-more div.notice-error.is-dismissible {
+  padding: 7px 7px 7px 15px !important;
 }
 .ajax-load-more .notice p,
 .ajax-load-more div.updated p,
@@ -2380,15 +2392,29 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.notice-success p,
 .ajax-load-more div.notice-updated p,
 .ajax-load-more div.notice-error p {
-  margin: 10px 0;
+  margin: 0 15px 0 0;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  width: 100%;
 }
-.ajax-load-more .notice .notice-dismiss,
-.ajax-load-more div.updated .notice-dismiss,
-.ajax-load-more div.error .notice-dismiss,
-.ajax-load-more div.notice-success .notice-dismiss,
-.ajax-load-more div.notice-updated .notice-dismiss,
-.ajax-load-more div.notice-error .notice-dismiss {
-  top: 2px;
+.ajax-load-more .notice p svg,
+.ajax-load-more div.updated p svg,
+.ajax-load-more div.error p svg,
+.ajax-load-more div.notice-success p svg,
+.ajax-load-more div.notice-updated p svg,
+.ajax-load-more div.notice-error p svg {
+  width: 22px;
+  height: 22px;
+}
+.ajax-load-more .notice button.notice-dismiss,
+.ajax-load-more div.updated button.notice-dismiss,
+.ajax-load-more div.error button.notice-dismiss,
+.ajax-load-more div.notice-success button.notice-dismiss,
+.ajax-load-more div.notice-updated button.notice-dismiss,
+.ajax-load-more div.notice-error button.notice-dismiss {
+  position: static !important;
+  margin-left: auto;
 }
 
 .ajax-load-more .alm-transient p {
