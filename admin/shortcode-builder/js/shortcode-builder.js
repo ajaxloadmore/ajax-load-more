@@ -3,7 +3,8 @@ jQuery(document).ready(function ($) {
 
 	var _alm = {},
 		output_div = $('.ajax-load-more.shortcode-builder #shortcode_output'),
-		output = '[ajax_load_more]';
+		output = '[ajax_load_more]',
+		previewBtn = document.querySelector('#shortcode-preview');
 
 	// Init the shortcode output.
 	output_div.text(output);
@@ -286,7 +287,9 @@ jQuery(document).ready(function ($) {
 			}
 
 			output += ' comments="' + comments + '"';
-			output += ' comments_post_id="\'.' + comments_post_id + '.\'"';
+			if (comments_post_id) {
+				output += ' comments_post_id="' + comments_post_id + '"';
+			}
 
 			if (comments_type !== 'comment') output += ' comments_type="' + comments_type + '"';
 
@@ -547,7 +550,9 @@ jQuery(document).ready(function ($) {
 			$('#pp-term-exclude').attr('disabled', false);
 
 			output += ' single_post="' + previous + '"';
-			output += ' single_post_id="\'.' + pp_id + '.\'"';
+			if (pp_id) {
+				output += ' single_post_id="' + pp_id + '"';
+			}
 
 			if (pp_order === '') {
 				output += ' single_post_order="previous"';
@@ -1354,8 +1359,21 @@ jQuery(document).ready(function ($) {
 		output += ']'; //Close shortcode
 		output_div.text(output);
 
-		if (output !== '[ajax_load_more]') $('.reset-shortcode-builder').show();
-		else $('.reset-shortcode-builder').hide();
+		// Preview button.
+		if (previous === 'true' || nextpage === 'true') {
+			previewBtn.style.display = 'none';
+		} else {
+			previewBtn.removeAttribute('style');
+		}
+
+		var previewBaseUrl = previewBtn.dataset.homeUrl || '/';
+		previewBtn.href = previewBaseUrl + '?alm_preview=' + encodeURIComponent(output);
+
+		if (output !== '[ajax_load_more]') {
+			$('.reset-shortcode-builder').show();
+		} else {
+			$('.reset-shortcode-builder').hide();
+		}
 	};
 
 	/*
@@ -1595,7 +1613,7 @@ jQuery(document).ready(function ($) {
 	};
 
 	// Reset shortcode builder.
-	$(document).on('click', '.reset-shortcode-builder a', function () {
+	$(document).on('click', '.reset-shortcode-builder', function () {
 		$('#alm-shortcode-builder-form').trigger('reset');
 		_alm.reset_select2();
 		_alm.buildShortcode();
@@ -1605,11 +1623,12 @@ jQuery(document).ready(function ($) {
 	_alm.generateUniqueID = function (length, el) {
 		var id = Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1));
 		$(el).val('alm_' + id);
+		_alm.buildShortcode();
 	};
 
 	// Option toggle click events.
 	$('.builder-option-toggle--buttons button').on('click', function () {
-		var siblings = $(this).siblings('button').removeClass('active');
+		$(this).siblings('button').removeClass('active');
 		$(this).addClass('active');
 		_alm.buildShortcode();
 	});

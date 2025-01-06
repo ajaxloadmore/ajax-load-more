@@ -17,6 +17,8 @@
 /*
 * NEW: Added required updates for the new [Query Loop add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/).
 * NEW: Added new `alm_single_post_querystring` hook to remove the querystring from Single Post add-on URLs.
+* NEW: Added preview functionality for previewing an ALM instance while building a shortcode.
+* UPDATE: Various admin UI/UX updates throughout plugin.
 
 TODO:
 - Update Query loop addon image.
@@ -27,6 +29,13 @@ TODO:
 	- prev_button_label
 	- prev_button_loading_label
 	- prev_button_done_label
+
+ADD-ONS
+
+QUERY LOOP
+FILTERS
+CACHE
+
 */
 
 define( 'ALM_VERSION', '7.1.4' );
@@ -112,6 +121,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		public function alm_includes() {
 			require_once ALM_PATH . 'core/functions.php'; // Load Core Functions.
 			require_once ALM_PATH . 'core/classes/class-alm-blocks.php'; // Load Block Class.
+			require_once ALM_PATH . 'core/classes/class-alm-preview.php'; // Load Preview Class.
 			require_once ALM_PATH . 'core/classes/class-alm-shortcode.php'; // Load Shortcode Class.
 			require_once ALM_PATH . 'core/classes/class-alm-woocommerce.php'; // Load Woocommerce Class.
 			require_once ALM_PATH . 'core/classes/class-alm-enqueue.php'; // Load Enqueue Class.
@@ -202,8 +212,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				define( 'ALM_ELEMENTOR_ITEM_NAME', '70951' );
 			}
 			if ( ! defined( 'ALM_RESTAPI_ITEM_NAME' ) ) {
-				// Deprecated.
-				define( 'ALM_RESTAPI_ITEM_NAME', '17105' );
+				define( 'ALM_RESTAPI_ITEM_NAME', '17105' ); // Deprecated.
 			}
 		}
 

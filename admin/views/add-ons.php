@@ -12,6 +12,14 @@ $alm_admin_heading = __( 'Add-ons', 'ajax-load-more' );
 	<?php require_once ALM_PATH . 'admin/includes/components/header.php'; ?>
 	<div class="ajax-load-more-inner-wrapper">
 		<div class="cnkt-main stylefree">
+			<?php
+			// Go Pro Upgrade CTA.
+			$alm_pro_cta = alm_get_pro_addon();
+			if ( $alm_pro_cta && $alm_pro_cta[0] ) {
+				echo wp_kses_post( alm_display_featured_addon( $alm_pro_cta[0], 'Upgrade Now' ) );
+				echo '<div class="spacer lg"></div>';
+			}
+			?>
 			<section class="flexbox-wrap">
 				<?php
 				$alm_addons = alm_get_addons();
@@ -48,15 +56,6 @@ $alm_admin_heading = __( 'Add-ons', 'ajax-load-more' );
 				</div>
 				<?php } ?>
 			</section>
-
-			<?php
-			// Go Pro Upgrade CTA.
-			$alm_pro_cta = alm_get_pro_addon();
-			if ( $alm_pro_cta && $alm_pro_cta[0] ) {
-				echo wp_kses_post( alm_display_featured_addon( $alm_pro_cta[0], 'Upgrade Now' ) );
-				echo '<div class="spacer lg"></div>';
-			}
-			?>
 			<div class="call-out call-out--centered light no-shadow">
 				<p><?php echo wp_kses_post( __( 'All add-ons are installed as standalone plugins and with a valid license key will receive plugin update notifications directly within the <a href="plugins.php">WordPress plugin dashboard</a>.', 'ajax-load-more' ) ); ?></p>
 			</div>

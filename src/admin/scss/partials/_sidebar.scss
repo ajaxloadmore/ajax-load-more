@@ -3,8 +3,8 @@
 	height: 100%;
 	padding: 0 0 $padding;
 	@media screen and (min-width: $break) {
-		width: calc( 30% - 20px);
-		&[data-sticky]{
+		width: calc(30% - 20px);
+		&[data-sticky] {
 			position: sticky;
 			top: 135px;
 		}
@@ -23,6 +23,36 @@
 		i {
 			opacity: 0.4;
 			margin: 0 2px 0 0;
+		}
+	}
+
+	.cta {
+		h3 {
+			padding: 15px $padding;
+			margin: 0;
+			display: block;
+			font-size: 14px;
+			text-transform: none;
+			border-bottom: 1px solid $light_border;
+			font-weight: 600;
+		}
+		&--header {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			width: 100%;
+			margin: 0;
+			padding: 0 $padding;
+			border-bottom: 1px solid $light_border;
+
+			h3 {
+				border: none;
+				padding: 15px 0;
+			}
+
+			.alm-status {
+				margin-left: auto;
+			}
 		}
 	}
 }

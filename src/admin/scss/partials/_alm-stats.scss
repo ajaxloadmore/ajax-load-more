@@ -1,0 +1,39 @@
+// Status indicator.
+.alm-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	cursor: default;
+	margin: 10px 0 0;
+	> div {
+		display: flex;
+		gap: 0;
+		font-size: 12px;
+		font-weight: 500;
+		border-radius: $radius;
+		padding: 0;
+		overflow: hidden;
+		box-shadow: 0 1px 4px rgba($border, 0.35);
+		div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.alm-stats--stat {
+			min-width: 38px;
+			height: 38px;
+			padding: 0 12px;
+			text-align: center;
+			color: #fff;
+			font-size: 13px;
+			font-weight: 600;
+			background: $purple;
+			background: linear-gradient(to bottom, #a4a5e2 0%, #9ea0d9 50%, #9597d9 51%, #a4a5e2 100%);
+		}
+		div:not(.alm-stats--stat) {
+			border: 1px solid $border;
+			padding: 0 15px 0 12px;
+			border-radius: 0 $radius $radius 0;
+		}
+	}
+}

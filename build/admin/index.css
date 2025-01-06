@@ -806,6 +806,91 @@ disabled look for disabled choices in the results dropdown
   display: block;
 }
 
+.alm-status {
+  display: flex;
+  margin: 0;
+  cursor: default;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: #f7f7f7;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 0 0 3px rgba(231, 231, 231, 0.5);
+}
+.alm-status span {
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 11px;
+  height: 28px;
+  line-height: 28px;
+}
+.alm-status span:nth-child(1) {
+  font-size: 12px;
+  width: 28px;
+}
+.alm-status span:nth-child(1) i {
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+}
+.alm-status span:nth-child(2) {
+  padding: 0 8px;
+  background-color: #f7f7f7;
+}
+.alm-status.success {
+  background-color: #8ed074;
+}
+.alm-status.success span i {
+  color: #fff;
+}
+.alm-status.failed {
+  background-color: #bf3538;
+}
+.alm-status.failed span i {
+  color: #fff;
+}
+
+.alm-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  cursor: default;
+  margin: 10px 0 0;
+}
+.alm-stats > div {
+  display: flex;
+  gap: 0;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(231, 231, 231, 0.35);
+}
+.alm-stats > div div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alm-stats > div .alm-stats--stat {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  background: #bb8dd2;
+  background: linear-gradient(to bottom, #a4a5e2 0%, #9ea0d9 50%, #9597d9 51%, #a4a5e2 100%);
+}
+.alm-stats > div div:not(.alm-stats--stat) {
+  border: 1px solid #e7e7e7;
+  padding: 0 15px 0 12px;
+  border-radius: 0 3px 3px 0;
+}
+
 .ajax-load-more .builder-option-toggle {
   display: flex;
   flex-wrap: nowrap;
@@ -1020,31 +1105,6 @@ disabled look for disabled choices in the results dropdown
 }
 .alm-cache .cnkt-main .alm-dir-listing ul.cache-details li a {
   word-break: break-word;
-}
-.alm-cache .cnkt-main p.cache-stats {
-  min-height: 38px;
-  line-height: 37px;
-  display: block;
-  padding: 0;
-  margin: 0;
-}
-.alm-cache .cnkt-main p.cache-stats span {
-  display: inline-block;
-  width: 38px;
-  height: 38px;
-  line-height: 36px;
-  text-align: center;
-  margin: 0 9px 0 0;
-  font-weight: 700;
-  font-size: 15px;
-  border-radius: 2px;
-  background: #a4a5e2;
-  background: linear-gradient(to bottom, #a4a5e2 0%, #9ea0d9 50%, #8d8fce 51%, #a4a5e2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a4a5e2", endColorstr="#a4a5e2", GradientType=0);
-  border: 1px solid #8586be;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  color: #fff;
-  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .ajax-load-more .CodeMirror {
@@ -2121,6 +2181,31 @@ disabled look for disabled choices in the results dropdown
   opacity: 0.4;
   margin: 0 2px 0 0;
 }
+.ajax-load-more .cnkt-sidebar .cta h3 {
+  padding: 15px 20px;
+  margin: 0;
+  display: block;
+  font-size: 14px;
+  text-transform: none;
+  border-bottom: 1px solid #efefef;
+  font-weight: 600;
+}
+.ajax-load-more .cnkt-sidebar .cta--header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  border-bottom: 1px solid #efefef;
+}
+.ajax-load-more .cnkt-sidebar .cta--header h3 {
+  border: none;
+  padding: 15px 0;
+}
+.ajax-load-more .cnkt-sidebar .cta--header .alm-status {
+  margin-left: auto;
+}
 
 /* Template Tags */
 .ajax-load-more .template-tags {
@@ -2369,11 +2454,12 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.error,
 .ajax-load-more div.notice-success,
 .ajax-load-more div.notice-updated,
+.ajax-load-more div.notice-info,
 .ajax-load-more div.notice-error {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 10px;
+  gap: 5px;
   border-radius: 5px;
   overflow: hidden;
   padding: 15px !important;
@@ -2383,6 +2469,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.error.is-dismissible,
 .ajax-load-more div.notice-success.is-dismissible,
 .ajax-load-more div.notice-updated.is-dismissible,
+.ajax-load-more div.notice-info.is-dismissible,
 .ajax-load-more div.notice-error.is-dismissible {
   padding: 7px 7px 7px 15px !important;
 }
@@ -2391,11 +2478,9 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.error p,
 .ajax-load-more div.notice-success p,
 .ajax-load-more div.notice-updated p,
+.ajax-load-more div.notice-info p,
 .ajax-load-more div.notice-error p {
-  margin: 0 15px 0 0;
-  display: flex;
-  gap: 5px;
-  align-items: center;
+  margin: 0;
   width: 100%;
 }
 .ajax-load-more .notice p svg,
@@ -2403,6 +2488,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.error p svg,
 .ajax-load-more div.notice-success p svg,
 .ajax-load-more div.notice-updated p svg,
+.ajax-load-more div.notice-info p svg,
 .ajax-load-more div.notice-error p svg {
   width: 22px;
   height: 22px;
@@ -2412,6 +2498,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.error button.notice-dismiss,
 .ajax-load-more div.notice-success button.notice-dismiss,
 .ajax-load-more div.notice-updated button.notice-dismiss,
+.ajax-load-more div.notice-info button.notice-dismiss,
 .ajax-load-more div.notice-error button.notice-dismiss {
   position: static !important;
   margin-left: auto;
@@ -2426,10 +2513,6 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more .alm-transient a.button {
   position: static;
   vertical-align: inherit !important;
-}
-.ajax-load-more .alm-transient button {
-  transform: translateY(-50%);
-  top: 50% !important;
 }
 
 #alm-settings .admin-select {
@@ -2559,22 +2642,11 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   position: relative;
 }
 
-.ajax-load-more p.small.reset-shortcode-builder {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-45%);
-  text-align: right;
-  margin: 0;
-  padding: 0;
+.ajax-load-more button.reset-shortcode-builder {
   display: none;
-  width: auto;
-  opacity: 1;
-  font-size: 12px;
-}
-
-.ajax-load-more p.small.reset-shortcode-builder a {
-  text-decoration: none;
+  margin-left: auto;
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 
 /* Expand Collapse Headings */
@@ -3291,15 +3363,12 @@ hr.indented {
   top: -1px;
   background: #fff;
   border-radius: 100%;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   text-align: center;
-  line-height: 16px;
-  box-shadow: 0 1px 1px #ccc;
-}
-
-.cta h3 .fa.tooltip {
-  top: 1px;
+  line-height: 18px;
+  box-shadow: 0 0 0 1px #efefef;
+  color: #838d99;
 }
 
 .ajax-load-more .section-title p span,
@@ -3367,6 +3436,16 @@ hr.indented {
   width: 100%;
   display: block;
   border-radius: 3px;
+}
+.ajax-load-more .output-wrap button {
+  all: unset;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+.ajax-load-more .output-wrap button svg {
+  width: 20px;
+  height: 20px;
 }
 .ajax-load-more .output-wrap textarea {
   background-color: transparent !important;
@@ -3480,6 +3559,17 @@ hr.indented {
   color: #666;
   text-shadow: 1px 1px 0 #fff;
   resize: none;
+}
+
+.ajax-load-more .alm-pre {
+  color: #bb8dd2;
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #f7f7f7;
+  font-size: 12px;
+  line-height: 1.55;
+  padding: 1px 4px;
+  font-family: Consolas, monaco, monospace;
 }
 
 .ajax-load-more .form-table input[type=radio],
@@ -3622,8 +3712,7 @@ hr.indented {
   margin: 0 0 20px;
   border-bottom: 1px solid #efefef;
 }
-.ajax-load-more h3.add-on-title,
-.ajax-load-more .cnkt-sidebar h3 {
+.ajax-load-more h3.add-on-title {
   padding: 0 0 10px;
   margin: 0 0 20px;
   border-bottom: 1px solid #efefef;
@@ -4249,14 +4338,13 @@ span.cnkt-button.installed,
   margin-top: 0;
 }
 .ajax-load-more .cnkt-sidebar .cta .alm-file-location:not(input) {
-  padding-top: 15px;
-  margin-top: 15px;
-  border-top: 1px solid #efefef;
+  padding-top: 10px;
 }
 .ajax-load-more .cnkt-sidebar .cta .alm-file-location:not(input) input {
   font-size: 11px;
   font-family: Consolas, monaco, monospace;
   width: 100%;
+  padding: 12px 15px;
 }
 
 .ajax-load-more .cnkt-sidebar .cta-inner {
@@ -4280,17 +4368,6 @@ span.cnkt-button.installed,
 .ajax-load-more .cnkt-sidebar h3,
 .ajax-load-more .cnkt-sidebar h4 {
   margin-top: 0;
-}
-
-.ajax-load-more .cnkt-sidebar h3 {
-  padding: 15px 0;
-  margin: 0;
-  display: block;
-  font-size: 15px;
-  text-transform: none;
-  border-bottom: 1px solid #efefef;
-  margin: 0 20px;
-  font-weight: 600;
 }
 
 .ajax-load-more .cnkt-sidebar .item {
@@ -4440,37 +4517,6 @@ span.cnkt-button.installed,
 .ajax-load-more .cnkt-sidebar .project-listing li img {
   height: 48px;
   width: 48px;
-}
-
-.alm-status {
-  display: flex;
-  margin: 0 0 15px;
-  cursor: default;
-}
-.alm-status span {
-  background-color: #f7f7f7;
-  padding: 0 10px 0 0;
-  line-height: 1;
-  border-radius: 3px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 11px;
-}
-.alm-status span i {
-  padding: 10px 12px;
-  margin: 0 10px 0 0;
-  text-align: center;
-}
-.alm-status.success span i {
-  background-color: #8ed074;
-  color: #fff;
-}
-.alm-status.failed span i {
-  background-color: #bf3538;
-  color: #fff;
 }
 
 .shortcode-builder hr {

@@ -209,12 +209,12 @@ $show_max                = 100; // Max number of items to show.
 								<h4><?php _e( 'Container Classes', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'You can define global container classes on the Ajax Load More settings screen', 'ajax-load-more' ); ?>."></a></h4>
 								<p>
 									<?php _e( 'Add custom CSS classes to the <span>.alm-listing</span> container.', 'ajax-load-more' ); ?>
-									<small>e.g. blog-listing large-12 etc...</small>
+									<small>e.g. row blog-listing etc...</small>
 								</p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">
-									<input class="alm_element" name="container-classes" type="text" id="container-classes" placeholder="listing large-12 columns">
+									<input class="alm_element" name="container-classes" type="text" id="container-classes" placeholder="row blog-listing">
 								</div>
 							</div>
 						</section>
