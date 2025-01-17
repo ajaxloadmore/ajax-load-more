@@ -57,7 +57,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			 * @return array $options Options array.
 			 */
 			$options            = has_filter( 'alm_settings' ) ? apply_filters( 'alm_settings', $options ) : $options;
-			$options = ! $options ? [] : $options; // Set options to an array by default.
+			$options            = ! $options ? [] : $options; // Set options to an array by default.
 			$options['post_id'] = $post_id; // Add post ID to options array.
 			$options['slug']    = $slug; // Add post slug to options array.
 
@@ -164,12 +164,14 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'preloaded_amount'             => '5',
 						'seo'                          => 'false',
 						'seo_offset'                   => false,
-						'repeater'                     => 'default',
-						'theme_repeater'               => 'null',
+						'template' 						    => '',
+						'repeater'                     => 'default', // Deprecated
+						'theme_repeater'               => 'null', // Deprecated
 						'cta'                          => false,
 						'cta_position'                 => 'before:1',
-						'cta_repeater'                 => 'null',
-						'cta_theme_repeater'           => 'null',
+						'cta_template'                 => '',
+						'cta_repeater'                 => '', // Deprecated
+						'cta_theme_repeater'           => '', // Deprecated
 						'masonry'                      => '',
 						'post_type'                    => 'post',
 						'sticky_posts'                 => false,
@@ -259,6 +261,18 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			$id   = sanitize_key( $id );
 			$vars = self::alm_strip_tags( $vars );
+
+			// Parse the Repeater Template value.
+			if ( $template ) {
+				switch ( alm_get_template_by_type( $template ) ) {
+					case 'theme_repeater':
+						$theme_repeater = $template;
+						break;
+					default:
+						$repeater = $template;
+						break;
+				}
+			}
 
 			// Elementor.
 			$elementor = $elementor === 'true' ? 'single' : $elementor;
@@ -418,7 +432,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			// Wrapper/CSS Classes.
 			$wrapper_classes = ! empty( $wrapper_classes ) ? ' ' . $wrapper_classes : '';
-			$css_classes = ! empty( $css_classes ) ? ' ' . $css_classes : '';
+			$css_classes     = ! empty( $css_classes ) ? ' ' . $css_classes : '';
 
 			// Append transition container classes.
 			$css_classes = ! empty( $tcc ) ? $css_classes . ' ' . $tcc : $css_classes;
@@ -657,7 +671,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			 * Set required archive config options.
 			 */
 			if ( $archive ) {
-				if( is_archive() ) {
+				if ( is_archive() ) {
 					if ( is_date() ) {
 						$archive_year  = get_the_date( 'Y' );
 						$archive_month = get_the_date( 'm' );
@@ -862,30 +876,44 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			}
 
 			// Cache Add-on.
-			$alm_auto_cache = isset( $_GET['alm_auto_cache'] );
 			if ( has_action( 'alm_cache_installed' ) && $cache === 'true' ) {
 				// Confirm cache version is 2.0 or greater.
 				$cache_version_check = defined( 'ALM_CACHE_VERSION' ) && version_compare( ALM_CACHE_VERSION, '2.0', '>=' );
 				if ( $cache_version_check ) {
-					$cache_return  = apply_filters(
+					$cache_return   = apply_filters(
 						'alm_cache_shortcode',
 						$cache,
 						$cache_id,
 						$options
 					);
-					$paging        = $alm_auto_cache ? false : $paging;    // Disable paging if auto generate cache active.
-					$ajaxloadmore .= wp_kses_post( $cache_return );
+					$alm_auto_cache = isset( $_GET['alm_auto_cache'] );
+					$paging         = $alm_auto_cache ? false : $paging;    // Disable paging if auto generate cache active.
+					$ajaxloadmore  .= wp_kses_post( $cache_return );
 				}
 			}
 
 			// CTA Add-on.
 			if ( has_action( 'alm_cta_installed' ) && $cta === 'true' ) {
+				if ( $cta_template ) {
+					// Parse the CTA template.
+					switch ( alm_get_template_by_type( $cta_template ) ) {
+						case 'theme_repeater':
+							$cta_theme_repeater = $cta_template;
+							break;
+
+						default:
+							$cta_repeater = $cta_template;
+							break;
+					}
+				}
+
 				$cta_return    = apply_filters(
 					'alm_cta_shortcode',
 					$cta,
 					$cta_position,
 					$cta_repeater,
-					$cta_theme_repeater
+					$cta_theme_repeater,
+					$cta_template
 				);
 				$ajaxloadmore .= wp_kses_post( $cta_return );
 			}
@@ -963,7 +991,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			// Preloaded Add-on.
 			if ( $preloaded === 'true' && has_action( 'alm_preload_installed' ) ) {
-				// Set preloaded to false if SEO, not Paging and page is greaten than 1.
+				// Set preloaded to false if SEO, not Paging and page is greater than 1.
 				if ( $seo === 'true' && $paging !== 'true' && (int) $query_args['paged'] > 1 ) {
 					$preloaded     = false;
 					$ajaxloadmore .= ' data-is-preloaded="true"';
@@ -1038,8 +1066,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 					$query_args,
 					$single_post_preview
 				);
-
-				$ajaxloadmore .= wp_kses_post( $single_post_return );
+				$ajaxloadmore      .= wp_kses_post( $single_post_return );
 			}
 
 			// Term Query Extension.
@@ -1086,7 +1113,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 					'paged'      => $elementor_woo_paged !== 1 ? $elementor_woo_paged : $elementor_paged,
 					'controls'   => $elementor_controls,
 					'scrolltop'  => $elementor_scrolltop,
-					'prev_label' => $elementor_link_label
+					'prev_label' => $elementor_link_label,
 				];
 
 				$elementor_return = apply_filters( 'alm_elementor_params', $elementor_params );
@@ -1105,7 +1132,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$ajaxloadmore .= $woocommerce ? ' data-woocommerce="true"' : '';
 
 			// URL Updates.
-			$ajaxloadmore .= $urls !== 'true'  ? ' data-urls="false"' : '';
+			$ajaxloadmore .= $urls !== 'true' ? ' data-urls="false"' : '';
 
 			// Repeaters.
 			if ( ! $woo && $elementor !== 'posts' ) {
@@ -1267,10 +1294,8 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				 *
 				 * @return $args;
 				 */
-				if ( $offset < 1 ) {
-					// Only render include if offset is zero.
-					$single_post_output .= apply_filters( 'alm_single_post_inc', $repeater, $repeater_type, $theme_repeater, $single_post_id, $post_type );
-				}
+				// Only render include if offset is zero.
+				$single_post_output .= $offset < 1 ? apply_filters( 'alm_single_post_inc', $repeater, $repeater_type, $theme_repeater, $single_post_id, $post_type ) : '';
 
 				$single_post_output .= '</div>';
 				$ajaxloadmore       .= $single_post_output; // Append $single_post_output data to $ajaxloadmore.
@@ -1419,10 +1444,10 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 		/**
 		 * Render the load more button.
 		 *
-		 * @param  string $paging         Is this for the Paging add-on.
-		 * @param  string $classname      Custom classnames.
+		 * @param  string                                          $paging         Is this for the Paging add-on.
+		 * @param  string                                          $classname      Custom classnames.
 		 * @param  string label           The label for the button.
-		 * @param  string $id             ALM div ID.
+		 * @param  string                                          $id             ALM div ID.
 		 * @return string                 The button html and wrapper.
 		 * @since  3.3.2
 		 */
@@ -1442,7 +1467,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 		 * Strip tags from param.
 		 *
 		 * @param string $str String to sanitize.
-		 * @return string 	 Stripped string.
+		 * @return string    Stripped string.
 		 */
 		public static function alm_strip_tags( $str ) {
 			$str = str_replace( [ '&lt;', '&gt;', '&#60;', '&#62;' ], '', $str ); // Remove < & > entity tags.

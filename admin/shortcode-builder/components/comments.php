@@ -42,11 +42,11 @@
 
 			<section>
 				<div class="shortcode-builder--label">
-					<h4><?php _e( 'Post ID', 'ajax-load-more' ); ?></h4>
-					<p><?php _e( 'The ID of the current post.', 'ajax-load-more' ); ?></p>
-					<p><small><?php _e( '<strong>Note</strong>: Leave empty to default to the current post ID.' ); ?></small></p>
+					<h4><?php _e( 'Comments Per Page', 'ajax-load-more' ); ?></h4>
+						<p><?php _e( 'The number of top level items to show for each page of comments.', 'ajax-load-more' ); ?></p>
+						<p><small><?php _e( '<strong>Note</strong>: Does not include comment replies.', 'ajax-load-more' ); ?></small></p>
 				</div>
-				<div class="shortcode-builder--fields">
+					<div class="shortcode-builder--fields">
 					<div class="inner">
 						<input type="number" class="alm_element numbers-only" name="comments-per-page" id="comments-per-page" step="1" min="1" value="5">
 					</div>
@@ -98,23 +98,33 @@
 
 			<section>
 				<div class="shortcode-builder--label">
-					<h4><?php _e( 'Comment Template', 'ajax-load-more' ); ?></h4>
-						<p><?php _e( 'Select a repeater template that will display comment data.', 'ajax-load-more' ); ?></p>
-						<p><small><?php _e( '<strong>Note</strong>: <span>None</span> will use the default WordPress comment layout.', 'ajax-load-more' ); ?></small></p>
-					</div>
+				<h4><?php _e( 'Comment Template', 'ajax-load-more' ); ?></h4>
+					<p><?php _e( 'Select a <a href="admin.php?page=ajax-load-more-repeaters">Repeater Template</a> to display comment data.', 'ajax-load-more' ); ?></p>
+					<p><small><?php _e( '<strong>Note</strong>: Selecting <span>None</span> will use the default WordPress comment layout.', 'ajax-load-more' ); ?></small></p>
+				</div>
 				<div class="shortcode-builder--fields">
 					<div class="inner">
 						<select class="alm_element comments_template" id="comments_template">
-						<option value="none" selected="selected"><?php _e( 'None', 'ajax-load-more' ); ?></option>
-						<option name="default" id="chk-default" value="default"><?php _e( 'Default', 'ajax-load-more' ); ?></option>
-					<?php
-					if ( has_action( 'alm_get_custom_repeaters' ) ) {
-						do_action( 'alm_get_custom_repeaters' );
-					}
-					if ( has_action( 'alm_get_unlimited_repeaters' ) ) {
-						do_action( 'alm_get_unlimited_repeaters' );
-					}
-					?>
+							<option value="none" selected="selected"><?php _e( 'None', 'ajax-load-more' ); ?></option>
+							<optgroup label="<?php _e( 'Custom Repeaters', 'ajax-load-more' ); ?>">
+								<option name="default" id="chk-default" value="default"><?php _e( 'Default', 'ajax-load-more' ); ?></option>
+								<?php
+								if ( has_action( 'alm_get_custom_repeaters' ) ) {
+									do_action( 'alm_get_custom_repeaters' );
+								}
+								if ( has_action( 'alm_get_unlimited_repeaters' ) ) {
+									do_action( 'alm_get_unlimited_repeaters' );
+								}
+								?>
+							</optgroup>
+							<?php
+							// Get Theme Repeaters
+							if ( has_action( 'alm_list_theme_repeaters' ) ) {
+								echo '<optgroup label="' . __( 'Theme Repeaters', 'ajax-load-more' ) . '">';
+								do_action( 'alm_list_theme_repeaters' );
+								echo '</optgroup>';
+							}
+							?>
 						</select>
 					</div>
 				</div>

@@ -750,7 +750,6 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 								}
 							}
 						}
-
 						alm_is_filtering = false;
 					});
 					/**

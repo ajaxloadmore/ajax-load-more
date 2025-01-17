@@ -18,11 +18,16 @@
 * NEW: Added required updates for the new [Query Loop add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/).
 * NEW: Added new `alm_single_post_querystring` hook to remove the querystring from Single Post add-on URLs.
 * NEW: Added preview functionality for previewing an ALM instance while building a shortcode.
+* NEW: Added new `template` parameter to the core ALM shortcode. This new parameter will normalize the template selection and replace the `repeater` and `theme_repeater` parameters.
+* NEW: Added new ALM core parameters, `urls`, `prev_button_label`, `prev_button_loading_label`, and `prev_button_done_label`. These new parameters can be used in the near future with various add-ons.
 * UPDATE: Various admin UI/UX updates throughout plugin.
+* FIX: Fixed issue with Users extension showing mising license notice in admin.
+
 
 TODO:
-- Update Query loop addon image.
-- Is it possible to use Paging add-on?
+- Update core ALM to use `template` parameter which contains both Repeater Templates and Theme Repeaters. [DONE]
+- Update Query loop addon image. [DONE]
+- Is it possible to use Paging add-on? [NOPE]
 - Create settings panel for Query Loop. Load Previous button. [DONE]
 - New shortcode params.
 	- urls
@@ -33,8 +38,32 @@ TODO:
 ADD-ONS
 
 QUERY LOOP
-FILTERS
-CACHE
+
+FILTERS - 2.3.0
+* NEW: Added feature to maintain default Taxonomy and Meta query params when filtering. This means you can now have default shortcode parameters and have them maintain when running a tax or meta query. This feature requires Ajax Load More 7.2.0.
+* NEW: Added support for filtering multiple instances of Ajax Load More on the same page with a single filter.
+* UPDATE: Updated facet functionality when update/add/remove an individual post. Facet indexes are now modifed and not recreated after a post has been modified. This will make updating the data much faster after the index has been created.
+* UPDATE: Added support for facet filtering without requiring URL rewrites. This also updates how facets are saved and retrieved from the database.
+* UPDATE: Refactor how and when facet indexing is handled.
+* UDPATE: Updating the admin notices and display.
+* FIX: Fixed potential issue with `sanitize_key` in filter target IDs.
+* FIX: Normalize the filter target ID to lowercase as Ajax Load More and Filter IDs MUST always be lowercase.
+
+CACHE - 2.0.4
+* UPDATE: Admin UI/UX updates.
+* UPDATE: Code cleanup and reorganization.
+
+CALL TO ACTIONS - 1.1.0
+* NEW: Added new parameter `cta_template`. This new parameter will normalize the template selection and replace the `cta_repeater` and `cta_theme-repeater` parameters.
+* UPDATE: Code cleanup, future proofing, and optimization.
+
+THEME REPEATERS - 1.2.0
+* NEW: Added new functions that fetch repeaters from theme directory.
+* UPDATE: Code cleanup and optimization.
+
+COMMENTS - 1.2.3
+* UPDATE: Adding support for Theme Repeaters to be selected as the Comment Template.
+* UPDATE: Various code enhancements and cleanup.
 
 */
 
@@ -509,7 +538,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 			// Repeater Templates.
 			$repeater       = isset( $params['repeater'] ) ? sanitize_file_name( $params['repeater'] ) : 'default';
-			$type           = alm_get_repeater_type( $repeater );
 			$theme_repeater = isset( $params['theme_repeater'] ) ? sanitize_file_name( $params['theme_repeater'] ) : 'null';
 
 			// Post Parameters.
@@ -539,8 +567,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				$cta_pos            = (string) $cta_position_array[0];
 				$cta_pos            = $cta_pos !== 'after' ? 'before' : $cta_pos;
 				$cta_val            = (string) $cta_position_array[1];
-				$cta_repeater       = isset( $cta_data['cta_repeater'] ) ? $cta_data['cta_repeater'] : 'null';
-				$cta_theme_repeater = isset( $cta_data['cta_theme_repeater'] ) ? sanitize_file_name( $cta_data['cta_theme_repeater'] ) : 'null';
+				$cta_repeater       = isset( $cta_data['cta_repeater'] ) ? $cta_data['cta_repeater'] : '';
+				$cta_theme_repeater = isset( $cta_data['cta_theme_repeater'] ) ? sanitize_file_name( $cta_data['cta_theme_repeater'] ) : '';
 			}
 
 			// Single Post Add-on.
@@ -658,7 +686,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 						}
 
 						// Load Repeater.
-						alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args, false );
+						alm_loop( $repeater, $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args, false );
 
 						// Call to Action [After].
 						if ( $cta && has_action( 'alm_cta_inc' ) && $cta_pos === 'after' && in_array( $alm_current, $cta_array ) ) { // phpcs:ignore

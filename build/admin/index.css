@@ -247,11 +247,6 @@
   transform: scale(1.1, 1.1);
 }
 
-/*
-* Select2 - form replacement - http://ivaynberg.github.io/select2/
-*
-* @since 1.0
-*/
 .select2-container {
   position: relative;
   display: inline-block;
@@ -1995,11 +1990,11 @@ disabled look for disabled choices in the results dropdown
 }
 .shortcode-builder--label h4 {
   font-size: 14px;
-  margin: 0 0 15px;
+  margin: 0 0 15px !important;
 }
 .shortcode-builder--label p {
   font-size: 13px !important;
-  line-height: 18px !important;
+  line-height: 1.55 !important;
 }
 .shortcode-builder--label p small {
   padding-top: 10px;

@@ -10,18 +10,7 @@
 <?php if ( ! has_action( 'alm_pro_installed' ) ) { ?>
 <div class="cta dyk">
 	<h3><?php esc_attr_e( 'Did You Know?', 'ajax-load-more' ); ?></h3>
-	<?php $random = rand( 1, 7 ); ?>
-	<?php if ( $random == 1 ) { ?>
-	<div class="cta-inner">
-		<div class="img">
-			<img src="<?php echo ALM_ADMIN_URL; ?>img/add-ons/shortcode-editor.jpg">
-		</div>
-		<div class="text">
-			<p class="lg">You can generate shortcodes while editing pages!</p>
-			<p>Click the Ajax Load More icon in the content editor toolbar and the <a href="?page=ajax-load-more-shortcode-builder">shortcode builder</a> will open up in a lightbox window.</p>
-		</div>
-	</div>
-	<?php } ?>
+	<?php $random = rand( 2, 7 ); ?>
 	<?php if ( $random == 2 ) { ?>
 	<div class="cta-inner">
 		<div class="img">

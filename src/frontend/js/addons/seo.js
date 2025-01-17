@@ -17,7 +17,7 @@ export function seoCreateParams(alm) {
 		}
 	}
 
-	alm.start_page = alm?.listing?.dataset?.seoStartPage || '';
+	alm.start_page = alm?.listing?.dataset?.seoStartPage || 0;
 	if (alm.start_page) {
 		alm.start_page = parseInt(alm.start_page);
 		alm.addons.seo_scroll = listing.dataset.seoScroll;

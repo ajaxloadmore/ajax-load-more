@@ -227,6 +227,7 @@ export function getTypeParams(alm, type) {
 				cta_position: addons.cta_position,
 				cta_repeater: addons.cta_repeater,
 				cta_theme_repeater: addons.cta_theme_repeater,
+				cta_template: addons.cta_template,
 			};
 
 		case 'nextpage':
