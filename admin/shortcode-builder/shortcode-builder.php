@@ -61,7 +61,6 @@ $show_max                = 100; // Max number of items to show.
 				require_once 'components/preloaded.php';
 				require_once 'components/seo.php';
 				require_once 'components/single-post.php';
-				require_once 'components/users.php';
 				?>
 			</div>
 		</div>
@@ -74,18 +73,17 @@ $show_max                = 100; // Max number of items to show.
 		if ( alm_has_extension_shortcodes() ) :
 			?>
 		<div class="shortcode-parameter-wrap alm-tabbed-wrapper--section" tabindex="0" id="extensions">
-
 			<h2><?php _e( 'Extensions', 'ajax-load-more' ); ?></h2>
 			<p class="section-intro">
 				<?php _e( 'Configure your Ajax Load More extensions.', 'ajax-load-more' ); ?>
 			</p>
 			<ul class="section-anchor-nav"></ul>
-
 			<div class="section-wrap">
 				<?php
 				require_once 'components/acf.php';
 				require_once 'components/rest-api.php';
 				require_once 'components/term-query.php';
+				require_once 'components/users.php';
 				?>
 			</div>
 		</div>
@@ -102,6 +100,52 @@ $show_max                = 100; // Max number of items to show.
 			<ul class="section-anchor-nav"></ul>
 
 			<div class="section-wrap">
+				<!-- Template Selection -->
+				<div class="row repeater" id="alm-template">
+					<h3 class="heading" tabindex="0"><?php esc_attr_e( 'Template Selection', 'ajax-load-more' ); ?></h3>
+					<div class="expand-wrap">
+						<section>
+							<div class="shortcode-builder--label">
+								<h4><?php esc_attr_e( 'Template', 'ajax-load-more' ); ?></h4>
+								<p><?php echo __( 'Select the <a href="admin.php?page=ajax-load-more-repeaters" target="_parent">Repeater Template</a> for displaying the content in the Ajax Load More loop.', 'ajax-load-more' ); ?></p>
+							</div>
+							<div class="shortcode-builder--fields">
+								<div class="inner">
+									<select name="template-select" class="alm_element">
+										<optgroup label="<?php _e( 'Custom Repeaters', 'ajax-load-more' ); ?>">
+											<option name="default" value="default"><?php _e( 'Default', 'ajax-load-more' ); ?></option>
+											<?php
+											if ( has_action( 'alm_get_custom_repeaters' ) ) {
+												do_action( 'alm_get_custom_repeaters' );
+											}
+											if ( has_action( 'alm_get_unlimited_repeaters' ) ) {
+												do_action( 'alm_get_unlimited_repeaters' );
+											}
+											?>
+										</optgroup>
+										<?php
+										// Theme Repeaters
+										if ( has_action( 'alm_list_theme_repeaters' ) ) {
+											echo '<optgroup label="' . __( 'Theme Repeaters', 'ajax-load-more' ) . '">';
+											do_action( 'alm_list_theme_repeaters' );
+											echo '</optgroup>';
+										}
+										?>
+									</select>
+								</div>
+							</div>
+						</section>
+						<?php
+						// Custom Repeaters CTA.
+						// TODO: Update this to reference the new Templates add-on.
+						if ( ! has_action( 'alm_get_unlimited_repeaters' ) && ! has_action( 'alm_theme_repeaters_installed' ) ) {
+							echo '<div class="call-out--shortcode-builder">';
+							include ALM_PATH . 'admin/includes/cta/extend.php';
+							echo '</div>';
+						}
+						?>
+					</div>
+				</div>
 
 				<!-- Options -->
 				<div class="row input alm-instance-options" id="alm-instance-options">
@@ -113,8 +157,8 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<h4><?php _e( 'ID', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding a unique ID will allow you target this specific Ajax Load More instance with the alm_query_args_id() filter', 'ajax-load-more' ); ?>."></a></h4>
 								<p>
-									<?php _e( 'Set a unique ID for this Ajax Load More instance.', 'ajax-load-more' ); ?>
-									<small>e.g. my_alm_list etc...</small>
+									<?php _e( 'Set a unique ID for this Ajax Load More instance. Lowercase alphanumeric characters only.', 'ajax-load-more' ); ?>
+									<small>e.g. my_alm_listing</small>
 								</p>
 								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_query_args" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a></p>
 							</div>
@@ -209,12 +253,12 @@ $show_max                = 100; // Max number of items to show.
 								<h4><?php _e( 'Container Classes', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'You can define global container classes on the Ajax Load More settings screen', 'ajax-load-more' ); ?>."></a></h4>
 								<p>
 									<?php _e( 'Add custom CSS classes to the <span>.alm-listing</span> container.', 'ajax-load-more' ); ?>
-									<small>e.g. blog-listing large-12 etc...</small>
+									<small>e.g. row blog-listing etc...</small>
 								</p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">
-									<input class="alm_element" name="container-classes" type="text" id="container-classes" placeholder="listing large-12 columns">
+									<input class="alm_element" name="container-classes" type="text" id="container-classes" placeholder="row blog-listing">
 								</div>
 							</div>
 						</section>
@@ -325,52 +369,6 @@ $show_max                = 100; // Max number of items to show.
 					</div>
 				</div>
 				<!-- End Options -->
-
-
-				<!-- Template Selection -->
-				<?php
-				echo '<div class="row repeater" id="alm-repeaters">';
-				echo '<h3 class="heading" tabindex="0">' . __( 'Template Selection', 'ajax-load-more' ) . '</h3>';
-				echo '<div class="expand-wrap">';
-					echo '<section class="first">';
-						echo '<div class="shortcode-builder--label">';
-				if ( has_action( 'alm_theme_repeaters_selection' ) ) {
-					echo '<h4>' . __( 'Repeater Template', 'ajax-load-more' ) . '</h4>';
-				}
-							echo '<p>' . __( 'Select which <a href="admin.php?page=ajax-load-more-repeaters" target="_parent">Repeater Template</a> you would like to use.', 'ajax-load-more' ) . '</p>';
-						echo '</div>';
-						echo '<div class="shortcode-builder--fields"><div class="inner">';
-							echo '<select name="repeater-select" class="alm_element">';
-							echo '<option name="default" value="default" selected="selected">Default</option>';
-				if ( has_action( 'alm_get_custom_repeaters' ) ) {
-					do_action( 'alm_get_custom_repeaters' );
-				}
-				if ( has_action( 'alm_get_unlimited_repeaters' ) ) {
-					do_action( 'alm_get_unlimited_repeaters' );
-				}
-							echo '</select>';
-						echo '</div>';
-					echo '</section>';
-
-					// Get Theme Repeaters
-				if ( has_action( 'alm_theme_repeaters_selection' ) ) {
-					do_action( 'alm_theme_repeaters_selection' );
-				}
-				?>
-
-				<?php
-				// Custom Repeaters CTA.
-				if ( ! has_action( 'alm_get_unlimited_repeaters' ) && ! has_action( 'alm_get_custom_repeaters' ) && ! has_action( 'alm_theme_repeaters_installed' ) ) {
-					// If Custom Repeaters NOT installed.
-					echo '<div class="call-out--shortcode-builder">';
-					include ALM_PATH . 'admin/includes/cta/extend.php';
-					echo '</div>';
-				}
-
-				echo '</div>';
-				echo '</div>';
-				?>
-				<!-- End Template Selection -->
 
 				<!-- Button Labels -->
 				<div class="row input btn-label" id="alm-btn-label">
@@ -645,7 +643,7 @@ $show_max                = 100; // Max number of items to show.
 								<section class="border-btm pause_override">
 									<div class="shortcode-builder--label">
 										<h4><?php _e( 'Pause Override', 'ajax-load-more' ); ?></h4>
-										<p><?php _e( 'Override the <em>Pause</em> parameter and trigger the initial loading of posts on scroll.', 'ajax-load-more' ); ?></p>
+										<p><?php _e( 'Override the Pause parameter and allow scrolling to trigger the initial loading of posts.', 'ajax-load-more' ); ?></p>
 									</div>
 									<div class="shortcode-builder--fields">
 										<ul>

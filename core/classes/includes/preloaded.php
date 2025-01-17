@@ -35,9 +35,6 @@ if ( $cta ) {
 $query_args['offset']         = $preload_offset;
 $query_args['posts_per_page'] = $preloaded_amount;
 
-// Get Repeater Template Type.
-$type = alm_get_repeater_type( $repeater ); // phpcs:ignore
-
 if ( $comments ) {
 	/**
 	 * Comments Add-on.
@@ -190,14 +187,12 @@ if ( $comments ) {
 	$output          = '';
 
 	if ( $alm_preload_query->have_posts() ) :
-
 		$alm_item        = 0;
 		$alm_page        = 0;
 		$alm_current     = 0;
 		$alm_found_posts = $alm_total_posts;
 
 		while ( $alm_preload_query->have_posts() ) :
-
 			$alm_preload_query->the_post();
 
 			++$alm_item;
@@ -209,7 +204,7 @@ if ( $comments ) {
 			}
 
 			// Repeater Template.
-			$output .= alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
+			$output .= alm_loop( $repeater, $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
 
 			// Call to Action [After].
 			if ( $cta === 'true' && has_action( 'alm_cta_inc' ) && $cta_pos === 'after' ) {

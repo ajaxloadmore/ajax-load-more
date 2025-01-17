@@ -8434,6 +8434,9 @@ function ctaCreateParams(alm) {
   alm.addons.cta = (listing === null || listing === void 0 || (_listing$dataset = listing.dataset) === null || _listing$dataset === void 0 ? void 0 : _listing$dataset.cta) === 'true';
   if (alm.addons.cta) {
     alm.addons.cta_position = listing.dataset.ctaPosition;
+    if (listing.dataset.ctaTemplate) {
+      alm.addons.cta_template = listing.dataset.ctaTemplate;
+    }
     alm.addons.cta_repeater = listing.dataset.ctaRepeater;
     alm.addons.cta_theme_repeater = listing.dataset.ctaThemeRepeater;
   }
@@ -9665,7 +9668,7 @@ function seoCreateParams(alm) {
       alm.offset = alm.posts_per_page;
     }
   }
-  alm.start_page = (alm === null || alm === void 0 || (_alm$listing = alm.listing) === null || _alm$listing === void 0 || (_alm$listing = _alm$listing.dataset) === null || _alm$listing === void 0 ? void 0 : _alm$listing.seoStartPage) || '';
+  alm.start_page = (alm === null || alm === void 0 || (_alm$listing = alm.listing) === null || _alm$listing === void 0 || (_alm$listing = _alm$listing.dataset) === null || _alm$listing === void 0 ? void 0 : _alm$listing.seoStartPage) || 0;
   if (alm.start_page) {
     alm.start_page = parseInt(alm.start_page);
     alm.addons.seo_scroll = listing.dataset.seoScroll;
@@ -9817,11 +9820,12 @@ function setPreloadedParams(alm) {
     }
   }
 }
-;// CONCATENATED MODULE: ./src/frontend/js/addons/queryLoop.js
-function queryLoop_typeof(o) { "@babel/helpers - typeof"; return queryLoop_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, queryLoop_typeof(o); }
-function queryLoop_regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ queryLoop_regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == queryLoop_typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(queryLoop_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
-function queryLoop_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-function queryLoop_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { queryLoop_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { queryLoop_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+;// CONCATENATED MODULE: ./src/frontend/js/addons/query-loop.js
+function query_loop_typeof(o) { "@babel/helpers - typeof"; return query_loop_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, query_loop_typeof(o); }
+function query_loop_regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ query_loop_regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == query_loop_typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(query_loop_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function query_loop_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function query_loop_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { query_loop_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { query_loop_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -9847,53 +9851,100 @@ function queryLoopCreateParams(alm) {
     return alm;
   }
 
-  // If parent is a wp-block-query, set queryloop settings.
+  // Pluck the queryId from the config.
+  var _getQueryLoopConfig = getQueryLoopConfig(container),
+    _getQueryLoopConfig$q = _getQueryLoopConfig.queryId,
+    queryId = _getQueryLoopConfig$q === void 0 ? false : _getQueryLoopConfig$q,
+    _getQueryLoopConfig$p = _getQueryLoopConfig.paged,
+    paged = _getQueryLoopConfig$p === void 0 ? 1 : _getQueryLoopConfig$p;
+  if (!queryId) {
+    console.warn('Ajax Load More: Unable to locate Query Loop ID.');
+    return alm;
+  }
   alm.addons.queryloop = true;
+  alm.addons.queryloopId = queryId;
   alm.addons.queryloop_settings = {
     container: container,
+    firstEl: container.querySelector('.wp-block-post'),
     classes: {
       container: ".".concat(container.className.replace(/ /g, '.')),
       listing: '.wp-block-post-template',
-      element: '.wp-block-post',
-      pagination: '.wp-block-query-pagination',
-      pagination_prev: 'a.wp-block-query-pagination-previous',
-      pagination_next: 'a.wp-block-query-pagination-next'
-    },
-    pagination: container.querySelector('.wp-block-query-pagination'),
-    pagination_prev: container.querySelector('a.wp-block-query-pagination-previous'),
-    pagination_next: container.querySelector('a.wp-block-query-pagination-next')
+      element: '.wp-block-post'
+    }
   };
+  alm.page = parseInt(paged);
+  alm.pause = 'true'; // Pause ALM by default.
   return alm;
+}
+/**
+ * Init the Query Loop functionality.
+ * @param {Object} alm The alm object.
+ */
+function queryLoopInit(alm) {
+  var _alm$addons$queryloop = alm.addons.queryloop_settings,
+    queryloop_settings = _alm$addons$queryloop === void 0 ? {} : _alm$addons$queryloop;
+  var _queryloop_settings$c = queryloop_settings.container,
+    container = _queryloop_settings$c === void 0 ? '' : _queryloop_settings$c,
+    first = queryloop_settings.firstEl;
+  var _getQueryLoopConfig2 = getQueryLoopConfig(container),
+    _getQueryLoopConfig2$ = _getQueryLoopConfig2.paged,
+    paged = _getQueryLoopConfig2$ === void 0 ? 1 : _getQueryLoopConfig2$,
+    prev = _getQueryLoopConfig2.prev;
+
+  // Create Load Previous button.
+  if (container && paged > 1 && prev) {
+    var _alm$prev_button_labe;
+    createLoadPreviousButton(alm, container, paged - 1, prev, alm === null || alm === void 0 || (_alm$prev_button_labe = alm.prev_button_labels) === null || _alm$prev_button_labe === void 0 ? void 0 : _alm$prev_button_labe["default"]);
+  }
+
+  // Config first element in list.
+  if (first) {
+    first.classList.add('alm-query-loop');
+    first.dataset.url = window.location.href;
+    first.dataset.page = alm.page;
+    first.dataset.title = document.querySelector('title').innerHTML;
+  }
+
+  // Set button URLs.
+  setButtonURLs(alm);
+
+  // Attach scroll events.
+  if (alm.urls) {
+    window.addEventListener('touchstart', onScroll);
+    window.addEventListener('scroll', onScroll);
+  }
 }
 
 /**
- * Set up the instance of Query Loop.
+ * Set the button URLs.
  *
- * @param {Object} alm
+ * @param {Object}      alm     The alm object.
+ * @param {HTMLElement} element The element to search.
  */
-function queryLoopInit(alm) {
+function setButtonURLs(alm) {
+  var element = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
   var rel = alm.rel,
-    addons = alm.addons,
     button = alm.button,
     buttonPrev = alm.buttonPrev,
-    page = alm.page;
-  var _addons$queryloop_set = addons.queryloop_settings,
-    settings = _addons$queryloop_set === void 0 ? {} : _addons$queryloop_set;
+    page = alm.page,
+    _alm$pagePrev = alm.pagePrev,
+    pagePrev = _alm$pagePrev === void 0 ? 1 : _alm$pagePrev;
+  var _getQueryLoopConfig3 = getQueryLoopConfig(element),
+    _getQueryLoopConfig3$ = _getQueryLoopConfig3.next,
+    next = _getQueryLoopConfig3$ === void 0 ? '' : _getQueryLoopConfig3$,
+    _getQueryLoopConfig3$2 = _getQueryLoopConfig3.prev,
+    prev = _getQueryLoopConfig3$2 === void 0 ? '' : _getQueryLoopConfig3$2;
 
   // Set button state & URL.
   if (rel === 'prev' && buttonPrev) {
-    var _settings$pagination_;
-    var prevURL = (settings === null || settings === void 0 || (_settings$pagination_ = settings.pagination_prev) === null || _settings$pagination_ === void 0 ? void 0 : _settings$pagination_.href) || false;
-    if (prevURL) {
-      setButtonAtts(buttonPrev, page - 1, prevURL);
+    if (prev) {
+      setButtonAtts(buttonPrev, pagePrev - 1, prev);
     } else {
       alm.AjaxLoadMore.triggerDonePrev();
     }
   } else {
-    var _settings$pagination_2;
-    var nextURL = (settings === null || settings === void 0 || (_settings$pagination_2 = settings.pagination_next) === null || _settings$pagination_2 === void 0 ? void 0 : _settings$pagination_2.href) || false;
-    if (nextURL) {
-      setButtonAtts(button, page + 1, nextURL);
+    if (next) {
+      setButtonAtts(button, page + 1, next);
     } else {
       alm.AjaxLoadMore.triggerDone();
     }
@@ -9914,58 +9965,38 @@ function queryLoopGetContent(alm, url, response, cache_slug) {
 
   // Successful response.
   if (response.status === 200 && response.data) {
-    var _queryloop_settings$c, _queryloop_settings$c2, _queryloop_settings$c3, _queryloop_settings$c4;
+    var _queryloop_settings$c2, _queryloop_settings$c3, _queryloop_settings$c4, _queryloop_settings$c5;
     var addons = alm.addons,
-      page = alm.page,
-      button = alm.button,
-      buttonPrev = alm.buttonPrev,
-      rel = alm.rel;
-    var _addons$queryloop_set2 = addons.queryloop_settings,
-      queryloop_settings = _addons$queryloop_set2 === void 0 ? {} : _addons$queryloop_set2;
+      canonical_url = alm.canonical_url;
+    var _addons$queryloop_set = addons.queryloop_settings,
+      queryloop_settings = _addons$queryloop_set === void 0 ? {} : _addons$queryloop_set;
 
     // Create temp div to hold response data.
     var content = document.createElement('div');
     content.innerHTML = response.data;
 
-    // Set button state & URL.
-    if (rel === 'prev' && buttonPrev) {
-      var prevURL = getPagedURL(queryloop_settings, content, 'prev');
-      if (prevURL) {
-        setButtonAtts(buttonPrev, page - 1, prevURL);
-      } else {
-        alm.AjaxLoadMore.triggerDonePrev();
-      }
-    } else {
-      var nextURL = getPagedURL(queryloop_settings, content);
-      if (nextURL) {
-        setButtonAtts(button, page + 1, nextURL);
-      } else {
-        alm.AjaxLoadMore.triggerDone();
-      }
-    }
-
-    // Get Page Title
-    var title = content.querySelector('title').innerHTML;
-    data.pageTitle = title;
-
     // Get container.
-    var container = content === null || content === void 0 ? void 0 : content.querySelector("".concat(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c = queryloop_settings.classes) === null || _queryloop_settings$c === void 0 ? void 0 : _queryloop_settings$c.container, " ").concat(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c2 = queryloop_settings.classes) === null || _queryloop_settings$c2 === void 0 ? void 0 : _queryloop_settings$c2.listing));
+    var container = content === null || content === void 0 ? void 0 : content.querySelector("".concat(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c2 = queryloop_settings.classes) === null || _queryloop_settings$c2 === void 0 ? void 0 : _queryloop_settings$c2.container, " ").concat(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c3 = queryloop_settings.classes) === null || _queryloop_settings$c3 === void 0 ? void 0 : _queryloop_settings$c3.listing));
     if (!container) {
       console.warn('Ajax Load More: Unable to locate Query Loop container.');
       return data;
     }
 
     // Get the first item and append data attributes.
-    var item = container ? container.querySelector(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c3 = queryloop_settings.classes) === null || _queryloop_settings$c3 === void 0 ? void 0 : _queryloop_settings$c3.element) : null;
+    var item = container ? container.querySelector(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c4 = queryloop_settings.classes) === null || _queryloop_settings$c4 === void 0 ? void 0 : _queryloop_settings$c4.element) : null;
     if (item) {
-      item.classList.add('alm-queryloop');
-      item.dataset.url = url;
-      item.dataset.page = rel === 'next' ? page + 1 : page - 1;
-      item.dataset.pageTitle = title;
+      // Get current page from config settings.
+      var _getQueryLoopConfig4 = getQueryLoopConfig(content),
+        _getQueryLoopConfig4$ = _getQueryLoopConfig4.paged,
+        paged = _getQueryLoopConfig4$ === void 0 ? 1 : _getQueryLoopConfig4$;
+      item.classList.add('alm-query-loop');
+      item.dataset.url = paged > 1 ? url : canonical_url;
+      item.dataset.page = paged;
+      item.dataset.title = content.querySelector('title').innerHTML;
     }
 
     // Count the number of returned items.
-    var items = container.querySelectorAll(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c4 = queryloop_settings.classes) === null || _queryloop_settings$c4 === void 0 ? void 0 : _queryloop_settings$c4.element);
+    var items = container.querySelectorAll(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c5 = queryloop_settings.classes) === null || _queryloop_settings$c5 === void 0 ? void 0 : _queryloop_settings$c5.element);
     if (items) {
       // Set the html to the elementor container data.
       data.html = container ? container.innerHTML : '';
@@ -9975,6 +10006,10 @@ function queryLoopGetContent(alm, url, response, cache_slug) {
       // Create cache file.
       createCache(alm, data, cache_slug);
     }
+
+    // Set the button URLs.
+    alm.page = alm.page + 1;
+    setButtonURLs(alm, content);
   }
   return data;
 }
@@ -9985,33 +10020,33 @@ function queryLoopGetContent(alm, url, response, cache_slug) {
  * @param {HTMLElement} content The HTML data.
  * @param {Object}      alm     The alm object.
  */
-function queryloop(content, alm) {
+function queryLoop(content, alm) {
   if (!content || !alm) {
     alm.AjaxLoadMore.triggerDone();
     return false;
   }
   return new Promise(function (resolve) {
-    var _queryloop_settings$c5, _queryloop_settings$c6;
+    var _queryloop_settings$c6, _queryloop_settings$c7;
     var addons = alm.addons;
-    var _addons$queryloop_set3 = addons.queryloop_settings,
-      queryloop_settings = _addons$queryloop_set3 === void 0 ? {} : _addons$queryloop_set3;
+    var _addons$queryloop_set2 = addons.queryloop_settings,
+      queryloop_settings = _addons$queryloop_set2 === void 0 ? {} : _addons$queryloop_set2;
 
     // Get post listing container.
-    var container = queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c5 = queryloop_settings.container) === null || _queryloop_settings$c5 === void 0 ? void 0 : _queryloop_settings$c5.querySelector("".concat(queryloop_settings.classes.listing));
+    var container = queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c6 = queryloop_settings.container) === null || _queryloop_settings$c6 === void 0 ? void 0 : _queryloop_settings$c6.querySelector("".concat(queryloop_settings.classes.listing));
 
     // Get all individual items in Ajax response.
-    var items = content.querySelectorAll("".concat(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c6 = queryloop_settings.classes) === null || _queryloop_settings$c6 === void 0 ? void 0 : _queryloop_settings$c6.element));
+    var items = content.querySelectorAll("".concat(queryloop_settings === null || queryloop_settings === void 0 || (_queryloop_settings$c7 = queryloop_settings.classes) === null || _queryloop_settings$c7 === void 0 ? void 0 : _queryloop_settings$c7.element));
     if (container && items) {
       var queryloopItems = Array.prototype.slice.call(items); // Convert NodeList to Array
 
-      // Trigger almQueryLoopLoaded callback.
-      if (typeof almQueryLoopLoaded === 'function') {
-        window.almQueryLoopLoaded(queryloopItems);
+      // Trigger almqueryLoopLoaded callback.
+      if (typeof almqueryLoopLoaded === 'function') {
+        window.almqueryLoopLoaded(queryloopItems);
       }
 
       // Load the items.
-      queryLoop_asyncToGenerator( /*#__PURE__*/queryLoop_regeneratorRuntime().mark(function _callee() {
-        return queryLoop_regeneratorRuntime().wrap(function _callee$(_context) {
+      query_loop_asyncToGenerator( /*#__PURE__*/query_loop_regeneratorRuntime().mark(function _callee() {
+        return query_loop_regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
@@ -10037,53 +10072,84 @@ function queryloop(content, alm) {
  *
  * @param {Object} alm The alm object.
  */
-function queryloopLoaded(alm) {
-  var page = alm.page,
-    AjaxLoadMore = alm.AjaxLoadMore,
-    addons = alm.addons;
-  var nextPage = page + 1;
-  var max_pages = addons.elementor_max_pages;
+function queryLoopLoaded(alm) {
+  var AjaxLoadMore = alm.AjaxLoadMore;
+  lazyImages(alm); // Lazy load images if necessary.
 
-  // Lazy load images if necessary.
-  lazyImages(alm);
-
-  // Trigger almComplete.
   if (typeof almComplete === 'function' && alm.transition !== 'masonry') {
-    window.almComplete(alm);
+    window.almComplete(alm); // Trigger almComplete.
   }
 
-  // End transitions.
-  AjaxLoadMore.transitionEnd();
-
-  // ALM Done.
-  if (nextPage >= max_pages) {
-    AjaxLoadMore.triggerDone();
-  }
+  AjaxLoadMore.transitionEnd(); // End transitions.
   dispatchScrollEvent();
 }
 
 /**
- * Get the pagination container for the Elementor pagination.
+ * Get the `<pre/>` config element.
  *
- * @param {Object}  settings The query loop settings object.
- * @param {Element} content  The HTML content to search.
- * @param {string}  dir      the direction, next of prev.
- * @return {HTMLElement}     The pagination element.
+ * @param {HTMLElement} element The element to search.
+ * @return {Object|void}        The config object.
  */
-function getPagedURL(settings, content) {
-  var _settings$classes, _settings$classes2, _pagination$querySele;
-  var dir = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'next';
-  // Locate the pagination container.
-  var pagination = content === null || content === void 0 ? void 0 : content.querySelector("".concat(settings.classes.container, " ").concat(settings.classes.pagination));
+function getQueryLoopConfig(element) {
+  var raw = element === null || element === void 0 ? void 0 : element.querySelector('pre[data-rel="ajax-load-more"]');
+  if (!raw) {
+    return;
+  }
+  return JSON.parse(raw === null || raw === void 0 ? void 0 : raw.innerHTML);
+}
 
-  // Get the pagination target class.
-  var target = dir === 'next' ? (_settings$classes = settings.classes) === null || _settings$classes === void 0 ? void 0 : _settings$classes.pagination_next : (_settings$classes2 = settings.classes) === null || _settings$classes2 === void 0 ? void 0 : _settings$classes2.pagination_prev;
+/**
+ * Scroll and touchstart events.
+ *
+ * @since 2.0
+ */
+function onScroll() {
+  var scrollTop = window.scrollY;
+  var disabled = false;
+  if (!disabled) {
+    var _posts$;
+    // Get all elements.
+    var posts = document.querySelectorAll('.alm-query-loop');
+    if (!posts) {
+      return;
+    }
+    var first = (_posts$ = posts[0]) === null || _posts$ === void 0 || (_posts$ = _posts$.dataset) === null || _posts$ === void 0 ? void 0 : _posts$.url;
 
-  // Get the next URL from the pagination element.
-  var page = pagination === null || pagination === void 0 || (_pagination$querySele = pagination.querySelector(target)) === null || _pagination$querySele === void 0 ? void 0 : _pagination$querySele.href;
+    // Get container scroll position
+    var fromTop = scrollTop;
 
-  // Return the next page URL.
-  return page ? page : false;
+    // Loop all posts
+    var current = Array.prototype.filter.call(posts, function (n) {
+      var divOffset = ajaxloadmore.getOffset(n);
+      if (divOffset.top < fromTop) {
+        return n;
+      }
+    });
+
+    // Get the data attributes of the current element.
+    var currentPost = current[current.length - 1];
+    var title = currentPost ? currentPost.dataset.title : '';
+    var permalink = currentPost ? currentPost.dataset.url : '';
+    var url = permalink || first;
+    if (window.location.href !== url) {
+      // Set URL if current post doesn't match the browser URL.
+      setURL(title, url);
+    }
+  }
+}
+
+/**
+ * Set the URL in the browser.
+ *
+ * @param {string} title     Page title.
+ * @param {string} permalink The permalink.
+ */
+function setURL(title, permalink) {
+  var state = {
+    permalink: permalink,
+    title: title
+  };
+  history.replaceState(state, title, permalink);
 }
 ;// CONCATENATED MODULE: ./src/frontend/js/addons/singleposts.js
 
@@ -11239,7 +11305,8 @@ function getTypeParams(alm, type) {
         cta: 'true',
         cta_position: addons.cta_position,
         cta_repeater: addons.cta_repeater,
-        cta_theme_repeater: addons.cta_theme_repeater
+        cta_theme_repeater: addons.cta_theme_repeater,
+        cta_template: addons.cta_template
       };
     case 'nextpage':
       return {
@@ -11622,7 +11689,7 @@ function filtering_arrayLikeToArray(arr, len) { if (len == null || len > arr.len
  * @since 2.6.1
  */
 function almFilter(transition) {
-  var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
+  var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 200;
   var data = arguments.length > 2 ? arguments[2] : undefined;
   var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'filter';
   if (data.target) {
@@ -12275,6 +12342,7 @@ __webpack_require__(334);
 
 // Global filtering state.
 var alm_is_filtering = false;
+var isBlockEditor = document.body.classList.contains('wp-admin');
 
 // Start ALM
 (function () {
@@ -12287,7 +12355,7 @@ var alm_is_filtering = false;
    * @param {number}  index The current index number of the Ajax Load More instance.
    */
   var ajaxloadmore = function ajaxloadmore(el, index) {
-    var _alm_localize, _el$dataset, _alm, _alm2, _alm3, _alm4, _alm5, _alm6, _alm_localize2, _alm7, _alm8, _alm9, _alm10, _alm11, _alm12, _alm13, _alm14, _alm15, _alm16, _alm_localize3, _alm17, _alm18, _alm19, _alm20, _alm21, _alm22;
+    var _alm_localize, _el$dataset, _alm, _alm2, _alm3, _alm4, _alm5, _alm6, _alm_localize2, _alm7, _alm8, _alm9, _alm10, _alm11, _alm12, _alm13, _alm14, _alm15, _alm16, _alm17, _alm18, _alm19, _alm20, _alm_localize3, _alm21, _alm22, _alm23, _alm24, _alm25, _alm26;
     // Move user to top of page to prevent loading of unnessasry posts
     if (((_alm_localize = alm_localize) === null || _alm_localize === void 0 ? void 0 : _alm_localize.scrolltop) === 'true') {
       window.scrollTo(0, 0);
@@ -12310,6 +12378,7 @@ var alm_is_filtering = false;
     alm.finished = false;
     alm.timer = null;
     alm.rel = 'next';
+    alm.defaults = {};
     alm.ua = window.navigator.userAgent ? window.navigator.userAgent : ''; // Browser User Agent
     alm.vendor = window.navigator.vendor ? window.navigator.vendor : ''; // Browser Vendor
 
@@ -12364,24 +12433,30 @@ var alm_is_filtering = false;
       loading: ((_alm7 = alm) === null || _alm7 === void 0 || (_alm7 = _alm7.listing) === null || _alm7 === void 0 || (_alm7 = _alm7.dataset) === null || _alm7 === void 0 ? void 0 : _alm7.buttonLoadingLabel) || null,
       done: ((_alm8 = alm) === null || _alm8 === void 0 || (_alm8 = _alm8.listing) === null || _alm8 === void 0 || (_alm8 = _alm8.dataset) === null || _alm8 === void 0 ? void 0 : _alm8.buttonDoneLabel) || null
     };
+    alm.prev_button_labels = {
+      "default": (_alm9 = alm) === null || _alm9 === void 0 || (_alm9 = _alm9.listing) === null || _alm9 === void 0 || (_alm9 = _alm9.dataset) === null || _alm9 === void 0 ? void 0 : _alm9.prevButtonLabel,
+      loading: ((_alm10 = alm) === null || _alm10 === void 0 || (_alm10 = _alm10.listing) === null || _alm10 === void 0 || (_alm10 = _alm10.dataset) === null || _alm10 === void 0 ? void 0 : _alm10.prevButtonLoadingLabel) || null,
+      done: ((_alm11 = alm) === null || _alm11 === void 0 || (_alm11 = _alm11.listing) === null || _alm11 === void 0 || (_alm11 = _alm11.dataset) === null || _alm11 === void 0 ? void 0 : _alm11.prevButtonDoneLabel) || null
+    };
+    alm.urls = ((_alm12 = alm) === null || _alm12 === void 0 || (_alm12 = _alm12.listing) === null || _alm12 === void 0 || (_alm12 = _alm12.dataset) === null || _alm12 === void 0 ? void 0 : _alm12.urls) === 'false' ? false : true;
     alm.placeholder = alm.main.querySelector('.alm-placeholder') || false;
-    alm.scroll_distance = ((_alm9 = alm) === null || _alm9 === void 0 || (_alm9 = _alm9.listing) === null || _alm9 === void 0 ? void 0 : _alm9.dataset.scrollDistance) || 100;
-    alm.scroll_container = ((_alm10 = alm) === null || _alm10 === void 0 || (_alm10 = _alm10.listing) === null || _alm10 === void 0 ? void 0 : _alm10.dataset.scrollContainer) || null;
-    alm.scroll_direction = ((_alm11 = alm) === null || _alm11 === void 0 || (_alm11 = _alm11.listing) === null || _alm11 === void 0 || (_alm11 = _alm11.dataset) === null || _alm11 === void 0 ? void 0 : _alm11.scrollDirection) || 'vertical';
-    alm.max_pages = (_alm12 = alm) !== null && _alm12 !== void 0 && (_alm12 = _alm12.listing) !== null && _alm12 !== void 0 && (_alm12 = _alm12.dataset) !== null && _alm12 !== void 0 && _alm12.maxPages ? parseInt(alm.listing.dataset.maxPages) : 0;
-    alm.pause_override = ((_alm13 = alm) === null || _alm13 === void 0 || (_alm13 = _alm13.listing) === null || _alm13 === void 0 || (_alm13 = _alm13.dataset) === null || _alm13 === void 0 ? void 0 : _alm13.pauseOverride) || false; // true | false
-    alm.pause = ((_alm14 = alm) === null || _alm14 === void 0 || (_alm14 = _alm14.listing) === null || _alm14 === void 0 || (_alm14 = _alm14.dataset) === null || _alm14 === void 0 ? void 0 : _alm14.pause) || false; // true | false
-    alm.transition = ((_alm15 = alm) === null || _alm15 === void 0 || (_alm15 = _alm15.listing) === null || _alm15 === void 0 || (_alm15 = _alm15.dataset) === null || _alm15 === void 0 ? void 0 : _alm15.transition) || 'fade'; // Transition
-    alm.transition_delay = ((_alm16 = alm) === null || _alm16 === void 0 || (_alm16 = _alm16.listing) === null || _alm16 === void 0 || (_alm16 = _alm16.dataset) === null || _alm16 === void 0 ? void 0 : _alm16.transitionDelay) || 0;
+    alm.scroll_distance = ((_alm13 = alm) === null || _alm13 === void 0 || (_alm13 = _alm13.listing) === null || _alm13 === void 0 ? void 0 : _alm13.dataset.scrollDistance) || 100;
+    alm.scroll_container = ((_alm14 = alm) === null || _alm14 === void 0 || (_alm14 = _alm14.listing) === null || _alm14 === void 0 ? void 0 : _alm14.dataset.scrollContainer) || null;
+    alm.scroll_direction = ((_alm15 = alm) === null || _alm15 === void 0 || (_alm15 = _alm15.listing) === null || _alm15 === void 0 || (_alm15 = _alm15.dataset) === null || _alm15 === void 0 ? void 0 : _alm15.scrollDirection) || 'vertical';
+    alm.max_pages = (_alm16 = alm) !== null && _alm16 !== void 0 && (_alm16 = _alm16.listing) !== null && _alm16 !== void 0 && (_alm16 = _alm16.dataset) !== null && _alm16 !== void 0 && _alm16.maxPages ? parseInt(alm.listing.dataset.maxPages) : 0;
+    alm.pause_override = ((_alm17 = alm) === null || _alm17 === void 0 || (_alm17 = _alm17.listing) === null || _alm17 === void 0 || (_alm17 = _alm17.dataset) === null || _alm17 === void 0 ? void 0 : _alm17.pauseOverride) || false; // true | false
+    alm.pause = ((_alm18 = alm) === null || _alm18 === void 0 || (_alm18 = _alm18.listing) === null || _alm18 === void 0 || (_alm18 = _alm18.dataset) === null || _alm18 === void 0 ? void 0 : _alm18.pause) || false; // true | false
+    alm.transition = ((_alm19 = alm) === null || _alm19 === void 0 || (_alm19 = _alm19.listing) === null || _alm19 === void 0 || (_alm19 = _alm19.dataset) === null || _alm19 === void 0 ? void 0 : _alm19.transition) || 'fade'; // Transition
+    alm.transition_delay = ((_alm20 = alm) === null || _alm20 === void 0 || (_alm20 = _alm20.listing) === null || _alm20 === void 0 || (_alm20 = _alm20.dataset) === null || _alm20 === void 0 ? void 0 : _alm20.transitionDelay) || 0;
     alm.speed = (_alm_localize3 = alm_localize) !== null && _alm_localize3 !== void 0 && _alm_localize3.speed ? parseInt(alm_localize.speed) : 250;
-    alm.images_loaded = ((_alm17 = alm) === null || _alm17 === void 0 || (_alm17 = _alm17.listing) === null || _alm17 === void 0 || (_alm17 = _alm17.dataset) === null || _alm17 === void 0 ? void 0 : _alm17.imagesLoaded) === 'true';
-    alm.destroy_after = (_alm18 = alm) !== null && _alm18 !== void 0 && (_alm18 = _alm18.listing) !== null && _alm18 !== void 0 && (_alm18 = _alm18.dataset) !== null && _alm18 !== void 0 && _alm18.destroyAfter ? parseInt(alm.listing.dataset.destroyAfter) : false;
-    alm.lazy_images = ((_alm19 = alm) === null || _alm19 === void 0 || (_alm19 = _alm19.listing.dataset) === null || _alm19 === void 0 ? void 0 : _alm19.lazyImages) === 'true' ? true : false;
-    alm.integration.woocommerce = ((_alm20 = alm) === null || _alm20 === void 0 || (_alm20 = _alm20.listing) === null || _alm20 === void 0 || (_alm20 = _alm20.dataset) === null || _alm20 === void 0 ? void 0 : _alm20.woocommerce) === 'true' ? true : false;
-    alm.scroll = ((_alm21 = alm) === null || _alm21 === void 0 || (_alm21 = _alm21.listing) === null || _alm21 === void 0 || (_alm21 = _alm21.dataset) === null || _alm21 === void 0 ? void 0 : _alm21.scroll) === 'false' ? false : true;
+    alm.images_loaded = ((_alm21 = alm) === null || _alm21 === void 0 || (_alm21 = _alm21.listing) === null || _alm21 === void 0 || (_alm21 = _alm21.dataset) === null || _alm21 === void 0 ? void 0 : _alm21.imagesLoaded) === 'true';
+    alm.destroy_after = (_alm22 = alm) !== null && _alm22 !== void 0 && (_alm22 = _alm22.listing) !== null && _alm22 !== void 0 && (_alm22 = _alm22.dataset) !== null && _alm22 !== void 0 && _alm22.destroyAfter ? parseInt(alm.listing.dataset.destroyAfter) : false;
+    alm.lazy_images = ((_alm23 = alm) === null || _alm23 === void 0 || (_alm23 = _alm23.listing.dataset) === null || _alm23 === void 0 ? void 0 : _alm23.lazyImages) === 'true' ? true : false;
+    alm.integration.woocommerce = ((_alm24 = alm) === null || _alm24 === void 0 || (_alm24 = _alm24.listing) === null || _alm24 === void 0 || (_alm24 = _alm24.dataset) === null || _alm24 === void 0 ? void 0 : _alm24.woocommerce) === 'true' ? true : false;
+    alm.scroll = ((_alm25 = alm) === null || _alm25 === void 0 || (_alm25 = _alm25.listing) === null || _alm25 === void 0 || (_alm25 = _alm25.dataset) === null || _alm25 === void 0 ? void 0 : _alm25.scroll) === 'false' ? false : true;
     alm.orginal_posts_per_page = parseInt(alm.listing.dataset.postsPerPage); // Used for paging add-on
     alm.posts_per_page = parseInt(alm.listing.dataset.postsPerPage);
-    alm.offset = (_alm22 = alm) !== null && _alm22 !== void 0 && (_alm22 = _alm22.listing) !== null && _alm22 !== void 0 && (_alm22 = _alm22.dataset) !== null && _alm22 !== void 0 && _alm22.offset ? parseInt(alm.listing.dataset.offset) : 0;
+    alm.offset = (_alm26 = alm) !== null && _alm26 !== void 0 && (_alm26 = _alm26.listing) !== null && _alm26 !== void 0 && (_alm26 = _alm26.dataset) !== null && _alm26 !== void 0 && _alm26.offset ? parseInt(alm.listing.dataset.offset) : 0;
     alm.paged = false;
 
     // Add-on Shortcode Params
@@ -12521,10 +12596,10 @@ var alm_is_filtering = false;
      * Render "Showing x of y results" text.
      */
     if (alm.integration.woocommerce) {
-      var _alm23;
+      var _alm27;
       // If woocommerce, get the default woocommerce results block
       alm.resultsText = document.querySelectorAll('.woocommerce-result-count');
-      if (((_alm23 = alm) === null || _alm23 === void 0 || (_alm23 = _alm23.resultsText) === null || _alm23 === void 0 ? void 0 : _alm23.length) < 1) {
+      if (((_alm27 = alm) === null || _alm27 === void 0 || (_alm27 = _alm27.resultsText) === null || _alm27 === void 0 ? void 0 : _alm27.length) < 1) {
         alm.resultsText = document.querySelectorAll('.alm-results-text');
       }
     } else {
@@ -12568,6 +12643,9 @@ var alm_is_filtering = false;
       if (!alm.addons.paging) {
         if (alm.rel === 'prev') {
           alm.buttonPrev.classList.add('loading');
+          if (alm.prev_button_labels.loading) {
+            alm.buttonPrev.innerHTML = alm.prev_button_labels.loading;
+          }
         } else {
           alm.button.classList.add('loading');
           if (alm.button_labels.loading) {
@@ -12588,7 +12666,7 @@ var alm_is_filtering = false;
      */
     alm.AjaxLoadMore.ajax = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee() {
       var type,
-        _alm24,
+        _alm28,
         params,
         cache,
         _args = arguments;
@@ -12606,7 +12684,7 @@ var alm_is_filtering = false;
           case 5:
             // Standard ALM.
             params = getAjaxParams(alm, type); // Cache.
-            if (!((_alm24 = alm) !== null && _alm24 !== void 0 && (_alm24 = _alm24.addons) !== null && _alm24 !== void 0 && _alm24.cache && !['totalposts', 'totalpages'].includes(type))) {
+            if (!((_alm28 = alm) !== null && _alm28 !== void 0 && (_alm28 = _alm28.addons) !== null && _alm28 !== void 0 && _alm28.cache && !['totalposts', 'totalpages'].includes(type))) {
               _context.next = 13;
               break;
             }
@@ -12778,7 +12856,7 @@ var alm_is_filtering = false;
      */
     alm.AjaxLoadMore.render = /*#__PURE__*/function () {
       var _ref3 = ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee8(data) {
-        var _alm29;
+        var _alm33;
         var html, meta, total, totalposts, nodes, temp, paging_container, currentPage;
         return ajax_load_more_regeneratorRuntime().wrap(function _callee8$(_context8) {
           while (1) switch (_context8.prev = _context8.next) {
@@ -12938,9 +13016,9 @@ var alm_is_filtering = false;
                         break;
                       }
                       _context4.next = 11;
-                      return queryloop(temp, alm);
+                      return queryLoop(temp, alm);
                     case 11:
-                      queryloopLoaded(alm);
+                      queryLoopLoaded(alm);
                     case 12:
                     case "end":
                       return _context4.stop();
@@ -13025,14 +13103,14 @@ var alm_is_filtering = false;
                 // ALM Done.
                 if (!alm.addons.single_post) {
                   if (alm.addons.nextpage) {
-                    var _alm25, _alm26;
+                    var _alm29, _alm30;
                     // Nextpage.
-                    if (((_alm25 = alm) === null || _alm25 === void 0 || (_alm25 = _alm25.localize) === null || _alm25 === void 0 ? void 0 : _alm25.post_count) + (alm.addons.nextpage_startpage - 1) >= ((_alm26 = alm) === null || _alm26 === void 0 || (_alm26 = _alm26.localize) === null || _alm26 === void 0 ? void 0 : _alm26.total_posts)) {
+                    if (((_alm29 = alm) === null || _alm29 === void 0 || (_alm29 = _alm29.localize) === null || _alm29 === void 0 ? void 0 : _alm29.post_count) + (alm.addons.nextpage_startpage - 1) >= ((_alm30 = alm) === null || _alm30 === void 0 || (_alm30 = _alm30.localize) === null || _alm30 === void 0 ? void 0 : _alm30.total_posts)) {
                       alm.AjaxLoadMore.triggerDone();
                     }
                   } else {
-                    var _alm27, _alm28;
-                    if (((_alm27 = alm) === null || _alm27 === void 0 || (_alm27 = _alm27.localize) === null || _alm27 === void 0 ? void 0 : _alm27.post_count) >= ((_alm28 = alm) === null || _alm28 === void 0 || (_alm28 = _alm28.localize) === null || _alm28 === void 0 ? void 0 : _alm28.total_posts)) {
+                    var _alm31, _alm32;
+                    if (((_alm31 = alm) === null || _alm31 === void 0 || (_alm31 = _alm31.localize) === null || _alm31 === void 0 ? void 0 : _alm31.post_count) >= ((_alm32 = alm) === null || _alm32 === void 0 || (_alm32 = _alm32.localize) === null || _alm32 === void 0 ? void 0 : _alm32.total_posts)) {
                       alm.AjaxLoadMore.triggerDone();
                     }
                   }
@@ -13137,7 +13215,7 @@ var alm_is_filtering = false;
               /**
                * Set Focus for accessibility.
                */
-              if ((_alm29 = alm) !== null && _alm29 !== void 0 && (_alm29 = _alm29.last_loaded) !== null && _alm29 !== void 0 && _alm29.length) {
+              if ((_alm33 = alm) !== null && _alm33 !== void 0 && (_alm33 = _alm33.last_loaded) !== null && _alm33 !== void 0 && _alm33.length) {
                 setFocus(alm, alm.last_loaded[0], total, alm_is_filtering);
               }
               alm.main.classList.remove('alm-is-filtering'); // Remove filtering class.
@@ -13165,10 +13243,10 @@ var alm_is_filtering = false;
      */
     alm.AjaxLoadMore.noresults = function () {
       if (!alm.addons.paging) {
-        var _alm30, _alm31;
+        var _alm34, _alm35;
         // Add .done class, reset btn text
-        (_alm30 = alm) === null || _alm30 === void 0 || (_alm30 = _alm30.button) === null || _alm30 === void 0 || (_alm30 = _alm30.classList) === null || _alm30 === void 0 || _alm30.remove('loading');
-        (_alm31 = alm) === null || _alm31 === void 0 || (_alm31 = _alm31.button) === null || _alm31 === void 0 || (_alm31 = _alm31.classList) === null || _alm31 === void 0 || _alm31.add('done');
+        (_alm34 = alm) === null || _alm34 === void 0 || (_alm34 = _alm34.button) === null || _alm34 === void 0 || (_alm34 = _alm34.classList) === null || _alm34 === void 0 || _alm34.remove('loading');
+        (_alm35 = alm) === null || _alm35 === void 0 || (_alm35 = _alm35.button) === null || _alm35 === void 0 || (_alm35 = _alm35.classList) === null || _alm35 === void 0 || _alm35.add('done');
         alm.AjaxLoadMore.resetBtnText();
       }
 
@@ -13410,6 +13488,11 @@ var alm_is_filtering = false;
         alm.buttonPrev.classList.add('done');
         alm.buttonPrev.style.opacity = '0.5';
         alm.buttonPrev.disabled = true;
+        if (alm.prev_button_labels.done) {
+          setTimeout(function () {
+            alm.buttonPrev.innerHTML = alm.prev_button_labels.done;
+          }, 75);
+        }
       }
 
       // almDonePrev Callback.
@@ -13430,6 +13513,9 @@ var alm_is_filtering = false;
       if (alm.button && alm.button_labels.loading) {
         alm.button.innerHTML = alm.button_labels["default"];
       }
+      if (alm.buttonPrev && alm.prev_button_labels.loading) {
+        alm.buttonPrev.innerHTML = alm.prev_button_labels["default"];
+      }
     };
 
     /**
@@ -13439,6 +13525,10 @@ var alm_is_filtering = false;
      * @since 4.2.0
      */
     alm.AjaxLoadMore.click = function (e) {
+      if (isBlockEditor && alm.addons.queryloop) {
+        return; //
+      }
+
       var button = e.currentTarget || e.target;
       alm.rel = 'next';
       if (alm.pause === 'true') {
@@ -13651,11 +13741,11 @@ var alm_is_filtering = false;
 
         // Loading buttons.
         if (alm.rel === 'prev') {
-          var _alm32;
-          (_alm32 = alm) === null || _alm32 === void 0 || (_alm32 = _alm32.buttonPrev) === null || _alm32 === void 0 || (_alm32 = _alm32.classList) === null || _alm32 === void 0 || _alm32.remove('loading');
+          var _alm36;
+          (_alm36 = alm) === null || _alm36 === void 0 || (_alm36 = _alm36.buttonPrev) === null || _alm36 === void 0 || (_alm36 = _alm36.classList) === null || _alm36 === void 0 || _alm36.remove('loading');
         } else {
-          var _alm33;
-          (_alm33 = alm) === null || _alm33 === void 0 || (_alm33 = _alm33.button) === null || _alm33 === void 0 || (_alm33 = _alm33.classList) === null || _alm33 === void 0 || _alm33.remove('loading');
+          var _alm37;
+          (_alm37 = alm) === null || _alm37 === void 0 || (_alm37 = _alm37.button) === null || _alm37 === void 0 || (_alm37 = _alm37.classList) === null || _alm37 === void 0 || _alm37.remove('loading');
         }
         alm.AjaxLoadMore.triggerAddons(alm);
         if (!alm.addons.paging) {
@@ -13677,10 +13767,10 @@ var alm_is_filtering = false;
      * @since 4.1
      */
     alm.AjaxLoadMore.setLocalizedVar = function () {
-      var _alm34;
+      var _alm38;
       var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      if ((_alm34 = alm) !== null && _alm34 !== void 0 && _alm34.localize && name !== '' && value !== '') {
+      if ((_alm38 = alm) !== null && _alm38 !== void 0 && _alm38.localize && name !== '' && value !== '') {
         alm.localize[name] = value; // Set ALM localize var.
         window[alm.localized_var][name] = value; // Update vars.
       }
@@ -13692,7 +13782,7 @@ var alm_is_filtering = false;
      * @since 2.0
      */
     alm.AjaxLoadMore.init = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee12() {
-      var nextpage_pages, _alm35, nextpage_first, nextpage_total;
+      var nextpage_pages, _alm39, nextpage_first, nextpage_total;
       return ajax_load_more_regeneratorRuntime().wrap(function _callee12$(_context12) {
         while (1) switch (_context12.prev = _context12.next) {
           case 0:
@@ -13808,7 +13898,7 @@ var alm_is_filtering = false;
                 nextpage_pages = alm.listing.querySelectorAll('.alm-nextpage'); // All Next Page Items.
                 if (nextpage_pages) {
                   nextpage_first = nextpage_pages[0];
-                  nextpage_total = nextpage_first.dataset.totalPosts ? parseInt(nextpage_first.dataset.totalPosts) : (_alm35 = alm) === null || _alm35 === void 0 || (_alm35 = _alm35.localize) === null || _alm35 === void 0 ? void 0 : _alm35.total_posts; // Disable if last page loaded
+                  nextpage_total = nextpage_first.dataset.totalPosts ? parseInt(nextpage_first.dataset.totalPosts) : (_alm39 = alm) === null || _alm39 === void 0 || (_alm39 = _alm39.localize) === null || _alm39 === void 0 ? void 0 : _alm39.total_posts; // Disable if last page loaded
                   if (nextpage_pages.length === nextpage_total || parseInt(nextpage_first.dataset.page) === nextpage_total) {
                     alm.AjaxLoadMore.triggerDone();
                   }
@@ -13862,8 +13952,8 @@ var alm_is_filtering = false;
               //  Filters, Facets & Preloaded Facets
               if (alm.addons.preloaded && alm.addons.filters && alm.facets) {
                 if (typeof almFiltersFacets === 'function') {
-                  var _alm36;
-                  var facets = (_alm36 = alm) === null || _alm36 === void 0 || (_alm36 = _alm36.localize) === null || _alm36 === void 0 ? void 0 : _alm36.facets;
+                  var _alm40;
+                  var facets = (_alm40 = alm) === null || _alm40 === void 0 || (_alm40 = _alm40.localize) === null || _alm40 === void 0 ? void 0 : _alm40.facets;
                   if (facets) {
                     window.almFiltersFacets(facets);
                   }
@@ -13958,8 +14048,8 @@ var alm_is_filtering = false;
      * @since 2.7.0
      */
     window.almGetParentContainer = function () {
-      var _alm37;
-      return (_alm37 = alm) === null || _alm37 === void 0 ? void 0 : _alm37.listing;
+      var _alm41;
+      return (_alm41 = alm) === null || _alm41 === void 0 ? void 0 : _alm41.listing;
     };
 
     /**
@@ -13993,7 +14083,7 @@ var alm_is_filtering = false;
       alm.AjaxLoadMore.scrollSetup();
     }, 1000);
 
-    // Init Ajax Load More
+    // Init Ajax Load More.
     alm.AjaxLoadMore.init();
   };
 
@@ -14034,7 +14124,7 @@ var alm_is_filtering = false;
  */
 var filter = function filter() {
   var transition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'fade';
-  var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '200';
+  var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 200;
   var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   if (!transition || !speed || !data) {
     return false;

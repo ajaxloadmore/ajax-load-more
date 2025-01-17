@@ -26,5 +26,9 @@
     "ajax-load-more-layouts",
     "ajax-load-more-paging"
   ],
+  "usesContext": [
+    "queryId",
+    "query"
+  ],
   "render": "file:./render.php"
 }

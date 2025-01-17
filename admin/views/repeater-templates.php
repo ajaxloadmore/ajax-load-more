@@ -52,7 +52,8 @@ $alm_theme_repeaters = isset( $_GET['theme-repeaters'] ) ? true : false;
 							$id             = preg_replace( '/\\.[^.\\s]{3,4}$/', '', $link );
 
 							// Only display .php files files.
-							if ( 'php' === $file_extension ) {
+							$allowed = [ 'php', 'html' ];
+							if ( in_array( $file_extension, $allowed, true ) ) {
 								?>
 							<div class="row template" id="tr-<?php echo esc_html( $id ); ?>">
 								<h3 class="heading" tabindex="0"><?php echo basename( $file ); ?></h3>
@@ -218,8 +219,8 @@ $alm_theme_repeaters = isset( $_GET['theme-repeaters'] ) ? true : false;
 										global $wpdb;
 										$table_name = $wpdb->prefix . 'alm';
 										$row        = $wpdb->get_row( "SELECT * FROM $table_name WHERE repeaterType = 'default'" ); // Get first result only
-										$content    = ! empty ( $row ) && $row->repeaterDefault ? $row->repeaterDefault : '';
-									?>
+										$content    = ! empty( $row ) && $row->repeaterDefault ? $row->repeaterDefault : '';
+										?>
 									<p class="warning-callout notify missing-template" style="margin: 10px 0 20px;">
 										<?php esc_attr_e( 'This default ALM template is missing from the filesystem! Click the "Save Template" button to save the template.', 'ajax-load-more' ); ?>
 									</p>

@@ -9,7 +9,7 @@ import { filtersCreateParams } from './addons/filters';
 import { nextpageCreateParams } from './addons/next-page';
 import { pagingComplete, pagingCreateParams } from './addons/paging';
 import { preloadedCreateParams, setPreloadedParams } from './addons/preloaded';
-import { queryLoopCreateParams, queryLoopGetContent, queryLoopInit, queryloop, queryloopLoaded } from './addons/queryLoop';
+import { queryLoop, queryLoopCreateParams, queryLoopGetContent, queryLoopInit, queryLoopLoaded } from './addons/query-loop';
 import { createSEOOffset, seoCreateParams } from './addons/seo';
 import { singlepostsCreateParams, singlepostsHTML } from './addons/singleposts';
 import { wooCreateParams, wooGetContent, wooInit, wooReset, woocommerce, woocommerceLoaded } from './addons/woocommerce';
@@ -58,6 +58,8 @@ require('focus-options-polyfill');
 // Global filtering state.
 let alm_is_filtering = false;
 
+const isBlockEditor = document.body.classList.contains('wp-admin');
+
 // Start ALM
 (function () {
 	'use strict';
@@ -91,6 +93,7 @@ let alm_is_filtering = false;
 		alm.finished = false;
 		alm.timer = null;
 		alm.rel = 'next';
+		alm.defaults = {};
 
 		alm.ua = window.navigator.userAgent ? window.navigator.userAgent : ''; // Browser User Agent
 		alm.vendor = window.navigator.vendor ? window.navigator.vendor : ''; // Browser Vendor
@@ -149,6 +152,13 @@ let alm_is_filtering = false;
 			loading: alm?.listing?.dataset?.buttonLoadingLabel || null,
 			done: alm?.listing?.dataset?.buttonDoneLabel || null,
 		};
+		alm.prev_button_labels = {
+			default: alm?.listing?.dataset?.prevButtonLabel,
+			loading: alm?.listing?.dataset?.prevButtonLoadingLabel || null,
+			done: alm?.listing?.dataset?.prevButtonDoneLabel || null,
+		};
+
+		alm.urls = alm?.listing?.dataset?.urls === 'false' ? false : true;
 
 		alm.placeholder = alm.main.querySelector('.alm-placeholder') || false;
 
@@ -357,6 +367,9 @@ let alm_is_filtering = false;
 			if (!alm.addons.paging) {
 				if (alm.rel === 'prev') {
 					alm.buttonPrev.classList.add('loading');
+					if (alm.prev_button_labels.loading) {
+						alm.buttonPrev.innerHTML = alm.prev_button_labels.loading;
+					}
 				} else {
 					alm.button.classList.add('loading');
 					if (alm.button_labels.loading) {
@@ -658,8 +671,8 @@ let alm_is_filtering = false;
 							elementorLoaded(alm);
 						}
 						if (alm.addons.queryloop) {
-							await queryloop(temp, alm);
-							queryloopLoaded(alm);
+							await queryLoop(temp, alm);
+							queryLoopLoaded(alm);
 						}
 					})().catch((e) => {
 						if (alm.addons.woocommerce) {
@@ -737,7 +750,6 @@ let alm_is_filtering = false;
 								}
 							}
 						}
-
 						alm_is_filtering = false;
 					});
 					/**
@@ -1064,6 +1076,11 @@ let alm_is_filtering = false;
 				alm.buttonPrev.classList.add('done');
 				alm.buttonPrev.style.opacity = '0.5';
 				alm.buttonPrev.disabled = true;
+				if (alm.prev_button_labels.done) {
+					setTimeout(function () {
+						alm.buttonPrev.innerHTML = alm.prev_button_labels.done;
+					}, 75);
+				}
 			}
 
 			// almDonePrev Callback.
@@ -1084,6 +1101,9 @@ let alm_is_filtering = false;
 			if (alm.button && alm.button_labels.loading) {
 				alm.button.innerHTML = alm.button_labels.default;
 			}
+			if (alm.buttonPrev && alm.prev_button_labels.loading) {
+				alm.buttonPrev.innerHTML = alm.prev_button_labels.default;
+			}
 		};
 
 		/**
@@ -1093,6 +1113,10 @@ let alm_is_filtering = false;
 		 * @since 4.2.0
 		 */
 		alm.AjaxLoadMore.click = function (e) {
+			if (isBlockEditor && alm.addons.queryloop) {
+				return; //
+			}
+
 			const button = e.currentTarget || e.target;
 			alm.rel = 'next';
 			if (alm.pause === 'true') {
@@ -1625,7 +1649,7 @@ let alm_is_filtering = false;
 			alm.AjaxLoadMore.scrollSetup();
 		}, 1000);
 
-		// Init Ajax Load More
+		// Init Ajax Load More.
 		alm.AjaxLoadMore.init();
 	};
 
@@ -1663,7 +1687,7 @@ let alm_is_filtering = false;
  * @param {Object} data       Query data as an object.
  * @since 5.0
  */
-export const filter = function (transition = 'fade', speed = '200', data = '') {
+export const filter = function (transition = 'fade', speed = 200, data = '') {
 	if (!transition || !speed || !data) {
 		return false;
 	}

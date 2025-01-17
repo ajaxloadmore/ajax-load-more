@@ -7,15 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.1.4
+ * Version: 7.2.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-define( 'ALM_VERSION', '7.1.4' );
-define( 'ALM_RELEASE', 'December 4, 2024' );
+define( 'ALM_VERSION', '7.2.0' );
+define( 'ALM_RELEASE', 'January 17, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
@@ -97,6 +97,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		public function alm_includes() {
 			require_once ALM_PATH . 'core/functions.php'; // Load Core Functions.
 			require_once ALM_PATH . 'core/classes/class-alm-blocks.php'; // Load Block Class.
+			require_once ALM_PATH . 'core/classes/class-alm-preview.php'; // Load Preview Class.
 			require_once ALM_PATH . 'core/classes/class-alm-shortcode.php'; // Load Shortcode Class.
 			require_once ALM_PATH . 'core/classes/class-alm-woocommerce.php'; // Load Woocommerce Class.
 			require_once ALM_PATH . 'core/classes/class-alm-enqueue.php'; // Load Enqueue Class.
@@ -165,11 +166,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_PREV_POST_ITEM_NAME' ) ) {
 				define( 'ALM_PREV_POST_ITEM_NAME', '9686' );
 			}
+			if ( ! defined( 'ALM_QUERY_LOOP_ITEM_NAME' ) ) {
+				define( 'ALM_QUERY_LOOP_ITEM_NAME', '120900' );
+			}
 			if ( ! defined( 'ALM_SEO_ITEM_NAME' ) ) {
 				define( 'ALM_SEO_ITEM_NAME', '3482' );
-			}
-			if ( ! defined( 'ALM_TABS_ITEM_NAME' ) ) {
-				define( 'ALM_TABS_ITEM_NAME', '54855' );
 			}
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
@@ -187,8 +188,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				define( 'ALM_ELEMENTOR_ITEM_NAME', '70951' );
 			}
 			if ( ! defined( 'ALM_RESTAPI_ITEM_NAME' ) ) {
-				// Deprecated.
-				define( 'ALM_RESTAPI_ITEM_NAME', '17105' );
+				define( 'ALM_RESTAPI_ITEM_NAME', '17105' ); // Deprecated.
 			}
 		}
 
@@ -420,6 +420,15 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		}
 
 		/**
+		 * Get default previous button label.
+		 *
+		 * @since 7.0.0
+		 */
+		public static function alm_default_prev_button_label() {
+			return apply_filters( 'alm_prev_button_label', __( 'Load Previous', 'ajax-load-more' ) );
+		}
+
+		/**
 		 * The AjaxLoadMore shortcode.
 		 *
 		 * @param array $atts Shortcode attributes.
@@ -461,9 +470,9 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$query_type = isset( $params['query_type'] ) ? $params['query_type'] : 'standard'; // 'standard' or 'totalposts' - totalposts returns $alm_found_posts.
 
 			// Filters.
-			$is_filters        = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
-			$filters_target    = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
-			$filters_facets    = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
+			$is_filters     = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
+			$filters_target = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
+			$filters_facets = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
 
 			// Cache.
 			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false;
@@ -476,7 +485,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 			// Repeater Templates.
 			$repeater       = isset( $params['repeater'] ) ? sanitize_file_name( $params['repeater'] ) : 'default';
-			$type           = alm_get_repeater_type( $repeater );
 			$theme_repeater = isset( $params['theme_repeater'] ) ? sanitize_file_name( $params['theme_repeater'] ) : 'null';
 
 			// Post Parameters.
@@ -506,16 +514,16 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				$cta_pos            = (string) $cta_position_array[0];
 				$cta_pos            = $cta_pos !== 'after' ? 'before' : $cta_pos;
 				$cta_val            = (string) $cta_position_array[1];
-				$cta_repeater       = isset( $cta_data['cta_repeater'] ) ? $cta_data['cta_repeater'] : 'null';
-				$cta_theme_repeater = isset( $cta_data['cta_theme_repeater'] ) ? sanitize_file_name( $cta_data['cta_theme_repeater'] ) : 'null';
+				$cta_repeater       = isset( $cta_data['cta_repeater'] ) ? $cta_data['cta_repeater'] : '';
+				$cta_theme_repeater = isset( $cta_data['cta_theme_repeater'] ) ? sanitize_file_name( $cta_data['cta_theme_repeater'] ) : '';
 			}
 
 			// Single Post Add-on.
 			$single_post      = false;
 			$single_post_data = isset( $params['single_post'] ) ? $params['single_post'] : false;
 			if ( $single_post_data ) {
-				$single_post      = true;
-				$single_post_id   = isset( $single_post_data['id'] ) ? $single_post_data['id'] : '';
+				$single_post    = true;
+				$single_post_id = isset( $single_post_data['id'] ) ? $single_post_data['id'] : '';
 			}
 
 			// SEO Add-on.
@@ -585,9 +593,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 			if ( $query_type === 'totalposts' ) {
 				// Paging add-on.
-				wp_send_json( [
-					'totalposts' => $alm_total_posts,
-				] );
+				wp_send_json(
+					[
+						'totalposts' => $alm_total_posts,
+					]
+				);
 
 			} else {
 
@@ -623,7 +633,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 						}
 
 						// Load Repeater.
-						alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args, false );
+						alm_loop( $repeater, $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args, false );
 
 						// Call to Action [After].
 						if ( $cta && has_action( 'alm_cta_inc' ) && $cta_pos === 'after' && in_array( $alm_current, $cta_array ) ) { // phpcs:ignore
@@ -647,7 +657,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					// Get filter facet options.
 					$facets = [];
 					if ( $is_filters && $filters_target && $filters_facets && function_exists( 'alm_filters_get_facets' ) ) {
-						$facets = alm_filters_get_facets( $args, $filters_target );
+						$facets           = alm_filters_get_facets( $args, $filters_target );
 						$return['facets'] = $facets;
 					}
 

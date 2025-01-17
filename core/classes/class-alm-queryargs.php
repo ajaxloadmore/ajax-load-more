@@ -202,11 +202,11 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			// Taxonomy & Post Format.
 			// Both use tax_query, so we need to combine the queries.
 			if ( ! empty( $post_format ) || ! empty( $taxonomy ) ) {
-				$tax_query_total   = count( explode( ':', $taxonomy ) ); // Total $taxonomy objects.
 				$taxonomy          = explode( ':', $taxonomy ); // Convert to array.
 				$taxonomy_terms    = explode( ':', $taxonomy_terms ); // Convert to array.
 				$taxonomy_operator = explode( ':', $taxonomy_operator ); // Convert to array.
 				$taxonomy_children = explode( ':', $taxonomy_children ); // Convert to array.
+				$tax_query_total   = count( $taxonomy ); // Total $taxonomy objects.
 
 				if ( empty( $taxonomy ) ) {
 					// Post Format only.
@@ -235,7 +235,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 						$args['tax_query'][] = alm_get_taxonomy_query(
 							$taxonomy[ $i ],
 							$taxonomy_terms[ $i ],
-							$taxonomy_operator[ $i ],
+							isset( $taxonomy_operator[ $i ] ) ? $taxonomy_operator[ $i ] : 'IN',
 							isset( $taxonomy_children[ $i ] ) ? $taxonomy_children[ $i ] : true
 						);
 					}
@@ -244,13 +244,12 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 
 			// Meta Query.
 			if ( ! empty( $meta_key ) && isset( $meta_value ) || ! empty( $meta_key ) && $meta_compare !== 'IN' ) {
-
 				// Parse multiple meta query.
-				$meta_query_total = count( explode( ':', $meta_key ) ); // Total meta_query objects.
 				$meta_keys        = explode( ':', $meta_key ); // convert to array.
 				$meta_value       = explode( ':', $meta_value ); // convert to array.
 				$meta_compare     = explode( ':', $meta_compare ); // convert to array.
 				$meta_type        = explode( ':', $meta_type ); // convert to array.
+				$meta_query_total = count( $meta_keys ); // Total meta_query objects.
 
 				// Add the meta relation.
 

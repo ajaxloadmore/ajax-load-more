@@ -67,7 +67,6 @@ function alm_do_inline_css( $setting ) {
  * This function will return HTML of a looped item.
  *
  * @param string  $repeater        The repeater name.
- * @param string  $type            Type of template.
  * @param string  $theme_repeater  Theme repeater name.
  * @param string  $alm_found_posts Total posts found.
  * @param string  $alm_page        The page number.
@@ -78,7 +77,7 @@ function alm_do_inline_css( $setting ) {
  * @return string
  * @since 3.7
  */
-function alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts = '', $alm_page = '', $alm_item = '', $alm_current = '', $args = [], $ob = true ) {
+function alm_loop( $repeater, $theme_repeater, $alm_found_posts = '', $alm_page = '', $alm_item = '', $alm_current = '', $args = [], $ob = true ) {
 	if ( $ob ) { // If Output Buffer is true.
 		ob_start();
 	}
@@ -88,8 +87,8 @@ function alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts = '', $al
 		do_action( 'alm_get_theme_repeater', $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
 
 	} else {
-		// Standard Repeater Template.
-		$file = alm_get_current_repeater( $repeater, $type );
+		// Standard Template.
+		$file = alm_get_current_repeater( $repeater, alm_get_repeater_type( $repeater ) );
 		include $file;
 	}
 
@@ -111,9 +110,10 @@ function alm_loop( $repeater, $type, $theme_repeater, $alm_found_posts = '', $al
 function alm_get_current_repeater( $repeater, $type ) {
 	$template = $repeater;
 	$include  = '';
+
 	// $content = get_the_content(null, null, 8879);
 	// $new_html = preg_replace("/(^<div[^>]*>|<\/div>$)/i", "", $content);
-	//echo apply_filters( 'the_content', $new_html );
+	// echo apply_filters( 'the_content', $new_html );
 
 	if ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1.
@@ -156,8 +156,8 @@ function alm_get_current_repeater( $repeater, $type ) {
  * @since 2.5.0
  */
 function alm_get_default_repeater() {
-	$file         = null;
-	$dir = apply_filters( 'alm_template_path', 'alm_templates' );
+	$file = null;
+	$dir  = apply_filters( 'alm_template_path', 'alm_templates' );
 
 	// Allow user to load template from theme directory.
 
@@ -366,7 +366,25 @@ function alm_parse_meta_value( $meta_value, $meta_compare ) {
 }
 
 /**
- * Get type of repeater.
+ * Get the template type by the name.
+ * Note: The function is used to parse the new `template` and `cta_template` parameters to
+ * determine if the template is a theme repeater or a custom repeater.
+ *
+ * @since 7.2.0
+ * @param  string $template The template name.
+ * @return string           The template type.
+ */
+function alm_get_template_by_type( $template = '' ) {
+	// If template is a Theme Repeater.
+	if ( strpos( $template, '.php' ) || strpos( $template, '.html' ) ) {
+		return 'theme_repeater';
+	}
+	return 'repeater';
+}
+
+/**
+ * Get type of custom repeater template.
+ * Value should be 'default', 'repeater' or 'template_'.
  *
  * @since 2.9
  * @param string $repeater The Repeater Template name.

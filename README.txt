@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 7.1.4
+Stable tag: 7.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -260,7 +260,16 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.1.4 -  December 4, 2024 =
+= 7.2.0 - January 17, 2025 =
+* NEW: Added required updates for the new [Query Loop add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/).
+* NEW: Added new `alm_single_post_querystring` hook to remove the querystring from Single Post add-on URLs.
+* NEW: Added preview functionality for previewing an ALM instance while building a shortcode.
+* NEW: Added new `template` parameter to the core ALM shortcode. This new parameter will normalize the template selection and replace the `repeater` and `theme_repeater` parameters.
+* NEW: Added new ALM core parameters, `urls`, `prev_button_label`, `prev_button_loading_label`, and `prev_button_done_label`. These new parameters can be used in the near future with various add-ons.
+* UPDATE: Various admin UI/UX updates throughout plugin.
+* FIX: Fixed issue with Users extension showing mising license notice in admin.
+
+= 7.1.4 - December 4, 2024 =
 * UPDATE: Updated Axios HTTP library to latest version.
 * UPDATE: Added feature to re-save default Repeater Template if template was deleted from the filesystem.
 * UDPATE: Modified the `alm` db columns to match upcoming Templates add-on requirements.

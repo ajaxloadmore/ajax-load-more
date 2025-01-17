@@ -80,7 +80,6 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 				$query_args = apply_filters( 'alm_query_args_' . $params['id'], $query_args, $params['post_id'] );
 
 				$posts_per_page = $query_args['posts_per_page'];
-				$type           = alm_get_repeater_type( $params['repeater'] );
 
 				// Update Paged and offset.
 				$query_args['paged']  = $paged;
@@ -99,7 +98,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 						++$i;
 						$alm_current = $i;
 						$alm_item    = $query_args['offset'] + $i;
-						$output     .= alm_loop( $params['repeater'], $type, $params['theme_repeater'], $alm_found_posts, $alm_page, $alm_item, $alm_current, $query_args );
+						$output     .= alm_loop( $params['repeater'], $params['theme_repeater'], $alm_found_posts, $alm_page, $alm_item, $alm_current, $query_args );
 					endwhile;
 					wp_reset_postdata();
 
@@ -123,9 +122,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 		 */
 		public static function build_noscript_paging( $query = [], $filters = false, $permalink = '' ) {
 			// Set up query variables.
-			$paged          = empty( get_query_var( 'paged' ) ) ? 1 : get_query_var( 'paged' );
 			$numposts       = $query->found_posts;
-			$max_page       = $query->max_num_pages;
 			$posts_per_page = $query->query_vars['posts_per_page'];
 			$total          = ceil( $numposts / $posts_per_page );
 			$start_page     = 1;

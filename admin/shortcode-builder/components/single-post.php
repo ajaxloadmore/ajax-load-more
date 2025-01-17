@@ -33,11 +33,12 @@ if(has_action('alm_single_post_installed')){ ?>
 				<section>
    	         <div class="shortcode-builder--label">
    	            <h4><?php _e('Post ID', 'ajax-load-more'); ?></h4>
-   	   		 	<p><?php _e('The ID of the current single post.', 'ajax-load-more'); ?></p>
-   	   		 </div>
+   	   		 	<p><?php _e('The ID of the current post.', 'ajax-load-more'); ?></p>
+						<p><small><?php _e( '<strong>Note</strong>: Leave empty to default to the current post ID.' ) ;?></small></p>
+   	   		</div>
    	         <div class="shortcode-builder--fields">
    	            <div class="inner">
-   	               <input type="text" value="get_the_ID()" id="pp_id"  class="alm_element disabled-input" disabled="disabled">
+   	               <input type="text" value="" id="pp_id"  class="alm_element">
    	            </div>
    	         </div>
 		      </section>

@@ -187,31 +187,4 @@
 			}
 		}
 	}
-
-	p.cache-stats {
-		min-height: 38px;
-		line-height: 37px;
-		display: block;
-		padding: 0;
-		margin: 0;
-
-		span {
-			display: inline-block;
-			width: 38px;
-			height: 38px;
-			line-height: 36px;
-			text-align: center;
-			margin: 0 9px 0 0;
-			font-weight: 700;
-			font-size: 15px;
-			border-radius: 2px;
-			background: #a4a5e2;
-			background: linear-gradient(to bottom, #a4a5e2 0%, #9ea0d9 50%, #8d8fce 51%, #a4a5e2 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a4a5e2', endColorstr='#a4a5e2', GradientType=0);
-			border: 1px solid #8586be;
-			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-			color: #fff;
-			text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);
-		}
-	}
 }

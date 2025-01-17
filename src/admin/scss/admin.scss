@@ -4,6 +4,8 @@
 @import './libs/select2';
 @import './partials/alm-settings-feedback';
 @import './partials/alm-tabbed-wrapper';
+@import './partials/alm-status';
+@import './partials/alm-stats';
 @import './partials/builder-option-toggle';
 @import './partials/cache';
 @import './partials/codemirror';
@@ -115,15 +117,30 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 .ajax-load-more div.error,
 .ajax-load-more div.notice-success,
 .ajax-load-more div.notice-updated,
+.ajax-load-more div.notice-info,
 .ajax-load-more div.notice-error {
-	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 5px;
+	border-radius: 5px;
 	overflow: hidden;
-	padding: 10px 15px;
-	p {
-		margin: 10px 0;
+	padding: 15px !important;
+	&.is-dismissible {
+		padding: 7px 7px 7px 15px !important;
 	}
-	.notice-dismiss {
-		top: 2px;
+
+	p {
+		margin: 0;
+		width: 100%;
+		& svg {
+			width: 22px;
+			height: 22px;
+		}
+	}
+	button.notice-dismiss {
+		position: static !important;
+		margin-left: auto;
 	}
 }
 
@@ -138,10 +155,6 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	a.button {
 		position: static;
 		vertical-align: inherit !important;
-	}
-	button {
-		transform: translateY(-50%);
-		top: 50% !important;
 	}
 }
 
@@ -278,21 +291,11 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 .ajax-load-more.shortcode-builder .major-publishing-actions {
 	position: relative;
 }
-.ajax-load-more p.small.reset-shortcode-builder {
-	position: absolute;
-	right: 15px;
-	top: 50%;
-	transform: translateY(-45%);
-	text-align: right;
-	margin: 0;
-	padding: 0;
+.ajax-load-more button.reset-shortcode-builder {
 	display: none;
-	width: auto;
-	opacity: 1;
-	font-size: 12px;
-}
-.ajax-load-more p.small.reset-shortcode-builder a {
-	text-decoration: none;
+	margin-left: auto;
+	background-color: transparent !important;
+	border-color: transparent !important;
 }
 
 /* Expand Collapse Headings */
@@ -967,14 +970,12 @@ hr.indented {
 	top: -1px;
 	background: #fff;
 	border-radius: 100%;
-	width: 16px;
-	height: 16px;
+	width: 18px;
+	height: 18px;
 	text-align: center;
-	line-height: 16px;
-	box-shadow: 0 1px 1px #ccc;
-}
-.cta h3 .fa.tooltip {
-	top: 1px;
+	line-height: 18px;
+	box-shadow: 0 0 0 1px #efefef;
+	color: $blue_grey;
 }
 .ajax-load-more .section-title p span,
 .ajax-load-more.settings .form-table p.notify span {
@@ -1039,6 +1040,16 @@ hr.indented {
 	width: 100%;
 	display: block;
 	border-radius: $radius;
+	button {
+		all: unset;
+		color: #fff;
+		padding: 10px;
+		cursor: pointer;
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
 	textarea {
 		background-color: transparent !important;
 		resize: none !important;
@@ -1147,6 +1158,17 @@ hr.indented {
 	color: #666;
 	text-shadow: 1px 1px 0 #fff;
 	resize: none;
+}
+
+.ajax-load-more .alm-pre {
+	color: $purple;
+	display: inline-block;
+	border-radius: $radius;
+	background-color: $light_grey;
+	font-size: 12px;
+	line-height: 1.55;
+	padding: 1px 4px;
+	font-family: Consolas, monaco, monospace;
 }
 
 .ajax-load-more .form-table input[type='radio'],
@@ -1294,8 +1316,7 @@ hr.indented {
 		margin: 0 0 20px;
 		border-bottom: 1px solid $light_border;
 	}
-	h3.add-on-title,
-	.cnkt-sidebar h3 {
+	h3.add-on-title {
 		padding: 0 0 10px;
 		margin: 0 0 20px;
 		border-bottom: 1px solid $light_border;
@@ -1937,13 +1958,12 @@ span.cnkt-button.installed,
 	}
 
 	.alm-file-location:not(input) {
-		padding-top: 15px;
-		margin-top: 15px;
-		border-top: 1px solid $light_border;
+		padding-top: 10px;
 		input {
 			font-size: 11px;
 			font-family: Consolas, monaco, monospace;
 			width: 100%;
+			padding: 12px 15px;
 		}
 	}
 }
@@ -1966,16 +1986,6 @@ span.cnkt-button.installed,
 .ajax-load-more .cnkt-sidebar h3,
 .ajax-load-more .cnkt-sidebar h4 {
 	margin-top: 0;
-}
-.ajax-load-more .cnkt-sidebar h3 {
-	padding: 15px 0;
-	margin: 0;
-	display: block;
-	font-size: 15px;
-	text-transform: none;
-	border-bottom: 1px solid $light_border;
-	margin: 0 $padding;
-	font-weight: 600;
 }
 
 .ajax-load-more .cnkt-sidebar .item {
@@ -2117,46 +2127,6 @@ span.cnkt-button.installed,
 		img {
 			height: 48px;
 			width: 48px;
-		}
-	}
-}
-
-// Status indicator.
-.alm-status {
-	display: flex;
-	margin: 0 0 15px;
-	cursor: default;
-	span {
-		background-color: $light_grey;
-		padding: 0 10px 0 0;
-		line-height: 1;
-		border-radius: $radius;
-		overflow: hidden;
-		display: flex;
-		align-items: center;
-		font-weight: 500;
-		text-transform: uppercase;
-		font-size: 11px;
-		i {
-			padding: 10px 12px;
-			margin: 0 10px 0 0;
-			text-align: center;
-		}
-	}
-	&.success {
-		span {
-			i {
-				background-color: $green;
-				color: #fff;
-			}
-		}
-	}
-	&.failed {
-		span {
-			i {
-				background-color: $red;
-				color: #fff;
-			}
 		}
 	}
 }

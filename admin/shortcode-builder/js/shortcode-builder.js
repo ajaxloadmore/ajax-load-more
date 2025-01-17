@@ -3,7 +3,8 @@ jQuery(document).ready(function ($) {
 
 	var _alm = {},
 		output_div = $('.ajax-load-more.shortcode-builder #shortcode_output'),
-		output = '[ajax_load_more]';
+		output = '[ajax_load_more]',
+		previewBtn = document.querySelector('#shortcode-preview');
 
 	// Init the shortcode output.
 	output_div.text(output);
@@ -29,7 +30,7 @@ jQuery(document).ready(function ($) {
 		// Default Select2
 		$('.row select, .cnkt-main select, select.jump-menu').not('.multiple').select2();
 
-		// multiple
+		// Multiple
 		$('.ajax-load-more .categories select.multiple').select2();
 		$('.ajax-load-more .tags select.multiple').select2();
 		$('.ajax-load-more .authors select.multiple').select2();
@@ -220,9 +221,6 @@ jQuery(document).ready(function ($) {
 
 		var cache = $('#alm-cache input[name=cache]:checked').val();
 		if (cache !== 'false' && cache !== undefined) {
-			if ($('input#cache-id').val() === '') {
-				_alm.generateUniqueID(10); // Generate unique ID on first load
-			}
 			$('.cache_id').slideDown(250, 'alm_easeInOutQuad');
 			output += ' cache="' + cache + '"';
 			var cache_id = $('input#cache-id').val();
@@ -241,22 +239,15 @@ jQuery(document).ready(function ($) {
 		var cta = $('input[name=cta]:checked', cta_container).val();
 		var cta_position = $('input[name=cta-position]', cta_container).val();
 		var cta_before_after = $('select[name=cta-before-after]', cta_container).val();
-		var cta_repeater = $('select[name=cta-repeater-select]', cta_container).val();
-		var cta_theme_repeater = $('select[name=theme-repeater-select]', cta_container).val();
+		var cta_template = $('select[name=cta-template-select]', cta_container).val();
 
 		if (cta !== 'false' && cta !== undefined) {
 			$('.cta_template_wrap').slideDown(250, 'alm_easeInOutQuad');
-			// Standard repeater
-			if (cta_repeater !== '' && cta_repeater !== undefined && cta_position !== '' && cta_position !== null) {
+			// Get template.
+			if (cta_template !== '' && cta_template !== undefined && cta_position !== '' && cta_position !== null) {
 				output += ' cta="' + cta + '"';
 				output += ' cta_position="' + cta_before_after + ':' + cta_position + '"';
-				output += ' cta_repeater="' + cta_repeater + '"';
-			}
-			// Theme repeater
-			if (cta_theme_repeater !== '' && cta_theme_repeater !== undefined && cta_position !== '' && cta_position !== null) {
-				output += ' cta="' + cta + '"';
-				output += ' cta_position="' + cta_before_after + ':' + cta_position + '"';
-				output += ' cta_theme_repeater="' + cta_theme_repeater + '"';
+				output += ' cta_template="' + cta_template + '"';
 			}
 			$('#sequence-update').text(cta_position);
 			$('#sequence-update-before-after').text(cta_before_after);
@@ -286,7 +277,9 @@ jQuery(document).ready(function ($) {
 			}
 
 			output += ' comments="' + comments + '"';
-			output += ' comments_post_id="\'.' + comments_post_id + '.\'"';
+			if (comments_post_id) {
+				output += ' comments_post_id="' + comments_post_id + '"';
+			}
 
 			if (comments_type !== 'comment') output += ' comments_type="' + comments_type + '"';
 
@@ -294,7 +287,7 @@ jQuery(document).ready(function ($) {
 
 			if (comments_style !== 'ol') output += ' comments_style="' + comments_style + '"';
 
-			if (comments_template !== 'none') output += ' comments_template="' + comments_template + '"';
+			if (comments_template !== 'none' && comments_template !== 'null') output += ' comments_template="' + comments_template + '"';
 
 			if (comments_callback !== '') output += ' comments_callback="' + comments_callback + '"';
 
@@ -547,7 +540,9 @@ jQuery(document).ready(function ($) {
 			$('#pp-term-exclude').attr('disabled', false);
 
 			output += ' single_post="' + previous + '"';
-			output += ' single_post_id="\'.' + pp_id + '.\'"';
+			if (pp_id) {
+				output += ' single_post_id="' + pp_id + '"';
+			}
 
 			if (pp_order === '') {
 				output += ' single_post_order="previous"';
@@ -699,15 +694,9 @@ jQuery(document).ready(function ($) {
 		// - Repeater Templates
 		// ---------------------------
 
-		var repeater = $('#alm-repeaters select[name=repeater-select]').val(),
-			theme_repeater = $('#alm-repeaters .select-theme-repeater select[name=theme-repeater-select]').val();
-
-		if (theme_repeater !== 'null' && theme_repeater !== '' && theme_repeater !== undefined) {
-			output += ' theme_repeater="' + theme_repeater + '"';
-		} else {
-			if (repeater !== '' && repeater !== undefined && repeater !== 'default') {
-				output += ' repeater="' + repeater + '"';
-			}
+		var template = $('#alm-template select[name=template-select]').val();
+		if (template && template !== 'default') {
+			output += ' template="' + template + '"';
 		}
 
 		// ---------------------------
@@ -1354,8 +1343,21 @@ jQuery(document).ready(function ($) {
 		output += ']'; //Close shortcode
 		output_div.text(output);
 
-		if (output !== '[ajax_load_more]') $('.reset-shortcode-builder').show();
-		else $('.reset-shortcode-builder').hide();
+		// Preview button.
+		if (previous === 'true' || nextpage === 'true') {
+			previewBtn.style.display = 'none';
+		} else {
+			previewBtn.removeAttribute('style');
+		}
+
+		var previewBaseUrl = previewBtn.dataset.homeUrl || '/';
+		previewBtn.href = previewBaseUrl + '?alm_preview=' + encodeURIComponent(output);
+
+		if (output !== '[ajax_load_more]') {
+			$('.reset-shortcode-builder').show();
+		} else {
+			$('.reset-shortcode-builder').hide();
+		}
 	};
 
 	/*
@@ -1595,7 +1597,7 @@ jQuery(document).ready(function ($) {
 	};
 
 	// Reset shortcode builder.
-	$(document).on('click', '.reset-shortcode-builder a', function () {
+	$(document).on('click', '.reset-shortcode-builder', function () {
 		$('#alm-shortcode-builder-form').trigger('reset');
 		_alm.reset_select2();
 		_alm.buildShortcode();
@@ -1605,11 +1607,12 @@ jQuery(document).ready(function ($) {
 	_alm.generateUniqueID = function (length, el) {
 		var id = Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1));
 		$(el).val('alm_' + id);
+		_alm.buildShortcode();
 	};
 
 	// Option toggle click events.
 	$('.builder-option-toggle--buttons button').on('click', function () {
-		var siblings = $(this).siblings('button').removeClass('active');
+		$(this).siblings('button').removeClass('active');
 		$(this).addClass('active');
 		_alm.buildShortcode();
 	});
