@@ -33,14 +33,17 @@ Ajax Load More is compatible for endless scrolling with popular eCommerce plugin
 
 Check out the **[website](https://connekthq.com/plugins/ajax-load-more/)** for more information on the features and functionality of Ajax Load More.
 
+### What Makes Ajax Load More Different?
+
+Ajax Load More differs from the other WordPress infinite scroll plugins because with ALM, you create the query for displaying the data. This gives you full control over the content you are loading and displaying to your users.
+
 ### What's New
 
+-  **[Query Loop](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/)** - Enable infinite scroll or load more functionality for the WordPress Query Loop block.
 -  **[Pro Bundle](https://connekthq.com/plugins/ajax-load-more/pro/)** - Access to all premium Ajax Load More add-ons in a single installation.
 -  **[Filters Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/filters/)** - The Filters add-on provides front-end and admin functionality for building and managing Ajax based filters.
--  **[Elementor Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/)** - Infinite scroll Elementor Posts Widget and WooCommerce widget content with Ajax Load More.
--  **[WooCommerce Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/woocommerce/)** - Infinite scroll WooCommerce products without updating a line of template code.
+-  **[Next Page Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/)** - Infinite scroll multi-page WordPress content with Ajax Load More.
 -  **[Advanced Custom Fields](https://connekthq.com/plugins/ajax-load-more/examples/advanced-custom-fields/)** - Compatibility and integration added for infinite scrolling Flexible Content, Gallery, Relationship and Repeater fields for Advanced Custom Fields.
--  **[Masonry](https://connekthq.com/plugins/ajax-load-more/examples/masonry/)** - Built-in support and functionality for Masonry layouts.
 -  **[Progress Bars](https://connekthq.com/plugins/ajax-load-more/examples/progress-bar/)** - Display a Progress Bar load indicator with each Ajax request.
 -  **[Scroll Container](https://connekthq.com/plugins/ajax-load-more/examples/scroll-container/)** - Constraining infinite scroll to a parent container.
 
@@ -53,12 +56,10 @@ Check out the examples below:
 -  [Standard Posts](https://connekthq.com/plugins/ajax-load-more/examples/default/)
 -  [Custom Post Types](https://connekthq.com/plugins/ajax-load-more/examples/masonry/)
 -  [Pages](https://connekthq.com/plugins/ajax-load-more/examples/search-results/)
--  [Multipage Posts & Pages](https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/next-page-default/) \*
--  [Single Posts](https://connekthq.com/ajax-load-more-posts/alm-post-example/) \*
--  [Comments](http://examples.connekthq.com/alm-comments/example-post/) \*
+-  [Multipage Posts & Pages](https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/next-page-default/)
+-  [Single Posts](https://connekthq.com/ajax-load-more-posts/alm-post-example/)
+-  [Comments](http://examples.connekthq.com/alm-comments/example-post/)
 -  [Advanced Custom Fields](https://connekthq.com/plugins/ajax-load-more/examples/advanced-custom-fields/)
-
-_*Add-on required_
 
 ### Parameters
 
