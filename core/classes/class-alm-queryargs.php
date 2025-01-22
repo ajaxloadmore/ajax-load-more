@@ -73,10 +73,9 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$day   = isset( $a['day'] ) ? $a['day'] : '';
 
 			// Custom Fields.
-			$sort_key   = isset( $a['sort_key'] ) ? $a['sort_key'] : '';
-			$meta_key   = isset( $a['meta_key'] ) ? $a['meta_key'] : '';
-			$meta_value = isset( $a['meta_value'] ) ? $a['meta_value'] : '';
-
+			$sort_key     = isset( $a['sort_key'] ) ? $a['sort_key'] : '';
+			$meta_key     = isset( $a['meta_key'] ) ? $a['meta_key'] : '';
+			$meta_value   = isset( $a['meta_value'] ) ? $a['meta_value'] : '';
 			$meta_compare = isset( $a['meta_compare'] ) ? $a['meta_compare'] : '';
 			$meta_compare = empty( $meta_compare ) ? 'IN' : $meta_compare;
 
@@ -252,7 +251,6 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 				$meta_query_total = count( $meta_keys ); // Total meta_query objects.
 
 				// Add the meta relation.
-
 				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$args['meta_query'] = [
 					'relation' => $meta_relation,
@@ -260,13 +258,15 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 
 				// Loop and build the Meta Query.
 				for ( $i = 0; $i < $meta_query_total; $i++ ) {
-					$meta_array = [
-						'key'     => isset( $meta_keys[ $i ] ) ? $meta_keys[ $i ] : '',
-						'value'   => isset( $meta_value[ $i ] ) ? $meta_value[ $i ] : '',
-						'compare' => isset( $meta_compare[ $i ] ) ? $meta_compare[ $i ] : 'IN',
-						'type'    => isset( $meta_type[ $i ] ) ? $meta_type[ $i ] : 'CHAR',
-					];
-					$args['meta_query'][ alm_create_meta_clause( $meta_keys[ $i ] ) ] = alm_get_meta_query( $meta_array );
+					if ( isset( $meta_keys[ $i ] ) && isset( $meta_value[ $i ] ) ) {
+						$meta_array = [
+							'key'     => isset( $meta_keys[ $i ] ) ? $meta_keys[ $i ] : '',
+							'value'   => isset( $meta_value[ $i ] ) ? $meta_value[ $i ] : '',
+							'compare' => isset( $meta_compare[ $i ] ) ? $meta_compare[ $i ] : 'IN',
+							'type'    => isset( $meta_type[ $i ] ) ? $meta_type[ $i ] : 'CHAR',
+						];
+						$args['meta_query'][ alm_create_meta_clause( $meta_keys[ $i ] ) ] = alm_get_meta_query( $meta_array );
+					}
 				}
 			}
 
