@@ -25,11 +25,9 @@ function alm_license_activation() {
 		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) );
 	}
 
-	$nonce   = $form_data['nonce'];
 	$type    = $form_data['type']; // activate OR deactivate.
 	$item_id = $form_data['item'];
 	$license = $form_data['license'];
-	$url     = $form_data['url'];
 	$upgrade = $form_data['upgrade'];
 	$status  = $form_data['status'];
 	$key     = $form_data['key'];

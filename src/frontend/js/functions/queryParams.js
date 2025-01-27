@@ -136,6 +136,18 @@ export function getAjaxParams(alm, queryType) {
 	if (alm.listing.dataset.metaType) {
 		data.meta_type = alm.listing.dataset.metaType;
 	}
+	if (alm.listing.dataset.dateQueryAfter) {
+		data.date_query_after = alm.listing.dataset.dateQueryAfter;
+	}
+	if (alm.listing.dataset.dateQueryBefore) {
+		data.date_query_before = alm.listing.dataset.dateQueryBefore;
+	}
+	if (alm.listing.dataset.dateQueryInclusive) {
+		data.date_query_inclusive = alm.listing.dataset.dateQueryInclusive;
+	}
+	if (alm.listing.dataset.dateQueryRelation) {
+		data.date_query_relation = alm.listing.dataset.dateQueryRelation;
+	}
 	if (alm.listing.dataset.author) {
 		data.author = alm.listing.dataset.author;
 	}
@@ -299,6 +311,10 @@ export function getRestAPIParams(alm) {
 		meta_compare: alm.listing.dataset.metaCompare,
 		meta_relation: alm.listing.dataset.metaRelation,
 		meta_type: alm.listing.dataset.metaType,
+		date_query_after: alm.listing.dataset.dateQueryAfter,
+		date_query_before: alm.listing.dataset.dateQueryBefore,
+		date_query_inclusive: alm.listing.dataset.dateQueryInclusive,
+		date_query_relation: alm.listing.dataset.dateQueryRelation,
 		author: alm.listing.dataset.author,
 		year: alm.listing.dataset.year,
 		month: alm.listing.dataset.month,

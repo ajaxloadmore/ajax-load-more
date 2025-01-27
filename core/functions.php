@@ -201,6 +201,38 @@ function alm_is_valid_path( $path ) {
 }
 
 /**
+ * Build and parse a date query.
+ *
+ * @param string $param The date query parameter.
+ * @param array  $data  The date query data.
+ * @param array  $args  The WP_Query args.
+ * @return array           Modified args.
+ */
+function alm_parse_date_query_param( $param, $data, $args ) {
+	$data = explode( ';', $data );
+	if ( ! $data ) {
+		return $args;
+	}
+
+	// Loop each date query.
+	foreach ( $data as $value ) {
+		$value = str_contains( $value, ':' ) ? explode( ':', $value ) : $value;
+
+		if ( ! is_array( $value ) ) {
+			// Not array, use time as string.
+			$args['date_query'][][ $param ] = $value;
+		} elseif ( isset( $value[0] ) ) {
+				$args['date_query'][][ $param ] = [
+					'year'  => $value[0],
+					'month' => isset( $value[1] ) && $value[1] ? $value[1] : '01',
+					'day'   => isset( $value[2] ) && $value[2] ? $value[2] : '01',
+				];
+		}
+	}
+	return $args;
+}
+
+/**
  * Query by post format.
  *
  * @since 2.5.0

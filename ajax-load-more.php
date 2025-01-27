@@ -14,6 +14,14 @@
  * @package AjaxLoadMore
  */
 
+/*
+* NEW: Added support for Date Query in WP_Query with `date_query_before` and `date_query_after` parameters.
+
+
+// It supports strtotime formats.
+// e.g. [ajax_load_more post_type="post" date_query_before="-5 Years" date_query_after="yesterday"]
+*/
+
 define( 'ALM_VERSION', '7.2.0.1' );
 define( 'ALM_RELEASE', 'January 22, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
