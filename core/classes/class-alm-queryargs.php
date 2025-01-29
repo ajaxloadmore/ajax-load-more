@@ -86,9 +86,11 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$meta_relation = empty( $meta_relation ) || $facets ? 'AND' : $meta_relation;
 
 			// Date Query.
-			$date_query_after     = isset( $a['date_query_after'] ) ? $a['date_query_after'] : '';
+			$date_query           = isset( $a['date_query'] ) ? $a['date_query'] : '';
 			$date_query_before    = isset( $a['date_query_before'] ) ? $a['date_query_before'] : '';
+			$date_query_after     = isset( $a['date_query_after'] ) ? $a['date_query_after'] : '';
 			$date_query_inclusive = isset( $a['date_query_inclusive'] ) ? $a['date_query_inclusive'] : '';
+			$date_query_compare   = isset( $a['date_query_compare'] ) ? $a['date_query_compare'] : '';
 			$date_query_relation  = isset( $a['date_query_relation'] ) ? $a['date_query_relation'] : '';
 
 			// Search.
@@ -277,18 +279,23 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			}
 
 			// Date Query.
-			if ( $date_query_after || $date_query_before ) {
-				$args['date_query'] = [
-					'relation' => empty( $date_query_relation ) ? 'AND' : $date_query_relation,
-				];
-				if ( $date_query_before ) {
-					$args = alm_parse_date_query_param( 'before', $date_query_before, $args );
+			if ( $date_query || $date_query_after || $date_query_before ) {
+				$args['date_query'] = [];
+				if ( ! empty( $date_query_relation ) ) {
+					$args['date_query']['relation'] = $date_query_relation;
 				}
-				if ( $date_query_after ) {
-					$args = alm_parse_date_query_param( 'after', $date_query_after, $args );
+				if ( $date_query_compare ) {
+					$args['date_query']['compare'] = $date_query_compare;
 				}
-				if ( $date_query_inclusive ) {
-					$args['date_query']['inclusive'] = $date_query_inclusive === 'true';
+
+				// Standard Date Query.
+				if ( $date_query ) {
+					$args = alm_get_date_query( $date_query, $args );
+				}
+
+				// Date Query (Before/After).
+				if ( $date_query_before || $date_query_after ) {
+					$args = alm_get_date_query_before_after( $args, $date_query_before, $date_query_after, $date_query_inclusive );
 				}
 			}
 

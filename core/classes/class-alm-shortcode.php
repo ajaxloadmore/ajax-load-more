@@ -192,8 +192,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'meta_compare'                 => '',
 						'meta_relation'                => '',
 						'meta_type'                    => '',
-						'date_query_after'             => '',
+						'date_query'                   => '',
 						'date_query_before'            => '',
+						'date_query_after'             => '',
 						'date_query_compare'           => '',
 						'date_query_inclusive'         => '',
 						'date_query_relation'          => '',
@@ -829,8 +830,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				'year'                      => $year,
 				'month'                     => $month,
 				'day'                       => $day,
-				'date_query_after'          => $date_query_after,
+				'date_query'                => $date_query,
 				'date_query_before'         => $date_query_before,
+				'date_query_after'          => $date_query_after,
 				'date_query_compare'        => $date_query_compare,
 				'date_query_inclusive'      => $date_query_inclusive,
 				'date_query_relation'       => $date_query_relation,
@@ -1190,6 +1192,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			// Date Query.
 			$ajaxloadmore .= $date_query_after ? ' data-date-query-after="' . esc_attr( $date_query_after ) . '"' : '';
 			$ajaxloadmore .= $date_query_before ? ' data-date-query-before="' . esc_attr( $date_query_before ) . '"' : '';
+			$ajaxloadmore .= $date_query_inclusive ? ' data-date-query-inclusive="' . esc_attr( $date_query_inclusive ) . '"' : '';
 			$ajaxloadmore .= $date_query_compare ? ' data-date-query-compare="' . esc_attr( $date_query_compare ) . '"' : '';
 			$ajaxloadmore .= $date_query_relation ? ' data-date-query-relation="' . esc_attr( $date_query_relation ) . '"' : '';
 
