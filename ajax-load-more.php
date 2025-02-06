@@ -7,29 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.2.0.1
+ * Version: 7.3.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-/*
-* NEW: Added support for Date Query in WP_Query with `date_query_before` and `date_query_after` parameters.
-
-
-NOTES:
-- It supports strtotime formats.
-  https://www.php.net/manual/en/function.strtotime.php
-  e.g. [ajax_load_more post_type="post" date_query_before="-5 Years" date_query_after="yesterday"]
-- date_query is parsed into year, month, day, hour, minute, second, week based on the shortocde params.
-  e.g. date_query="2017-06-20-12-01-01" will be parsed into year=2017, month=06, day=20, hour=12, minute=01, second=01
-
-
-*/
-
-define( 'ALM_VERSION', '7.2.0.1' );
-define( 'ALM_RELEASE', 'January 22, 2025' );
+define( 'ALM_VERSION', '7.3.0' );
+define( 'ALM_RELEASE', 'February 6, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.

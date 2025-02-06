@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 7.2.0.1
+Stable tag: 7.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,10 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.3.0 - February 6, 2025 =
+* NEW: Added Date Query support with `date_query`, `date_query_before` and `date_query_after` parameters.
+* UPDATE: Various admin UI/UX updates and code cleanup throughout plugin.
 
 = 7.2.0.1 - January 22, 2025 =
 * HOTFIX: Fixed potential issue with the parsing of `meta_query` and `tax_query` parameters when using Preloaded add-on.
