@@ -18,8 +18,14 @@
 * NEW: Added support for Date Query in WP_Query with `date_query_before` and `date_query_after` parameters.
 
 
-// It supports strtotime formats.
-// e.g. [ajax_load_more post_type="post" date_query_before="-5 Years" date_query_after="yesterday"]
+NOTES:
+- It supports strtotime formats.
+  https://www.php.net/manual/en/function.strtotime.php
+  e.g. [ajax_load_more post_type="post" date_query_before="-5 Years" date_query_after="yesterday"]
+- date_query is parsed into year, month, day, hour, minute, second, week based on the shortocde params.
+  e.g. date_query="2017-06-20-12-01-01" will be parsed into year=2017, month=06, day=20, hour=12, minute=01, second=01
+
+
 */
 
 define( 'ALM_VERSION', '7.2.0.1' );

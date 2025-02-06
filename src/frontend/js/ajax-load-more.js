@@ -418,7 +418,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 * @since 5.0.0
 		 */
 		alm.AjaxLoadMore.adminajax = async function (params, type) {
-			let { ajaxurl } = alm_localize; // Get Ajax URL
+			let { ajaxurl: url } = alm_localize; // Get Ajax URL
 			const { cache_slug = '' } = params; // Deconstruct query params.
 
 			/**
@@ -426,47 +426,36 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			 * If `single_post_target`, adjust the Ajax URL to the post URL.
 			 */
 			if (alm.addons.single_post && alm.addons.single_post_target) {
-				ajaxurl = `${alm.addons.single_post_permalink}?id=${alm.addons.single_post_id}&alm_page=${parseInt(alm.page) + 1}`;
+				url = `${alm.addons.single_post_permalink}?id=${alm.addons.single_post_id}&alm_page=${parseInt(alm.page) + 1}`;
 				params = '';
 			}
 
 			// Query Loop || WooCommerce || Elementor.
 			if (alm.addons.queryloop || alm.addons.woocommerce || (alm.addons.elementor && alm.addons.elementor_type === 'posts')) {
-				ajaxurl = getButtonURL(alm, alm.rel);
+				url = getButtonURL(alm, alm.rel);
 				params = '';
 			}
 
-			// Send HTTP request via axios.
+			// HTTP request via axios.
 			const data = await axios
-				.get(ajaxurl, { params })
+				.get(url, { params })
 				.then(function (response) {
 					if (alm.addons.single_post && alm.addons.single_post_target) {
-						// Single Posts
-						return singlepostsHTML(alm, response, cache_slug);
+						return singlepostsHTML(alm, response, cache_slug); // Single Posts
 					} else if (alm.addons.woocommerce) {
-						// WooCommerce.
-						return wooGetContent(alm, ajaxurl, response, cache_slug);
+						return wooGetContent(alm, url, response, cache_slug); // WooCommerce.
 					} else if (alm.addons.elementor) {
-						// Elementor
-						return elementorGetContent(alm, ajaxurl, response, cache_slug);
+						return elementorGetContent(alm, url, response, cache_slug); // Elementor
 					} else if (alm.addons.queryloop) {
-						// Query Loop
-						return queryLoopGetContent(alm, ajaxurl, response, cache_slug);
+						return queryLoopGetContent(alm, url, response, cache_slug); // Query Loop
 					}
-
-					// Standard ALM - Get data from response.
-					return response.data;
+					return response.data; // Standard ALM.
 				})
 				.catch(function (error) {
-					// Error
 					alm.AjaxLoadMore.error(error, 'adminajax');
 				});
 
 			switch (type) {
-				case 'standard':
-					alm.AjaxLoadMore.render(data);
-					break;
-
 				case 'totalposts':
 				case 'totalpages':
 					if (alm.addons.paging && alm.addons.nextpage && typeof almBuildPagination === 'function') {
@@ -477,6 +466,10 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 							window.almBuildPagination(data.totalposts, alm);
 						}
 					}
+					break;
+
+				default:
+					alm.AjaxLoadMore.render(data);
 					break;
 			}
 		};

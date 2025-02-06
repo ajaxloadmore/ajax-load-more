@@ -1190,6 +1190,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$ajaxloadmore .= $day ? ' data-day="' . esc_attr( $day ) . '"' : '';
 
 			// Date Query.
+			$ajaxloadmore .= $date_query ? ' data-date-query="' . esc_attr( $date_query ) . '"' : '';
 			$ajaxloadmore .= $date_query_after ? ' data-date-query-after="' . esc_attr( $date_query_after ) . '"' : '';
 			$ajaxloadmore .= $date_query_before ? ' data-date-query-before="' . esc_attr( $date_query_before ) . '"' : '';
 			$ajaxloadmore .= $date_query_inclusive ? ' data-date-query-inclusive="' . esc_attr( $date_query_inclusive ) . '"' : '';
