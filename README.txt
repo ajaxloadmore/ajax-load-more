@@ -63,9 +63,9 @@ Check out the examples below:
 
 ### Parameters
 
-Ajax Load More accepts a variety of query and styling parameters that are passed to WordPress via shortcode or [PHP function](https://connekthq.com/plugins/ajax-load-more/docs/implementation-methods).
+Ajax Load More accepts a variety of WordPress query and display parameters that are passed to WordPress via shortcode or [PHP function](https://connekthq.com/plugins/ajax-load-more/docs/implementation-methods).
 
-These parameters allow you to customize the content of your infinite scroll by selecting query parameters such as Post Types, Taxonomies, Categories, Tags, etc… you can also control interactive properties such as button labels, scrolling options and transition styles.
+These parameters allow you to customize the content of the infinite scroll experience by selecting query parameters such as Post Types, Taxonomies, Categories, Tags, Dates, etc… you can also control interactive properties such as button labels, scrolling options and transition styles.
 
 &rarr; [View Parameters](https://connekthq.com/plugins/ajax-load-more/docs/shortcode-parameters/)
 
