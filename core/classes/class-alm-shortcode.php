@@ -78,7 +78,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$atts = $default_atts ? array_merge( $default_atts, $atts ) : $atts;
 
 			// Extact shortcode arrtibutes to variables.
-			// phpcs:disable
 			extract(
 				shortcode_atts(
 					[
@@ -164,7 +163,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'preloaded_amount'             => '5',
 						'seo'                          => 'false',
 						'seo_offset'                   => false,
-						'template' 						    => '',
+						'template'                     => '',
 						'repeater'                     => 'default', // Deprecated
 						'theme_repeater'               => 'null', // Deprecated
 						'cta'                          => false,
@@ -187,12 +186,18 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'taxonomy_operator'            => '',
 						'taxonomy_relation'            => '',
 						'taxonomy_include_children'    => '',
-						'sort_key'							 => '',
+						'sort_key'                     => '',
 						'meta_key'                     => '',
 						'meta_value'                   => '',
 						'meta_compare'                 => '',
 						'meta_relation'                => '',
 						'meta_type'                    => '',
+						'date_query'                   => '',
+						'date_query_before'            => '',
+						'date_query_after'             => '',
+						'date_query_compare'           => '',
+						'date_query_inclusive'         => '',
+						'date_query_relation'          => '',
 						'year'                         => '',
 						'month'                        => '',
 						'day'                          => '',
@@ -216,7 +221,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'pause'                        => 'false',
 						'destroy_after'                => '',
 						'transition'                   => 'fade',
-						'transition_delay'             => "0",
+						'transition_delay'             => '0',
 						'transition_container_classes' => '',
 						'masonry_selector'             => '',
 						'masonry_columnwidth'          => '',
@@ -242,7 +247,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'no_results_text'              => '',
 						'placeholder'                  => '',
 						'lazy_images'                  => false,
-						'urls'      					    => 'true',
+						'urls'                         => 'true',
 						'archive'                      => false,
 						'woocommerce'                  => false,
 						'elementor'                    => false,
@@ -257,7 +262,6 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 					$atts
 				)
 			);
-			// phpcs:enable
 
 			$id   = sanitize_key( $id );
 			$vars = self::alm_strip_tags( $vars );
@@ -826,6 +830,12 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				'year'                      => $year,
 				'month'                     => $month,
 				'day'                       => $day,
+				'date_query'                => $date_query,
+				'date_query_before'         => $date_query_before,
+				'date_query_after'          => $date_query_after,
+				'date_query_compare'        => $date_query_compare,
+				'date_query_inclusive'      => $date_query_inclusive,
+				'date_query_relation'       => $date_query_relation,
 				'author'                    => $author,
 				'post__in'                  => $post__in,
 				'post__not_in'              => $post__not_in,
@@ -1178,6 +1188,14 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			$ajaxloadmore .= $year ? ' data-year="' . esc_attr( $year ) . '"' : '';
 			$ajaxloadmore .= $month ? ' data-month="' . esc_attr( $month ) . '"' : '';
 			$ajaxloadmore .= $day ? ' data-day="' . esc_attr( $day ) . '"' : '';
+
+			// Date Query.
+			$ajaxloadmore .= $date_query ? ' data-date-query="' . esc_attr( $date_query ) . '"' : '';
+			$ajaxloadmore .= $date_query_after ? ' data-date-query-after="' . esc_attr( $date_query_after ) . '"' : '';
+			$ajaxloadmore .= $date_query_before ? ' data-date-query-before="' . esc_attr( $date_query_before ) . '"' : '';
+			$ajaxloadmore .= $date_query_inclusive ? ' data-date-query-inclusive="' . esc_attr( $date_query_inclusive ) . '"' : '';
+			$ajaxloadmore .= $date_query_compare ? ' data-date-query-compare="' . esc_attr( $date_query_compare ) . '"' : '';
+			$ajaxloadmore .= $date_query_relation ? ' data-date-query-relation="' . esc_attr( $date_query_relation ) . '"' : '';
 
 			// Author.
 			$ajaxloadmore .= $author ? ' data-author="' . esc_attr( $author ) . '"' : '';

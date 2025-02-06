@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 7.2.0.1
+Stable tag: 7.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Ajax Load More is compatible for endless scrolling with popular eCommerce plugin
 ### Features
 
 -  **Shortcode Builder** - Create a custom Ajax Load More shortcode in seconds by adjusting various WordPress query parameters in the inuitive shortcode builder.
--  **Query Parameters** - Query WordPress by many different content types. Query by Post Type, Post Format, Date, Category, Tags, Custom Taxonomies, Search Term, Authors and more!
+-  **Query Parameters** - Query WordPress by many different content types. Query by Post Type, Category, Tags, Custom Taxonomies, Search Term, Date Query, Authors and more!
 -  **Repeater Templates** - Edit and extend the functionality of Ajax Load More by creating your own repeater template to match the look and feel of your website.
 -  **Multiple Instances** - Include multiple instances of Ajax Load More on a single page, post or template.
 -  **Ajax Filtering** - The Ajax Load More [custom filtering](https://connekthq.com/plugins/ajax-load-more/examples/filtering/) method will allow you to filter and update your Ajax query results.
@@ -268,6 +268,10 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.3.0 - February 6, 2025 =
+* NEW: Added Date Query support with `date_query`, `date_query_before` and `date_query_after` parameters.
+* UPDATE: Various admin UI/UX updates and code cleanup throughout plugin.
 
 = 7.2.0.1 - January 22, 2025 =
 * HOTFIX: Fixed potential issue with the parsing of `meta_query` and `tax_query` parameters when using Preloaded add-on.

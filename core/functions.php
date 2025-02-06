@@ -201,6 +201,82 @@ function alm_is_valid_path( $path ) {
 }
 
 /**
+ * Construct a date query before/after query.
+ *
+ * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
+ * @param array  $args The WP_Query args.
+ * @param string $before The before date.
+ * @param string $after The after date.
+ * @param string $inclusive The inclusive value.
+ * @return void
+ */
+function alm_get_date_query_before_after( array $args = [], string $before = '', string $after = '', string $inclusive = '' ) {
+	if ( empty( $before ) && empty( $after ) ) {
+		return $args; // Exit early if no date query.
+	}
+	$array = [];
+	if ( $before ) {
+		$array['before'] = $before;
+	}
+	if ( $after ) {
+		$array['after'] = $after;
+	}
+	if ( $inclusive ) {
+		$array['inclusive'] = $inclusive === 'true';
+	}
+	$args['date_query'][] = $array;
+
+	return $args;
+}
+
+/**
+ * Build and parse a date query.
+ *
+ * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
+ * @param string $param The date query parameter.
+ * @param array  $data  The date query data.
+ * @param array  $args  The WP_Query args.
+ * @return array        Modified args.
+ */
+function alm_get_date_query( $data = '', $args = [] ) {
+	if ( ! $data ) {
+		return $args;
+	}
+
+	// Explode the date query data.
+	$data = explode( ';', $data );
+
+	// Loop each date query.
+	foreach ( $data as $value ) {
+		$params = explode( '-', $value );
+		$array  = [];
+		if ( isset( $params[0] ) && $params[0] ) {
+			$array['year'] = $params[0];
+		}
+		if ( isset( $params[1] ) && $params[1] ) {
+			$array['month'] = $params[1];
+		}
+		if ( isset( $params[2] ) && $params[2] ) {
+			$array['day'] = $params[2];
+		}
+		if ( isset( $params[3] ) && $params[3] ) {
+			$array['hour'] = $params[3];
+		}
+		if ( isset( $params[4] ) && $params[4] ) {
+			$array['minute'] = $params[4];
+		}
+		if ( isset( $params[5] ) && $params[5] ) {
+			$array['second'] = $params[5];
+		}
+		if ( isset( $params[6] ) && $params[6] ) {
+			$array['week'] = $params[6];
+		}
+		$args['date_query'][] = $array;
+	}
+	return $args;
+}
+
+/**
  * Query by post format.
  *
  * @since 2.5.0

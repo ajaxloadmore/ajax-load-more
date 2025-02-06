@@ -72,7 +72,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$month = isset( $a['month'] ) ? $a['month'] : '';
 			$day   = isset( $a['day'] ) ? $a['day'] : '';
 
-			// Custom Fields.
+			// Meta/Custom Fields.
 			$sort_key     = isset( $a['sort_key'] ) ? $a['sort_key'] : '';
 			$meta_key     = isset( $a['meta_key'] ) ? $a['meta_key'] : '';
 			$meta_value   = isset( $a['meta_value'] ) ? $a['meta_value'] : '';
@@ -84,6 +84,14 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 
 			$meta_relation = isset( $a['meta_relation'] ) ? $a['meta_relation'] : '';
 			$meta_relation = empty( $meta_relation ) || $facets ? 'AND' : $meta_relation;
+
+			// Date Query.
+			$date_query           = isset( $a['date_query'] ) ? $a['date_query'] : '';
+			$date_query_before    = isset( $a['date_query_before'] ) ? $a['date_query_before'] : '';
+			$date_query_after     = isset( $a['date_query_after'] ) ? $a['date_query_after'] : '';
+			$date_query_inclusive = isset( $a['date_query_inclusive'] ) ? $a['date_query_inclusive'] : '';
+			$date_query_compare   = isset( $a['date_query_compare'] ) ? $a['date_query_compare'] : '';
+			$date_query_relation  = isset( $a['date_query_relation'] ) ? $a['date_query_relation'] : '';
 
 			// Search.
 			$s = isset( $a['search'] ) ? $a['search'] : '';
@@ -267,6 +275,27 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 						];
 						$args['meta_query'][ alm_create_meta_clause( $meta_keys[ $i ] ) ] = alm_get_meta_query( $meta_array );
 					}
+				}
+			}
+
+			// Date Query.
+			if ( $date_query || $date_query_after || $date_query_before ) {
+				$args['date_query'] = [];
+				if ( ! empty( $date_query_relation ) ) {
+					$args['date_query']['relation'] = $date_query_relation;
+				}
+				if ( $date_query_compare ) {
+					$args['date_query']['compare'] = $date_query_compare;
+				}
+
+				// Standard Date Query.
+				if ( $date_query ) {
+					$args = alm_get_date_query( $date_query, $args );
+				}
+
+				// Date Query (Before/After).
+				if ( $date_query_before || $date_query_after ) {
+					$args = alm_get_date_query_before_after( $args, $date_query_before, $date_query_after, $date_query_inclusive );
 				}
 			}
 

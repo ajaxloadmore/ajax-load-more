@@ -11217,6 +11217,24 @@ function getAjaxParams(alm, queryType) {
   if (alm.listing.dataset.metaType) {
     data.meta_type = alm.listing.dataset.metaType;
   }
+  if (alm.listing.dataset.dateQuery) {
+    data.date_query = alm.listing.dataset.dateQuery;
+  }
+  if (alm.listing.dataset.dateQueryAfter) {
+    data.date_query_after = alm.listing.dataset.dateQueryAfter;
+  }
+  if (alm.listing.dataset.dateQueryBefore) {
+    data.date_query_before = alm.listing.dataset.dateQueryBefore;
+  }
+  if (alm.listing.dataset.dateQueryCompare) {
+    data.date_query_compare = alm.listing.dataset.dateQueryCompare;
+  }
+  if (alm.listing.dataset.dateQueryInclusive) {
+    data.date_query_inclusive = alm.listing.dataset.dateQueryInclusive;
+  }
+  if (alm.listing.dataset.dateQueryRelation) {
+    data.date_query_relation = alm.listing.dataset.dateQueryRelation;
+  }
   if (alm.listing.dataset.author) {
     data.author = alm.listing.dataset.author;
   }
@@ -11374,6 +11392,12 @@ function getRestAPIParams(alm) {
     meta_compare: alm.listing.dataset.metaCompare,
     meta_relation: alm.listing.dataset.metaRelation,
     meta_type: alm.listing.dataset.metaType,
+    date_query: alm.listing.dataset.dateQuery,
+    date_query_after: alm.listing.dataset.dateQueryAfter,
+    date_query_before: alm.listing.dataset.dateQueryBefore,
+    date_query_compare: alm.listing.dataset.dateQueryCompare,
+    date_query_inclusive: alm.listing.dataset.dateQueryInclusive,
+    date_query_relation: alm.listing.dataset.dateQueryRelation,
     author: alm.listing.dataset.author,
     year: alm.listing.dataset.year,
     month: alm.listing.dataset.month,
@@ -12717,61 +12741,52 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
      */
     alm.AjaxLoadMore.adminajax = /*#__PURE__*/function () {
       var _ref2 = ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee2(params, type) {
-        var _alm_localize4, ajaxurl, _params, _params$cache_slug, cache_slug, data;
+        var _alm_localize4, url, _params, _params$cache_slug, cache_slug, data;
         return ajax_load_more_regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              _alm_localize4 = alm_localize, ajaxurl = _alm_localize4.ajaxurl; // Get Ajax URL
+              _alm_localize4 = alm_localize, url = _alm_localize4.ajaxurl; // Get Ajax URL
               _params = params, _params$cache_slug = _params.cache_slug, cache_slug = _params$cache_slug === void 0 ? '' : _params$cache_slug; // Deconstruct query params.
               /**
                * Single Posts.
                * If `single_post_target`, adjust the Ajax URL to the post URL.
                */
               if (alm.addons.single_post && alm.addons.single_post_target) {
-                ajaxurl = "".concat(alm.addons.single_post_permalink, "?id=").concat(alm.addons.single_post_id, "&alm_page=").concat(parseInt(alm.page) + 1);
+                url = "".concat(alm.addons.single_post_permalink, "?id=").concat(alm.addons.single_post_id, "&alm_page=").concat(parseInt(alm.page) + 1);
                 params = '';
               }
 
               // Query Loop || WooCommerce || Elementor.
               if (alm.addons.queryloop || alm.addons.woocommerce || alm.addons.elementor && alm.addons.elementor_type === 'posts') {
-                ajaxurl = getButtonURL(alm, alm.rel);
+                url = getButtonURL(alm, alm.rel);
                 params = '';
               }
 
-              // Send HTTP request via axios.
+              // HTTP request via axios.
               _context2.next = 6;
-              return lib_axios.get(ajaxurl, {
+              return lib_axios.get(url, {
                 params: params
               }).then(function (response) {
                 if (alm.addons.single_post && alm.addons.single_post_target) {
-                  // Single Posts
-                  return singlepostsHTML(alm, response, cache_slug);
+                  return singlepostsHTML(alm, response, cache_slug); // Single Posts
                 } else if (alm.addons.woocommerce) {
-                  // WooCommerce.
-                  return wooGetContent(alm, ajaxurl, response, cache_slug);
+                  return wooGetContent(alm, url, response, cache_slug); // WooCommerce.
                 } else if (alm.addons.elementor) {
-                  // Elementor
-                  return elementorGetContent(alm, ajaxurl, response, cache_slug);
+                  return elementorGetContent(alm, url, response, cache_slug); // Elementor
                 } else if (alm.addons.queryloop) {
-                  // Query Loop
-                  return queryLoopGetContent(alm, ajaxurl, response, cache_slug);
+                  return queryLoopGetContent(alm, url, response, cache_slug); // Query Loop
                 }
 
-                // Standard ALM - Get data from response.
-                return response.data;
+                return response.data; // Standard ALM.
               })["catch"](function (error) {
-                // Error
                 alm.AjaxLoadMore.error(error, 'adminajax');
               });
             case 6:
               data = _context2.sent;
               _context2.t0 = type;
-              _context2.next = _context2.t0 === 'standard' ? 10 : _context2.t0 === 'totalposts' ? 12 : _context2.t0 === 'totalpages' ? 12 : 14;
+              _context2.next = _context2.t0 === 'totalposts' ? 10 : _context2.t0 === 'totalpages' ? 10 : 12;
               break;
             case 10:
-              alm.AjaxLoadMore.render(data);
-              return _context2.abrupt("break", 14);
-            case 12:
               if (alm.addons.paging && alm.addons.nextpage && typeof almBuildPagination === 'function') {
                 window.almBuildPagination(data.totalpages, alm);
                 alm.totalpages = data.totalpages;
@@ -12780,6 +12795,9 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                   window.almBuildPagination(data.totalposts, alm);
                 }
               }
+              return _context2.abrupt("break", 14);
+            case 12:
+              alm.AjaxLoadMore.render(data);
               return _context2.abrupt("break", 14);
             case 14:
             case "end":
