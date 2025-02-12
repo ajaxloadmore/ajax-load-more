@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 7.3.0
+Stable tag: 7.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,11 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.3.1 - February 12, 2025 =
+* UPDATE: Updated new Date Query feature to parse compare value. This was previously not functioning as expected. e.g. `[ajax_load_more date_query="2024-01-01;2020-01-01" date_query_compare=">=;<=" date_query_relation="OR"]
+* NEW: Added date_query_column parameter to allow for querying the post_date or post_modified column. e.g. `[ajax_load_more date_query="2020-01-01" date_query_column="post_modified"]
+* HOTFIX: Fixed issue with conflicting `wp-block-query` class the new Query Loop add-on.
 
 = 7.3.0 - February 6, 2025 =
 * NEW: Added Date Query support with `date_query`, `date_query_before` and `date_query_after` parameters.

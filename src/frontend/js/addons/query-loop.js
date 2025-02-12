@@ -234,7 +234,7 @@ export function queryLoopLoaded(alm) {
 function getQueryLoopConfig(element) {
 	const raw = element?.querySelector('pre[data-rel="ajax-load-more"]');
 	if (!raw) {
-		return;
+		return {};
 	}
 	return JSON.parse(raw?.innerHTML);
 }

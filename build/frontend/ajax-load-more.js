@@ -10093,7 +10093,7 @@ function queryLoopLoaded(alm) {
 function getQueryLoopConfig(element) {
   var raw = element === null || element === void 0 ? void 0 : element.querySelector('pre[data-rel="ajax-load-more"]');
   if (!raw) {
-    return;
+    return {};
   }
   return JSON.parse(raw === null || raw === void 0 ? void 0 : raw.innerHTML);
 }
@@ -11226,6 +11226,9 @@ function getAjaxParams(alm, queryType) {
   if (alm.listing.dataset.dateQueryBefore) {
     data.date_query_before = alm.listing.dataset.dateQueryBefore;
   }
+  if (alm.listing.dataset.dateQueryColumn) {
+    data.date_query_column = alm.listing.dataset.dateQueryColumn;
+  }
   if (alm.listing.dataset.dateQueryCompare) {
     data.date_query_compare = alm.listing.dataset.dateQueryCompare;
   }
@@ -11395,6 +11398,7 @@ function getRestAPIParams(alm) {
     date_query: alm.listing.dataset.dateQuery,
     date_query_after: alm.listing.dataset.dateQueryAfter,
     date_query_before: alm.listing.dataset.dateQueryBefore,
+    date_query_column: alm.listing.dataset.dateQueryColumn,
     date_query_compare: alm.listing.dataset.dateQueryCompare,
     date_query_inclusive: alm.listing.dataset.dateQueryInclusive,
     date_query_relation: alm.listing.dataset.dateQueryRelation,

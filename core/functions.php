@@ -233,23 +233,29 @@ function alm_get_date_query_before_after( array $args = [], string $before = '',
  * Build and parse a date query.
  *
  * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
- * @param string $param The date query parameter.
- * @param array  $data  The date query data.
- * @param array  $args  The WP_Query args.
- * @return array        Modified args.
+ * @param string $data    The date query data.
+ * @param string $compare The date query compare.
+ * @param string $columm  The date query columm.
+ * @param array  $args    The WP_Query args.
+ * @return array          The modified args.
  */
-function alm_get_date_query( $data = '', $args = [] ) {
+function alm_get_date_query( $data = '', $compare = '', $columm = '', $args = [] ) {
 	if ( ! $data ) {
 		return $args;
 	}
 
-	// Explode the date query data.
-	$data = explode( ';', $data );
+	// Explode the date query params.
+	$data    = explode( ';', $data );
+	$compare = explode( ';', $compare );
+	$columm  = explode( ';', $columm );
 
 	// Loop each date query.
-	foreach ( $data as $value ) {
-		$params = explode( '-', $value );
-		$array  = [];
+	foreach ( $data as $key => $value ) {
+		$params       = explode( '-', $value );
+		$date_compare = isset( $compare[ $key ] ) ? alm_parse_query_compare( $compare[ $key ] ) : '';
+		$date_columm  = isset( $columm[ $key ] ) ? $columm[ $key ] : '';
+
+		$array = [];
 		if ( isset( $params[0] ) && $params[0] ) {
 			$array['year'] = $params[0];
 		}
@@ -270,6 +276,12 @@ function alm_get_date_query( $data = '', $args = [] ) {
 		}
 		if ( isset( $params[6] ) && $params[6] ) {
 			$array['week'] = $params[6];
+		}
+		if ( $date_compare ) {
+			$array['compare'] = $date_compare;
+		}
+		if ( $date_columm ) {
+			$array['column'] = $date_columm;
 		}
 		$args['date_query'][] = $array;
 	}
@@ -357,6 +369,23 @@ function alm_parse_tax_terms( $terms ) {
 }
 
 /**
+ * do_shortcode fix (shortcode renders as HTML when using < OR  <==).
+ *
+ * @param string $compare The compare operator.
+ * @return void
+ */
+function alm_parse_query_compare( $compare ) {
+	if ( ! $compare ) {
+		return;
+	}
+	$compare = 'lessthan' === $compare ? '<' : $compare;
+	$compare = 'lessthanequalto' === $compare ? '<=' : $compare;
+	$compare = 'greaterthan' === $compare ? '>' : $compare;
+	$compare = 'greaterthanequalto' === $compare ? '>=' : $compare;
+	return $compare;
+}
+
+/**
  * Query by custom field values.
  *
  * @since 2.5.0
@@ -370,11 +399,7 @@ function alm_get_meta_query( $params ) {
 	$meta_type    = esc_sql( $params['type'] );
 
 	if ( ! empty( $meta_key ) ) {
-		// do_shortcode fix (shortcode was rendering as HTML when using < OR  <==).
-		$meta_compare = 'lessthan' === $meta_compare ? '<' : $meta_compare;
-		$meta_compare = 'lessthanequalto' === $meta_compare ? '<=' : $meta_compare;
-		$meta_compare = 'greaterthan' === $meta_compare ? '>' : $meta_compare;
-		$meta_compare = 'greaterthanequalto' === $meta_compare ? '>=' : $meta_compare;
+		$meta_compare = alm_parse_query_compare( $meta_compare );
 
 		// Get optimized `meta_value` parameter.
 		$meta_values = alm_parse_meta_value( $meta_value, $meta_compare );
@@ -409,7 +434,6 @@ function alm_get_meta_query( $params ) {
  * eg. `Country Code` = `country_code_clause`
  *
  * @see https://wordpress.stackexchange.com/questions/246355/order-by-multiple-meta-key-and-meta-value/246358#246358
- *
  * @param string $key The meta key name.
  * @return string     Formatted meta name.
  */

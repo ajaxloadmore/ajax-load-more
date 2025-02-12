@@ -65,7 +65,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 			} else {
 				// Standard ALM.
 				// Build the $args array to use with this WP_Query.
-				$query_args = ALM_QUERY_ARGS::alm_build_queryargs( $params, false );
+				$args = ALM_QUERY_ARGS::alm_build_queryargs( $params, false );
 
 				$filters = $params['filters'];
 				if ( $filters ) {
@@ -75,20 +75,19 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 				/**
 				 * ALM Core Filter Hook
 				 *
-				 * @return $query_args;
+				 * @return array Modified array.
 				*/
-				$query_args = apply_filters( 'alm_query_args_' . $params['id'], $query_args, $params['post_id'] );
-
-				$posts_per_page = $query_args['posts_per_page'];
+				$args = apply_filters( 'alm_query_args_' . $params['id'], $args, $params['post_id'] );
 
 				// Update Paged and offset.
-				$query_args['paged']  = $paged;
-				$query_args['offset'] = self::set_offset( $paged, $posts_per_page, $params['offset'] );
+				$posts_per_page = $args['posts_per_page'];
+				$args['paged']  = $paged;
+				$args['offset'] = self::set_offset( $paged, $posts_per_page, $params['offset'] );
 
 				$output = '';
 				$i      = 0;
 
-				$noscript_query = new WP_Query( $query_args );
+				$noscript_query = new WP_Query( $args );
 
 				if ( $noscript_query->have_posts() ) :
 					$alm_found_posts = $noscript_query->found_posts;
@@ -97,8 +96,8 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 						$noscript_query->the_post();
 						++$i;
 						$alm_current = $i;
-						$alm_item    = $query_args['offset'] + $i;
-						$output     .= alm_loop( $params['repeater'], $params['theme_repeater'], $alm_found_posts, $alm_page, $alm_item, $alm_current, $query_args );
+						$alm_item    = $args['offset'] + $i;
+						$output     .= alm_loop( $params['repeater'], $params['theme_repeater'], $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
 					endwhile;
 					wp_reset_postdata();
 

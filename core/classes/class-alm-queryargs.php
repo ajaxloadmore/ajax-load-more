@@ -90,6 +90,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$date_query_before    = isset( $a['date_query_before'] ) ? $a['date_query_before'] : '';
 			$date_query_after     = isset( $a['date_query_after'] ) ? $a['date_query_after'] : '';
 			$date_query_inclusive = isset( $a['date_query_inclusive'] ) ? $a['date_query_inclusive'] : '';
+			$date_query_column    = isset( $a['date_query_column'] ) ? $a['date_query_column'] : '';
 			$date_query_compare   = isset( $a['date_query_compare'] ) ? $a['date_query_compare'] : '';
 			$date_query_relation  = isset( $a['date_query_relation'] ) ? $a['date_query_relation'] : '';
 
@@ -284,13 +285,10 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 				if ( ! empty( $date_query_relation ) ) {
 					$args['date_query']['relation'] = $date_query_relation;
 				}
-				if ( $date_query_compare ) {
-					$args['date_query']['compare'] = $date_query_compare;
-				}
 
 				// Standard Date Query.
 				if ( $date_query ) {
-					$args = alm_get_date_query( $date_query, $args );
+					$args = alm_get_date_query( $date_query, $date_query_compare, $date_query_column, $args );
 				}
 
 				// Date Query (Before/After).
