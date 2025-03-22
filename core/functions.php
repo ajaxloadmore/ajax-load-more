@@ -748,6 +748,19 @@ function alm_print( $query = '', $title = '' ) {
 }
 
 /**
+ * Debug helper for printing to error log.
+ *
+ * @param object|array $data The data to log.
+ */
+function alm_log( $data ) {
+	if ( is_array( $data ) || is_object( $data ) ) {
+		error_log( print_r( $data, true ) );
+	} else {
+		error_log( $data );
+	}
+}
+
+/**
  * Convert dashes to underscores.
  *
  * @param string $data The string to convert.

@@ -5,8 +5,10 @@
  * @package AjaxLoadMore
  */
 
-// @codingStandardsIgnoreStart
 $alm_options = get_option( 'alm_settings' );
+if ( empty( $alm_options ) ) {
+	$alm_options = [];
+}
 
 // Check if '_alm_disable_dynamic is set within settings.
 if ( ! isset( $alm_options['_alm_disable_dynamic'] ) ) {
@@ -817,9 +819,9 @@ $show_max                = 100; // Max number of items to show.
 
 				<!-- Post Types -->
 				<?php
-				$pt_args = array(
+				$pt_args = [
 					'public' => true,
-				);
+				];
 				$types   = get_post_types( $pt_args );
 				if ( $types ) {
 					?>
@@ -1103,10 +1105,10 @@ $show_max                = 100; // Max number of items to show.
 
 				<?php
 				// Taxonomies
-				$tax_args   = array(
+				$tax_args   = [
 					'public'   => true,
 					'_builtin' => false,
-				);
+				];
 				$tax_output = 'objects';
 				$taxonomies = get_taxonomies( $tax_args, $tax_output );
 				if ( $taxonomies ) {
