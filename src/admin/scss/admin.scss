@@ -2051,6 +2051,8 @@ span.cnkt-button.installed,
 	padding: 10px 0;
 	display: block;
 	border-top: 1px solid $light_border;
+	outline: none !important;
+	box-shadow: none !important;
 }
 .ajax-load-more .cnkt-sidebar .cta.resources li:first-of-type a {
 	border: none;
@@ -2285,20 +2287,18 @@ span.cnkt-button.installed,
 .ajax-load-more {
 	.alm-dir-listing {
 		ul {
-			padding: 0;
-			margin: 0;
-			display: flex;
+			all: unset;
+			display: grid;
 			width: 100%;
-			flex-wrap: wrap;
 			li {
-				margin: 0;
-				padding: 10px 5px 5px 55px;
-				background: transparent url('../img/ui/directory-list.gif') no-repeat left 46%;
+				margin: 0 !important;
+				padding: 5px 5px 5px 55px;
+				background: transparent url('../img/ui/directory-list.gif') no-repeat left center;
 				position: relative;
 				display: block;
-				width: 50%;
-				&.full {
-					width: 100%;
+				label {
+					padding-bottom: 0 !important;
+					margin-bottom: 0 !important;
 				}
 				&:last-child,
 				&:nth-last-child(2) {
@@ -2307,7 +2307,9 @@ span.cnkt-button.installed,
 				a {
 					text-decoration: none;
 					display: block;
-					word-break: break-all;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					width: 100%;
 				}
 				i {
 					width: 15px;
@@ -2320,15 +2322,18 @@ span.cnkt-button.installed,
 		}
 		p.theme-title {
 			font-weight: 600;
-			margin: 0 0 20px !important;
+			margin: 0 0 10px !important;
 			padding: 0;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			width: 100%;
 		}
+
 		&.theme-repeaters ul li {
 			display: block;
 			width: 100%;
-			padding-top: 10px;
-			padding: 0 0 0 36px;
-			background-position: left 54%;
+			padding-left: 36px;
 			label {
 				display: block;
 				width: 100%;

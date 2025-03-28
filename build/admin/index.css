@@ -5,7 +5,6 @@
 /*!****************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/admin/scss/admin.scss (1) ***!
   \****************************************************************************************************************************************************/
-@charset "UTF-8";
 /* This is the default Tooltipster theme (feel free to modify or duplicate and create multiple themes!): */
 .tooltipster-default {
   border-radius: 3px;
@@ -852,7 +851,7 @@ disabled look for disabled choices in the results dropdown
   flex-wrap: wrap;
   gap: 10px;
   cursor: default;
-  margin: 10px 0 0;
+  margin: 15px 0 0;
 }
 .alm-stats > div {
   display: flex;
@@ -944,6 +943,8 @@ disabled look for disabled choices in the results dropdown
 .alm-cache .cnkt-main {
   /* Live Search */
   /* Directory Listing */
+  /* Cache Details */
+  /* Cache File Listing */
 }
 .alm-cache .cnkt-main .group .row {
   overflow: visible;
@@ -999,6 +1000,13 @@ disabled look for disabled choices in the results dropdown
   padding: 0;
   margin: 10px 0 0;
 }
+.alm-cache .cnkt-main .alm-dir-listing ul li.file {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 .alm-cache .cnkt-main .alm-dir-listing--nested {
   padding: 0 15px 15px;
 }
@@ -1044,39 +1052,6 @@ disabled look for disabled choices in the results dropdown
   border-color: #c94141;
   color: #fff;
 }
-.alm-cache .cnkt-main .cache-page-title {
-  font-size: 12px;
-  display: block;
-  width: 100%;
-  padding: 0 7px 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.alm-cache .cnkt-main .cache-page-wrap {
-  padding: 5px 12px 20px;
-}
-ß .alm-cache .cnkt-main .cache-page-wrap ul {
-  max-height: 300px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
-.alm-cache .cnkt-main .cache-full-path {
-  display: none;
-}
-.alm-cache .cnkt-main .cache-full-path-button {
-  border: 1px solid #efefef;
-  border-radius: 3px;
-  background: #fff;
-  cursor: pointer;
-  margin: 0 2px 0 0;
-  text-align: left;
-  color: #878787;
-  font-size: 13px;
-  padding: 2px 4px;
-}
-.alm-cache .cnkt-main .cache-full-path-button:hover, .alm-cache .cnkt-main .cache-full-path-button:focus {
-  border-color: #e7e7e7;
-}
 .alm-cache .cnkt-main .alm-dir-listing ul.cache-details {
   display: block;
   padding: 20px 15px 0;
@@ -1088,18 +1063,44 @@ disabled look for disabled choices in the results dropdown
   display: block;
   width: 100%;
   background: none !important;
-  padding: 0 10px 0 28px;
+  padding-left: 28px;
   margin: 0 0 10px;
 }
 .alm-cache .cnkt-main .alm-dir-listing ul.cache-details li i {
   color: #999;
   font-size: 16px;
   position: absolute;
-  top: 1px;
-  left: 5px;
+  top: 6px;
+  left: 4px;
 }
 .alm-cache .cnkt-main .alm-dir-listing ul.cache-details li a {
   word-break: break-word;
+}
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details .cache-full-path {
+  display: none;
+}
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details .cache-full-path-button {
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  margin: 0 2px 0 0;
+  text-align: left;
+  color: #878787;
+  font-size: 13px;
+  padding: 2px 4px;
+}
+.alm-cache .cnkt-main .alm-dir-listing ul.cache-details .cache-full-path-button:hover, .alm-cache .cnkt-main .alm-dir-listing ul.cache-details .cache-full-path-button:focus {
+  border-color: #e7e7e7;
+}
+.alm-cache .cnkt-main .cache-page-wrap {
+  padding: 10px;
+}
+.alm-cache .cnkt-main .cache-page-wrap ul {
+  grid-template-columns: repeat(2, 1fr);
+  max-height: 300px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .ajax-load-more .CodeMirror {
@@ -2159,6 +2160,10 @@ disabled look for disabled choices in the results dropdown
     position: sticky;
     top: 135px;
   }
+}
+.ajax-load-more .cnkt-sidebar a {
+  outline: none !important;
+  box-shadow: none !important;
 }
 .ajax-load-more .cnkt-sidebar .major-publishing-actions {
   padding: 15px;
@@ -4432,6 +4437,8 @@ span.cnkt-button.installed,
   padding: 10px 0;
   display: block;
   border-top: 1px solid #efefef;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .ajax-load-more .cnkt-sidebar .cta.resources li:first-of-type a {
@@ -4667,22 +4674,20 @@ span.cnkt-button.installed,
 }
 
 .ajax-load-more .alm-dir-listing ul {
-  padding: 0;
-  margin: 0;
-  display: flex;
+  all: unset;
+  display: grid;
   width: 100%;
-  flex-wrap: wrap;
 }
 .ajax-load-more .alm-dir-listing ul li {
-  margin: 0;
-  padding: 10px 5px 5px 55px;
-  background: transparent url(../admin/img/ui/directory-list.gif) no-repeat left 46%;
+  margin: 0 !important;
+  padding: 5px 5px 5px 55px;
+  background: transparent url(../admin/img/ui/directory-list.gif) no-repeat left center;
   position: relative;
   display: block;
-  width: 50%;
 }
-.ajax-load-more .alm-dir-listing ul li.full {
-  width: 100%;
+.ajax-load-more .alm-dir-listing ul li label {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 .ajax-load-more .alm-dir-listing ul li:last-child, .ajax-load-more .alm-dir-listing ul li:nth-last-child(2) {
   background-image: url(../admin/img/ui/directory-list-btm.gif);
@@ -4690,7 +4695,9 @@ span.cnkt-button.installed,
 .ajax-load-more .alm-dir-listing ul li a {
   text-decoration: none;
   display: block;
-  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 .ajax-load-more .alm-dir-listing ul li i {
   width: 15px;
@@ -4701,15 +4708,17 @@ span.cnkt-button.installed,
 }
 .ajax-load-more .alm-dir-listing p.theme-title {
   font-weight: 600;
-  margin: 0 0 20px !important;
+  margin: 0 0 10px !important;
   padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
 }
 .ajax-load-more .alm-dir-listing.theme-repeaters ul li {
   display: block;
   width: 100%;
-  padding-top: 10px;
-  padding: 0 0 0 36px;
-  background-position: left 54%;
+  padding-left: 36px;
 }
 .ajax-load-more .alm-dir-listing.theme-repeaters ul li label {
   display: block;
