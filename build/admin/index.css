@@ -2210,17 +2210,24 @@ disabled look for disabled choices in the results dropdown
 /* Template Tags */
 .ajax-load-more .template-tags {
   overflow: hidden;
-  border-left: 5px solid #dfd8c2;
-  padding: 15px;
+  border-left: 4px solid #dfd8c2;
+  padding: 12px 15px;
   background: #fff9ea;
-  margin: 20px 0 0;
-  border-radius: 3px;
+  margin: 10px 0 0;
+  border-radius: 2px;
+  display: grid;
+  gap: 5px;
+}
+.ajax-load-more .template-tags ul,
+.ajax-load-more .template-tags li {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .ajax-load-more .template-tags h4,
 .ajax-load-more .template-tags li {
-  margin: 0 0 8px;
+  margin: 0 !important;
   padding: 0;
-  font-size: 13px;
+  font-size: 12px;
   text-decoration: none !important;
 }
 .ajax-load-more .template-tags li {
@@ -2229,10 +2236,6 @@ disabled look for disabled choices in the results dropdown
   padding: 0 !important;
   border-radius: 3px;
   line-height: 1.25;
-}
-.ajax-load-more .template-tags ul {
-  margin: 0;
-  padding: 0;
 }
 .ajax-load-more .template-tags pre {
   display: inline-block;
@@ -3515,6 +3518,10 @@ hr.indented {
   margin: 0;
 }
 
+.form-table input,
+.form-table select {
+  margin-left: 0;
+}
 .form-table label {
   display: block;
   clear: both;
@@ -3578,13 +3585,6 @@ hr.indented {
   margin-top: 0 !important;
 }
 
-.ajax-load-more.settings input[type=text],
-.ajax-load-more.settings input[type=number],
-.ajax-load-more.settings input[type=email],
-.ajax-load-more.settings .select2-container {
-  margin-top: 10px;
-}
-
 .ajax-load-more .ajax-load-more-wrap {
   position: relative;
   top: 10px;
@@ -3640,6 +3640,7 @@ hr.indented {
 .ajax-load-more.settings .form-table th {
   padding: 25px;
   line-height: 1.5;
+  vertical-align: top;
 }
 .ajax-load-more.settings .form-table td:last-of-type,
 .ajax-load-more.settings .form-table th:last-of-type {
@@ -4098,7 +4099,7 @@ hr.indented {
 
 .ajax-load-more p.warning-callout {
   background-color: #eaf6fb;
-  border-left: 8px solid #3d8ed0;
+  border-left: 5px solid #3d8ed0;
   color: #333;
   font-size: 13px;
   margin: 0;
@@ -4141,6 +4142,19 @@ hr.indented {
 .ajax-load-more p.warning-callout.notify strong {
   background-color: #9a4343;
   color: #fff;
+}
+.ajax-load-more .alm-form-notice {
+  background-color: #fffbe7;
+  border-left: 5px solid #e2d8a8;
+  font-size: 13px;
+  margin: 0;
+  display: block;
+  padding: 15px 100px 15px 20px;
+  border-radius: 3px;
+  margin: 0;
+  width: auto;
+  line-height: 1.55;
+  position: relative;
 }
 
 .ajax-load-more .call-out {

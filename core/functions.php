@@ -43,8 +43,7 @@ add_filter( 'alm_progress_css', 'alm_progress_css', 10, 3 );
  * @since 3.3.1
  */
 function alm_css_disabled( $setting ) {
-	$options  = get_option( 'alm_settings' );
-	$disabled = true;
+	$options = get_option( 'alm_settings' );
 	return ! isset( $options[ $setting ] ) || $options[ $setting ] !== '1' ? false : true;
 }
 
