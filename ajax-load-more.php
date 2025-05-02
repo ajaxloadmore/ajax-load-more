@@ -19,6 +19,7 @@
 * UPDATE: Added support for iframe block editor and rendering Ajax Load More Block.
 * FIX: Fixed issue with default values on archive templates adding a duplicate query param.
 * FIX: Fixed potential issue with core and filters ALM blocks throwing admin error.
+* Fix: Fixed PHP warning due to registering the text domain.
 * FIX: Security fix.
 
 PAGING - 2.0.1
