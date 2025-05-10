@@ -1764,7 +1764,8 @@ hr.indented {
 		border-left: 5px solid $yellow_dark;
 		font-size: 13px;
 		margin: 0;
-		display: block;
+		display: grid;
+		gap: 10px;
 		padding: $padding_sm 100px $padding_sm $padding;
 		border-radius: $radius;
 		margin: 0;

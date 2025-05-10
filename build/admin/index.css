@@ -4148,7 +4148,8 @@ hr.indented {
   border-left: 5px solid #e2d8a8;
   font-size: 13px;
   margin: 0;
-  display: block;
+  display: grid;
+  gap: 10px;
   padding: 15px 100px 15px 20px;
   border-radius: 3px;
   margin: 0;

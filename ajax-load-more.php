@@ -85,12 +85,12 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 */
 		public function __construct() {
 			$this->alm_define_constants();
-			$this->alm_includes();
 
 			add_action( 'wp_ajax_alm_get_posts', [ $this, 'alm_query_posts' ] );
 			add_action( 'wp_ajax_nopriv_alm_get_posts', [ $this, 'alm_query_posts' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'alm_enqueue_scripts' ] );
 			add_action( 'after_setup_theme', [ $this, 'alm_image_sizes' ] );
+			add_action( 'init', [ $this, 'alm_includes' ] );
 
 			add_filter( 'alm_noscript', [ $this, 'alm_noscript' ], 10, 6 );
 			add_filter( 'alm_noscript_pagination', [ &$this, 'alm_noscript_pagination' ], 10, 3 );
@@ -99,16 +99,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ $this, 'alm_shortcode' ] );
-			add_action( 'init', [ $this, 'alm_textdomain' ] );
-		}
-
-		/**
-		 * Load text domain.
-		 *
-		 * @return void
-		 */
-		public function alm_textdomain() {
-			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 		}
 
 		/**
@@ -117,6 +107,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 * @since 2.0.0
 		 */
 		public function alm_includes() {
+			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 			require_once ALM_PATH . 'core/functions.php'; // Load Core Functions.
 			require_once ALM_PATH . 'core/classes/class-alm-blocks.php'; // Load Block Class.
 			require_once ALM_PATH . 'core/classes/class-alm-preview.php'; // Load Preview Class.
