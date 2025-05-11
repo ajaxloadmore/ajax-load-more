@@ -7,14 +7,14 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.3.1.1
+ * Version: 7.3.1.2
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
-define( 'ALM_VERSION', '7.3.1.1' );
-define( 'ALM_RELEASE', 'May 10, 2025' );
+define( 'ALM_VERSION', '7.3.1.2' );
+define( 'ALM_RELEASE', 'May 11, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
@@ -62,8 +62,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 */
 		public function __construct() {
 			$this->alm_define_constants();
+			$this->alm_includes();
 
-			add_action( 'init', [ $this, 'alm_includes' ] );
 			add_action( 'wp_ajax_alm_get_posts', [ $this, 'alm_query_posts' ] );
 			add_action( 'wp_ajax_nopriv_alm_get_posts', [ $this, 'alm_query_posts' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'alm_enqueue_scripts' ] );
@@ -76,6 +76,17 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ $this, 'alm_shortcode' ] );
+
+			add_action( 'init', [ $this, 'alm_load_text_domain' ] );
+		}
+
+		/**
+		 * Load the plugin text domain for translation.
+		 *
+		 * @return void
+		 */
+		public function alm_load_text_domain() {
+			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 		}
 
 		/**
@@ -84,7 +95,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 * @since 2.0.0
 		 */
 		public function alm_includes() {
-			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 			require_once ALM_PATH . 'core/functions.php'; // Load Core Functions.
 			require_once ALM_PATH . 'core/classes/class-alm-blocks.php'; // Load Block Class.
 			require_once ALM_PATH . 'core/classes/class-alm-preview.php'; // Load Preview Class.
