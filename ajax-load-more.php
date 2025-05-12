@@ -97,8 +97,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ $this, 'alm_shortcode' ] );
-
-			add_action( 'init', [ $this, 'alm_load_text_domain' ] );
+			add_shortcode( 'init', [ $this, 'alm_load_text_domain' ] );
 		}
 
 		/**
@@ -116,7 +115,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 * @since 2.0.0
 		 */
 		public function alm_includes() {
-			load_plugin_textdomain( 'ajax-load-more', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 			require_once ALM_PATH . 'core/functions.php'; // Load Core Functions.
 			require_once ALM_PATH . 'core/classes/class-alm-blocks.php'; // Load Block Class.
 			require_once ALM_PATH . 'core/classes/class-alm-preview.php'; // Load Preview Class.
@@ -316,16 +314,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					echo esc_html__( 'Error creating repeater template directory', 'ajax-load-more' ) . ' - ' . esc_attr( $dir );
 				}
 			}
-		}
-
-		/**
-		 * Returns add-on data (admin/admin-functions.php).
-		 *
-		 * @since 2.0.0
-		 * @return @addons
-		 */
-		public function alm_return_addons() {
-			return alm_get_addons();
 		}
 
 		/**

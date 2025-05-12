@@ -149,7 +149,6 @@ function alm_admin_notice_errors() {
 }
 add_action( 'admin_notices', 'alm_admin_notice_errors' );
 
-
 /**
  * Check the status of a license.
  *
@@ -209,8 +208,7 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
  * @since 5.2
  */
 function alm_plugin_update_license_messages() {
-	$addons = alm_get_addons();
-	foreach ( $addons as $addon ) {
+	foreach ( alm_get_addons() as $addon ) {
 		$path = $addon['path'];
 		$hook = "in_plugin_update_message-{$path}/{$path}.php";
 		add_action( $hook, 'alm_prefix_plugin_update_message', 10, 2 );
@@ -226,9 +224,8 @@ alm_plugin_update_license_messages();
  * @since 5.2
  */
 function alm_prefix_plugin_update_message( $data, $response ) {
-	$addons  = alm_get_addons();
-	$slug    = $response->slug;
-	$version = $response->new_version;
+	$addons = alm_get_addons();
+	$slug   = $response->slug;
 
 	foreach ( $addons as $key => $addon ) {
 		if ( $addon['path'] === $slug ) {
@@ -241,32 +238,31 @@ function alm_prefix_plugin_update_message( $data, $response ) {
 		$addon = $addons[ $index ];
 
 		if ( isset( $addon ) ) {
-			$name   = '<strong>' . $addon['name'] . '</strong>';
 			$status = get_option( $addon['status'] );
 
-			// Expired.
 			if ( $status === 'expired' ) {
+				// Expired.
 				printf(
 					'<span style="' . esc_html( $style ) . '">%s %s</span>',
-					esc_html( __( 'Looks like your subscription has expired.', 'ajax-load-more' ) ),
+					esc_html__( 'Looks like your subscription has expired.', 'ajax-load-more' ),
 					wp_kses_post( __( 'Please login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 				);
 			}
 
-			// Invalid/Inactive.
 			if ( $status === 'invalid' || $status === 'disabled' ) {
+				// Invalid/Inactive.
 				printf(
 					'<span style="' . esc_html( $style ) . '">%s %s</span>',
-					esc_html( __( 'Looks like your license is inactive and/or invalid.', 'ajax-load-more' ) ),
+					esc_html__( 'Looks like your license is inactive and/or invalid.', 'ajax-load-more' ),
 					wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> or login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 				);
 			}
 
-			// Deactivated.
 			if ( $status === 'deactivated' ) {
+				// Deactivated.
 				printf(
 					'<span style="' . esc_html( $style ) . '">%s %s</span>',
-					esc_html( __( 'Looks like your license has been deactivated.', 'ajax-load-more' ) ),
+					esc_html__( 'Looks like your license has been deactivated.', 'ajax-load-more' ),
 					wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> to update.', 'ajax-load-more' ) )
 				);
 			}
@@ -281,9 +277,7 @@ function alm_prefix_plugin_update_message( $data, $response ) {
  * @since 5.2
  */
 function alm_plugin_row( $plugin_name ) {
-	$addons     = alm_get_addons();
-	$pro_addons = alm_get_pro_addon();
-
+	$addons = alm_get_addons();
 	$addons = array_merge( alm_get_addons(), alm_get_pro_addon() );
 	foreach ( $addons as $addon ) {
 		if ( $plugin_name === $addon['path'] . '/' . $addon['path'] . '.php' ) {

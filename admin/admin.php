@@ -68,20 +68,18 @@ function alm_transient_notification( $message = '', $transient = '', $duration =
  * @since 4.0
  */
 function alm_set_transient() {
-	$form_data = filter_input_array( INPUT_POST );
+	$data = filter_input_array( INPUT_POST );
 
-	if ( ! current_user_can( 'edit_theme_options' ) || ! isset( $form_data['nonce'] ) ) {
-		// Bail early if missing WP capabilities or nonce.
-		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) );
+	if ( ! current_user_can( 'edit_theme_options' ) || ! isset( $data['nonce'] ) ) {
+		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) ); // Bail early if missing WP capabilities or nonce.
 	}
 
-	if ( ! wp_verify_nonce( $form_data['nonce'], 'alm_repeater_nonce' ) ) {
-		// Verify nonce.
-		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) );
+	if ( ! wp_verify_nonce( $data['nonce'], 'alm_repeater_nonce' ) ) {
+		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) ); // Verify nonce.
 	}
 
-	$transient = $form_data['transient_name'];
-	$duration  = ! isset( $form_data['duration'] ) ? 'YEAR_IN_SECONDS' : $form_data['duration'];
+	$transient = $data['transient_name'];
+	$duration  = ! isset( $data['duration'] ) ? 'YEAR_IN_SECONDS' : $data['duration'];
 
 	if ( $transient ) {
 		set_transient( $transient, 'true', constant( $duration ) );
@@ -99,13 +97,12 @@ add_action( 'wp_ajax_alm_set_transient', 'alm_set_transient' ); // Set transient
  */
 function alm_admin_menu() {
 	global $alm_menu_items;
-	$icon            = ALM_ADMIN_URL . '/img/alm-icon-menu.svg';
 	$before_link     = '<span style="display:block; border-top: 1px solid #555; padding-top: 8px;">';
 	$after_link      = '</span>';
 	$style_link_icon = 'style="opacity: 0.6; font-size: 18px; height: 18px; width: 18px; position: relative; left: -2px;"';
 	$license_title   = has_action( 'alm_pro_installed' ) ? __( 'License', 'ajax-load-more' ) : __( 'Licenses', 'ajax-load-more' );
 
-	$alm_page = add_menu_page(
+	add_menu_page(
 		'Ajax Load More',
 		'Ajax Load More',
 		apply_filters( 'alm_user_role', 'edit_theme_options' ),
@@ -617,7 +614,7 @@ function alm_get_tax_terms() {
 		echo $value; // phpcs:ignore
 		wp_die();
 	} else {
-		echo "<p class='warning'>No terms exist within this taxonomy</p>";
+		echo '<p class="warning">' . __( 'No terms exist within this taxonomy', 'ajax-load-more' ) . '</p>';
 		wp_die();
 	}
 }
