@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 7.3.1
+Stable tag: 7.3.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,14 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.3.1.2 - May 11, 2025 =
+* HOTFIX: Revert change to fix `load_plugin_textdomain` warning. This update caused a fatal error. Sorry about that. Will fix the warning in the next release.
+
+= 7.3.1.1 - May 10, 2025 =
+* UPDATE: Various security fixes.
+* UPDATE: Updated Axios NPM package.
+* FIX: Fixed issue with `load_plugin_textdomain` warning.
 
 = 7.3.1 - February 12, 2025 =
 * UPDATE: Updated new Date Query feature to parse compare value. This was previously not functioning as expected. e.g. `[ajax_load_more date_query="2024-01-01;2020-01-01" date_query_compare=">=;<=" date_query_relation="OR"]
