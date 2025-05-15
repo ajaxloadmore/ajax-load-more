@@ -586,7 +586,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			// Horizontal Scroll CSS.
 			if ( $scroll_direction === 'horizontal' && $scroll_container ) {
 				// Add style for overflow style of the container.
-				$ajaxloadmore .= '<style>' . $scroll_container . '{ height: auto; width: 100%; overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch; }</style>';
+				$ajaxloadmore .= '<style>' . esc_attr( $scroll_container ) . '{ height: auto; width: 100%; overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch; }</style>';
 			}
 
 			// Masonry Hook (Before).
