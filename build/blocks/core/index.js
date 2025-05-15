@@ -491,12 +491,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  * Watch for changes to the DOM and initialize ALM blocks.
  */
 var almBlockCallback = function almBlockCallback() {
-  var alm = document.querySelectorAll('.wp-block-ajax-load-more-core .ajax-load-more-wrap');
-  if (alm !== null && alm !== void 0 && alm.length) {
-    _toConsumableArray(alm).forEach(function (instance) {
-      ajaxloadmore.wpblock(instance);
-    });
-  }
+  setTimeout(function () {
+    var targetClass = '.wp-block-ajax-load-more-core .ajax-load-more-wrap';
+
+    /**
+     * Support iFrame block editor.
+     * @see https://make.wordpress.org/core/2023/07/18/miscellaneous-editor-changes-in-wordpress-6-3/#post-editor-iframed
+     */
+    var iframe = document.querySelector('iframe[name="editor-canvas"]');
+
+    // Get all instances of ALM blocks.
+    var alm = iframe ? iframe.contentWindow.document.querySelectorAll(targetClass) : document.querySelectorAll(targetClass);
+    if (alm !== null && alm !== void 0 && alm.length) {
+      _toConsumableArray(alm).forEach(function (instance) {
+        ajaxloadmore.wpblock(instance);
+      });
+    }
+  }, 1000);
 };
 external_wp_domReady_default()(function () {
   var observer = new MutationObserver(almBlockCallback);
@@ -506,7 +517,9 @@ external_wp_domReady_default()(function () {
     childList: true,
     subtree: true
   };
-  observer.observe(targetNode, config);
+  if (targetNode) {
+    observer.observe(targetNode, config);
+  }
 });
 // EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
 var injectStylesIntoStyleTag = __webpack_require__(379);

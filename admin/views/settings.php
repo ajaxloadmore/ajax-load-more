@@ -23,12 +23,27 @@ $alm_admin_heading = __( 'Settings', 'ajax-load-more' );
 					<ul>
 						<?php
 						foreach ( (array) $wp_settings_sections[ $page ] as $alm_section ) {
-							echo '<li><button type="button" data-id="' . esc_attr( str_replace( 'alm_', '', $alm_section['id'] ) ) . '">';
+							$section_id = $alm_section['id'];
+
+							echo '<li><button type="button" data-id="' . esc_attr( str_replace( 'alm_', '', $section_id ) ) . '">';
 							if ( $alm_section['title'] ) {
-								if ( $alm_section['id'] === 'alm_general_settings' || $alm_section['id'] === 'alm_admin_settings' ) {
+								if ( $section_id === 'alm_general_settings' || $section_id === 'alm_admin_settings' ) {
 									echo '<i class="fa fa-cog"></i>' . esc_attr( $alm_section['title'] );
 								} else {
-									echo '<i class="fa fa-plus-circle"></i>' . esc_attr( str_replace( ' Settings', '', $alm_section['title'] ) );
+									$nav_title = str_replace( ' Settings', '', $alm_section['title'] );
+
+									// Append 's' to the title if the section in array.
+									$nav_title = in_array(
+										$section_id,
+										[
+											'alm_filters_settings',
+											'alm_theme_repeaters_settings',
+											'alm_prev_post_settings',
+										],
+										true
+									) ? $nav_title . 's' : $nav_title;
+
+									echo '<i class="fa fa-plus-circle"></i>' . esc_attr( $nav_title );
 								}
 							}
 							echo '</button></li>';

@@ -9,6 +9,10 @@
 			top: 135px;
 		}
 	}
+	a {
+		outline: none !important;
+		box-shadow: none !important;
+	}
 	.major-publishing-actions {
 		padding: $padding_sm;
 		clear: both;

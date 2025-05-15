@@ -7,7 +7,7 @@ import insertScript from '../modules/insertScript';
  * @return {Object}    The modified object.
  */
 export function pagingCreateParams(alm) {
-	const { listing } = alm;
+	const { listing, container_type } = alm;
 	alm.addons.paging = listing.dataset.paging === 'true';
 	if (alm.addons.paging) {
 		alm.addons.paging_init = true;
@@ -22,7 +22,7 @@ export function pagingCreateParams(alm) {
 
 		alm.addons.paging_scroll = listing.dataset.pagingScroll ? listing.dataset.pagingScroll : false;
 		alm.addons.paging_scrolltop = listing.dataset.pagingScrolltop ? parseInt(listing.dataset.pagingScrolltop) : 100;
-		alm.addons.paging_container = listing.querySelector('.alm-paging-content');
+		alm.addons.paging_container = container_type === 'table' ? listing : listing.querySelector('.alm-paging-content');
 
 		alm.pause = alm.addons.preloaded ? true : alm.pause; // If preloaded, pause ALM.
 	}

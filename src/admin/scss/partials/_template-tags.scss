@@ -2,16 +2,23 @@
 .ajax-load-more {
 	.template-tags {
 		overflow: hidden;
-		border-left: 5px solid #dfd8c2;
-		padding: 15px;
+		border-left: 4px solid #dfd8c2;
+		padding: 12px 15px;
 		background: #fff9ea;
-		margin: 20px 0 0;
-		border-radius: 3px;
+		margin: 10px 0 0;
+		border-radius: 2px;
+		display: grid;
+		gap: 5px;
+		ul,
+		li {
+			margin: 0 !important;
+			padding: 0 !important;
+		}
 		h4,
 		li {
-			margin: 0 0 8px;
+			margin: 0 !important;
 			padding: 0;
-			font-size: 13px;
+			font-size: 12px;
 			text-decoration: none !important;
 		}
 		li {
@@ -20,10 +27,6 @@
 			padding: 0 !important;
 			border-radius: $radius;
 			line-height: 1.25;
-		}
-		ul {
-			margin: 0;
-			padding: 0;
 		}
 		pre {
 			display: inline-block;

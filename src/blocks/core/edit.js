@@ -21,17 +21,31 @@ export default function (props) {
  * Watch for changes to the DOM and initialize ALM blocks.
  */
 const almBlockCallback = function () {
-	const alm = document.querySelectorAll('.wp-block-ajax-load-more-core .ajax-load-more-wrap');
-	if (alm?.length) {
-		[...alm].forEach((instance) => {
-			ajaxloadmore.wpblock(instance);
-		});
-	}
+	setTimeout(() => {
+		const targetClass = '.wp-block-ajax-load-more-core .ajax-load-more-wrap';
+
+		/**
+		 * Support iFrame block editor.
+		 * @see https://make.wordpress.org/core/2023/07/18/miscellaneous-editor-changes-in-wordpress-6-3/#post-editor-iframed
+		 */
+		const iframe = document.querySelector('iframe[name="editor-canvas"]');
+
+		// Get all instances of ALM blocks.
+		const alm = iframe ? iframe.contentWindow.document.querySelectorAll(targetClass) : document.querySelectorAll(targetClass);
+
+		if (alm?.length) {
+			[...alm].forEach((instance) => {
+				ajaxloadmore.wpblock(instance);
+			});
+		}
+	}, 1000);
 };
 
 domReady(() => {
 	const observer = new MutationObserver(almBlockCallback);
 	const targetNode = document.querySelector('#editor');
 	const config = { attributes: false, childList: true, subtree: true };
-	observer.observe(targetNode, config);
+	if (targetNode) {
+		observer.observe(targetNode, config);
+	}
 });

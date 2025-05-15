@@ -9659,7 +9659,8 @@ var insertScript = {
  * @return {Object}    The modified object.
  */
 function pagingCreateParams(alm) {
-  var listing = alm.listing;
+  var listing = alm.listing,
+    container_type = alm.container_type;
   alm.addons.paging = listing.dataset.paging === 'true';
   if (alm.addons.paging) {
     alm.addons.paging_init = true;
@@ -9672,7 +9673,7 @@ function pagingCreateParams(alm) {
     alm.addons.paging_last_label = listing.dataset.pagingLastLabel;
     alm.addons.paging_scroll = listing.dataset.pagingScroll ? listing.dataset.pagingScroll : false;
     alm.addons.paging_scrolltop = listing.dataset.pagingScrolltop ? parseInt(listing.dataset.pagingScrolltop) : 100;
-    alm.addons.paging_container = listing.querySelector('.alm-paging-content');
+    alm.addons.paging_container = container_type === 'table' ? listing : listing.querySelector('.alm-paging-content');
     alm.pause = alm.addons.preloaded ? true : alm.pause; // If preloaded, pause ALM.
   }
 
@@ -12981,7 +12982,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
               alm.postcount = alm.addons.paging ? total : alm.postcount + total;
 
               // Set alm.html as plain text return.
-              alm.html = alm.container_type === 'table' ? html : html;
+              alm.html = html;
               if (!meta) {
                 // Display warning if `meta` is missing from response.
                 console.warn('Ajax Load More: Unable to access `meta` object in Ajax response. There may be an issue in your Repeater Template or another theme/plugin hook causing interference with the Ajax request.');

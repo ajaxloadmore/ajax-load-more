@@ -33,5 +33,7 @@ domReady(() => {
 	const observer = new MutationObserver(almBlockCallback);
 	const targetNode = document.querySelector('#editor');
 	const config = { attributes: false, childList: true, subtree: true };
-	observer.observe(targetNode, config);
+	if (targetNode) {
+		observer.observe(targetNode, config);
+	}
 });

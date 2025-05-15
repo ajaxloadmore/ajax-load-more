@@ -15,7 +15,7 @@
 function alm_is_admin_screen() {
 	$return = false;
 	$screen = get_current_screen();
-	if ( $screen->parent_base === 'ajax-load-more' ) {
+	if ( $screen && $screen->parent_base === 'ajax-load-more' ) {
 		$return = true;
 	}
 	return $return;

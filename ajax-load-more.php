@@ -7,14 +7,35 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.3.1.2
+ * Version: 7.4.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
-define( 'ALM_VERSION', '7.3.1.2' );
-define( 'ALM_RELEASE', 'May 11, 2025' );
+
+/*
+* NEW: Added required updates for table layouts and paging add-on.
+* UPDATE: Added support for iframe block editor and rendering Ajax Load More Block.
+* FIX: Fixed issue with default values on archive templates adding a duplicate query param.
+* FIX: Fixed potential issue with core and filters ALM blocks throwing admin error.
+* Fix: Fixed PHP warning due to registering the text domain.
+* FIX: Security fixes.
+
+PAGING - 2.0.1
+FILTERS - 2.4.0
+ELEMENTOR
+- Fix for activation check.
+- Updated Elementor tested to.
+WooCommerce
+- Fix for activation check.
+- Updated WooCommerce tested to.
+
+*/
+
+
+define( 'ALM_VERSION', '7.4.0' );
+define( 'ALM_RELEASE', 'May 14, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
@@ -76,8 +97,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ $this, 'alm_shortcode' ] );
-
-			add_action( 'init', [ $this, 'alm_load_text_domain' ] );
+			add_shortcode( 'init', [ $this, 'alm_load_text_domain' ] );
 		}
 
 		/**
@@ -294,16 +314,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					echo esc_html__( 'Error creating repeater template directory', 'ajax-load-more' ) . ' - ' . esc_attr( $dir );
 				}
 			}
-		}
-
-		/**
-		 * Returns add-on data (admin/admin-functions.php).
-		 *
-		 * @since 2.0.0
-		 * @return @addons
-		 */
-		public function alm_return_addons() {
-			return alm_get_addons();
 		}
 
 		/**

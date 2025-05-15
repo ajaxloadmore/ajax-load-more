@@ -36,10 +36,7 @@
 				<a target="blank" href="https://wordpress.org/plugins/ajax-load-more/"><i class="fa fa-wordpress"></i> <?php esc_attr_e( 'WordPress', 'ajax-load-more' ); ?></a>
 			</li>
 			<li>
-				<a target="blank" href="https://github.com/dcooney/wordpress-ajax-load-more"><i class="fa fa-github"></i> <?php esc_attr_e( 'Github', 'ajax-load-more' ); ?></a>
-			</li>
-			<li>
-				<a target="blank" href="http://twitter.com/ajaxloadmore"><i class="fa fa-twitter"></i> <?php esc_attr_e( 'Twitter', 'ajax-load-more' ); ?></a>
+				<a target="blank" href="https://github.com/ajaxloadmore/ajax-load-more"><i class="fa fa-github"></i> <?php esc_attr_e( 'Github', 'ajax-load-more' ); ?></a>
 			</li>
 		</ul>
 	</div>

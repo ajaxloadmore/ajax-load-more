@@ -546,7 +546,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			alm.postcount = alm.addons.paging ? total : alm.postcount + total;
 
 			// Set alm.html as plain text return.
-			alm.html = alm.container_type === 'table' ? html : html;
+			alm.html = html;
 
 			if (!meta) {
 				// Display warning if `meta` is missing from response.

@@ -109,12 +109,13 @@ function alm_admin_notice_errors() {
 	$screen              = get_current_screen();
 	$alm_is_admin_screen = alm_is_admin_screen();
 
+	$excluded = [ 'dashboard', 'plugins', 'options-general', 'options' ];
+
 	// Exit if screen is not dashboard, plugins, settings or ALM admin.
-	if ( ! $alm_is_admin_screen && $screen->id !== 'dashboard' && $screen->id !== 'plugins' && $screen->id !== 'options-general' && $screen->id !== 'options' ) {
+	if ( ! $alm_is_admin_screen && ! in_array( $screen->id, $excluded, true ) ) {
 		return;
 	}
 
-	$class   = 'notice error alm-err-notice';
 	$message = '';
 	$count   = 0;
 
@@ -134,6 +135,7 @@ function alm_admin_notice_errors() {
 		if ( has_action( $addon['action'] ) ) {
 			$key    = $addon['key'];
 			$status = get_option( $addon['status'] );
+
 			// Check license status.
 			$license_status = alm_license_check( $addon['item_id'], get_option( $key ), $status );
 			if ( ! isset( $status ) || empty( $status ) || $license_status !== 'valid' ) {
@@ -144,18 +146,18 @@ function alm_admin_notice_errors() {
 
 	// Print result.
 	if ( $count > 0 ) {
-		printf( '<div class="%1$s"><p>%2$s</p></div>', wp_kses_post( $class ), wp_kses_post( $message ) );
+		printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice error alm-err-notice', wp_kses_post( $message ) );
 	}
 }
 add_action( 'admin_notices', 'alm_admin_notice_errors' );
-
 
 /**
  * Check the status of a license.
  *
  * @param string $item_id The ID of the product.
  * @param string $license The actual license key.
- * @param string $status The status of the license.
+ * @param string $status  The status of the license.
+ * @return bool|string
  * @since 2.8.3
  */
 function alm_license_check( $item_id = null, $license = null, $status = null ) {
@@ -163,11 +165,11 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
 		return false;
 	}
 
-	// Get plugin transient for license status.
-	if ( get_transient( "alm_{$item_id}_{$license}" ) ) {
+	$transient = "alm_{$item_id}_{$license}";
 
-		// Transient exists.
-		return get_transient( "alm_{$item_id}_{$license}" );
+	// Get plugin transient for license status.
+	if ( get_transient( $transient ) ) {
+		return get_transient( $transient );
 
 	} else {
 		$api_params = [
@@ -181,7 +183,7 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
 			[
 				'body'      => $api_params,
 				'timeout'   => 15,
-				'sslverify' => false,
+				'sslverify' => apply_filters( 'alm_licensing_sslverify', false ),
 			]
 		);
 		if ( is_wp_error( $response ) ) {
@@ -195,7 +197,7 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
 		update_option( $status, $license_data->license );
 
 		// Set transient value to store license status.
-		set_transient( "alm_{$item_id}_{$license}", $license_data->license, 168 * HOUR_IN_SECONDS ); // 7 days
+		set_transient( $transient, $license_data->license, 168 * HOUR_IN_SECONDS ); // 7 days
 
 		// Return the status.
 		return $license_data->license;
@@ -209,8 +211,7 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
  * @since 5.2
  */
 function alm_plugin_update_license_messages() {
-	$addons = alm_get_addons();
-	foreach ( $addons as $addon ) {
+	foreach ( alm_get_addons() as $addon ) {
 		$path = $addon['path'];
 		$hook = "in_plugin_update_message-{$path}/{$path}.php";
 		add_action( $hook, 'alm_prefix_plugin_update_message', 10, 2 );
@@ -226,9 +227,8 @@ alm_plugin_update_license_messages();
  * @since 5.2
  */
 function alm_prefix_plugin_update_message( $data, $response ) {
-	$addons  = alm_get_addons();
-	$slug    = $response->slug;
-	$version = $response->new_version;
+	$addons = alm_get_addons();
+	$slug   = $response->slug;
 
 	foreach ( $addons as $key => $addon ) {
 		if ( $addon['path'] === $slug ) {
@@ -241,32 +241,31 @@ function alm_prefix_plugin_update_message( $data, $response ) {
 		$addon = $addons[ $index ];
 
 		if ( isset( $addon ) ) {
-			$name   = '<strong>' . $addon['name'] . '</strong>';
 			$status = get_option( $addon['status'] );
 
-			// Expired.
 			if ( $status === 'expired' ) {
+				// Expired.
 				printf(
 					'<span style="' . esc_html( $style ) . '">%s %s</span>',
-					esc_html( __( 'Looks like your subscription has expired.', 'ajax-load-more' ) ),
+					esc_html__( 'Looks like your subscription has expired.', 'ajax-load-more' ),
 					wp_kses_post( __( 'Please login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 				);
 			}
 
-			// Invalid/Inactive.
 			if ( $status === 'invalid' || $status === 'disabled' ) {
+				// Invalid/Inactive.
 				printf(
 					'<span style="' . esc_html( $style ) . '">%s %s</span>',
-					esc_html( __( 'Looks like your license is inactive and/or invalid.', 'ajax-load-more' ) ),
+					esc_html__( 'Looks like your license is inactive and/or invalid.', 'ajax-load-more' ),
 					wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> or login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 				);
 			}
 
-			// Deactivated.
 			if ( $status === 'deactivated' ) {
+				// Deactivated.
 				printf(
 					'<span style="' . esc_html( $style ) . '">%s %s</span>',
-					esc_html( __( 'Looks like your license has been deactivated.', 'ajax-load-more' ) ),
+					esc_html__( 'Looks like your license has been deactivated.', 'ajax-load-more' ),
 					wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> to update.', 'ajax-load-more' ) )
 				);
 			}
@@ -281,9 +280,7 @@ function alm_prefix_plugin_update_message( $data, $response ) {
  * @since 5.2
  */
 function alm_plugin_row( $plugin_name ) {
-	$addons     = alm_get_addons();
-	$pro_addons = alm_get_pro_addon();
-
+	$addons = alm_get_addons();
 	$addons = array_merge( alm_get_addons(), alm_get_pro_addon() );
 	foreach ( $addons as $addon ) {
 		if ( $plugin_name === $addon['path'] . '/' . $addon['path'] . '.php' ) {

@@ -43,8 +43,7 @@ add_filter( 'alm_progress_css', 'alm_progress_css', 10, 3 );
  * @since 3.3.1
  */
 function alm_css_disabled( $setting ) {
-	$options  = get_option( 'alm_settings' );
-	$disabled = true;
+	$options = get_option( 'alm_settings' );
 	return ! isset( $options[ $setting ] ) || $options[ $setting ] !== '1' ? false : true;
 }
 
@@ -745,6 +744,19 @@ function alm_print( $query = '', $title = '' ) {
 		echo esc_html( $title );
 	}
 	alm_pretty_print( $query );
+}
+
+/**
+ * Debug helper for printing to error log.
+ *
+ * @param object|array $data The data to log.
+ */
+function alm_log( $data ) {
+	if ( is_array( $data ) || is_object( $data ) ) {
+		error_log( print_r( $data, true ) );
+	} else {
+		error_log( $data );
+	}
 }
 
 /**
