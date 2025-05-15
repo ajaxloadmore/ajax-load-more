@@ -7,7 +7,7 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.3.1.2
+ * Version: 7.4.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
@@ -23,19 +23,19 @@
 * FIX: Security fixes.
 
 PAGING - 2.0.1
-* NEW: Added support for table layouts.
-* UPDATE: Code cleanup and various UI/UX updates.
-
-FILTERS:
-
-
-IN PROGRESS:
+FILTERS - 2.4.0
+ELEMENTOR
+- Fix for activation check.
+- Updated Elementor tested to.
+WooCommerce
+- Fix for activation check.
+- Updated WooCommerce tested to.
 
 */
 
 
-define( 'ALM_VERSION', '7.3.1.2' );
-define( 'ALM_RELEASE', 'May 11, 2025' );
+define( 'ALM_VERSION', '7.4.0' );
+define( 'ALM_RELEASE', 'May 14, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.

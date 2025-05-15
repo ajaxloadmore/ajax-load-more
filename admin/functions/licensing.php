@@ -109,12 +109,13 @@ function alm_admin_notice_errors() {
 	$screen              = get_current_screen();
 	$alm_is_admin_screen = alm_is_admin_screen();
 
+	$excluded = [ 'dashboard', 'plugins', 'options-general', 'options' ];
+
 	// Exit if screen is not dashboard, plugins, settings or ALM admin.
-	if ( ! $alm_is_admin_screen && $screen->id !== 'dashboard' && $screen->id !== 'plugins' && $screen->id !== 'options-general' && $screen->id !== 'options' ) {
+	if ( ! $alm_is_admin_screen && ! in_array( $screen->id, $excluded, true ) ) {
 		return;
 	}
 
-	$class   = 'notice error alm-err-notice';
 	$message = '';
 	$count   = 0;
 
@@ -134,6 +135,7 @@ function alm_admin_notice_errors() {
 		if ( has_action( $addon['action'] ) ) {
 			$key    = $addon['key'];
 			$status = get_option( $addon['status'] );
+
 			// Check license status.
 			$license_status = alm_license_check( $addon['item_id'], get_option( $key ), $status );
 			if ( ! isset( $status ) || empty( $status ) || $license_status !== 'valid' ) {
@@ -144,7 +146,7 @@ function alm_admin_notice_errors() {
 
 	// Print result.
 	if ( $count > 0 ) {
-		printf( '<div class="%1$s"><p>%2$s</p></div>', wp_kses_post( $class ), wp_kses_post( $message ) );
+		printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice error alm-err-notice', wp_kses_post( $message ) );
 	}
 }
 add_action( 'admin_notices', 'alm_admin_notice_errors' );
@@ -154,7 +156,8 @@ add_action( 'admin_notices', 'alm_admin_notice_errors' );
  *
  * @param string $item_id The ID of the product.
  * @param string $license The actual license key.
- * @param string $status The status of the license.
+ * @param string $status  The status of the license.
+ * @return bool|string
  * @since 2.8.3
  */
 function alm_license_check( $item_id = null, $license = null, $status = null ) {
@@ -162,11 +165,11 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
 		return false;
 	}
 
-	// Get plugin transient for license status.
-	if ( get_transient( "alm_{$item_id}_{$license}" ) ) {
+	$transient = "alm_{$item_id}_{$license}";
 
-		// Transient exists.
-		return get_transient( "alm_{$item_id}_{$license}" );
+	// Get plugin transient for license status.
+	if ( get_transient( $transient ) ) {
+		return get_transient( $transient );
 
 	} else {
 		$api_params = [
@@ -180,7 +183,7 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
 			[
 				'body'      => $api_params,
 				'timeout'   => 15,
-				'sslverify' => false,
+				'sslverify' => apply_filters( 'alm_licensing_sslverify', false ),
 			]
 		);
 		if ( is_wp_error( $response ) ) {
@@ -194,7 +197,7 @@ function alm_license_check( $item_id = null, $license = null, $status = null ) {
 		update_option( $status, $license_data->license );
 
 		// Set transient value to store license status.
-		set_transient( "alm_{$item_id}_{$license}", $license_data->license, 168 * HOUR_IN_SECONDS ); // 7 days
+		set_transient( $transient, $license_data->license, 168 * HOUR_IN_SECONDS ); // 7 days
 
 		// Return the status.
 		return $license_data->license;
