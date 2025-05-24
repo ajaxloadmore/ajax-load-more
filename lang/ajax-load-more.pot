@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-14T13:17:17+00:00\n"
+"POT-Creation-Date: 2025-05-24T13:11:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -79,7 +79,7 @@ msgstr ""
 #: admin/admin.php:118
 #: admin/admin.php:126
 #: admin/views/settings.php:9
-#: ajax-load-more.php:321
+#: ajax-load-more.php:307
 #: src/blocks/core/inspector.js:17
 #: src/blocks/filters/inspector.js:28
 msgid "Settings"
@@ -239,40 +239,40 @@ msgstr ""
 msgid "This doesn't look right, what are you trying to do?"
 msgstr ""
 
-#: admin/functions/licensing.php:124
+#: admin/functions/licensing.php:125
 msgid "You have an invalid or expired <a href=\"admin.php?page=ajax-load-more\"><b>Ajax Load More Pro</b></a> license key - visit the <a href=\"admin.php?page=ajax-load-more-licenses\">License</a> section to input your key or <a href=\"https://connekthq.com/plugins/ajax-load-more/pro/\" target=\"_blank\">purchase</a> one now."
 msgstr ""
 
-#: admin/functions/licensing.php:129
+#: admin/functions/licensing.php:130
 msgid "You have invalid or expired <a href=\"admin.php?page=ajax-load-more\"><b>Ajax Load More</b></a> license keys - visit the <a href=\"admin.php?page=ajax-load-more-licenses\">Licenses</a> section to input your keys."
 msgstr ""
 
-#: admin/functions/licensing.php:247
+#: admin/functions/licensing.php:250
 msgid "Looks like your subscription has expired."
 msgstr ""
 
-#: admin/functions/licensing.php:248
+#: admin/functions/licensing.php:251
 msgid "Please login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
 msgstr ""
 
-#: admin/functions/licensing.php:256
+#: admin/functions/licensing.php:259
 msgid "Looks like your license is inactive and/or invalid."
 msgstr ""
 
-#: admin/functions/licensing.php:257
+#: admin/functions/licensing.php:260
 msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> or login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
 msgstr ""
 
-#: admin/functions/licensing.php:265
+#: admin/functions/licensing.php:268
 msgid "Looks like your license has been deactivated."
 msgstr ""
 
-#: admin/functions/licensing.php:266
+#: admin/functions/licensing.php:269
 msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> to update."
 msgstr ""
 
 #. translators: %1$s is replaced with link href
-#: admin/functions/licensing.php:295
+#: admin/functions/licensing.php:298
 msgid "%1$sRegister%2$s your copy of %3$s to receive access to automatic upgrades and support. Need a license key? %4$sPurchase one now%5$s."
 msgstr ""
 
@@ -416,7 +416,7 @@ msgstr ""
 #: admin/functions/settings.php:374
 #: admin/shortcode-builder/shortcode-builder.php:214
 #: admin/shortcode-builder/shortcode-builder.php:387
-#: ajax-load-more.php:423
+#: ajax-load-more.php:409
 msgid "Load More"
 msgstr ""
 
@@ -2731,19 +2731,19 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:308
+#: ajax-load-more.php:294
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:407
+#: ajax-load-more.php:393
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:408
+#: ajax-load-more.php:394
 msgid "No results found."
 msgstr ""
 
-#: ajax-load-more.php:432
+#: ajax-load-more.php:418
 msgid "Load Previous"
 msgstr ""
 

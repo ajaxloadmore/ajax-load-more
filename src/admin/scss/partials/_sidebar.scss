@@ -22,11 +22,16 @@
 		border-radius: 0 0 $radius_lg $radius_lg;
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		gap: 10px;
 		width: 100%;
 		i {
 			opacity: 0.4;
 			margin: 0 2px 0 0;
+		}
+
+		&.space-between {
+			justify-content: space-between;
 		}
 	}
 

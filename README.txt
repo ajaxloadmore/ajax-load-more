@@ -269,11 +269,12 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.4.0 - May 14, 2025 =
-* NEW: Added required updates for background processing feature of the FIlters add-on.
+= 7.4.0 - May 25, 2025 =
 * NEW: Added required updates for table layouts and paging add-on.
+* NEW: Added required updates for background processing feature of the Filters add-on.
 * UPDATE: Added support for iframe block editor and rendering Ajax Load More Block.
 * FIX: Fixed issue with default values on archive templates adding a duplicate query param.
+* FIX: Fixed issue with `load_plugin_textdomain` warning.
 * FIX: Fixed potential issue with core and filters ALM blocks throwing admin error.
 * Fix: Fixed PHP warning due to registering the text domain.
 * UPDATE: Various code cleanup and UI updates throughout the plugin.

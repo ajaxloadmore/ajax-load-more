@@ -14,28 +14,8 @@
  * @package AjaxLoadMore
  */
 
-/*
-* NEW: Added required updates for table layouts and paging add-on.
-* UPDATE: Added support for iframe block editor and rendering Ajax Load More Block.
-* FIX: Fixed issue with default values on archive templates adding a duplicate query param.
-* FIX: Fixed potential issue with core and filters ALM blocks throwing admin error.
-* Fix: Fixed PHP warning due to registering the text domain.
-* FIX: Security fixes.
-
-PAGING - 2.0.1
-FILTERS - 2.4.0
-ELEMENTOR
-- Fix for activation check.
-- Updated Elementor tested to.
-WooCommerce
-- Fix for activation check.
-- Updated WooCommerce tested to.
-
-*/
-
-
 define( 'ALM_VERSION', '7.4.0' );
-define( 'ALM_RELEASE', 'May 14, 2025' );
+define( 'ALM_RELEASE', 'May 25, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 // Plugin installation helpers.
