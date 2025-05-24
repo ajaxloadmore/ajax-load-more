@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button button-primary" href="https://connekthq.com/plugins/ajax-load-more/add-ons/cache/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Cache">Learn More</a>
+		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/cache/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Cache">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button button-primary" href="https://connekthq.com/plugins/ajax-load-more/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Learn More</a>
+		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -52,7 +52,7 @@
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button button-primary" href="https://connekthq.com/plugins/ajax-load-more/add-ons/comments/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Comments">Learn More</a>
+		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/comments/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Comments">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -67,7 +67,7 @@
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button button-primary" href="https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Learn More</a>
+		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button button-primary" href="https://connekthq.com/plugins/ajax-load-more/pro/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Pro">Learn More</a>
+		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/pro/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Pro">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -97,7 +97,7 @@
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button button-primary" href="https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=elementor">Learn More</a>
+		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=elementor">Learn More</a>
 	</div>
 	<?php } ?>
 </div>

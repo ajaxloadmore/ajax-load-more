@@ -30,4 +30,9 @@
 			</li>
 		</ul>
 	</div>
+	<div class="major-publishing-actions">
+		<a href="https://connekthq.com/about/" class="button" target="_blank">
+			<?php esc_html_e( 'About Connekt', 'ajax-load-more-filters' ); ?>
+		</a>
+	</div>
 </div>

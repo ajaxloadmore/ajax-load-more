@@ -6,7 +6,7 @@
  */
 
 $alm_menu_items   = $GLOBALS['alm_menu_items'];
-$alm_current_page = filter_input( INPUT_GET, 'page', @FILTER_SANITIZE_STRING );
+$alm_current_page = filter_input( INPUT_GET, 'page' );
 ?>
 <header class="alm-admin-toolbar">
 	<a class="alm-admin-toolbar--logo" href="<?php get_admin_url(); ?>admin.php?page=ajax-load-more">

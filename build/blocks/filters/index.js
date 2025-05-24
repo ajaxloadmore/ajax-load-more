@@ -537,7 +537,9 @@ external_wp_domReady_default()(function () {
     childList: true,
     subtree: true
   };
-  observer.observe(targetNode, config);
+  if (targetNode) {
+    observer.observe(targetNode, config);
+  }
 });
 // EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
 var injectStylesIntoStyleTag = __webpack_require__(379);
