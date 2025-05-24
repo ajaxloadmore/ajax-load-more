@@ -279,6 +279,9 @@ How to install Ajax Load More.
 * Fix: Fixed PHP warning due to registering the text domain.
 * UPDATE: Various code cleanup and UI updates throughout the plugin.
 
+= 7.3.1.3 - May 15, 2025 =
+* UPDATE: Various security fixes.
+
 = 7.3.1.2 - May 11, 2025 =
 * HOTFIX: Revert change to fix `load_plugin_textdomain` warning. This update caused a fatal error. Sorry about that. Will fix the warning in the next release.
 
@@ -390,11 +393,9 @@ If you are using the Filters, SEO or Paging add-ons please be sure to update the
 * FIX: Fixed issue with admin_footer_text hook not returning but echoing text content.
 * FIX: Fixed issue with Single Posts add-on preview function. This was no longer working but it functional again.
 
-
 = 6.2.0.3 - November 6, 2023 =
 *HOTFIX: Fixed issue with fatal i18n error in core Ajax Load More Elementor widget causing issues with loading posts on edit screens.
 *UPDATE: Improved Cache add-on checker function for increased reliability while fetching cache.
-
 
 = 6.2.0.2 - November 3, 2023 =
 * FIX: Fixed issue with paging URLs when using Elementor add-on with WooCommerce products and WP archive templates.
@@ -409,7 +410,6 @@ add_filter( 'alm_restapi_url', function(){
 = 6.2.0.1 - October 20, 2023 =
 * HOTFIX: Fixed issue with speed variable when loading Ajax Load More in a SPA application or via HTTP request.
 
-
 = 6.2.0 - September 27, 2023 =
 * UPDATE: Added support for GA4 integration across various add-ons.
 * UPDATE: Updated Shortcode builder to accept new plugin parameters for Next Page add-on.
@@ -421,11 +421,9 @@ add_filter( 'alm_restapi_url', function(){
 * FIX: Fixed issue with seo_offset parameter not displaying results due to JS error.
 * FIX: Various security fixes and patches.
 
-
 = 6.1.0.1 - August 8, 2023 =
 * HOTFIX: Fixed issue with querying data using `custom_args` parameter.
 * HOTFIX: Fixed issue with querying data using the `vars` parameter.
-
 
 = 6.1.0 - July 27, 2023 =
 
@@ -446,16 +444,13 @@ Users who were previously using `meta_key` for custom field ordering will need t
 * FIX: Attempted compatibility fix for WPML and Single Posts add-on loading incorrect language because of WPML language cookies.
 * Fix: Fixed issue with broken [Results Text](https://connekthq.com/plugins/ajax-load-more/docs/results-text/)
 
-
 = 6.0.1 - June 13, 2023 =
 * HOTFIX: Fixed issue with Shortcode Builder JavaScript error causing issues in admin.
 * HOTFIX: Fixed issue with posts_per_page="-1" unintentionally not loading any posts.
 
-
 = 6.0.0 - June 11, 2023 =
 * NOTICE: Ajax Load More 6.0 is a major update and includes a breaking changes with regards to the Cache add-on. Please review the information below before updating.
 * NOTICE: Cache add-on < 2.0 is no longer supported by Ajax Load More. Please update to the latest version of the add-on to continue using the Cache functionality.
-
 
 * NEW: Adding required functionality for the Cache 2.0 update. This introduces a new cache structure using MD5 hash for many cache URLs.
 * UPDATE: Core ALM JavaScript refactoring to stremline content loading using async/await and promises.
@@ -466,10 +461,8 @@ Users who were previously using `meta_key` for custom field ordering will need t
 * FIX: Fixed issue with WooCommerce and Cache add-ons not working in some instances.
 * FIX: Fixed issue with ACF extension and Paging add-on not getting correct amount of posts loaded.
 
-
 = 5.6.0.5 - April 3, 2023 =
 * HOTFIX: Fixed issue with `taxonomy_relation` parameter resolving to `AND`.
-
 
 = 5.6.0.4 - March 8, 2023 =
 * UPDATE: Restricting ALM ID to contain alphanumeric characters, dashes and underscores only.
