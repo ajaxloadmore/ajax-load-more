@@ -269,7 +269,7 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.4.0 - May 25, 2025 =
+= 7.4.0 - May 27, 2025 =
 * NEW: Added required updates for table layouts and paging add-on.
 * NEW: Added required updates for background processing feature of the Filters add-on.
 * UPDATE: Added support for iframe block editor and rendering Ajax Load More Block.
