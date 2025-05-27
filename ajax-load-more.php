@@ -7,14 +7,14 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.4.0
+ * Version: 7.4.0.1
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-define( 'ALM_VERSION', '7.4.0' );
+define( 'ALM_VERSION', '7.4.0.1' );
 define( 'ALM_RELEASE', 'May 27, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
@@ -294,6 +294,16 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					echo esc_html__( 'Error creating repeater template directory', 'ajax-load-more' ) . ' - ' . esc_attr( $dir );
 				}
 			}
+		}
+
+		/**
+		 * Returns add-on data (admin/admin-functions.php).
+		 *
+		 * @since 2.0.0
+		 * @return @addons
+		 */
+		public function alm_return_addons() {
+			return alm_get_addons();
 		}
 
 		/**
