@@ -10,10 +10,12 @@
  * Include these files.
  */
 require_once ALM_PATH . 'admin/functions/layouts.php';
-require_once ALM_PATH . 'admin/functions/licensing.php';
 require_once ALM_PATH . 'admin/functions/plugin-updates.php';
 require_once ALM_PATH . 'admin/functions/repeater-templates.php';
 require_once ALM_PATH . 'admin/functions/settings.php';
+
+require_once plugin_dir_path( __FILE__ ) . 'classes/licensing.php';
+( new ALM_Licensing() )->register();
 
 /**
  * Setup the admin hooks
@@ -22,7 +24,8 @@ require_once ALM_PATH . 'admin/functions/settings.php';
  * @deprecated 5.6
  */
 function alm_admin_hooks() {
-	require_once plugin_dir_path( __FILE__ ) . '/classes/class-nag.php';
+	require_once plugin_dir_path( __FILE__ ) . 'classes/nag.php';
+	( new ALM_Nag() )->register();
 }
 add_action( 'admin_init', 'alm_admin_hooks' );
 

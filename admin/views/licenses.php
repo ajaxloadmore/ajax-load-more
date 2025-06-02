@@ -38,8 +38,10 @@ if ( isset( $_POST['license_activate'] ) ) {
 				?>
 			</p>
 			<?php
-			$addons      = has_action( 'alm_pro_installed' ) ? alm_get_pro_addon() : alm_get_addons();
-			$addon_count = 0;
+			$addons        = has_action( 'alm_pro_installed' ) ? alm_get_pro_addon() : alm_get_addons();
+			$addon_count   = 0;
+			$alm_licensing = new ALM_Licensing();
+
 			foreach ( $addons as $addon ) {
 				$name           = $addon['name'];
 				$intro          = $addon['intro'];
@@ -49,9 +51,8 @@ if ( isset( $_POST['license_activate'] ) ) {
 				$settings_field = $addon['settings_field'];
 				$url            = $addon['url'];
 				$item_id        = $addon['item_id'];
-
-				$constant = 'ALM_' . strtoupper( str_replace( '-', '_', sanitize_title_with_dashes( $name ) ) ) . '_LICENSE_KEY'; // e.g. ALM_CALL_TO_ACTION_LICENSE_KEY.
-				$license  = defined( $constant ) ? constant( $constant ) : get_option( $key );
+				$constant       = 'ALM_' . strtoupper( str_replace( '-', '_', sanitize_title_with_dashes( $name ) ) ) . '_LICENSE_KEY'; // e.g. ALM_CALL_TO_ACTION_LICENSE_KEY.
+				$license        = defined( $constant ) ? constant( $constant ) : get_option( $key );
 
 				// If installed.
 				if ( ! has_action( $action ) ) {
@@ -60,20 +61,23 @@ if ( isset( $_POST['license_activate'] ) ) {
 				++$addon_count;
 
 				// Check license status.
-				$license_status = alm_license_check( $item_id, $license, $settings_field );
+				$license_status = $alm_licensing->license_check( $item_id, $license, $settings_field );
 				$is_valid       = $license_status === 'valid';
 
 				// Get the complete license data.
-				$license_data = alm_get_license_data( "{$settings_field}_data" );
+				$license_data = $alm_licensing->get_license_data( "{$settings_field}_data" );
+
+				// Set initial variables.
+				$account_url = '';
+				$is_at_limit = false;
 				?>
-				<form method="post" action="admin.php?page=ajax-load-more-licenses">
+				<form method="post" action="admin.php?page=ajax-load-more-licenses" autocomplete="off">
 					<?php
 						$nonce = 'alm_' . esc_html( $item_id ) . '_license_nonce';
 						wp_nonce_field( $nonce, $nonce );
 						settings_fields( $settings_field );
 					?>
 					<input type="hidden" name="alm_license_nonce" value="<?php echo esc_attr( $nonce ); ?>" />
-					<input type="hidden" name="alm_item_name" value="<?php echo esc_attr( $name ); ?>" />
 					<input type="hidden" name="alm_item_key" value="<?php echo esc_attr( $key ); ?>" />
 					<input type="hidden" name="alm_item_option" value="<?php echo esc_attr( $settings_field ); ?>" />
 
@@ -89,8 +93,12 @@ if ( isset( $_POST['license_activate'] ) ) {
 						<div class="alm-license--fields">
 							<?php if ( $license_status !== 'valid' ) { ?>
 							<div class="alm-license-callout">
-								<h4><?php _e( 'Don\'t have a license?', 'ajax-load-more' ); ?></h4>
-								<p><?php _e( 'A valid license is required to activate and receive plugin updates directly in your WordPress dashboard', 'ajax-load-more' ); ?> &rarr; <a href="<?php echo $url; ?>?utm_source=WP%20Admin&utm_medium=Licenses&utm_campaign=<?php echo $name; ?>" target="blank"><strong><?php _e( 'Purchase Now', 'ajax-load-more' ); ?>!</strong></a></p>
+								<span class="alm-license-callout--icon">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+									</svg>
+								</span>
+								<div><?php _e( 'A valid license is required to activate and receive plugin updates directly in your WordPress dashboard', 'ajax-load-more' ); ?> &rarr; <a href="<?php echo $url; ?>?utm_source=WP%20Admin&utm_medium=Licenses&utm_campaign=<?php echo $name; ?>" target="blank"><strong><?php _e( 'Purchase Now', 'ajax-load-more' ); ?>!</strong></a></div>
 							</div>
 							<?php } ?>
 							<label for="<?php echo esc_attr( $key ); ?>">
@@ -101,12 +109,14 @@ if ( isset( $_POST['license_activate'] ) ) {
 									id="<?php echo esc_attr( $key ); ?>"
 									name="<?php echo esc_attr( $key ); ?>"
 									type="<?php echo esc_attr( apply_filters( 'alm_mask_license_keys', false ) ? 'password' : 'text' ); ?>"
-									class="regular-text"
 									value="<?php echo esc_attr( $license ); ?>"
 									placeholder="<?php _e( 'Enter License Key', 'ajax-load-more' ); ?>"
 									<?php
+									if ( defined( $constant ) || $is_valid ) {
+										echo 'readonly';
+									}
 									if ( defined( $constant ) ) {
-										echo 'disabled';
+										echo ' class="has-constant"';
 									}
 									?>
 								/>
@@ -119,46 +129,48 @@ if ( isset( $_POST['license_activate'] ) ) {
 							</div>
 						</div>
 						<div class="alm-license--actions">
-						<button class="button button-primary" type="submit" name="alm_activate_license" value="<?php echo esc_attr( $item_id ); ?>">
-								<?php esc_html_e( 'Activate License', 'ajax-load-more' ); ?>
-							</button>
 							<?php if ( ! $is_valid ) { ?>
-							<button class="button button-primary" type="submit" name="alm_activate_license" value="<?php echo esc_attr( $item_id ); ?>">
+							<button class="button button-primary button-large" type="submit" name="alm_activate_license" value="<?php echo esc_attr( $item_id ); ?>">
 								<?php esc_html_e( 'Activate License', 'ajax-load-more' ); ?>
 							</button>
 							<?php } else { ?>
-							<button class="button" type="submit" name="alm_deactivate_license" value="<?php echo esc_attr( $item_id ); ?>">
+							<button class="button button-large" type="submit" name="alm_deactivate_license" value="<?php echo esc_attr( $item_id ); ?>">
 								<?php esc_html_e( 'Deactivate License', 'ajax-load-more' ); ?>
 							</button>
-							<button class="button button-secondary" type="submit" name="alm_refresh_license">
-								<i class="fa fa-refresh" aria-hidden="true"></i> <?php _e( 'Refresh Status', 'ajax-load-more' ); ?>
+							<button class="button button-link button-large" type="submit" name="alm_refresh_license" value="<?php echo esc_attr( $item_id ); ?>">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+								</svg>
+								<?php _e( 'Refresh Status', 'ajax-load-more' ); ?>
 							</button>
 							<?php } ?>
 							<?php
 							// Expired license. Show Renew button.
 							if ( $license && $license_status === 'expired' ) {
-								$store_url = ALM_STORE_URL;
-								$url       = "{$store_url}/checkout/?edd_license_key={$license}&download_id={$item_id}";
+								$url = ALM_STORE_URL . "/checkout/?edd_license_key={$license}&download_id={$item_id}";
 								?>
-								<a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank">
+								<a class="button button-link button-large" href="<?php echo esc_url( $url ); ?>" target="_blank">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+	<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+</svg>
+
 									<?php _e( 'Renew License', 'ajax-load-more' ); ?>
 								</a>
 							<?php } ?>
 						</div>
 
 						<?php
-						if ( isset( $license_data['success'] ) && $license_data['success'] ) {
+						if ( $license_status === 'valid' && isset( $license_data['success'] ) && $license_data['success'] ) {
 							$expires       = isset( $license_data['expires'] ) ? $license_data['expires'] : '';
 							$license_limit = isset( $license_data['license_limit'] ) ? $license_data['license_limit'] : false;
 							$site_count    = isset( $license_data['site_count'] ) ? $license_data['site_count'] : false;
 							$payment_id    = isset( $license_data['payment_id'] ) ? $license_data['payment_id'] : '';
 
 							echo '<div class="alm-license--stats">';
-
 							if ( $expires ) {
 								?>
 								<div>
-									<span><?php esc_html_e( 'License Expires:', 'ajax-load-more' ); ?></span>
+									<span><?php esc_html_e( 'Expires:', 'ajax-load-more' ); ?></span>
 									<span>
 										<?php
 										if ( $expires === 'lifetime' ) {
@@ -177,18 +189,20 @@ if ( isset( $_POST['license_activate'] ) ) {
 									echo '<div>';
 									echo '<span>' . __( 'Activations:', 'ajax-load-more' ) . '</span>';
 									echo '<span>';
-									echo __( 'Unlimited', 'ajax-load-more' );
-									echo '</span>';
+									echo $site_count . '<em>/</em>' . __( 'Unlimited', 'ajax-load-more' );
+									echo '</em>';
 									echo '</div>';
 
 								} else {
-									$account_url = $payment_id ? ALM_STORE_URL . '/purchase-history/?action=manage_licenses&payment_id=105110' : '';
+									$account_url = $payment_id ? ALM_STORE_URL . "/purchase-history/?action=manage_licenses&payment_id={$payment_id}" : '';
 									$is_at_limit = $site_count >= $license_limit;
-
+									if ( (int) $site_count > (int) $license_limit ) {
+										$site_count = $license_limit; // Limit display to the license limit.
+									}
 									echo '<div>';
 									echo '<span>' . __( 'Activations:', 'ajax-load-more' ) . '</span>';
 									echo '<span>';
-									echo esc_html( $site_count ) . '/' . esc_html( $license_limit );
+									echo esc_html( $site_count ) . '<em>/</em>' . esc_html( $license_limit );
 									if ( $account_url && $is_at_limit ) {
 										echo ' &nbsp; <a href="' . esc_url( $account_url ) . '" target="_blank">' . esc_html__( 'View Upgrades', 'ajax-load-more' ) . '</a>';
 									}
@@ -202,26 +216,31 @@ if ( isset( $_POST['license_activate'] ) ) {
 
 						<?php
 						// Display Activation Limit Reached message.
-						if ( isset( $account_url ) && isset( $is_at_limit ) && $is_at_limit ) {
+						if ( $license_status === 'valid' && $account_url && $is_at_limit ) {
 							?>
 							<div class="alm-license-callout end">
-								<p>
+								<span	span class="alm-license-callout--icon">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+									</svg>
+								</span>
+								<div>
 								<?php
 								$message = sprintf(
 									/* translators: the license key expiration date */
-									__( 'Activation limit reached &mdash; you can add additional %1$s licenses from <a href="%2$s" target="_blank">your account</a>.', 'ajax-load-more' ),
+									__( 'Activation limit reached. You can purchase additional %1$s licenses from <a href="%2$s" target="_blank">your account</a>.', 'ajax-load-more' ),
 									'<a href="' . $url . '" target="_blank">' . $name . '</a>',
 									$account_url
 								);
 								echo wp_kses_post( $message );
 								?>
-								</p>
+								</div>
 							</div>
 							<?php
 						}
 						?>
 					</div>
-					<?php alm_print( $license_data ); ?>
+					<?php // alm_print( $license_data ); ?>
 				</form>
 				<?php
 			}
