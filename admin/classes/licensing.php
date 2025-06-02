@@ -154,7 +154,7 @@ class ALM_Licensing {
 				case 'missing':
 					$msg = sprintf(
 						// translators: %s is the plugin name.
-						__( 'Invalid %s license. Are you sure this license is correct?.', 'ajax-load-more' ),
+						__( 'Invalid %s license key. Are you sure this license is correct?.', 'ajax-load-more' ),
 						$name,
 					);
 					break;
@@ -372,7 +372,7 @@ class ALM_Licensing {
 	 * @return void
 	 */
 	public function delete_license_status( $option_prefix = '', $transient = '' ) {
-		// delete_option( "{$option_prefix}_key" ); // Delete the license key.
+		delete_option( "{$option_prefix}_key" ); // Delete the license key.
 		delete_option( "{$option_prefix}_status" ); // Delete the license status .
 		delete_option( "{$option_prefix}_data", ); // Delete the license data array.
 		delete_transient( $transient ); // Delete transient.
