@@ -834,7 +834,7 @@ disabled look for disabled choices in the results dropdown
   background-color: #f7f7f7;
 }
 .alm-status.success {
-  background-color: #2fc755;
+  background-color: #8ed860;
 }
 .alm-status.success span i {
   color: #fff;
@@ -2171,8 +2171,8 @@ disabled look for disabled choices in the results dropdown
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(191, 53, 56, 0.2);
 }
 .ajax-load-more .alm-license--header h3 span.is-valid {
-  background-color: #2fc755;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(47, 199, 85, 0.2);
+  background-color: #8ed860;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(142, 216, 96, 0.2);
 }
 .ajax-load-more .alm-license--header a {
   display: block;
@@ -2321,8 +2321,8 @@ disabled look for disabled choices in the results dropdown
   z-index: 5;
 }
 .ajax-load-more .alm-license-status.active {
-  background-color: #2fc755;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(47, 199, 85, 0.2);
+  background-color: #8ed860;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(142, 216, 96, 0.2);
 }
 .ajax-load-more .alm-license-status.inactive {
   background-color: #bf3538;
