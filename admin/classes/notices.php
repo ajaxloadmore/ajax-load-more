@@ -35,7 +35,7 @@ if ( ! class_exists( 'ALM_Notices' ) ) {
 		 * @param string $class The classname for the notice.
 		 * @return function
 		 */
-		public function alm_add_admin_notice( $text, $type = '', $class = '', $dismissible = true ) {
+		public function add_admin_notice( $text, $type = '', $class = '', $dismissible = true ) {
 			return $this->add_notice( $text, $type, $class, $dismissible );
 		}
 

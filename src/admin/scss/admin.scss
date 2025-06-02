@@ -129,7 +129,6 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	&.is-dismissible {
 		padding: 7px 7px 7px 15px !important;
 	}
-
 	p {
 		margin: 0;
 		width: 100%;
@@ -141,6 +140,37 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	button.notice-dismiss {
 		position: static !important;
 		margin-left: auto;
+	}
+
+	&.nag-notice {
+		@media screen and (max-width: $tablet) {
+			display: none;
+		}
+		svg {
+			display: none;
+		}
+		p {
+			display: grid;
+			@media screen and (min-width: $lg) {
+				display: flex;
+			}
+			align-items: center;
+			gap: 5px;
+			width: 100%;
+		}
+		.alm-nag-buttons {
+			margin: 15px 0 0;
+			@media screen and (min-width: $lg) {
+				margin: 0 0 0 auto;
+			}
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: nowrap;
+			a.button-no {
+				white-space: nowrap;
+			}
+		}
 	}
 }
 

@@ -2500,6 +2500,82 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   position: static !important;
   margin-left: auto;
 }
+@media screen and (max-width: 640px) {
+  .ajax-load-more .notice.nag-notice,
+  .ajax-load-more div.updated.nag-notice,
+  .ajax-load-more div.error.nag-notice,
+  .ajax-load-more div.notice-success.nag-notice,
+  .ajax-load-more div.notice-updated.nag-notice,
+  .ajax-load-more div.notice-info.nag-notice,
+  .ajax-load-more div.notice-error.nag-notice {
+    display: none;
+  }
+}
+.ajax-load-more .notice.nag-notice svg,
+.ajax-load-more div.updated.nag-notice svg,
+.ajax-load-more div.error.nag-notice svg,
+.ajax-load-more div.notice-success.nag-notice svg,
+.ajax-load-more div.notice-updated.nag-notice svg,
+.ajax-load-more div.notice-info.nag-notice svg,
+.ajax-load-more div.notice-error.nag-notice svg {
+  display: none;
+}
+.ajax-load-more .notice.nag-notice p,
+.ajax-load-more div.updated.nag-notice p,
+.ajax-load-more div.error.nag-notice p,
+.ajax-load-more div.notice-success.nag-notice p,
+.ajax-load-more div.notice-updated.nag-notice p,
+.ajax-load-more div.notice-info.nag-notice p,
+.ajax-load-more div.notice-error.nag-notice p {
+  display: grid;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+@media screen and (min-width: 1270px) {
+  .ajax-load-more .notice.nag-notice p,
+  .ajax-load-more div.updated.nag-notice p,
+  .ajax-load-more div.error.nag-notice p,
+  .ajax-load-more div.notice-success.nag-notice p,
+  .ajax-load-more div.notice-updated.nag-notice p,
+  .ajax-load-more div.notice-info.nag-notice p,
+  .ajax-load-more div.notice-error.nag-notice p {
+    display: flex;
+  }
+}
+.ajax-load-more .notice.nag-notice .alm-nag-buttons,
+.ajax-load-more div.updated.nag-notice .alm-nag-buttons,
+.ajax-load-more div.error.nag-notice .alm-nag-buttons,
+.ajax-load-more div.notice-success.nag-notice .alm-nag-buttons,
+.ajax-load-more div.notice-updated.nag-notice .alm-nag-buttons,
+.ajax-load-more div.notice-info.nag-notice .alm-nag-buttons,
+.ajax-load-more div.notice-error.nag-notice .alm-nag-buttons {
+  margin: 15px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+@media screen and (min-width: 1270px) {
+  .ajax-load-more .notice.nag-notice .alm-nag-buttons,
+  .ajax-load-more div.updated.nag-notice .alm-nag-buttons,
+  .ajax-load-more div.error.nag-notice .alm-nag-buttons,
+  .ajax-load-more div.notice-success.nag-notice .alm-nag-buttons,
+  .ajax-load-more div.notice-updated.nag-notice .alm-nag-buttons,
+  .ajax-load-more div.notice-info.nag-notice .alm-nag-buttons,
+  .ajax-load-more div.notice-error.nag-notice .alm-nag-buttons {
+    margin: 0 0 0 auto;
+  }
+}
+.ajax-load-more .notice.nag-notice .alm-nag-buttons a.button-no,
+.ajax-load-more div.updated.nag-notice .alm-nag-buttons a.button-no,
+.ajax-load-more div.error.nag-notice .alm-nag-buttons a.button-no,
+.ajax-load-more div.notice-success.nag-notice .alm-nag-buttons a.button-no,
+.ajax-load-more div.notice-updated.nag-notice .alm-nag-buttons a.button-no,
+.ajax-load-more div.notice-info.nag-notice .alm-nag-buttons a.button-no,
+.ajax-load-more div.notice-error.nag-notice .alm-nag-buttons a.button-no {
+  white-space: nowrap;
+}
 
 .ajax-load-more .alm-transient p {
   margin: 0.5em 0;

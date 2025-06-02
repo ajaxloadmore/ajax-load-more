@@ -9,11 +9,13 @@
 /**
  * Include these files.
  */
+if ( ! class_exists( 'ALM_Notices' ) ) {
+	require_once plugin_dir_path( __FILE__ ) . 'classes/notices.php';
+}
 require_once ALM_PATH . 'admin/functions/layouts.php';
 require_once ALM_PATH . 'admin/functions/plugin-updates.php';
 require_once ALM_PATH . 'admin/functions/repeater-templates.php';
 require_once ALM_PATH . 'admin/functions/settings.php';
-
 require_once plugin_dir_path( __FILE__ ) . 'classes/licensing.php';
 ( new ALM_Licensing() )->register();
 

@@ -21,13 +21,9 @@ class ALM_Licensing {
 	 */
 	public function register() {
 		add_action( 'admin_init', [ $this, 'license_activation' ] );
-		add_action( 'admin_notices', [ $this, 'admin_license_notices' ] );
+		add_action( 'admin_notices', [ $this, 'admin_license_notice' ] );
 		add_action( 'after_plugin_row', [ $this, 'alm_plugin_row' ] );
-
-		if ( ! class_exists( 'ALM_Notices' ) ) {
-			require_once ALM_PATH . 'admin/classes/notices.php';
-			$this->notices = new ALM_Notices();
-		}
+		$this->notices = new ALM_Notices();
 
 		// Loop each addon and add the plugin update message hook.
 		foreach ( alm_get_addons() as $addon ) {
@@ -95,7 +91,7 @@ class ALM_Licensing {
 			} else {
 				$message = __( 'An error occurred, please try again.', 'ajax-load-more' );
 			}
-			$this->notices->alm_add_admin_notice( $message, 'error' );
+			$this->notices->add_admin_notice( $message, 'error' );
 			return; // Bail early if the response is not okay.
 		}
 
@@ -138,7 +134,7 @@ class ALM_Licensing {
 				case 'expired':
 					$msg = sprintf(
 						// translators: %1$s is the plugin name, %2$s is the expiration date, %3$s is the renewal link, %4$s is the renewal text.
-						__( '%1$s license key expired on %2$s &rarr; <a href="%3$s">%4$s</a>', 'ajax-load-more' ),
+						__( 'Your %1$s license key expired on %2$s &rarr; <a href="%3$s">%4$s</a>', 'ajax-load-more' ),
 						$name,
 						date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) ),
 						ALM_STORE_URL . "/checkout/?edd_license_key={$license}&download_id={$license_data->item_id}",
@@ -150,7 +146,7 @@ class ALM_Licensing {
 				case 'revoked':
 					$msg = sprintf(
 						// translators: %s is the plugin name.
-						__( '%s license key has been disabled.', 'ajax-load-more' ),
+						__( 'Your %s license key has been disabled.', 'ajax-load-more' ),
 						$name,
 					);
 					break;
@@ -167,14 +163,14 @@ class ALM_Licensing {
 				case 'site_inactive':
 					$msg = sprintf(
 						// translators: %s is the plugin name.
-						__( 'Invalid %s license is not active for this URL.', 'ajax-load-more' ),
+						__( 'Your license is not active for this URL.', 'ajax-load-more' ),
 						$name,
 					);
 					break;
 
 				case 'item_name_mismatch':
 					// translators: %s is the plugin name.
-					$msg = sprintf( __( 'This %s license appears to be an invalid key for this add-on.', 'ajax-load-more' ), $name );
+					$msg = sprintf( __( 'This appears to be an invalid license key for %s.', 'ajax-load-more' ), $name );
 					break;
 
 				case 'no_activations_left':
@@ -202,7 +198,9 @@ class ALM_Licensing {
 			}
 		}
 
-		$this->notices->alm_add_admin_notice( $msg, $notice_type );
+		if ( $msg ) {
+			$this->notices->add_admin_notice( $msg, $notice_type );
+		}
 
 		// Set the license status options.
 		$this->set_license_status( $license_data, $item_option, $transient_name );
@@ -228,7 +226,7 @@ class ALM_Licensing {
 			__( '%s license deactivated.', 'ajax-load-more' ),
 			$name
 		);
-		$this->notices->alm_add_admin_notice( $msg, 'warning' );
+		$this->notices->add_admin_notice( $msg, 'warning' );
 	}
 
 	/**
@@ -266,13 +264,13 @@ class ALM_Licensing {
 	 *
 	 * @since 3.3.0
 	 */
-	public function admin_license_notices() {
+	public function admin_license_notice() {
 		$screen          = get_current_screen();
 		$is_admin_screen = alm_is_admin_screen();
-		$excluded        = [ 'dashboard', 'plugins', 'options-general', 'options' ];
+		$show_on         = [ 'dashboard', 'plugins', 'options-general', 'options' ];
 
-		if ( ! $is_admin_screen && ! in_array( $screen->id, $excluded, true ) ) {
-			return; // Exit if screen is not dashboard, plugins, settings or ALM admin.
+		if ( ! $is_admin_screen && ! in_array( $screen->id, $show_on, true ) ) {
+			return; // Exit if screen is not dashboard, plugins, settings, etc or ALM admin.
 		}
 
 		// Plugin not activated notices.
@@ -300,7 +298,7 @@ class ALM_Licensing {
 			}
 		}
 		if ( $invalid_license ) {
-			printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice error alm-err-notice', wp_kses_post( $message ) );
+			$this->notices->add_admin_notice( $message, 'error', '', false );
 		}
 	}
 
