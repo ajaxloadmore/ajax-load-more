@@ -12,10 +12,10 @@
 if ( ! class_exists( 'ALM_Notices' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . 'classes/notices.php';
 }
-require_once ALM_PATH . 'admin/functions/layouts.php';
-require_once ALM_PATH . 'admin/functions/plugin-updates.php';
-require_once ALM_PATH . 'admin/functions/repeater-templates.php';
-require_once ALM_PATH . 'admin/functions/settings.php';
+require_once plugin_dir_path( __FILE__ ) . 'functions/layouts.php';
+require_once plugin_dir_path( __FILE__ ) . 'functions/plugin-updates.php';
+require_once plugin_dir_path( __FILE__ ) . 'functions/repeater-templates.php';
+require_once plugin_dir_path( __FILE__ ) . 'functions/settings.php';
 require_once plugin_dir_path( __FILE__ ) . 'classes/licensing.php';
 ( new ALM_Licensing() )->register();
 
@@ -38,7 +38,8 @@ add_action( 'admin_init', 'alm_admin_hooks' );
  */
 function alm_pro_transient_notification() {
 	if ( ! has_action( 'alm_pro_installed' ) ) {
-		$msg = '🔥&nbsp; <strong><a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank">Ajax Load More Pro</a></strong>: Get instant access to all 15 add-ons in a single installation! &nbsp; <strong><a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank" class="button button-primary">Upgrade Now</a></strong>';
+		$msg  = '🔥&nbsp; <strong><a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank">Ajax Load More Pro</a></strong> &rarr; ';
+		$msg .= 'Get access to all 15+ add-ons in a single installation! &nbsp; <strong><a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank" class="button button-primary">Upgrade Now</a></strong>';
 		alm_transient_notification( $msg, 'alm_pro_upgrade', 'YEAR_IN_SECONDS', true );
 	}
 }
@@ -46,24 +47,25 @@ function alm_pro_transient_notification() {
 /**
  * Display a notification on pages with transients.
  *
- * @param string  $message The message to display.
- * @param string  $transient The transient name.
- * @param string  $duration The length to store transient.
- * @param boolean $dismissible Is this dissmissable.
- * @param string  $type The tpe of notification.
+ * @param string  $message        The message to display.
+ * @param string  $transient_name The transient name.
+ * @param string  $duration       The length to store transient.
+ * @param boolean $dismissible    Is this dissmissable.
+ * @param string  $type           The tpe of notification.
  * @since 4.0
  */
-function alm_transient_notification( $message = '', $transient = '', $duration = 'YEAR_IN_SECONDS', $dismissible = true, $type = 'info' ) {
-	if ( ! empty( $transient ) ) {
-		$transient_value = get_transient( $transient );
-		$dismissible     = $dismissible ? ' is-dismissible' : '';
-		if ( ! isset( $transient_value ) || empty( $transient_value ) && ! empty( $message ) ) {
-			?>
-		<div class="alm-admin-notice notice-<?php echo esc_html( $type ); ?> notice<?php echo esc_html( $dismissible ); ?> alm-transient" data-transient="<?php echo esc_html( $transient ); ?>" data-duration="<?php echo esc_html( $duration ); ?>">
-			<p><?php echo wp_kses_post( $message ); ?></p>
-		</div>
-			<?php
-		}
+function alm_transient_notification( $message = '', $transient_name = '', $duration = 'YEAR_IN_SECONDS', $dismissible = true, $type = 'info' ) {
+	if ( empty( $transient_name ) ) {
+		return; // Bail early if transient is empty.
+	}
+	$transient   = get_transient( $transient_name );
+	$dismissible = $dismissible ? ' is-dismissible' : '';
+	if ( ! isset( $transient ) || empty( $transient ) && ! empty( $message ) ) {
+		?>
+	<div class="notice-<?php echo esc_html( $type ); ?> notice<?php echo esc_html( $dismissible ); ?> alm-transient" data-transient="<?php echo esc_html( $transient_name ); ?>" data-duration="<?php echo esc_html( $duration ); ?>">
+		<p><?php echo wp_kses_post( $message ); ?></p>
+	</div>
+		<?php
 	}
 }
 
@@ -74,23 +76,17 @@ function alm_transient_notification( $message = '', $transient = '', $duration =
  */
 function alm_set_transient() {
 	$data = filter_input_array( INPUT_POST );
-
 	if ( ! current_user_can( 'edit_theme_options' ) || ! isset( $data['nonce'] ) ) {
 		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) ); // Bail early if missing WP capabilities or nonce.
 	}
-
 	if ( ! wp_verify_nonce( $data['nonce'], 'alm_repeater_nonce' ) ) {
 		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) ); // Verify nonce.
 	}
-
 	$transient = $data['transient_name'];
 	$duration  = ! isset( $data['duration'] ) ? 'YEAR_IN_SECONDS' : $data['duration'];
-
 	if ( $transient ) {
 		set_transient( $transient, 'true', constant( $duration ) );
-		echo esc_html__( 'Transient set successfully', 'ajax-load-more' );
 	}
-
 	wp_die();
 }
 add_action( 'wp_ajax_alm_set_transient', 'alm_set_transient' ); // Set transient.
