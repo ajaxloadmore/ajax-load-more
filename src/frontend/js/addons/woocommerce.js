@@ -138,56 +138,57 @@ export function woocommerce(content, alm) {
  * @since 5.3.0
  */
 export function wooGetContent(alm, url, response, cache_slug) {
-	const data = API_DATA_SHAPE; // Default data object.
+	const data = API_DATA_SHAPE;
+	const { status, data: resData } = response;
 
-	// Successful response.
-	if (response.status === 200 && response.data) {
-		const { addons, pagePrev, rel = 'next', page, localize } = alm;
-		const { total_posts } = localize;
-		const { woocommerce_settings = {} } = addons;
-
-		// Get the page number.
-		const currentPage = rel === 'prev' ? pagePrev : page + 1;
-
-		// Create temp div to hold response data.
-		const content = document.createElement('div');
-		content.innerHTML = response.data;
-
-		// Get Page Title
-		const title = content.querySelector('title').innerHTML;
-		data.pageTitle = title;
-
-		// Get WooCommerce products container.
-		const container = content.querySelector(woocommerce_settings.container);
-		if (!container) {
-			console.warn(`Ajax Load More WooCommerce: Unable to find WooCommerce ${woocommerce_settings.container} element.`);
-			return data;
-		}
-
-		// Get the first item and append data attributes.
-		const item = container ? container.querySelector(woocommerce_settings.products) : null;
-		if (item) {
-			item.classList.add('alm-woocommerce');
-			item.dataset.url = url;
-			item.dataset.page = currentPage;
-			item.dataset.pageTitle = title;
-		}
-
-		// Count the number of returned items.
-		const items = container.querySelectorAll(woocommerce_settings.products);
-		if (items) {
-			// Set the html to the elementor container data.
-			data.html = container ? container.innerHTML : '';
-			data.meta.postcount = items.length;
-			data.meta.totalposts = total_posts;
-
-			// Create cache file.
-			createCache(alm, data, cache_slug);
-		}
-
-		// Results Text
-		almWooCommerceResultsText(content, alm);
+	if (status !== 200 || !resData) {
+		return data; // Bail early if response is not OK or empty.
 	}
+
+	const { addons, pagePrev, rel = 'next', page, localize } = alm;
+	const { total_posts } = localize;
+	const { woocommerce_settings = {} } = addons;
+
+	// Get the page number.
+	const currentPage = rel === 'prev' ? pagePrev : page + 1;
+
+	// Create temp div to hold response data.
+	const content = document.createElement('div');
+	content.innerHTML = resData;
+
+	// Get Page Title
+	const title = content.querySelector('title').innerHTML;
+	data.pageTitle = title;
+
+	// Get WooCommerce products container.
+	const container = content.querySelector(woocommerce_settings.container);
+	if (!container) {
+		console.warn(`Ajax Load More WooCommerce: Unable to find WooCommerce ${woocommerce_settings.container} element.`);
+		return data;
+	}
+
+	// Get the first item and append data attributes.
+	const item = container ? container.querySelector(woocommerce_settings.products) : null;
+	if (item) {
+		item.classList.add('alm-woocommerce');
+		item.dataset.url = url;
+		item.dataset.page = currentPage;
+		item.dataset.pageTitle = title;
+	}
+
+	// Count the number of returned items.
+	const items = container.querySelectorAll(woocommerce_settings.products);
+	if (items) {
+		// Set the html to the elementor container data.
+		data.html = container ? container.innerHTML : '';
+		data.meta.postcount = items.length;
+		data.meta.totalposts = total_posts;
+
+		createCache(alm, data, cache_slug); // Create cache file.
+	}
+
+	// Results Text
+	almWooCommerceResultsText(content, alm);
 
 	return data;
 }

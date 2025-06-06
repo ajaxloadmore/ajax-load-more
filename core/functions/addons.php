@@ -124,8 +124,8 @@ function alm_get_addons() {
 		],
 		[
 			'name'           => 'Filters',
-			'intro'          => 'Create custom Ajax Load More filters in seconds.',
-			'desc'           => 'The Filters add-on provides both front-end and admin functionality for building and managing your Ajax filters.',
+			'intro'          => 'Create custom filters and facets Ajax Load More filters in a matter of seconds.',
+			'desc'           => 'The Filters add-on provides both front-end and admin functionality for building and managing your Ajax filters and facets.',
 			'action'         => 'alm_filters_installed',
 			'key'            => 'alm_filters_license_key',
 			'status'         => 'alm_filters_license_status',

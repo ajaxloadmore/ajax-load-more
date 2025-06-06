@@ -2,21 +2,21 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.4.0\n"
+"Project-Id-Version: Ajax Load More 7.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-24T13:11:38+00:00\n"
+"POT-Creation-Date: 2025-06-06T14:33:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
 
 #. Plugin Name of the plugin
 #: ajax-load-more.php
-#: admin/admin.php:552
+#: admin/admin.php:553
 #: core/integration/elementor/elementor.php:19
 #: src/blocks/core/render.php:22
 msgid "Ajax Load More"
@@ -42,238 +42,311 @@ msgstr ""
 msgid "https://connekthq.com"
 msgstr ""
 
-#: admin/admin.php:74
-#: admin/admin.php:588
+#: admin/admin.php:80
+#: admin/admin.php:589
 #: admin/functions/layouts.php:18
-#: admin/functions/licensing.php:19
 #: admin/functions/repeater-templates.php:20
 #: admin/functions/repeater-templates.php:125
 msgid "You don't belong here."
 msgstr ""
 
-#: admin/admin.php:78
-#: admin/admin.php:592
+#: admin/admin.php:83
+#: admin/admin.php:593
 #: admin/functions/layouts.php:23
-#: admin/functions/licensing.php:25
 #: admin/functions/repeater-templates.php:25
 #: admin/functions/repeater-templates.php:130
 msgid "Error - unable to verify nonce, please try again."
 msgstr ""
 
-#: admin/admin.php:86
-msgid "Transient set successfully"
-msgstr ""
-
-#: admin/admin.php:103
+#: admin/admin.php:104
 msgid "License"
 msgstr ""
 
-#: admin/admin.php:103
+#: admin/admin.php:104
 #: admin/views/filters.php:10
 #: admin/views/licenses.php:9
 #: admin/views/licenses.php:10
 msgid "Licenses"
 msgstr ""
 
-#: admin/admin.php:117
 #: admin/admin.php:118
-#: admin/admin.php:126
+#: admin/admin.php:119
+#: admin/admin.php:127
 #: admin/views/settings.php:9
-#: ajax-load-more.php:307
+#: ajax-load-more.php:316
 #: src/blocks/core/inspector.js:17
 #: src/blocks/filters/inspector.js:28
 msgid "Settings"
 msgstr ""
 
-#: admin/admin.php:133
 #: admin/admin.php:134
-#: admin/admin.php:142
+#: admin/admin.php:135
+#: admin/admin.php:143
 #: admin/views/repeater-templates.php:9
 msgid "Templates"
 msgstr ""
 
-#: admin/admin.php:149
 #: admin/admin.php:150
-#: admin/admin.php:158
+#: admin/admin.php:151
+#: admin/admin.php:159
 #: admin/views/shortcode-builder.php:9
 msgid "Shortcode Builder"
 msgstr ""
 
-#: admin/admin.php:165
 #: admin/admin.php:166
-#: admin/admin.php:174
+#: admin/admin.php:167
+#: admin/admin.php:175
 #: admin/shortcode-builder/components/filters.php:10
 #: admin/views/filters.php:9
 msgid "Filters"
 msgstr ""
 
-#: admin/admin.php:182
 #: admin/admin.php:183
-#: admin/admin.php:193
+#: admin/admin.php:184
+#: admin/admin.php:194
 #: admin/shortcode-builder/components/cache.php:3
 msgid "Cache"
 msgstr ""
 
-#: admin/admin.php:202
 #: admin/admin.php:203
-#: admin/admin.php:212
+#: admin/admin.php:204
+#: admin/admin.php:213
 msgid "WooCommerce"
 msgstr ""
 
-#: admin/admin.php:222
 #: admin/admin.php:223
-#: admin/admin.php:231
+#: admin/admin.php:224
+#: admin/admin.php:232
 #: admin/shortcode-builder/shortcode-builder.php:27
 #: admin/shortcode-builder/shortcode-builder.php:48
 #: admin/views/add-ons.php:9
 msgid "Add-ons"
 msgstr ""
 
-#: admin/admin.php:242
 #: admin/admin.php:243
-#: admin/admin.php:251
+#: admin/admin.php:244
+#: admin/admin.php:252
 #: admin/shortcode-builder/shortcode-builder.php:30
 #: admin/shortcode-builder/shortcode-builder.php:78
 #: admin/views/extensions.php:9
 msgid "Extensions"
 msgstr ""
 
-#: admin/admin.php:259
 #: admin/admin.php:260
-#: admin/admin.php:268
-#: admin/admin.php:274
+#: admin/admin.php:261
+#: admin/admin.php:269
+#: admin/admin.php:275
 msgid "Pro"
 msgstr ""
 
-#: admin/admin.php:275
-#: admin/admin.php:283
-#: admin/views/licenses.php:154
+#: admin/admin.php:276
+#: admin/admin.php:284
+#: admin/views/licenses.php:256
 msgid "Go Pro"
 msgstr ""
 
-#: admin/admin.php:307
 #: admin/admin.php:308
-#: admin/admin.php:316
+#: admin/admin.php:309
+#: admin/admin.php:317
 #: admin/views/help.php:9
 msgid "Help"
 msgstr ""
 
-#: admin/admin.php:553
-#: admin/views/licenses.php:97
+#: admin/admin.php:554
+#: admin/views/licenses.php:127
 msgid "Active"
 msgstr ""
 
-#: admin/admin.php:554
-#: admin/views/licenses.php:99
+#: admin/admin.php:555
+#: admin/views/licenses.php:130
 msgid "Inactive"
 msgstr ""
 
-#: admin/admin.php:555
+#: admin/admin.php:556
 msgid "Applying Layout"
 msgstr ""
 
-#: admin/admin.php:556
+#: admin/admin.php:557
 #: admin/views/repeater-templates.php:448
 msgid "Template Updated"
 msgstr ""
 
-#: admin/admin.php:558
+#: admin/admin.php:559
 msgid "Select Author(s)"
 msgstr ""
 
-#: admin/admin.php:559
+#: admin/admin.php:560
 msgid "Select Categories"
 msgstr ""
 
-#: admin/admin.php:560
+#: admin/admin.php:561
 msgid "Select Tags"
 msgstr ""
 
-#: admin/admin.php:561
+#: admin/admin.php:562
 msgid "Select"
 msgstr ""
 
-#: admin/admin.php:562
+#: admin/admin.php:563
 msgid "Jump to Option"
 msgstr ""
 
-#: admin/admin.php:563
+#: admin/admin.php:564
 msgid "Jump to Template"
 msgstr ""
 
-#: admin/admin.php:564
+#: admin/admin.php:565
 msgid "Are you sure you want to install this Ajax Load More extension?"
 msgstr ""
 
-#: admin/admin.php:565
+#: admin/admin.php:566
 msgid "Install Now"
 msgstr ""
 
-#: admin/admin.php:566
+#: admin/admin.php:567
 msgid "Activate"
 msgstr ""
 
-#: admin/admin.php:567
+#: admin/admin.php:568
 msgid "Saving Settings"
 msgstr ""
 
-#: admin/admin.php:568
+#: admin/admin.php:569
 msgid "Settings Saved Successfully"
 msgstr ""
 
-#: admin/admin.php:569
+#: admin/admin.php:570
 msgid "Error Saving Settings"
 msgstr ""
 
-#: admin/admin.php:570
+#: admin/admin.php:571
 msgid "There is a maximum of 3 tax_query objects while using the shortcode builder"
 msgstr ""
 
-#: admin/admin.php:617
+#: admin/admin.php:618
 msgid "No terms exist within this taxonomy"
+msgstr ""
+
+#: admin/classes/licensing.php:92
+#: admin/classes/licensing.php:182
+msgid "An error occurred, please try again."
+msgstr ""
+
+#: admin/classes/licensing.php:100
+msgid "Plugin"
+msgstr ""
+
+#. translators: %1$s is the plugin name, %2$s is the expiration date, %3$s is the renewal link, %4$s is the renewal text.
+#: admin/classes/licensing.php:137
+msgid "Your %1$s license key expired on %2$s &rarr; <a href=\"%3$s\">%4$s</a>"
+msgstr ""
+
+#: admin/classes/licensing.php:141
+msgid "Renew Now"
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:149
+msgid "Your %s license key has been disabled."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:157
+msgid "Invalid %s license key. Are you sure this license is correct?."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:166
+msgid "Your license is not active for this URL."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:173
+msgid "This appears to be an invalid license key for %s."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:178
+msgid "This %s license key has reached its activation limit."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:193
+msgid "%s license data has been refreshed."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:197
+msgid "%s license activated."
+msgstr ""
+
+#. translators: %s is the plugin name.
+#: admin/classes/licensing.php:226
+msgid "%s license deactivated."
+msgstr ""
+
+#: admin/classes/licensing.php:282
+msgid "You have an invalid or expired <a href=\"admin.php?page=ajax-load-more\">Ajax Load More Pro</a> license key. Visit the <a href=\"admin.php?page=ajax-load-more-licenses\">License</a> section to input your key or <a href=\"https://connekthq.com/plugins/ajax-load-more/pro/\" target=\"_blank\">purchase</a> one now."
+msgstr ""
+
+#: admin/classes/licensing.php:285
+msgid "You have invalid or expired <a href=\"admin.php?page=ajax-load-more\">Ajax Load More</a> license keys. Visit the <a href=\"admin.php?page=ajax-load-more-licenses\">Licenses</a> section to input your keys."
+msgstr ""
+
+#: admin/classes/licensing.php:424
+msgid "Looks like your subscription has expired."
+msgstr ""
+
+#: admin/classes/licensing.php:425
+msgid "Please login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
+msgstr ""
+
+#: admin/classes/licensing.php:432
+msgid "Looks like your license is inactive and/or invalid."
+msgstr ""
+
+#: admin/classes/licensing.php:433
+msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> or login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
+msgstr ""
+
+#: admin/classes/licensing.php:440
+msgid "Looks like your license has been deactivated."
+msgstr ""
+
+#: admin/classes/licensing.php:441
+msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> to update."
+msgstr ""
+
+#. translators: %1$s is replaced with link href
+#: admin/classes/licensing.php:468
+msgid "%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s"
+msgstr ""
+
+#. translators: %1$s is the Ajax Load More admin page URL, %2$s is the WordPress.org plugin review URL.
+#: admin/classes/nag.php:132
+msgid "Looks like you've been using the <a href=\"%1$s\">Ajax Load More</a> plugin for some time now, would you consider leaving a review at <a href=\"%2$s\" target=\"_blank\">wordpress.org</a>?"
+msgstr ""
+
+#: admin/classes/nag.php:137
+msgid "All reviews, both good and bad are important as they help the plugin grow and improve over time."
+msgstr ""
+
+#: admin/classes/nag.php:146
+msgid "Leave Review"
+msgstr ""
+
+#: admin/classes/nag.php:147
+msgid "No thanks"
+msgstr ""
+
+#: admin/classes/nag.php:148
+msgid "I've already done this"
 msgstr ""
 
 #: admin/functions/layouts.php:35
 #: admin/functions/layouts.php:55
 #: admin/functions/layouts.php:67
 msgid "This doesn't look right, what are you trying to do?"
-msgstr ""
-
-#: admin/functions/licensing.php:125
-msgid "You have an invalid or expired <a href=\"admin.php?page=ajax-load-more\"><b>Ajax Load More Pro</b></a> license key - visit the <a href=\"admin.php?page=ajax-load-more-licenses\">License</a> section to input your key or <a href=\"https://connekthq.com/plugins/ajax-load-more/pro/\" target=\"_blank\">purchase</a> one now."
-msgstr ""
-
-#: admin/functions/licensing.php:130
-msgid "You have invalid or expired <a href=\"admin.php?page=ajax-load-more\"><b>Ajax Load More</b></a> license keys - visit the <a href=\"admin.php?page=ajax-load-more-licenses\">Licenses</a> section to input your keys."
-msgstr ""
-
-#: admin/functions/licensing.php:250
-msgid "Looks like your subscription has expired."
-msgstr ""
-
-#: admin/functions/licensing.php:251
-msgid "Please login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
-msgstr ""
-
-#: admin/functions/licensing.php:259
-msgid "Looks like your license is inactive and/or invalid."
-msgstr ""
-
-#: admin/functions/licensing.php:260
-msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> or login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
-msgstr ""
-
-#: admin/functions/licensing.php:268
-msgid "Looks like your license has been deactivated."
-msgstr ""
-
-#: admin/functions/licensing.php:269
-msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> to update."
-msgstr ""
-
-#. translators: %1$s is replaced with link href
-#: admin/functions/licensing.php:298
-msgid "%1$sRegister%2$s your copy of %3$s to receive access to automatic upgrades and support. Need a license key? %4$sPurchase one now%5$s."
 msgstr ""
 
 #: admin/functions/repeater-templates.php:105
@@ -416,7 +489,7 @@ msgstr ""
 #: admin/functions/settings.php:374
 #: admin/shortcode-builder/shortcode-builder.php:214
 #: admin/shortcode-builder/shortcode-builder.php:387
-#: ajax-load-more.php:409
+#: ajax-load-more.php:418
 msgid "Load More"
 msgstr ""
 
@@ -2557,88 +2630,114 @@ msgstr ""
 msgid "View All Examples"
 msgstr ""
 
-#: admin/views/licenses.php:20
+#: admin/views/licenses.php:25
+#: admin/views/licenses.php:108
 msgid "License Key"
 msgstr ""
 
-#: admin/views/licenses.php:22
+#: admin/views/licenses.php:27
 msgid "License Keys"
 msgstr ""
 
-#: admin/views/licenses.php:29
-msgid "Enter your Ajax Load More Pro license key to receive plugin update notifications directly within the <a href=\"plugins.php\">WP Plugins dashboard</a>."
+#: admin/views/licenses.php:34
+msgid "Enter your Ajax Load More Pro license key to receive plugin updates directly from the <a href=\"plugins.php\">WP Plugins dashboard</a>."
 msgstr ""
 
-#: admin/views/licenses.php:31
-msgid "Enter a key for each of your Ajax Load More add-ons to receive plugin update notifications directly within the <a href=\"plugins.php\">WP Plugins dashboard</a>."
+#: admin/views/licenses.php:36
+msgid "Enter the license key for each of your Ajax Load More add-ons to receive plugin updates directly from the <a href=\"plugins.php\">WP Plugins dashboard</a>."
 msgstr ""
 
-#: admin/views/licenses.php:77
-msgid "Don't have a license?"
+#: admin/views/licenses.php:90
+msgid "View Add-on"
 msgstr ""
 
-#: admin/views/licenses.php:78
+#: admin/views/licenses.php:104
 msgid "A valid license is required to activate and receive plugin updates directly in your WordPress dashboard"
 msgstr ""
 
-#: admin/views/licenses.php:78
+#: admin/views/licenses.php:104
 msgid "Purchase Now"
 msgstr ""
 
-#: admin/views/licenses.php:82
-#: admin/views/licenses.php:94
+#: admin/views/licenses.php:116
 msgid "Enter License Key"
 msgstr ""
 
-#: admin/views/licenses.php:99
+#: admin/views/licenses.php:130
 msgid "Expired"
 msgstr ""
 
-#: admin/views/licenses.php:120
+#: admin/views/licenses.php:137
 msgid "Activate License"
 msgstr ""
 
-#: admin/views/licenses.php:124
+#: admin/views/licenses.php:141
 msgid "Deactivate License"
 msgstr ""
 
-#: admin/views/licenses.php:128
+#: admin/views/licenses.php:147
 msgid "Refresh Status"
 msgstr ""
 
-#: admin/views/licenses.php:139
+#: admin/views/licenses.php:160
 msgid "Renew License"
 msgstr ""
 
-#: admin/views/licenses.php:154
+#: admin/views/licenses.php:176
+msgid "Expires:"
+msgstr ""
+
+#: admin/views/licenses.php:180
+msgid "Lifetime"
+msgstr ""
+
+#: admin/views/licenses.php:193
+#: admin/views/licenses.php:206
+msgid "Activations:"
+msgstr ""
+
+#: admin/views/licenses.php:195
+msgid "Unlimited"
+msgstr ""
+
+#: admin/views/licenses.php:210
+msgid "View Upgrades"
+msgstr ""
+
+#. translators: the license key expiration date
+#: admin/views/licenses.php:234
+msgid "Activation limit reached. You can purchase additional %1$s licenses from <a href=\"%2$s\" target=\"_blank\">your account</a>."
+msgstr ""
+
+#: admin/views/licenses.php:256
 msgid "You do not have any Ajax Load More add-ons installed"
 msgstr ""
 
-#: admin/views/licenses.php:154
+#: admin/views/licenses.php:256
 msgid "Browse Add-ons"
 msgstr ""
 
-#: admin/views/licenses.php:161
+#: admin/views/licenses.php:263
 msgid "About Licenses"
 msgstr ""
 
-#: admin/views/licenses.php:164
+#: admin/views/licenses.php:266
 msgid "License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target=\"_blank\" href=\"https://connekthq.com/account/\">Account</a> section on our website"
 msgstr ""
 
-#: admin/views/licenses.php:165
+#: admin/views/licenses.php:267
 msgid "If you cannot locate your key please open a support ticket by filling out the <a href=\"https://connekthq.com/support/\">support form</a> and reference the email address used when you completed the purchase."
 msgstr ""
 
-#: admin/views/licenses.php:166
+#: admin/views/licenses.php:268
 msgid "Are you having issues updating an add-on?"
 msgstr ""
 
-#: admin/views/licenses.php:166
-msgid "Please try deactivating and then re-activating each license. Once you've done that, try running the update again."
+#: admin/views/licenses.php:269
+msgid "Try deactivating and re-activating the license. Once you've done that, try running the update again."
 msgstr ""
 
-#: admin/views/licenses.php:171
+#: admin/views/licenses.php:274
 msgid "Your Account"
 msgstr ""
 
@@ -2731,19 +2830,19 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:294
+#: ajax-load-more.php:293
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:393
+#: ajax-load-more.php:402
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:394
+#: ajax-load-more.php:403
 msgid "No results found."
 msgstr ""
 
-#: ajax-load-more.php:418
+#: ajax-load-more.php:427
 msgid "Load Previous"
 msgstr ""
 

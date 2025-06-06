@@ -13,12 +13,8 @@
  * @since 2.12.0
  */
 function alm_is_admin_screen() {
-	$return = false;
 	$screen = get_current_screen();
-	if ( $screen && $screen->parent_base === 'ajax-load-more' ) {
-		$return = true;
-	}
-	return $return;
+	return $screen && $screen->parent_base === 'ajax-load-more';
 }
 
 /**

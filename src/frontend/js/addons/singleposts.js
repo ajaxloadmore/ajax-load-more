@@ -1,3 +1,4 @@
+import { API_DATA_SHAPE } from '../functions/constants';
 import { createCache } from './cache';
 
 /**
@@ -62,51 +63,45 @@ export function singlepostsCreateParams(alm) {
  * @since 5.1.8.1
  */
 export function singlepostsHTML(alm, response, cache_slug) {
-	const data = {
-		html: '',
-		meta: {
-			postcount: 0,
-			totalposts: 0,
-		},
-	};
+	const data = API_DATA_SHAPE;
+	const { status, data: resData } = response;
+	const { single_post_target, single_post_id } = alm.addons; // Get target elements.
+
+	if (status !== 200 || !resData || !single_post_target) {
+		return data; // Bail early if response is not OK or empty.
+	}
+
+	// Create temp div to hold response data.
+	const div = document.createElement('div');
+	div.innerHTML = resData;
 
 	// Get target element.
-	const { single_post_target, single_post_id } = alm.addons;
+	const html = div.querySelector(single_post_target);
 
-	if (response.status === 200 && response.data && single_post_target) {
-		// Create temp div to hold response data.
-		const div = document.createElement('div');
-		div.innerHTML = response.data;
+	if (!html) {
+		console.warn(`Ajax Load More: Unable to find ${single_post_target} element.`);
+		return data;
+	}
 
-		// Get target element.
-		const html = div.querySelector(single_post_target);
-
-		if (!html) {
-			console.warn(`Ajax Load More: Unable to find ${single_post_target} element.`);
-			return data;
-		}
-
-		// Get any custom target elements.
-		if (window?.almSinglePostsCustomElements) {
-			const customElements = singlepostsGetCustomElements(div, window?.almSinglePostsCustomElements, single_post_id);
-			if (customElements) {
-				// Get first element in HTML.
-				const target = html.querySelector('article, section, div');
-				if (target) {
-					target.appendChild(customElements);
-				}
+	// Get any custom target elements.
+	if (window?.almSinglePostsCustomElements) {
+		const customElements = singlepostsGetCustomElements(div, window?.almSinglePostsCustomElements, single_post_id);
+		if (customElements) {
+			// Get first element in HTML.
+			const target = html.querySelector('article, section, div');
+			if (target) {
+				target.appendChild(customElements);
 			}
 		}
-
-		data.html = html.innerHTML;
-		data.meta = {
-			postcount: 1,
-			totalposts: 1,
-		};
-
-		// Create cache file.
-		createCache(alm, data, cache_slug);
 	}
+
+	data.html = html.innerHTML;
+	data.meta = {
+		postcount: 1,
+		totalposts: 1,
+	};
+
+	createCache(alm, data, cache_slug); // Create cache file.
 	return data;
 }
 

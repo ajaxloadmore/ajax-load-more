@@ -16,23 +16,31 @@ if ( ! class_exists( 'ALM_NAG' ) ) :
 		const OPTION_NAG_DELAY        = '-7 days';
 
 		/**
+		 * ALM Admin Notices.
+		 *
+		 * @var array
+		 */
+		public $notices = [];
+
+		/**
 		 * Setup the class.
 		 */
-		public function setup() {
+		public function register() {
 			$this->catch_hide_notice();
 			$this->bind();
+			$this->notices = new ALM_Notices();
 		}
 
 		/**
 		 * Catch the hide nag request
 		 */
 		private function catch_hide_notice() {
-			if ( isset( $_GET[ ALM_Nag::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
-				// Add user meta
+			if ( isset( $_GET[ ALM_Nag::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) ) ) {
+				// Add user meta.
 				global $current_user;
 				add_user_meta( $current_user->ID, ALM_Nag::OPTION_ADMIN_NOTICE_KEY, '1', true );
 
-				// Build redirect URL
+				// Build redirect URL.
 				$query_params = $this->get_admin_querystring_array();
 				unset( $query_params[ ALM_Nag::OPTION_ADMIN_NOTICE_KEY ] );
 				$query_string = http_build_query( $query_params );
@@ -46,7 +54,6 @@ if ( ! class_exists( 'ALM_NAG' ) ) :
 				}
 				$redirect_url .= '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . $query_string;
 
-				// Redirect
 				wp_redirect( $redirect_url );
 				exit;
 			}
@@ -60,14 +67,14 @@ if ( ! class_exists( 'ALM_NAG' ) ) :
 			$current_user = wp_get_current_user();
 			$hide_notice  = get_user_meta( $current_user->ID, ALM_Nag::OPTION_ADMIN_NOTICE_KEY, true );
 
-			// Check if we need to display the notice
+			// Check if we need to display the notice.
 			if ( current_user_can( 'install_plugins' ) && '' == $hide_notice ) {
-				// Get installation date
+				// Get installation date.
 				$datetime_install = $this->get_install_date();
 				$datetime_past    = new DateTime( ALM_Nag::OPTION_NAG_DELAY );
 				if ( $datetime_past >= $datetime_install ) {
-					// 10 or more days ago, show admin notice
-					add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
+					// 10 or more days ago, show admin notice.
+					add_action( 'admin_notices', [ $this, 'display_admin_notice' ] );
 				}
 			}
 		}
@@ -117,19 +124,38 @@ if ( ! class_exists( 'ALM_NAG' ) ) :
 		 */
 		public function display_admin_notice() {
 			$query_params = $this->get_admin_querystring_array();
-			$query_string = '?' . http_build_query( array_merge( $query_params, array( ALM_Nag::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
+			$query_string = '?' . http_build_query( array_merge( $query_params, [ ALM_Nag::OPTION_ADMIN_NOTICE_KEY => '1' ] ) );
 
-			echo '<div class="notice-info notice" style="padding: 15px;">';
-			printf( __( "<p style='padding: 0; margin: 0 0 15px;'>You've been using <b style='color: #222;'><a href='%1\$s'>Ajax Load More</a></b> for some time now, could you please give it a review at wordpress.org?<br/>All reviews, both good and bad are important as they help the plugin grow and improve over time.</p><p style='padding: 0; margin: 0;'><a href='%2\$s' target='_blank' class='button button-primary'>Leave Review</a> &nbsp; <a href='%3\$s' class='button'>No thanks</a> &nbsp; <a href='%4\$s' class='button-no'>I've already done this</a></p>" ), get_admin_url() . 'admin.php?page=ajax-load-more', 'http://wordpress.org/support/view/plugin-reviews/ajax-load-more', $query_string, $query_string );
-			echo '</div>';
+			$msg  = '<span>';
+			$msg .= sprintf(
+				// translators: %1$s is the Ajax Load More admin page URL, %2$s is the WordPress.org plugin review URL.
+				__( 'Looks like you\'ve been using the <a href="%1$s">Ajax Load More</a> plugin for some time now, would you consider leaving a review at <a href="%2$s" target="_blank">wordpress.org</a>?', 'ajax-load-more' ),
+				get_admin_url() . 'admin.php?page=ajax-load-more',
+				'http://wordpress.org/support/view/plugin-reviews/ajax-load-more/',
+			);
+			$msg .= '<br/>';
+			$msg .= __( 'All reviews, both good and bad are important as they help the plugin grow and improve over time.', 'ajax-load-more' );
+			$msg .= '</span>';
+
+			$msg .= '<span class="alm-nag-buttons">';
+			$msg .= sprintf(
+				// translators: %1$s is the WordPress.org plugin review URL, %2$s is the admin page URL, %3$s is the Leave Review button text, %4$s is the No thanks button text, %5$s is the I\'ve already done this button text.
+				"<a href='%1\$s' target='_blank' class='button button-primary'>%3\$s</a><a href='%2\$s' class='button'>%4\$s</a><a href='%2\$s' class='button-no'>%5\$s</a>",
+				'http://wordpress.org/support/view/plugin-reviews/ajax-load-more',
+				$query_string,
+				__( 'Leave Review', 'ajax-load-more' ),
+				__( 'No thanks', 'ajax-load-more' ),
+				__( 'I\'ve already done this', 'ajax-load-more' )
+			);
+			$msg .= '</span>';
+
+			$this->notices->add_admin_notice(
+				$msg,
+				'info',
+				'nag-notice',
+				false
+			);
 		}
 	}
-
-	function alm_nag_notice() {
-		$alm_nag = new ALM_NAG();
-		$alm_nag->setup();
-	}
-	// initialize
-	alm_nag_notice();
 
 endif;
