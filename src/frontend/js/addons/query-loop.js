@@ -115,52 +115,55 @@ function setButtonURLs(alm, element = document) {
  * @return {Object}           Results data.
  */
 export function queryLoopGetContent(alm, url, response, cache_slug) {
-	const data = API_DATA_SHAPE; // Default data object.
+	const data = API_DATA_SHAPE;
+	const { status, data: resData } = response;
 
-	// Successful response.
-	if (response.status === 200 && response.data) {
-		const { addons, canonical_url } = alm;
-		const { queryloop_settings = {} } = addons;
-
-		// Create temp div to hold response data.
-		const content = document.createElement('div');
-		content.innerHTML = response.data;
-
-		// Get container.
-		const container = content?.querySelector(`${queryloop_settings?.classes?.container} ${queryloop_settings?.classes?.listing}`);
-		if (!container) {
-			console.warn('Ajax Load More: Unable to locate Query Loop container.');
-			return data;
-		}
-
-		// Get the first item and append data attributes.
-		const item = container ? container.querySelector(queryloop_settings?.classes?.element) : null;
-		if (item) {
-			// Get current page from config settings.
-			const { paged = 1 } = getQueryLoopConfig(content);
-
-			item.classList.add('alm-query-loop');
-			item.dataset.url = paged > 1 ? url : canonical_url;
-			item.dataset.page = paged;
-			item.dataset.title = content.querySelector('title').innerHTML;
-		}
-
-		// Count the number of returned items.
-		const items = container.querySelectorAll(queryloop_settings?.classes?.element);
-		if (items) {
-			// Set the html to the elementor container data.
-			data.html = container ? container.innerHTML : '';
-			data.meta.postcount = items.length;
-			data.meta.totalposts = items.length;
-
-			// Create cache file.
-			createCache(alm, data, cache_slug);
-		}
-
-		// Set the button URLs.
-		alm.page = alm.page + 1;
-		setButtonURLs(alm, content);
+	if (status !== 200 || !resData) {
+		return data; // Bail early if response is not OK or empty.
 	}
+
+	const { addons, canonical_url } = alm;
+	const { queryloop_settings = {} } = addons;
+
+	// Create temp div to hold response data.
+	const content = document.createElement('div');
+	content.innerHTML = resData;
+
+	// Get container.
+	const container = content?.querySelector(`${queryloop_settings?.classes?.container} ${queryloop_settings?.classes?.listing}`);
+	if (!container) {
+		console.warn('Ajax Load More: Unable to locate Query Loop container.');
+		return data;
+	}
+
+	// Get the first item and append data attributes.
+	const item = container ? container.querySelector(queryloop_settings?.classes?.element) : null;
+	if (item) {
+		// Get current page from config settings.
+		const { paged = 1 } = getQueryLoopConfig(content);
+
+		item.classList.add('alm-query-loop');
+		item.dataset.url = paged > 1 ? url : canonical_url;
+		item.dataset.page = paged;
+		item.dataset.title = content.querySelector('title').innerHTML;
+	}
+
+	// Count the number of returned items.
+	const items = container.querySelectorAll(queryloop_settings?.classes?.element);
+	if (items) {
+		// Set the html to the elementor container data.
+		data.html = container ? container.innerHTML : '';
+		data.meta.postcount = items.length;
+		data.meta.totalposts = items.length;
+
+		// Create cache file.
+		createCache(alm, data, cache_slug);
+	}
+
+	// Set the button URLs.
+	alm.page = alm.page + 1;
+	setButtonURLs(alm, content);
+
 	return data;
 }
 

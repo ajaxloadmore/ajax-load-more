@@ -753,9 +753,9 @@ function alm_print( $query = '', $title = '' ) {
  */
 function alm_log( $data ) {
 	if ( is_array( $data ) || is_object( $data ) ) {
-		error_log( print_r( $data, true ) );
+		error_log( print_r( $data, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 	} else {
-		error_log( $data );
+		error_log( $data ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 	}
 }
 

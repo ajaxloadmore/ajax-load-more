@@ -126,66 +126,68 @@ export function elementorInit(alm) {
  * @return {Object}           Results data.
  */
 export function elementorGetContent(alm, url, response, cache_slug) {
-	const data = API_DATA_SHAPE; // Default data object.
+	const data = API_DATA_SHAPE;
+	const { status, data: resData } = response;
 
-	// Successful response.
-	if (response.status === 200 && response.data) {
-		const { addons, page, button, buttonPrev, rel } = alm;
-		const { elementor_target, elementor_container_class, elementor_item_class } = addons;
+	if (status !== 200 || !resData) {
+		return data; // Bail early if response is not OK or empty.
+	}
 
-		// Create temp div to hold response data.
-		const content = document.createElement('div');
-		content.innerHTML = response.data;
+	const { addons, page, button, buttonPrev, rel } = alm;
+	const { elementor_target, elementor_container_class, elementor_item_class } = addons;
 
-		// Set button state & URL.
-		if (rel === 'prev' && buttonPrev) {
-			const prevURL = elementorGetPagedURL(alm, content, 'prev');
-			if (prevURL) {
-				setButtonAtts(buttonPrev, page - 1, prevURL);
-			} else {
-				alm.AjaxLoadMore.triggerDonePrev();
-			}
+	// Create temp div to hold response data.
+	const content = document.createElement('div');
+	content.innerHTML = resData;
+
+	// Set button state & URL.
+	if (rel === 'prev' && buttonPrev) {
+		const prevURL = elementorGetPagedURL(alm, content, 'prev');
+		if (prevURL) {
+			setButtonAtts(buttonPrev, page - 1, prevURL);
 		} else {
-			const nextURL = elementorGetPagedURL(alm, content);
-			if (nextURL) {
-				setButtonAtts(button, page + 1, nextURL);
-			} else {
-				alm.AjaxLoadMore.triggerDone();
-			}
+			alm.AjaxLoadMore.triggerDonePrev();
 		}
-
-		// Get Page Title
-		const title = content.querySelector('title').innerHTML;
-		data.pageTitle = title;
-
-		// Get Elementor container.
-		const container = content.querySelector(`${elementor_target} .${elementor_container_class}`);
-		if (!container) {
-			console.warn(`Ajax Load More Elementor: Unable to find Elementor container element.`);
-			return data;
-		}
-
-		// Get the first item and append data attributes.
-		const item = container ? container.querySelector(`.${elementor_item_class}`) : null;
-		if (item) {
-			item.classList.add('alm-elementor');
-			item.dataset.url = url;
-			item.dataset.page = rel === 'next' ? page + 1 : page - 1;
-			item.dataset.pageTitle = title;
-		}
-
-		// Count the number of returned items.
-		const items = container.querySelectorAll(`.${elementor_item_class}`);
-		if (items) {
-			// Set the html to the elementor container data.
-			data.html = container ? container.innerHTML : '';
-			data.meta.postcount = items.length;
-			data.meta.totalposts = items.length;
-
-			// Create cache file.
-			createCache(alm, data, cache_slug);
+	} else {
+		const nextURL = elementorGetPagedURL(alm, content);
+		if (nextURL) {
+			setButtonAtts(button, page + 1, nextURL);
+		} else {
+			alm.AjaxLoadMore.triggerDone();
 		}
 	}
+
+	// Get Page Title
+	const title = content.querySelector('title').innerHTML;
+	data.pageTitle = title;
+
+	// Get Elementor container.
+	const container = content.querySelector(`${elementor_target} .${elementor_container_class}`);
+	if (!container) {
+		console.warn(`Ajax Load More Elementor: Unable to find Elementor container element.`);
+		return data;
+	}
+
+	// Get the first item and append data attributes.
+	const item = container ? container.querySelector(`.${elementor_item_class}`) : null;
+	if (item) {
+		item.classList.add('alm-elementor');
+		item.dataset.url = url;
+		item.dataset.page = rel === 'next' ? page + 1 : page - 1;
+		item.dataset.pageTitle = title;
+	}
+
+	// Count the number of returned items.
+	const items = container.querySelectorAll(`.${elementor_item_class}`);
+	if (items) {
+		// Set the html to the elementor container data.
+		data.html = container ? container.innerHTML : '';
+		data.meta.postcount = items.length;
+		data.meta.totalposts = items.length;
+
+		createCache(alm, data, cache_slug); // Create cache file.
+	}
+
 	return data;
 }
 
