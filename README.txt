@@ -269,7 +269,7 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.4.1 - June 5, 2025 =
+= 7.4.1 - June 6, 2025 =
 * UPDATE: Updated license handling functionality to reduce failed attempted to activate licenses.
 * UPDATE: Various code cleanup and UI updates throughout the plugin.
 * UPDATE: Secuirty fixes.
