@@ -1,6 +1,6 @@
 // ALM Modules
 import axios from 'axios';
-import DOMPurify from 'dompurify';
+import '../scss/ajax-load-more.scss';
 import { cacheCreateParams, getCache } from './addons/cache';
 import { ctaCreateParams } from './addons/call-to-actions';
 import { commentsCreateParams } from './addons/comments';
@@ -33,16 +33,15 @@ import * as resultsText from './modules/resultsText';
 import setLocalizedVars from './modules/setLocalizedVars';
 import { tableOfContents } from './modules/tableofcontents';
 
-import '../scss/ajax-load-more.scss';
-
 // External packages.
 const qs = require('qs');
 const imagesLoaded = require('imagesloaded');
 
 // Axios Config.
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// Axios Interceptor for nested data objects
 axios.interceptors.request.use((config) => {
-	// Axios Interceptor for nested data objects
 	config.paramsSerializer = (params) => {
 		// Qs is already included in the Axios package
 		return qs.stringify(params, {
@@ -146,14 +145,14 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		alm.button = alm?.trigger?.querySelector('button.alm-load-more-btn') || null;
 
 		alm.button_labels = {
-			default: DOMPurify.sanitize(alm?.listing?.dataset?.buttonLabel) || alm_localize?.button_label,
-			loading: DOMPurify.sanitize(alm?.listing?.dataset?.buttonLoadingLabel) || null,
-			done: DOMPurify.sanitize(alm?.listing?.dataset?.buttonDoneLabel) || null,
+			default: alm?.listing?.dataset?.buttonLabel || alm_localize?.button_label,
+			loading: alm?.listing?.dataset?.buttonLoadingLabel || null,
+			done: alm?.listing?.dataset?.buttonDoneLabel || null,
 		};
 		alm.prev_button_labels = {
-			default: DOMPurify.sanitize(alm?.listing?.dataset?.prevButtonLabel),
-			loading: DOMPurify.sanitize(alm?.listing?.dataset?.prevButtonLoadingLabel) || null,
-			done: DOMPurify.sanitize(alm?.listing?.dataset?.prevButtonDoneLabel) || null,
+			default: alm?.listing?.dataset?.prevButtonLabel,
+			loading: alm?.listing?.dataset?.prevButtonLoadingLabel || null,
+			done: alm?.listing?.dataset?.prevButtonDoneLabel || null,
 		};
 
 		alm.urls = alm?.listing?.dataset?.urls === 'false' ? false : true;
@@ -434,7 +433,6 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				params = '';
 			}
 
-			// Make API request.
 			// HTTP request via axios.
 			const data = await axios
 				.get(url, { params })
@@ -451,7 +449,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					return response.data; // Standard ALM.
 				})
 				.catch(function (error) {
-					alm.AjaxLoadMore.error(error);
+					alm.AjaxLoadMore.error(error, 'adminajax');
 				});
 
 			switch (type) {
@@ -519,7 +517,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					alm.AjaxLoadMore.render(obj);
 				})
 				.catch(function (error) {
-					alm.AjaxLoadMore.error(error);
+					// Error
+					alm.AjaxLoadMore.error(error, 'restapi');
 				});
 		};
 
@@ -988,7 +987,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					return data;
 				})
 				.catch(function (error) {
-					alm.AjaxLoadMore.error(error);
+					// Error
+					alm.AjaxLoadMore.error(error, 'getSinglePost');
 					alm.fetchingPreviousPost = false;
 				});
 
@@ -1531,17 +1531,36 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		};
 
 		/**
-		 * Handle API errors by reseting the loading state and button text.
+		 * Handle error messages.
 		 *
-		 * @param {string} error The error message.
+		 * @param {string} error    The error message.
+		 * @param {string} location The location the error occured.
 		 * @since 2.6.0
 		 */
-		alm.AjaxLoadMore.error = function (error = '') {
-			console.error('Ajax Load More: There was an error with the Ajax request.', error); //eslint-disable-line no-console
+		alm.AjaxLoadMore.error = function (error, location = null) {
 			alm.loading = false;
 			if (!alm.addons.paging) {
 				alm.button.classList.remove('loading');
 				alm.AjaxLoadMore.resetBtnText();
+			}
+			console.warn('Error: ', error);
+
+			if (error.response) {
+				// The request was made and the server responded with a status code that falls out of the range of 2xx.
+				console.error('Error Msg: ', error.message);
+			} else if (error.request) {
+				// The request was made but no response was received.
+				console.error(error.request);
+			} else {
+				// Something happened in setting up the request that triggered an Error.
+				console.error('Error Msg: ', error.message);
+			}
+
+			if (location) {
+				console.error('ALM Error started in ' + location);
+			}
+			if (error.config) {
+				console.error('ALM Error Debug: ', error.config);
 			}
 		};
 

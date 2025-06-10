@@ -139,6 +139,9 @@ function almSetFilters(speed, data, type, element) {
 					.toLowerCase();
 				listing.setAttribute('data-' + key, value);
 			}
+
+			almCleanFilterData(listing, data); // Cleanup Filters data
+
 			// Fade ALM back (Filters only)
 			almFadeIn(element, speed);
 			break;
@@ -162,11 +165,39 @@ function almSetFilters(speed, data, type, element) {
 
 	switch (type) {
 		case 'filter':
-			// Filters Complete (not the add-on)
+			// Filters Complete (not the add-on).
 			if (typeof almFilterComplete === 'function') {
-				// Standard Filtering
 				almFilterComplete();
 			}
 			break;
+	}
+}
+
+/**
+ * Clean up Taxonomy and Meta Query data from filters.
+ *
+ * @param {HTMLElement} listing The alm-listing container.
+ * @param {Object}      data    The data object containing filter parameters.
+ */
+function almCleanFilterData(listing, data) {
+	// If taxonomy is empty, remove taxonomy-related data attributes.
+	if (data && data.taxonomy === '') {
+		delete listing.dataset.taxonomy;
+		if (listing.dataset.taxonomyTerms) {
+			delete listing.dataset.taxonomy;
+			delete listing.dataset.taxonomyTerms;
+			delete listing.dataset.taxonomyOperator;
+			delete listing.dataset.taxonomyIncludeChildren;
+		}
+	}
+
+	// If metaKey is empty, remove meta-related data attributes.
+	if (data && data.metaKey === '') {
+		delete listing.dataset.metaKey;
+		if (listing.dataset.metaValue) {
+			delete listing.dataset.metaValue;
+			delete listing.dataset.metaType;
+			delete listing.dataset.metaCompare;
+		}
 	}
 }

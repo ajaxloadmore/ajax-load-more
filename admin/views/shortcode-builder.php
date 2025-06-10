@@ -29,7 +29,7 @@ $alm_admin_heading = __( 'Shortcode Builder', 'ajax-load-more' );
 				<div class="major-publishing-actions">
 					<button class="button button-primary copy copy-to-clipboard" data-copied="<?php _e( 'Copied!', 'ajax-load-more' ); ?>"><?php _e( 'Copy Shortcode', 'ajax-load-more' ); ?></button>
 					<a id="shortcode-preview" class="button button-secondary" data-home-url="<?php echo esc_url( get_home_url() ); ?>" href="<?php echo esc_url( get_home_url() ); ?>?alm_preview=[ajax_load_more]" target="_blank"><?php _e( 'Preview', 'ajax-load-more' ); ?></a>
-					<button class="button reset-shortcode-builder"><i class="fa fa-refresh"></i> <?php _e( 'Reset', 'ajax-load-more' ); ?></button>
+					<button class="button reset-shortcode-builder"><?php _e( 'Reset', 'ajax-load-more' ); ?></button>
 				</div>
 			</div>
 		</aside>
