@@ -177,9 +177,12 @@ export function addSinglePostsAttributes(alm, element) {
 	}
 
 	const { page, addons } = alm;
+	const { retain_querystring = true } = alm_localize;
+	const querystring = retain_querystring ? window.location.search : '';
+
 	element.setAttribute('class', `alm-single-post post-${addons.single_post_id}`);
 	element.dataset.id = addons.single_post_id;
-	element.dataset.url = addons.single_post_permalink;
+	element.dataset.url = `${addons.single_post_permalink}${querystring}`;
 	element.dataset.page = addons.single_post_target ? parseInt(page) + 1 : page;
 	element.dataset.title = addons.single_post_title;
 	return element;

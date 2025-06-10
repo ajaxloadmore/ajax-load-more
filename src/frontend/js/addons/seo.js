@@ -52,7 +52,7 @@ export function seoCreateParams(alm) {
 export function addSEOAttributes(alm, element, pagenum, skipOffset = false) {
 	const { addons, canonical_url } = alm;
 	const { retain_querystring = true } = alm_localize;
-	const querystring = retain_querystring ? window.location.search : '';
+	const querystring = retain_querystring || alm.init ? window.location.search : '';
 
 	pagenum = !skipOffset ? getSEOPageNum(addons?.seo_offset, pagenum) : pagenum;
 

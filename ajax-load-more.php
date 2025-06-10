@@ -7,15 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.4.1
+ * Version: 7.4.2
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-define( 'ALM_VERSION', '7.4.1' );
-define( 'ALM_RELEASE', 'June 6, 2025' );
+define( 'ALM_VERSION', '7.4.2' );
+define( 'ALM_RELEASE', 'June 10, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
@@ -68,6 +68,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_action( 'wp_ajax_nopriv_alm_get_posts', [ $this, 'alm_query_posts' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'alm_enqueue_scripts' ] );
 			add_action( 'after_setup_theme', [ $this, 'alm_image_sizes' ] );
+			add_action( 'init', [ $this, 'alm_load_text_domain' ] );
 
 			add_filter( 'alm_noscript', [ $this, 'alm_noscript' ], 10, 6 );
 			add_filter( 'alm_noscript_pagination', [ $this, 'alm_noscript_pagination' ], 10, 3 );
@@ -76,7 +77,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			add_filter( 'widget_text', 'do_shortcode' );
 
 			add_shortcode( 'ajax_load_more', [ $this, 'alm_shortcode' ] );
-			add_shortcode( 'init', [ $this, 'alm_load_text_domain' ] );
 		}
 
 		/**
