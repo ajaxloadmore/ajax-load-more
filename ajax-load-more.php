@@ -14,6 +14,13 @@
  * @package AjaxLoadMore
  */
 
+/*
+* NEW: Added support for Ajax Load More Search add-on.
+* UPDATE: Refactored default WP_Query to use alm_do_query function for routing queries.
+* UPDATE: Various bug fixes and other improvements.
+
+*/
+
 define( 'ALM_VERSION', '7.4.2' );
 define( 'ALM_RELEASE', 'June 10, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
@@ -174,9 +181,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
 			}
-			if ( ! defined( 'ALM_USERS_ITEM_NAME' ) ) {
-				define( 'ALM_USERS_ITEM_NAME', '32311' );
-			}
 			if ( ! defined( 'ALM_PRO_ITEM_NAME' ) ) {
 				define( 'ALM_PRO_ITEM_NAME', '42166' );
 			}
@@ -187,7 +191,10 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				define( 'ALM_ELEMENTOR_ITEM_NAME', '70951' );
 			}
 			if ( ! defined( 'ALM_RESTAPI_ITEM_NAME' ) ) {
-				define( 'ALM_RESTAPI_ITEM_NAME', '17105' ); // Deprecated.
+				define( 'ALM_RESTAPI_ITEM_NAME', '17105' );
+			}
+			if ( ! defined( 'ALM_USERS_ITEM_NAME' ) ) {
+				define( 'ALM_USERS_ITEM_NAME', '32311' ); // Deprecated.
 			}
 		}
 
@@ -528,14 +535,17 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			// SEO Add-on.
 			$seo_start_page = isset( $params['seo_start_page'] ) ? $params['seo_start_page'] : 1;
 
-			// Set up initial WP_Query $args.
+			/**
+			 * Set up query args.
+			 *
+			 * @return array
+			 */
 			$args = ALM_QUERY_ARGS::alm_build_queryargs( $params, true );
 
 			$args['paged']  = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 			$args['offset'] = $offset + ( $posts_per_page * $page );
 
-			// Get current page number for determining item number.
-			$alm_page_count = $page === 0 ? 1 : $page + 1;
+			$alm_page_count = $page === 0 ? 1 : $page + 1; // Get current page number for determining item number.
 
 			/**
 			 * Single Post Add-on hook
@@ -544,6 +554,12 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			 * @return array
 			 */
 			$args = $single_post && has_action( 'alm_single_post_installed' ) ? apply_filters( 'alm_single_post_args', $single_post_id, $post_type ) : $args;
+
+			/**
+			 * Custom `alm_query` parameter in the WP_Query.
+			 * Note: Value is accessed elsewhere for filters & hooks etc.
+			 */
+			$args['alm_query'] = $single_post ? 'single_posts' : 'alm';
 
 			/**
 			 * ALM Core Query Filter Hook
@@ -562,31 +578,23 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$args = apply_filters( 'alm_query_args_' . $id, $args, $post_id );
 
 			/**
-			 * Custom `alm_query` parameter in the WP_Query
-			 * Value is accessed elsewhere for filters & hooks etc.
+			 * Dispatch Ajax Load More query.
 			 */
-			$args['alm_query'] = $single_post ? 'single_posts' : 'alm';
-
-			// Dispatch WP_Query.
-			$alm_query = new WP_Query( $args );
+			$query = alm_do_query( $args );
 
 			/**
-			 * ALM Core Filter Hook to modify the returned query
+			 * ALM Core Filter Hook to modify the returned query.
 			 *
-			 * @return $alm_query;
+			 * @return array
 			 */
-			$alm_query = apply_filters( 'alm_query_after_' . $id, $alm_query, $post_id );
+			$query = apply_filters( 'alm_query_after_' . $id, $query, $post_id );
 
-			// If preloaded, update loop counter and total posts.
+			// If Preloaded, update loop counter and total posts.
 			if ( has_action( 'alm_preload_installed' ) && $preloaded === 'true' ) {
-				$alm_total_posts = $alm_query->found_posts - $offset + $preloaded_amount;
-				if ( $old_offset > 0 ) {
-					$alm_loop_count = $old_offset;
-				} else {
-					$alm_loop_count = $offset;
-				}
+				$alm_total_posts = $query->found_posts - $offset + $preloaded_amount;
+				$alm_loop_count  = $old_offset > 0 ? $old_offset : $offset;
 			} else {
-				$alm_total_posts = $alm_query->found_posts - $offset;
+				$alm_total_posts = $query->found_posts - $offset;
 				$alm_loop_count  = 0;
 			}
 
@@ -607,9 +615,9 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				 */
 				$debug = apply_filters( 'alm_debug', false ) ? $args : false;
 
-				if ( $alm_query->have_posts() ) {
+				if ( $query->have_posts() ) {
 					$alm_found_posts = $alm_total_posts;
-					$alm_post_count  = $alm_query->post_count;
+					$alm_post_count  = $query->post_count;
 					$alm_current     = 0;
 
 					// Build CTA Position Array.
@@ -618,8 +626,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					ob_start();
 
 					// Run the loop.
-					while ( $alm_query->have_posts() ) :
-						$alm_query->the_post();
+					while ( $query->have_posts() ) :
+						$query->the_post();
 
 						++$alm_loop_count;
 						++$alm_current; // Current item in loop.

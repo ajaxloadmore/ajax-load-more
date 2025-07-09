@@ -87,13 +87,16 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 				$output = '';
 				$i      = 0;
 
-				$noscript_query = new WP_Query( $args );
+				/**
+				 * Dispatch Ajax Load More query.
+				 */
+				$query = alm_do_query( $args );
 
-				if ( $noscript_query->have_posts() ) :
-					$alm_found_posts = $noscript_query->found_posts;
+				if ( $query->have_posts() ) :
+					$alm_found_posts = $query->found_posts;
 					$alm_page        = $paged;
-					while ( $noscript_query->have_posts() ) :
-						$noscript_query->the_post();
+					while ( $query->have_posts() ) :
+						$query->the_post();
 						++$i;
 						$alm_current = $i;
 						$alm_item    = $args['offset'] + $i;
@@ -103,7 +106,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 
 				endif;
 
-				$paging = self::build_noscript_paging( $noscript_query, $filters, $permalink );
+				$paging = self::build_noscript_paging( $query, $filters, $permalink );
 
 				return self::render( $output, $container, $paging, $css_classes );
 

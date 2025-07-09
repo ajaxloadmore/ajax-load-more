@@ -95,7 +95,8 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$date_query_relation  = isset( $a['date_query_relation'] ) ? $a['date_query_relation'] : '';
 
 			// Search.
-			$s = isset( $a['search'] ) ? $a['search'] : '';
+			$s      = isset( $a['search'] ) ? trim( $a['search'] ) : '';
+			$engine = isset( $a['engine'] ) ? $a['engine'] : '';
 
 			// Custom Args.
 			$custom_args = isset( $a['custom_args'] ) ? $a['custom_args'] : '';
@@ -311,6 +312,13 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			// Search Term.
 			if ( ! empty( $s ) ) {
 				$args['s'] = $s;
+			} else {
+				unset( $args['s'] );
+			}
+
+			// Search Engine.
+			if ( ! empty( $engine ) ) {
+				$args['engine'] = $engine;
 			}
 
 			// Custom Args.

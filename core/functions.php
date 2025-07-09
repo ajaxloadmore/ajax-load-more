@@ -11,6 +11,7 @@
  */
 require_once ALM_PATH . 'core/functions/addons.php';
 require_once ALM_PATH . 'core/functions/masonry.php';
+require_once ALM_PATH . 'core/functions/query.php';
 require_once ALM_PATH . 'core/functions/deprecated.php';
 
 /**

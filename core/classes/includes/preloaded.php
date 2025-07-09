@@ -145,13 +145,11 @@ if ( $comments ) {
 	 */
 
 	/**
-	 * This function will return an $args array for the ALM WP_Query.
+	 * Set up query args.
 	 *
 	 * @return array
 	 */
-	if ( class_exists( 'ALM_QUERY_ARGS' ) ) {
-		$args = ALM_QUERY_ARGS::alm_build_queryargs( $query_args, false );
-	}
+	$args = ALM_QUERY_ARGS::alm_build_queryargs( $query_args, false );
 
 	/**
 	 * ALM Core Filter Hook.
@@ -169,31 +167,29 @@ if ( $comments ) {
 	$args = apply_filters( 'alm_query_args_' . $id, $args, $post_id );
 
 	/**
-	 *  WP_Query
-	 *
-	 * @return WP_Query
+	 * Dispatch Ajax Load More query.
 	 */
-	$alm_preload_query = new WP_Query( $args );
+	$query = alm_do_query( $args );
 
 	/**
 	 * ALM Core Filter Hook to modify the returned query.
 	 *
-	 * @return WP_Query;
+	 * @return array
 	 */
-	$alm_preload_query = apply_filters( 'alm_query_after_' . $id, $alm_preload_query, $post_id );
+	$query = apply_filters( 'alm_query_after_' . $id, $query, $post_id );
 
-	$alm_total_posts = $alm_preload_query->found_posts - $offset;
-	$alm_post_count  = $alm_preload_query->post_count;
+	$alm_total_posts = $query->found_posts - $offset;
+	$alm_post_count  = $query->post_count;
 	$output          = '';
 
-	if ( $alm_preload_query->have_posts() ) :
+	if ( $query->have_posts() ) :
 		$alm_item        = 0;
 		$alm_page        = 0;
 		$alm_current     = 0;
 		$alm_found_posts = $alm_total_posts;
 
-		while ( $alm_preload_query->have_posts() ) :
-			$alm_preload_query->the_post();
+		while ( $query->have_posts() ) :
+			$query->the_post();
 
 			++$alm_item;
 			++$alm_current;
@@ -224,7 +220,7 @@ if ( $comments ) {
 		 */
 		if ( has_action( 'alm_seo_installed' ) && $seo === 'true' || $filters ) {
 			if ( ! apply_filters( 'alm_disable_noscript_' . $id, false ) ) {
-				$noscript_pagingnav = apply_filters( 'alm_noscript_pagination', $alm_preload_query, $filters );
+				$noscript_pagingnav = apply_filters( 'alm_noscript_pagination', $query, $filters );
 			}
 		}
 
