@@ -145,7 +145,7 @@ function alm_admin_init() {
 		do_action( 'alm_nextpage_settings' );
 	}
 
-	// PAGINATION.
+	// PAGING.
 	if ( has_action( 'alm_paging_settings' ) ) {
 		do_action( 'alm_paging_settings' );
 	}
@@ -170,6 +170,11 @@ function alm_admin_init() {
 		do_action( 'alm_prev_post_settings' );
 	}
 
+	// TEMPLATES.
+	if ( has_action( 'alm_templates_settings' ) ) {
+		do_action( 'alm_templates_settings' );
+	}
+
 	// THEME REPEATERS.
 	if ( has_action( 'alm_theme_repeaters_settings' ) ) {
 		do_action( 'alm_theme_repeaters_settings' );
@@ -183,7 +188,7 @@ add_action( 'admin_init', 'alm_admin_init' );
  * @since 2.0.0
  */
 function alm_general_settings_callback() {
-	echo '<p>' . esc_html__( 'Customize the user experience of Ajax Load More by updating the fields below.', 'ajax-load-more' ) . '</p>';
+	echo '<p>' . esc_html__( 'Customize the Ajax Load More experience by updating the fields below.', 'ajax-load-more' ) . '</p>';
 }
 
 /**

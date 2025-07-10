@@ -338,7 +338,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	cursor: pointer;
 	width: 100%;
 	position: relative;
-	font-size: 16px;
+	font-size: 15px;
 	background: $light_grey;
 	border-bottom: 1px solid $border;
 	&:hover:after,
@@ -352,12 +352,16 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 		text-decoration: underline;
 	}
 	&::after {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		font-family: 'FontAwesome';
 		content: '\f056';
 		color: $border;
 		position: absolute;
-		left: 13px;
-		top: 16px;
+		left: 10px;
+		top: 50%;
+		transform: translateY(-50%);
 		height: 20px;
 		width: 20px;
 	}
@@ -1508,7 +1512,7 @@ hr.indented {
 			font-weight: 400;
 			color: $paragraph;
 			font-size: 12px;
-			padding-top: 3px;
+			padding-top: 1px;
 			opacity: 0.75;
 		}
 	}
@@ -1939,7 +1943,7 @@ hr.indented {
 			font-size: 13px;
 			display: block;
 			flex: 1;
-			padding: 7px 14px;
+			padding: 8px 12px;
 			background: #77498e;
 			color: #fff;
 			border: none;
@@ -2257,13 +2261,23 @@ span.cnkt-button.installed,
 .ajax-load-more {
 	.alm-add-template {
 		text-align: center;
-		margin: 20px 0 5px !important;
+		margin: 15px 0 0 !important;
 		display: block;
 		font-size: 14px;
 		font-weight: 500;
 		text-transform: none !important;
 		text-align: center;
-		a {
+
+		&.disabled {
+			button {
+				pointer-events: none;
+				cursor: not-allowed;
+				filter: grayscale(1);
+				opacity: 0.75;
+			}
+		}
+		a,
+		button {
 			background: $light_grey;
 			border: 1px solid $border;
 			color: $grey;
@@ -2310,6 +2324,9 @@ span.cnkt-button.installed,
 	height: 10px;
 	clear: both;
 	display: block;
+	&.md {
+		height: 15px;
+	}
 	&.lg {
 		height: 20px;
 	}
@@ -2522,7 +2539,6 @@ span.cnkt-button.installed,
  * Repeater Template options dropdown
  * @since 2.4.1
  */
-
 .ajax-load-more .row.template {
 	position: relative;
 	&:first-of-type {
@@ -2536,15 +2552,20 @@ span.cnkt-button.installed,
 // Repeater Options
 .alm-drop-btn.alm-repeater-options {
 	position: absolute;
-	top: -42px;
-	right: 7px;
+	top: -41px;
+	right: 6px;
 	z-index: 8;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	a.target {
 		padding: 5px 9px;
 		box-shadow: none;
 		border: none;
 		> i {
-			font-size: 24px;
+			font-size: 20px;
 			position: static;
 			transform: none;
 			margin: 0;

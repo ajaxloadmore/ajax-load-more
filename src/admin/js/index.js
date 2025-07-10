@@ -1,6 +1,7 @@
 require('./libs/jquery.drops');
 require('./libs/jquery.tooltipster.min');
 require('./libs/select2.min');
+import './modules/templates';
 import '../scss/admin.scss';
 
 var ajax_load_more = ajax_load_more || {};
@@ -37,20 +38,20 @@ jQuery(document).ready(function ($) {
 	 * Build the header admin menu based on the sidebar.
 	 */
 	function createAdminMenu() {
-		let adminmenu = document.querySelector('#adminmenu .toplevel_page_ajax-load-more > ul');
+		const adminmenu = document.querySelector('#adminmenu .toplevel_page_ajax-load-more > ul');
 		if (!adminmenu) {
 			return;
 		}
 
-		let alm_header = document.querySelector('.ajax-load-more header.header-wrap');
+		const alm_header = document.querySelector('.ajax-load-more header.header-wrap');
 		if (!alm_header) {
 			return;
 		}
 
-		let menu = adminmenu.cloneNode(true);
+		const menu = adminmenu.cloneNode(true);
 		menu.setAttribute('class', '');
 
-		let nav = document.createElement('nav');
+		const nav = document.createElement('nav');
 		nav.appendChild(menu);
 		alm_header.appendChild(nav);
 	}

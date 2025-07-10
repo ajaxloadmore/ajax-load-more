@@ -171,11 +171,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_SEO_ITEM_NAME' ) ) {
 				define( 'ALM_SEO_ITEM_NAME', '3482' );
 			}
+			if ( ! defined( 'ALM_TEMPLATES_ITEM_NAME' ) ) {
+				define( 'ALM_TEMPLATES_ITEM_NAME', '124259' );
+			}
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
-			}
-			if ( ! defined( 'ALM_USERS_ITEM_NAME' ) ) {
-				define( 'ALM_USERS_ITEM_NAME', '32311' );
 			}
 			if ( ! defined( 'ALM_PRO_ITEM_NAME' ) ) {
 				define( 'ALM_PRO_ITEM_NAME', '42166' );
@@ -186,8 +186,13 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_ELEMENTOR_ITEM_NAME' ) ) {
 				define( 'ALM_ELEMENTOR_ITEM_NAME', '70951' );
 			}
+
+			// Deprecated.
 			if ( ! defined( 'ALM_RESTAPI_ITEM_NAME' ) ) {
-				define( 'ALM_RESTAPI_ITEM_NAME', '17105' ); // Deprecated.
+				define( 'ALM_RESTAPI_ITEM_NAME', '17105' );
+			}
+			if ( ! defined( 'ALM_USERS_ITEM_NAME' ) ) {
+				define( 'ALM_USERS_ITEM_NAME', '32311' );
 			}
 		}
 

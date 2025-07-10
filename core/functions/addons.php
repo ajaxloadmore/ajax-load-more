@@ -93,21 +93,6 @@ function alm_get_addons() {
 			'slug'           => 'comments',
 		],
 		[
-			'name'           => 'Custom Repeaters',
-			'intro'          => 'Extend Ajax Load More with unlimited repeater templates.',
-			'desc'           => 'Create, delete and modify repeater templates as you need them with absolutely zero restrictions.',
-			'action'         => 'alm_unlimited_installed',
-			'key'            => 'alm_unlimited_license_key',
-			'status'         => 'alm_unlimited_license_status',
-			'settings_field' => 'alm_unlimited_license',
-			'img'            => 'img/add-ons/unlimited-add-ons.jpg',
-			'url'            => $url_prefix . 'custom-repeaters/',
-			'item_id'        => ALM_UNLIMITED_ITEM_NAME,
-			'version'        => 'ALM_UNLIMITED_VERSION',
-			'path'           => $path_prefix . 'repeaters-v2',
-			'slug'           => 'repeaters-v2',
-		],
-		[
 			'name'           => 'Elementor',
 			'intro'          => 'Infinite scroll Elementor widget content with Ajax Load More.',
 			'desc'           => 'The Elementor add-on provides functionality required for integrating with the Elementor Posts and WooCommerce Products widget.',
@@ -243,19 +228,19 @@ function alm_get_addons() {
 			'slug'           => 'previous-post',
 		],
 		[
-			'name'           => 'Theme Repeaters',
+			'name'           => 'Templates',
 			'intro'          => 'Manage Repeater Templates within your current theme directory.',
 			'desc'           => 'The Theme Repeater add-on will allow you load, edit and maintain Ajax Load More templates from your theme.',
-			'action'         => 'alm_theme_repeaters_installed',
-			'key'            => 'alm_theme_repeaters_license_key',
-			'status'         => 'alm_theme_repeaters_license_status',
-			'settings_field' => 'alm_theme_repeaters_license',
-			'img'            => 'img/add-ons/theme-repeater-add-on.jpg',
-			'url'            => $url_prefix . 'theme-repeaters/',
-			'item_id'        => ALM_THEME_REPEATERS_ITEM_NAME,
-			'version'        => 'ALM_THEME_REPEATERS_VERSION',
-			'path'           => $path_prefix . 'theme-repeaters',
-			'slug'           => 'theme-repeaters',
+			'action'         => 'alm_templates_installed',
+			'key'            => 'alm_templates_license_key',
+			'status'         => 'alm_templates_license_status',
+			'settings_field' => 'alm_templates_license',
+			'img'            => 'img/add-ons/templates-add-on.jpg',
+			'url'            => $url_prefix . 'templates/',
+			'item_id'        => ALM_TEMPLATES_ITEM_NAME,
+			'version'        => 'ALM_TEMPLATES_VERSION',
+			'path'           => $path_prefix . 'templates',
+			'slug'           => 'templates',
 		],
 		[
 			'name'           => 'WooCommerce',
@@ -296,13 +281,15 @@ function alm_get_addon( $slug ) {
  *
  * @param array  $addon The details.
  * @param string $label The text for the button.
+ * @param string $intro The intro text.
+ * @param string $desc  The description text.
  * @return void
  */
-function alm_display_featured_addon( $addon, $label = 'Upgrade Now' ) {
+function alm_display_featured_addon( $addon, $label = 'Upgrade Now', $intro = '', $desc = '' ) {
 	if ( $addon ) {
 		$name  = $addon['name'];
-		$intro = $addon['intro'];
-		$desc  = $addon['desc'];
+		$intro = $intro ? $intro : $addon['intro'];
+		$desc  = $desc ? $desc : $addon['desc'];
 		$url   = $addon['url'];
 		$img   = $addon['img'];
 		?>
