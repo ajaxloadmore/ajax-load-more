@@ -100,7 +100,6 @@ jQuery(document).ready(function ($) {
 	 */
 	function updateRepeater(btn, editorId) {
 		var container = btn.closest('.repeater-wrap'),
-			el = $('textarea._alm_repeater', container),
 			btn = btn,
 			btn_text = btn.html(),
 			editor = $('.CodeMirror', container),
@@ -156,4 +155,40 @@ jQuery(document).ready(function ($) {
 	$('button.option-update').click(function () {
 		updateRepeater($(this));
 	});
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+	/**
+	 * Copy Repeater Templates value.
+	 */
+	const copyButtons = document.querySelectorAll('.alm-dropdown button.copy');
+	if (copyButtons) {
+		copyButtons.forEach(function (button) {
+			button.addEventListener('click', function () {
+				const container = this.closest('.repeater-wrap');
+				const span = this.querySelector('span');
+				const copied = this.dataset.copied;
+				const copy = this.dataset.copy;
+
+				let template = container.dataset.name; // Template name.
+				if (template === 'default') {
+					template = 'template-default';
+				}
+
+				const textarea = document.querySelector('#' + template); // Get textarea.
+				if (!textarea) {
+					return;
+				}
+
+				span.innerText = copied; // Update button text to 'Copied!'
+				textarea.select();
+				textarea.setSelectionRange(0, 99999);
+				navigator.clipboard.writeText(textarea.value);
+
+				setTimeout(() => {
+					span.innerText = copy; // Reset button text after 2 seconds
+				}, 2000);
+			});
+		});
+	}
 });

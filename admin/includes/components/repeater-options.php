@@ -31,9 +31,9 @@
 				</li>
 				<?php } ?>
 				<li>
-					<button type="button" class="option copy">
+					<button type="button" class="option copy" data-copied="<?php esc_attr_e( 'Copied!', 'ajax-load-more' ); ?>" data-copy="<?php esc_attr_e( 'Copy Template', 'ajax-load-more' ); ?>">
 						<i class="fa fa-file"></i>
-						<span><?php esc_attr_e( 'Copy Template Data', 'ajax-load-more' ); ?></span>
+						<span><?php esc_attr_e( 'Copy Template', 'ajax-load-more' ); ?></span>
 					</button>
 				</li>
 

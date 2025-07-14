@@ -14,6 +14,11 @@
  * @package AjaxLoadMore
  */
 
+/*
+* UPDATE: Various UI/UX updates, bug fixes, and improvements.
+
+*/
+
 define( 'ALM_VERSION', '7.4.2' );
 define( 'ALM_RELEASE', 'June 10, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
