@@ -13,8 +13,8 @@
  * @since 3.6
  */
 function alm_get_pro_addon() {
-	$path_prefix = 'ajax-load-more-';
-	$url_prefix  = 'https://connekthq.com/plugins/ajax-load-more/pro/';
+	$path = 'ajax-load-more-';
+	$url  = 'https://connekthq.com/plugins/ajax-load-more/pro/';
 
 	$addons = [
 		[
@@ -26,10 +26,10 @@ function alm_get_pro_addon() {
 			'status'         => 'alm_pro_license_status',
 			'settings_field' => 'alm_pro_license',
 			'img'            => 'img/add-ons/pro-bundle-add-on.png',
-			'url'            => $url_prefix,
+			'url'            => $url,
 			'item_id'        => ALM_PRO_ITEM_NAME,
 			'version'        => 'ALM_PRO_VERSION',
-			'path'           => $path_prefix . 'pro',
+			'path'           => $path . 'pro',
 			'slug'           => 'pro',
 		],
 	];
@@ -37,14 +37,14 @@ function alm_get_pro_addon() {
 }
 
 /**
- *  An array of add-on parameters.
+ *  Get an array of Ajax Load More add-ons.
  *
- *  @return array
+ *  @return array Array of addons.
  *  @since 3.3.0
  */
 function alm_get_addons() {
-	$path_prefix = 'ajax-load-more-';
-	$url_prefix  = 'https://connekthq.com/plugins/ajax-load-more/add-ons/';
+	$path = 'ajax-load-more-';
+	$url  = 'https://connekthq.com/plugins/ajax-load-more/add-ons/';
 
 	$addons = [
 		[
@@ -56,10 +56,10 @@ function alm_get_addons() {
 			'status'         => 'alm_cache_license_status',
 			'settings_field' => 'alm_cache_license',
 			'img'            => 'img/add-ons/cache-add-on.jpg',
-			'url'            => $url_prefix . 'cache/',
+			'url'            => $url . 'cache/',
 			'item_id'        => ALM_CACHE_ITEM_NAME,
 			'version'        => 'ALM_CACHE_VERSION',
-			'path'           => $path_prefix . 'cache',
+			'path'           => $path . 'cache',
 			'slug'           => 'cache',
 		],
 		[
@@ -71,10 +71,10 @@ function alm_get_addons() {
 			'status'         => 'alm_cta_license_status',
 			'settings_field' => 'alm_cta_license',
 			'img'            => 'img/add-ons/cta-add-on.jpg',
-			'url'            => $url_prefix . 'call-to-actions/',
+			'url'            => $url . 'call-to-actions/',
 			'item_id'        => ALM_CTA_ITEM_NAME,
 			'version'        => 'ALM_CTA_VERSION',
-			'path'           => $path_prefix . 'call-to-actions',
+			'path'           => $path . 'call-to-actions',
 			'slug'           => 'call-to-actions',
 		],
 		[
@@ -86,10 +86,10 @@ function alm_get_addons() {
 			'status'         => 'alm_comments_license_status',
 			'settings_field' => 'alm_comments_license',
 			'img'            => 'img/add-ons/comments-add-on.jpg',
-			'url'            => $url_prefix . 'comments/',
+			'url'            => $url . 'comments/',
 			'item_id'        => ALM_COMMENTS_ITEM_NAME,
 			'version'        => 'ALM_COMMENTS_VERSION',
-			'path'           => $path_prefix . 'comments',
+			'path'           => $path . 'comments',
 			'slug'           => 'comments',
 		],
 		[
@@ -101,10 +101,10 @@ function alm_get_addons() {
 			'status'         => 'alm_elementor_license_status',
 			'settings_field' => 'alm_elementor_license',
 			'img'            => 'img/add-ons/elementor-add-on.jpg',
-			'url'            => $url_prefix . 'elementor/',
+			'url'            => $url . 'elementor/',
 			'item_id'        => ALM_ELEMENTOR_ITEM_NAME,
 			'version'        => 'ALM_ELEMENTOR_VERSION',
-			'path'           => $path_prefix . 'elementor',
+			'path'           => $path . 'elementor',
 			'slug'           => 'elementor',
 		],
 		[
@@ -116,10 +116,10 @@ function alm_get_addons() {
 			'status'         => 'alm_filters_license_status',
 			'settings_field' => 'alm_filters_license',
 			'img'            => 'img/add-ons/filters-add-on.jpg',
-			'url'            => $url_prefix . 'filters/',
+			'url'            => $url . 'filters/',
 			'item_id'        => ALM_FILTERS_ITEM_NAME,
 			'version'        => 'ALM_FILTERS_VERSION',
-			'path'           => $path_prefix . 'filters',
+			'path'           => $path . 'filters',
 			'slug'           => 'filters',
 		],
 		[
@@ -131,10 +131,10 @@ function alm_get_addons() {
 			'status'         => 'alm_layouts_license_status',
 			'settings_field' => 'alm_layouts_license',
 			'img'            => 'img/add-ons/layouts-add-on.jpg',
-			'url'            => $url_prefix . 'layouts/',
+			'url'            => $url . 'layouts/',
 			'item_id'        => ALM_LAYOUTS_ITEM_NAME,
 			'version'        => 'ALM_LAYOUTS_VERSION',
-			'path'           => $path_prefix . 'layouts',
+			'path'           => $path . 'layouts',
 			'slug'           => 'layouts',
 		],
 		[
@@ -146,10 +146,10 @@ function alm_get_addons() {
 			'status'         => 'alm_nextpage_license_status',
 			'settings_field' => 'alm_nextpage_license',
 			'img'            => 'img/add-ons/next-page-add-on.jpg',
-			'url'            => $url_prefix . 'nextpage/',
+			'url'            => $url . 'nextpage/',
 			'item_id'        => ALM_NEXTPAGE_ITEM_NAME,
 			'version'        => 'ALM_NEXTPAGE_VERSION',
-			'path'           => $path_prefix . 'next-page',
+			'path'           => $path . 'next-page',
 			'slug'           => 'next-page',
 		],
 		[
@@ -161,10 +161,10 @@ function alm_get_addons() {
 			'status'         => 'alm_paging_license_status',
 			'settings_field' => 'alm_paging_license',
 			'img'            => 'img/add-ons/paging-add-ons.jpg',
-			'url'            => $url_prefix . 'paging/',
+			'url'            => $url . 'paging/',
 			'item_id'        => ALM_PAGING_ITEM_NAME,
 			'version'        => 'ALM_PAGING_VERSION',
-			'path'           => $path_prefix . 'paging',
+			'path'           => $path . 'paging',
 			'slug'           => 'paging',
 		],
 		[
@@ -176,10 +176,10 @@ function alm_get_addons() {
 			'status'         => 'alm_preloaded_license_status',
 			'settings_field' => 'alm_preloaded_license',
 			'img'            => 'img/add-ons/preloaded-add-ons.jpg',
-			'url'            => $url_prefix . 'preloaded/',
+			'url'            => $url . 'preloaded/',
 			'item_id'        => ALM_PRELOADED_ITEM_NAME,
 			'version'        => 'ALM_PRELOADED_VERSION',
-			'path'           => $path_prefix . 'preloaded',
+			'path'           => $path . 'preloaded',
 			'slug'           => 'preloaded',
 		],
 		[
@@ -191,10 +191,10 @@ function alm_get_addons() {
 			'status'         => 'alm_query_loop_license_status',
 			'settings_field' => 'alm_query_loop_license',
 			'img'            => 'img/add-ons/query-loop-add-on.jpg',
-			'url'            => $url_prefix . 'query-loop/',
+			'url'            => $url . 'query-loop/',
 			'item_id'        => ALM_QUERY_LOOP_ITEM_NAME,
 			'version'        => 'ALM_QUERY_LOOP_VERSION',
-			'path'           => $path_prefix . 'query-loop',
+			'path'           => $path . 'query-loop',
 			'slug'           => 'query-loop',
 		],
 		[
@@ -206,10 +206,10 @@ function alm_get_addons() {
 			'status'         => 'alm_seo_license_status',
 			'settings_field' => 'alm_seo_license',
 			'img'            => 'img/add-ons/seo-add-ons.jpg',
-			'url'            => $url_prefix . 'search-engine-optimization/',
+			'url'            => $url . 'search-engine-optimization/',
 			'item_id'        => ALM_SEO_ITEM_NAME,
 			'version'        => 'ALM_SEO_VERSION',
-			'path'           => $path_prefix . 'seo',
+			'path'           => $path . 'seo',
 			'slug'           => 'seo',
 		],
 		[
@@ -221,25 +221,25 @@ function alm_get_addons() {
 			'status'         => 'alm_prev_post_license_status',
 			'settings_field' => 'alm_prev_post_license',
 			'img'            => 'img/add-ons/prev-post-add-on.jpg',
-			'url'            => $url_prefix . 'single-post/',
+			'url'            => $url . 'single-post/',
 			'item_id'        => ALM_PREV_POST_ITEM_NAME,
 			'version'        => 'ALM_PREV_POST_VERSION',
-			'path'           => $path_prefix . 'previous-post',
+			'path'           => $path . 'previous-post',
 			'slug'           => 'previous-post',
 		],
 		[
 			'name'           => 'Templates',
-			'intro'          => 'Unlock the Power of unlimited Repeater Templates.',
-			'desc'           => 'The Templates add-on lets you create and manage Repeater Templates on demand, as well as load templates directly from your theme.',
+			'intro'          => 'Unlock the power of unlimited Repeater Templates.',
+			'desc'           => 'The Templates add-on lets you create and manage Repeater Templates on demand, as well as load templates directly from your theme directory.',
 			'action'         => 'alm_templates_installed',
 			'key'            => 'alm_templates_license_key',
 			'status'         => 'alm_templates_license_status',
 			'settings_field' => 'alm_templates_license',
 			'img'            => 'img/add-ons/unlimited-add-ons.jpg',
-			'url'            => $url_prefix . 'templates/',
+			'url'            => $url . 'templates/',
 			'item_id'        => ALM_TEMPLATES_ITEM_NAME,
 			'version'        => 'ALM_TEMPLATES_VERSION',
-			'path'           => $path_prefix . 'templates',
+			'path'           => $path . 'templates',
 			'slug'           => 'templates',
 		],
 		[
@@ -251,10 +251,10 @@ function alm_get_addons() {
 			'status'         => 'alm_woocommerce_license_status',
 			'settings_field' => 'alm_woocommerce_license',
 			'img'            => 'img/add-ons/woocommerce-add-on.jpg',
-			'url'            => $url_prefix . 'woocommerce/',
+			'url'            => $url . 'woocommerce/',
 			'item_id'        => ALM_WOO_ITEM_NAME,
 			'version'        => 'ALM_WOO_VERSION',
-			'path'           => $path_prefix . 'woocommerce',
+			'path'           => $path . 'woocommerce',
 			'slug'           => 'woocommerce',
 		],
 	];
@@ -281,17 +281,18 @@ function alm_get_addon( $slug ) {
  *
  * @param array  $addon The details.
  * @param string $label The text for the button.
- * @param string $intro The intro text.
- * @param string $desc  The description text.
+ * @param string $intro The intro text - override text.
+ * @param string $desc  The description text - override text.
+ * @param string $img   The image URL - override text.
  * @return void
  */
-function alm_display_featured_addon( $addon, $label = 'Upgrade Now', $intro = '', $desc = '' ) {
+function alm_display_featured_addon( $addon, $label = 'Upgrade Now', $intro = '', $desc = '', $img = '' ) {
 	if ( $addon ) {
 		$name  = $addon['name'];
 		$intro = $intro ? $intro : $addon['intro'];
 		$desc  = $desc ? $desc : $addon['desc'];
 		$url   = $addon['url'];
-		$img   = $addon['img'];
+		$img   = $img ? $img : $addon['img'];
 		?>
 	<section class="alm-cta-upgrade">
 		<a href="<?php echo $url; ?>?utm_source=WP%20Admin&utm_medium=ALM%20Add-ons&utm_campaign=<?php echo $name; ?>" target="_blank">

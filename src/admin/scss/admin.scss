@@ -221,13 +221,13 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	code {
 		padding: 15px 0;
 		line-height: 18px;
-		font-size: 11px;
+		font-size: 12px;
 	}
 	span {
 		margin: 0;
 		width: auto;
 		cursor: help;
-		font-size: 14px;
+		font-size: 13px;
 		color: $grey_text;
 	}
 	code {
@@ -352,7 +352,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	&:focus {
 		color: #222;
 		outline: none;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 	&::after {
 		display: flex;

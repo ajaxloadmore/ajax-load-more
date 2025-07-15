@@ -2635,13 +2635,13 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more .file-location code {
   padding: 15px 0;
   line-height: 18px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .ajax-load-more .file-location span {
   margin: 0;
   width: auto;
   cursor: help;
-  font-size: 14px;
+  font-size: 13px;
   color: #999;
 }
 .ajax-load-more .file-location code {
@@ -2761,7 +2761,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more h3.heading:hover, .ajax-load-more h3.heading:focus {
   color: #222;
   outline: none;
-  text-decoration: underline;
+  text-decoration: none;
 }
 .ajax-load-more h3.heading::after {
   display: flex;

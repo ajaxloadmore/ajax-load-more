@@ -13,11 +13,10 @@ $alm_theme_repeaters = isset( $_GET['theme-templates'] ) ? true : false;
 	<?php require_once ALM_PATH . 'admin/includes/components/header.php'; ?>
 	<div class="ajax-load-more-inner-wrapper">
 		<div class="cnkt-main stylefree repeaters">
-
 			<ul class="alm-toggle-switch">
 				<li>
 					<?php
-						echo '<a href="?page=ajax-load-more-repeaters" class="' . ( ! $alm_theme_repeaters ? 'active' : '' ) . '">' . esc_html__( 'Repeater Templates', 'ajax-load-more' ) . '</a>';
+						echo '<a href="?page=ajax-load-more-repeaters" class="' . ( ! $alm_theme_repeaters ? 'active' : '' ) . '">' . esc_html__( 'Site Templates', 'ajax-load-more' ) . '</a>';
 					?>
 				</li>
 				<li>
@@ -26,7 +25,6 @@ $alm_theme_repeaters = isset( $_GET['theme-templates'] ) ? true : false;
 					?>
 				</li>
 			</ul>
-
 			<div class="alm-content-wrap">
 				<?php
 				// Theme Repeaters.
@@ -129,7 +127,8 @@ $alm_theme_repeaters = isset( $_GET['theme-templates'] ) ? true : false;
 							alm_get_addon( 'templates' ),
 							'Upgrade Now',
 							'Manage Ajax Load More Templates within your current theme directory.',
-							'The Templates add-on will allow you load, edit and maintain Ajax Load More Repeater Templates from your theme.'
+							'The Templates add-on will allow you load, edit and maintain Ajax Load More Repeater Templates from your theme.',
+							'img/add-ons/theme-repeater-add-on.jpg',
 						);
 					}
 					?>
@@ -173,13 +172,7 @@ $alm_theme_repeaters = isset( $_GET['theme-templates'] ) ? true : false;
 					?>
 					<h3 class="heading" tabindex="0"><?php esc_attr_e( 'Default Template', 'ajax-load-more' ); ?></h3>
 					<div class="expand-wrap">
-						<div class="wrap repeater-wrap
-						<?php
-						if ( $alm_local_template ) {
-							echo ' cm-readonly';
-						}
-						?>
-						" data-name="default" data-type="default">
+						<div class="wrap repeater-wrap <?php echo ( $alm_local_template ) ? 'cm-readonly' : ''; ?>" data-name="default" data-type="default">
 							<?php
 							if ( ! $alm_local_template ) {
 								?>
@@ -187,7 +180,7 @@ $alm_theme_repeaters = isset( $_GET['theme-templates'] ) ? true : false;
 									<div class="column column-9">
 										<label class="trigger-codemirror" data-id="default" for="template-default">
 											<?php esc_attr_e( 'Template Code:', 'ajax-load-more' ); ?>
-											<span><?php esc_attr_e( 'Enter the PHP and HTML markup for this template.', 'ajax-load-more' ); ?></span>
+											<span><?php esc_attr_e( 'The PHP and HTML markup for this template.', 'ajax-load-more' ); ?></span>
 										</label>
 									</div>
 									<div class="column column-3">
@@ -271,7 +264,7 @@ $alm_theme_repeaters = isset( $_GET['theme-templates'] ) ? true : false;
 								<span title="<?php _e( 'Template Location', 'ajax-load-more' ); ?>">
 									<i class="fa fa-folder-open" aria-hidden="true"></i>
 								</span>
-								<code title="<?php echo esc_attr( $file ); ?>">themes/<?php echo esc_attr( $file_directory ); ?></code>
+								<code title="<?php echo esc_attr( $file_directory ); ?>">themes/<?php echo esc_attr( $file_directory ); ?></code>
 							</div>
 							<?php } ?>
 					</div>

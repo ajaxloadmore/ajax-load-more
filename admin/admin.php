@@ -349,7 +349,7 @@ function alm_settings_page() {
 }
 
 /**
- *  Custom Repeaters.
+ *  Custom Repeaters v1.
  *
  *  @since 2.0.0
  */
@@ -556,7 +556,7 @@ function alm_enqueue_admin_scripts() {
 			'applying_layout'      => __( 'Applying Layout', 'ajax-load-more' ),
 			'template_updated'     => __( 'Template Updated', 'ajax-load-more' ),
 			'updating_template'    => __( 'Updating Template...', 'ajax-load-more' ),
-			'saving_template'     => __( 'Saving template...', 'ajax-load-more' ),
+			'saving_template'      => __( 'Saving template...', 'ajax-load-more' ),
 			'something_went_wrong' => __( 'Something went wrong and the data could not be saved.', 'ajax-load-more' ),
 			'alm_admin_nonce'      => wp_create_nonce( 'alm_repeater_nonce' ),
 			'select_authors'       => __( 'Select Author(s)', 'ajax-load-more' ),

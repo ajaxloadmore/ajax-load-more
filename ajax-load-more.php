@@ -7,20 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.4.2
+ * Version: 7.4.3
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-/*
-* UPDATE: Various UI/UX updates, bug fixes, and improvements.
-
-*/
-
-define( 'ALM_VERSION', '7.4.2' );
-define( 'ALM_RELEASE', 'June 10, 2025' );
+define( 'ALM_VERSION', '7.4.3' );
+define( 'ALM_RELEASE', 'July 15, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
