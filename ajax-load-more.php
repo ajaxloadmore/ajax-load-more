@@ -188,6 +188,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
 				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
 			}
+
+			// Deprecated.
 			if ( ! defined( 'ALM_RESTAPI_ITEM_NAME' ) ) {
 				define( 'ALM_RESTAPI_ITEM_NAME', '17105' );
 			}
