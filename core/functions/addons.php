@@ -258,6 +258,53 @@ function alm_get_addons() {
 			'slug'           => 'woocommerce',
 		],
 	];
+
+	// Backwards compatibility for Pro add-ons - Custom Repeaters and Theme Repeaters.
+	if ( has_action( 'alm_pro_installed' ) && defined( 'ALM_PRO_VERSION' ) && version_compare( ALM_PRO_VERSION, '1.4.0', '<' ) ) {
+		$backwards = [
+			[
+				'name'           => 'Custom Repeaters',
+				'intro'          => 'Extend Ajax Load More with unlimited repeater templates.',
+				'desc'           => 'Create, delete and modify repeater templates as you need them with absolutely zero restrictions.',
+				'action'         => 'alm_unlimited_installed',
+				'key'            => 'alm_unlimited_license_key',
+				'status'         => 'alm_unlimited_license_status',
+				'settings_field' => 'alm_unlimited_license',
+				'img'            => 'img/add-ons/unlimited-add-ons.jpg',
+				'url'            => $url . 'custom-repeaters/',
+				'item_id'        => ALM_UNLIMITED_ITEM_NAME,
+				'version'        => 'ALM_UNLIMITED_VERSION',
+				'path'           => $path . 'repeaters-v2',
+				'slug'           => 'repeaters-v2',
+			],
+			[
+				'name'           => 'Theme Repeaters',
+				'intro'          => 'Manage Repeater Templates within your current theme directory.',
+				'desc'           => 'The Theme Repeater add-on will allow you load, edit and maintain Ajax Load More templates from your theme.',
+				'action'         => 'alm_theme_repeaters_installed',
+				'key'            => 'alm_theme_repeaters_license_key',
+				'status'         => 'alm_theme_repeaters_license_status',
+				'settings_field' => 'alm_theme_repeaters_license',
+				'img'            => 'img/add-ons/theme-repeater-add-on.jpg',
+				'url'            => $url . 'theme-repeaters/',
+				'item_id'        => ALM_THEME_REPEATERS_ITEM_NAME,
+				'version'        => 'ALM_THEME_REPEATERS_VERSION',
+				'path'           => $path . 'theme-repeaters',
+				'slug'           => 'theme-repeaters',
+			],
+		];
+
+		// Merge backwards compatibility add-ons with the current add-ons.
+		$addons = array_merge( $addons, $backwards );
+
+		// Remove Templates add-on from the list if Pro add-ons are installed.
+		foreach ( $addons as $key => $addon ) {
+			if ( $addon['slug'] === 'templates' ) {
+				unset( $addons[ $key ] );
+			}
+		}
+	}
+
 	return $addons;
 }
 

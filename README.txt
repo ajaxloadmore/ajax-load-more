@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 7.4.3
+Stable tag: 7.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,7 +268,7 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.4.3 - July 15, 2025 =
+= 7.5.0 - July 15, 2025 =
 * NEW: Added required updated for the new Templates add-on.
 * UPDATE: Various UI/UX updates, bug fixes, and improvements.
 

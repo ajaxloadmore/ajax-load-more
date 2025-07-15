@@ -26,3 +26,4 @@ webpack.config.js
 webpack.prod.js
 CONTRIBUTING.md
 README.md
+phpcs.xml

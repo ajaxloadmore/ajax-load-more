@@ -1,5 +1,6 @@
 *.min.js
 !/.*.js
+_out/
 build/
 node_modules/
 vendor/
