@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 7.4.2
+Stable tag: 7.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,18 +109,17 @@ The Ajax Load More [Shortcode Builder](https://connekthq.com/plugins/ajax-load-m
 
 &rarr; [See All Examples](https://connekthq.com/plugins/ajax-load-more/examples/)
 
-**Note**: The [Custom Repeaters Add-On](https://connekthq.com/plugins/ajax-load-more/custom-repeaters/) has been installed for use on each of our product demos.
+**Note**: The [Templates Add-On](https://connekthq.com/plugins/ajax-load-more/templates/) has been installed for use on each of our product demos.
 
 [youtube https://www.youtube.com/watch?v=EQ57i6dkOew]
 
 ### Add-ons
 
-The following [add-ons](https://connekthq.com/plugins/ajax-load-more/add-ons/) are available to increase the functionality of Ajax Load More.
+The following [add-ons](https://connekthq.com/plugins/ajax-load-more/add-ons/) are available to etend and enhance the functionality of Ajax Load More.
 
 -  **[Cache](https://connekthq.com/plugins/ajax-load-more/add-ons/cache/)**: Improve website performance by caching the results of Ajax server requests.
 -  **[Call to Actions](https://connekthq.com/plugins/ajax-load-more/add-ons/call-to-actions/)**: Extend Ajax Load More with advertisement and call to action content blocks.
 -  **[Comments](https://connekthq.com/plugins/ajax-load-more/add-ons/comments/)**: Load and display WordPress blog comments using the core Ajax Load More infinite scroll functionality.
--  **[Custom Repeaters](https://connekthq.com/plugins/ajax-load-more/add-ons/custom-repeaters/)**: Create, modify and delete repeater templates as you need them with absolutely zero restrictions.
 -  **[Elementor](https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/)**: Add infinite scroll or load more to your Elementor Posts and WooCommerce listing widgets with Ajax Load More and the intuitive Elementor Widget Connector.
 -  **[Filters](https://connekthq.com/plugins/ajax-load-more/add-ons/filters/)**: Front-end and admin functionality for creating, managing and displaying Ajax Load More filters.
 -  **[Layouts](https://connekthq.com/plugins/ajax-load-more/add-ons/layouts/)**: Predefined responsive layouts for Ajax Load More repeater templates.
@@ -130,7 +129,7 @@ The following [add-ons](https://connekthq.com/plugins/ajax-load-more/add-ons/) a
 -  **[Query Loop](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/)**: Infinite scroll the core WordPress Query Loop block
 -  **[SEO](https://connekthq.com/plugins/ajax-load-more/add-ons/search-engine-optimization/)**: Generate unique paging URLs with each Ajax Load More query.
 -  **[Single Post](https://connekthq.com/plugins/ajax-load-more/add-ons/single-post/)**: Enable infinite scrolling of single posts on your WordPress post templates.
--  **[Theme Repeaters](https://connekthq.com/plugins/ajax-load-more/add-ons/theme-repeaters/)**: Manage Ajax Load More repeater templates from within your current theme directory.
+-  **[Templates](https://connekthq.com/plugins/ajax-load-more/add-ons/templates/)**: Create and manage Repeater Templates on demand, as well as load templates directly from your theme directory.
 -  **[WooCommerce](https://connekthq.com/plugins/ajax-load-more/add-ons/woocommerce/)**: Infinite scroll WooCommerce products with Ajax Load More.
 
 ### Ajax Load More Pro
@@ -263,11 +262,15 @@ How to install Ajax Load More.
 
 1. Settings: Customize Ajax Load More by configuring the various plugin settings.
 2. Repeater Templates: Manage the front-end display and styling of Ajax loaded content.
-3. Custom Repeaters: Unlock the ability to create an infinite number of Repeater Templates.
+3. Templates: Unlock the ability to create an infinite number of Repeater Templates with the Templates add-on.
 4. Shortcode Builder: Create complex WordPress queries in seconds using the intuitive Shortcode Builder.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.4.3 - July 15, 2025 =
+* NEW: Added required updated for the new Templates add-on.
+* UPDATE: Various UI/UX updates, bug fixes, and improvements.
 
 = 7.4.2 - June 10, 2025 =
 * FIX: Fixed issue with registering the load_text_domain() function.

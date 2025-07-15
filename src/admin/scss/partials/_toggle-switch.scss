@@ -1,4 +1,3 @@
-
 // Toggle Switch.
 .ajax-load-more {
 	.alm-toggle-switch {
@@ -33,9 +32,8 @@
 				}
 				&.active {
 					background: #fff;
-					font-weight: 600;
 					border-bottom-color: #fff;
-					color: $grey;
+					color: $grey_dark;
 				}
 			}
 		}

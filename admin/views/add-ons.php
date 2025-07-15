@@ -16,7 +16,7 @@ $alm_admin_heading = __( 'Add-ons', 'ajax-load-more' );
 			// Go Pro Upgrade CTA.
 			$alm_pro_cta = alm_get_pro_addon();
 			if ( $alm_pro_cta && $alm_pro_cta[0] ) {
-				echo wp_kses_post( alm_display_featured_addon( $alm_pro_cta[0], 'Upgrade Now' ) );
+				alm_display_featured_addon( $alm_pro_cta[0], 'Upgrade Now' );
 				echo '<div class="spacer lg"></div>';
 			}
 			?>

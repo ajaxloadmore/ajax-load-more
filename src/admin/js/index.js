@@ -1,12 +1,13 @@
 require('./libs/jquery.drops');
 require('./libs/jquery.tooltipster.min');
 require('./libs/select2.min');
+import './modules/templates';
 import '../scss/admin.scss';
 
 var ajax_load_more = ajax_load_more || {};
 
 jQuery(document).ready(function ($) {
-	'use strict';
+	('use strict');
 	ajax_load_more.options = {
 		speed: 200,
 	};
@@ -37,20 +38,20 @@ jQuery(document).ready(function ($) {
 	 * Build the header admin menu based on the sidebar.
 	 */
 	function createAdminMenu() {
-		let adminmenu = document.querySelector('#adminmenu .toplevel_page_ajax-load-more > ul');
+		const adminmenu = document.querySelector('#adminmenu .toplevel_page_ajax-load-more > ul');
 		if (!adminmenu) {
 			return;
 		}
 
-		let alm_header = document.querySelector('.ajax-load-more header.header-wrap');
+		const alm_header = document.querySelector('.ajax-load-more header.header-wrap');
 		if (!alm_header) {
 			return;
 		}
 
-		let menu = adminmenu.cloneNode(true);
+		const menu = adminmenu.cloneNode(true);
 		menu.setAttribute('class', '');
 
-		let nav = document.createElement('nav');
+		const nav = document.createElement('nav');
 		nav.appendChild(menu);
 		alm_header.appendChild(nav);
 	}
@@ -330,16 +331,6 @@ jQuery(document).ready(function ($) {
 	ajax_load_more.copyToClipboard = function (text) {
 		window.prompt('Copy link to your clipboard: Press Ctrl + C then hit Enter to copy.', text);
 	};
-
-	// Copy link on repeater templates
-	$('.alm-dropdown button.copy').click(function () {
-		var container = $(this).closest('.repeater-wrap'), // find closet wrap
-			el = container.data('name'); // get template name
-
-		if (el === 'default') el = 'template-default';
-		var c = $('#' + el).val(); // Get textarea val()
-		ajax_load_more.copyToClipboard(c);
-	});
 
 	/*
 	 *  Expand/Collapse shortcode headings

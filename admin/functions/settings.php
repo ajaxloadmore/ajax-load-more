@@ -120,59 +120,25 @@ function alm_admin_init() {
 		'alm_admin_settings'
 	);
 
-	// CACHE.
-	if ( has_action( 'alm_cache_settings' ) ) {
-		do_action( 'alm_cache_settings' );
-	}
+	$settings = [
+		'alm_cache_settings',
+		'alm_unlimited_settings', // Deprecated 7.4.3
+		'alm_filters_settings',
+		'alm_layouts_settings',
+		'alm_nextpage_settings',
+		'alm_paging_settings',
+		'alm_preloaded_settings',
+		'alm_rest_api_settings',
+		'alm_seo_settings',
+		'alm_prev_post_settings',
+		'alm_templates_settings',
+		'alm_theme_repeaters_settings', // Deprecated 7.4.3
+	];
 
-	// CUSTOM REPEATERS.
-	if ( has_action( 'alm_unlimited_settings' ) ) {
-		do_action( 'alm_unlimited_settings' );
-	}
-
-	// FILTERS.
-	if ( has_action( 'alm_filters_settings' ) ) {
-		do_action( 'alm_filters_settings' );
-	}
-
-	// LAYOUTS.
-	if ( has_action( 'alm_layouts_settings' ) ) {
-		do_action( 'alm_layouts_settings' );
-	}
-
-	// NEXT PAGE.
-	if ( has_action( 'alm_nextpage_settings' ) ) {
-		do_action( 'alm_nextpage_settings' );
-	}
-
-	// PAGINATION.
-	if ( has_action( 'alm_paging_settings' ) ) {
-		do_action( 'alm_paging_settings' );
-	}
-
-	// PRELOADED.
-	if ( has_action( 'alm_preloaded_settings' ) ) {
-		do_action( 'alm_preloaded_settings' );
-	}
-
-	// REST API.
-	if ( has_action( 'alm_rest_api_settings' ) ) {
-		do_action( 'alm_rest_api_settings' );
-	}
-
-	// SEO.
-	if ( has_action( 'alm_seo_settings' ) ) {
-		do_action( 'alm_seo_settings' );
-	}
-
-	// SINGLE POST.
-	if ( has_action( 'alm_prev_post_settings' ) ) {
-		do_action( 'alm_prev_post_settings' );
-	}
-
-	// THEME REPEATERS.
-	if ( has_action( 'alm_theme_repeaters_settings' ) ) {
-		do_action( 'alm_theme_repeaters_settings' );
+	foreach ( $settings as $setting ) {
+		if ( has_action( $setting ) ) {
+			do_action( $setting );
+		}
 	}
 }
 add_action( 'admin_init', 'alm_admin_init' );
@@ -183,7 +149,7 @@ add_action( 'admin_init', 'alm_admin_init' );
  * @since 2.0.0
  */
 function alm_general_settings_callback() {
-	echo '<p>' . esc_html__( 'Customize the user experience of Ajax Load More by updating the fields below.', 'ajax-load-more' ) . '</p>';
+	echo '<p>' . esc_html__( 'Customize the Ajax Load More experience by updating the fields below.', 'ajax-load-more' ) . '</p>';
 }
 
 /**
