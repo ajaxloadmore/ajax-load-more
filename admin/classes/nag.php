@@ -63,18 +63,26 @@ if ( ! class_exists( 'ALM_NAG' ) ) :
 		 * Bind nag message
 		 */
 		private function bind() {
-			// Is admin notice hidden?
+			$params = $this->get_admin_querystring_array();
+			$page   = isset( $params['page'] ) ? $params['page'] : '';
+			if ( ! $page ) {
+				return; // Exit if no page is set.
+			}
+
+			if ( ! str_contains( $page, 'ajax-load-more' ) ) {
+				return; // Exit if not on the Ajax Load More admin page.
+			}
+
 			$current_user = wp_get_current_user();
 			$hide_notice  = get_user_meta( $current_user->ID, ALM_Nag::OPTION_ADMIN_NOTICE_KEY, true );
 
 			// Check if we need to display the notice.
-			if ( current_user_can( 'install_plugins' ) && '' == $hide_notice ) {
+			if ( current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) ) && '' === $hide_notice ) {
 				// Get installation date.
 				$datetime_install = $this->get_install_date();
 				$datetime_past    = new DateTime( ALM_Nag::OPTION_NAG_DELAY );
 				if ( $datetime_past >= $datetime_install ) {
-					// 10 or more days ago, show admin notice.
-					add_action( 'admin_notices', [ $this, 'display_admin_notice' ] );
+					add_action( 'admin_notices', [ $this, 'display_admin_notice' ] ); // 10 or more days ago, show admin notice.
 				}
 			}
 		}
@@ -133,7 +141,7 @@ if ( ! class_exists( 'ALM_NAG' ) ) :
 				get_admin_url() . 'admin.php?page=ajax-load-more',
 				'http://wordpress.org/support/view/plugin-reviews/ajax-load-more/',
 			);
-			$msg .= '<br/>';
+			$msg .= ' ';
 			$msg .= __( 'All reviews, both good and bad are important as they help the plugin grow and improve over time.', 'ajax-load-more' );
 			$msg .= '</span>';
 
