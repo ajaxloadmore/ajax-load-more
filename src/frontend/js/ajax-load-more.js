@@ -1660,7 +1660,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
  * @param {Object} data       Query data as an object.
  * @since 5.0
  */
-export const filter = function (transition = 'fade', speed = 200, data = '') {
+export const filter = function (transition = 'fade', speed = 200, data = {}) {
 	if (!transition || !speed || !data) {
 		return false;
 	}
