@@ -2034,6 +2034,9 @@ span.cnkt-button.installed,
 		border-radius: 3px;
 		border: 1px solid $border;
 	}
+	& :last-child {
+		margin-bottom: 0;
+	}
 }
 .ajax-load-more .cnkt-sidebar .cta-inner.padding-bottom {
 	padding-bottom: 80px;

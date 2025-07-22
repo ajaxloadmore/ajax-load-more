@@ -253,6 +253,10 @@
   *display: inline;
   vertical-align: middle;
   min-width: 60%;
+  padding: 3px;
+  background-color: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 3px;
 }
 
 .inner.half .select2-container {
@@ -1986,7 +1990,7 @@ disabled look for disabled choices in the results dropdown
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
 }
 .ajax-load-more .cnkt-sidebar .major-publishing-actions i {
@@ -2064,7 +2068,7 @@ disabled look for disabled choices in the results dropdown
   display: flex;
   clear: both;
   margin: 0;
-  padding: 2px 15px 0;
+  padding: 0 15px;
   overflow: hidden;
   position: relative;
   top: 1px;
@@ -4466,6 +4470,9 @@ span.cnkt-button.installed,
   background-color: #f7f7f7;
   border-radius: 3px;
   border: 1px solid #e7e7e7;
+}
+.ajax-load-more .cnkt-sidebar .cta-inner :last-child {
+  margin-bottom: 0;
 }
 
 .ajax-load-more .cnkt-sidebar .cta-inner.padding-bottom {

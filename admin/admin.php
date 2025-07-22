@@ -14,7 +14,7 @@ if ( ! class_exists( 'ALM_Notices' ) ) {
 }
 require_once plugin_dir_path( __FILE__ ) . 'functions/layouts.php';
 require_once plugin_dir_path( __FILE__ ) . 'functions/plugin-updates.php';
-require_once plugin_dir_path( __FILE__ ) . 'functions/repeater-templates.php';
+require_once plugin_dir_path( __FILE__ ) . 'functions/templates.php';
 require_once plugin_dir_path( __FILE__ ) . 'functions/settings.php';
 require_once plugin_dir_path( __FILE__ ) . 'classes/licensing.php';
 ( new ALM_Licensing() )->register();
@@ -354,7 +354,7 @@ function alm_settings_page() {
  *  @since 2.0.0
  */
 function alm_repeater_page() {
-	include_once ALM_PATH . 'admin/views/repeater-templates.php';
+	include_once ALM_PATH . 'admin/views/templates.php';
 }
 
 /**
