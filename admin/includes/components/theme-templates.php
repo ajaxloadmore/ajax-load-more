@@ -85,10 +85,10 @@ if ( has_action( 'alm_get_theme_repeater' ) ) {
 	// Empty Theme Theme Templates.
 	if ( $count < 1 ) {
 		?>
-		<div style="padding: 30px; text-align: center;">
+		<div style="padding: 75px 25px; text-align: center;">
 			<h3><?php esc_html_e( 'Templates Not Found!', 'ajax-load-more' ); ?></h3>
 			<p style="padding: 0 10%;">
-				<?php _e( 'You\'ll need to create and upload templates to your theme directory before you can use Theme Templates with Ajax Load More.', 'ajax-load-more' ); ?>
+				<?php _e( 'Templates must be uploaded to your selected Theme Templates directory before this feature can be used.', 'ajax-load-more' ); ?>
 			</p>
 			<p style="margin: 20px 0 0;">
 				<a href="https://connekthq.com/plugins/ajax-load-more/add-ons/templates/" class="button button-primary" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a>

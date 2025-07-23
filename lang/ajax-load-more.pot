@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-15T18:14:59+00:00\n"
+"POT-Creation-Date: 2025-07-23T14:03:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -45,16 +45,16 @@ msgstr ""
 #: admin/admin.php:80
 #: admin/admin.php:592
 #: admin/functions/layouts.php:18
-#: admin/functions/repeater-templates.php:18
-#: admin/functions/repeater-templates.php:130
+#: admin/functions/templates.php:18
+#: admin/functions/templates.php:130
 msgid "You don't belong here."
 msgstr ""
 
 #: admin/admin.php:83
 #: admin/admin.php:596
 #: admin/functions/layouts.php:23
-#: admin/functions/repeater-templates.php:22
-#: admin/functions/repeater-templates.php:134
+#: admin/functions/templates.php:22
+#: admin/functions/templates.php:134
 msgid "Error - unable to verify nonce, please try again."
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 #: admin/admin.php:135
 #: admin/admin.php:143
 #: admin/includes/cta/theme-templates.php:7
-#: admin/views/repeater-templates.php:9
+#: admin/views/templates.php:9
 msgid "Templates"
 msgstr ""
 
@@ -180,7 +180,7 @@ msgid "Saving template..."
 msgstr ""
 
 #: admin/admin.php:560
-#: admin/functions/repeater-templates.php:113
+#: admin/functions/templates.php:113
 msgid "Something went wrong and the data could not be saved."
 msgstr ""
 
@@ -330,29 +330,28 @@ msgstr ""
 msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> to update."
 msgstr ""
 
-#. translators: %1$s is replaced with link href
-#: admin/classes/licensing.php:468
+#: admin/classes/licensing.php:471
 msgid "%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s"
 msgstr ""
 
 #. translators: %1$s is the Ajax Load More admin page URL, %2$s is the WordPress.org plugin review URL.
-#: admin/classes/nag.php:132
+#: admin/classes/nag.php:140
 msgid "Looks like you've been using the <a href=\"%1$s\">Ajax Load More</a> plugin for some time now, would you consider leaving a review at <a href=\"%2$s\" target=\"_blank\">wordpress.org</a>?"
 msgstr ""
 
-#: admin/classes/nag.php:137
+#: admin/classes/nag.php:145
 msgid "All reviews, both good and bad are important as they help the plugin grow and improve over time."
 msgstr ""
 
-#: admin/classes/nag.php:146
+#: admin/classes/nag.php:154
 msgid "Leave Review"
 msgstr ""
 
-#: admin/classes/nag.php:147
+#: admin/classes/nag.php:155
 msgid "No thanks"
 msgstr ""
 
-#: admin/classes/nag.php:148
+#: admin/classes/nag.php:156
 msgid "I've already done this"
 msgstr ""
 
@@ -360,18 +359,6 @@ msgstr ""
 #: admin/functions/layouts.php:55
 #: admin/functions/layouts.php:67
 msgid "This doesn't look right, what are you trying to do?"
-msgstr ""
-
-#: admin/functions/repeater-templates.php:111
-msgid "Template Saved Successfully"
-msgstr ""
-
-#: admin/functions/repeater-templates.php:113
-msgid "Error Writing File"
-msgstr ""
-
-#: admin/functions/repeater-templates.php:178
-msgid "Something isn't right here..."
 msgstr ""
 
 #: admin/functions/settings.php:37
@@ -533,6 +520,18 @@ msgstr ""
 msgid "* Database Tables, Options and Repeater Templates"
 msgstr ""
 
+#: admin/functions/templates.php:111
+msgid "Template Saved Successfully"
+msgstr ""
+
+#: admin/functions/templates.php:113
+msgid "Error Writing File"
+msgstr ""
+
+#: admin/functions/templates.php:178
+msgid "Something isn't right here..."
+msgstr ""
+
 #: admin/includes/components/example-list.php:2
 #: admin/includes/components/toggle-all-button.php:10
 msgid "Collapse All"
@@ -633,6 +632,85 @@ msgstr ""
 msgid "Copy Template"
 msgstr ""
 
+#: admin/includes/components/repeater-templates.php:42
+msgid "Default Template"
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:51
+msgid "Template Code:"
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:52
+msgid "The PHP and HTML markup for this template."
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:74
+msgid "This default ALM template is missing from the filesystem! Click the \"Save Template\" button to save the template."
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:100
+msgid "Save Template"
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:116
+msgid "Repeater Templates editing has been disabled for this instance of Ajax Load More. To enable the template editing, please remove the <strong>ALM_DISABLE_REPEATER_TEMPLATES</strong> PHP constant from your wp-config.php (or functions.php) and re-activate the plugin."
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:129
+msgid "You're loading the <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/#default-template\" target=\"_blank\"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server."
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:133
+#: admin/includes/components/theme-templates.php:66
+msgid "Template Location"
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:148
+msgid "Add New Template"
+msgstr ""
+
+#: admin/includes/components/sidebar-repeater-templates.php:10
+msgid "What's a Repeater Template?"
+msgstr ""
+
+#: admin/includes/components/sidebar-repeater-templates.php:15
+msgid "A <a href=\"%1$s\" target=\"_blank\">Repeater Template</a> is a snippet of code that will execute over and over within a <a href=\"%2$s\" target=\"_blank\">WordPress loop</a>."
+msgstr ""
+
+#: admin/includes/components/sidebar-repeater-templates.php:28
+#: admin/includes/components/sidebar-theme-templates.php:22
+#: admin/includes/components/theme-templates.php:94
+#: admin/shortcode-builder/shortcode-builder.php:165
+#: admin/views/filters.php:41
+#: admin/views/go-pro.php:63
+msgid "Learn More"
+msgstr ""
+
+#: admin/includes/components/sidebar-theme-templates.php:10
+msgid "What's a Theme Template?"
+msgstr ""
+
+#: admin/includes/components/sidebar-theme-templates.php:14
+msgid "Theme Templates are <a href=\"%1$s\" target=\"_blank\">Repeater Templates</a> loaded from the active theme directory."
+msgstr ""
+
+#: admin/includes/components/sidebar-theme-templates.php:18
+msgid "Manage and maintain Ajax Load More templates with your favorite code editor and push updates via GIT or SFTP."
+msgstr ""
+
+#: admin/includes/components/sidebar-theme-templates.php:25
+#: admin/includes/components/theme-templates.php:95
+msgid "Manage Directory"
+msgstr ""
+
+#: admin/includes/components/theme-templates.php:89
+msgid "Templates Not Found!"
+msgstr ""
+
+#: admin/includes/components/theme-templates.php:91
+msgid "Templates must be uploaded to your selected Theme Templates directory before this feature can be used."
+msgstr ""
+
 #: admin/includes/cta/about.php:10
 msgid "Other Plugins by Connekt"
 msgstr ""
@@ -728,11 +806,11 @@ msgid "Get Plugin Support"
 msgstr ""
 
 #: admin/includes/cta/writeable.php:14
-msgid "Read/Write access is enabled within the Ajax Load More Repeater Template directory."
+msgid "Read/Write access is enabled within the Ajax Load More Repeater Templates directory."
 msgstr ""
 
 #: admin/includes/cta/writeable.php:17
-msgid "You must enable read/write access to save repeater template data. Please contact your hosting provider or site administrator for more information."
+msgid "You must enable read/write access to save Repeater Template data. Please contact your hosting provider or site administrator for more information."
 msgstr ""
 
 #: admin/includes/cta/writeable.php:21
@@ -995,7 +1073,6 @@ msgstr ""
 
 #: admin/shortcode-builder/components/comments.php:109
 #: admin/shortcode-builder/components/cta.php:37
-#: admin/shortcode-builder/shortcode-builder.php:117
 msgid "Custom Repeaters"
 msgstr ""
 
@@ -1009,7 +1086,7 @@ msgstr ""
 #: admin/shortcode-builder/components/comments.php:123
 #: admin/shortcode-builder/components/cta.php:51
 #: admin/shortcode-builder/shortcode-builder.php:131
-#: admin/views/repeater-templates.php:24
+#: admin/views/templates.php:24
 msgid "Theme Templates"
 msgstr ""
 
@@ -1905,6 +1982,11 @@ msgstr ""
 msgid "Select the <a href=\"admin.php?page=ajax-load-more-repeaters\" target=\"_parent\">Repeater Template</a> for displaying the content in the Ajax Load More loop."
 msgstr ""
 
+#: admin/shortcode-builder/shortcode-builder.php:117
+#: admin/views/templates.php:19
+msgid "Repeater Templates"
+msgstr ""
+
 #: admin/shortcode-builder/shortcode-builder.php:160
 msgid "ID"
 msgstr ""
@@ -1915,14 +1997,6 @@ msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:162
 msgid "Set a unique ID for this Ajax Load More instance. Lowercase alphanumeric characters only."
-msgstr ""
-
-#: admin/shortcode-builder/shortcode-builder.php:165
-#: admin/views/filters.php:41
-#: admin/views/go-pro.php:63
-#: admin/views/repeater-templates.php:118
-#: admin/views/repeater-templates.php:317
-msgid "Learn More"
 msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:171
@@ -2753,67 +2827,6 @@ msgstr ""
 
 #: admin/views/licenses.php:274
 msgid "Your Account"
-msgstr ""
-
-#: admin/views/repeater-templates.php:19
-msgid "Site Templates"
-msgstr ""
-
-#: admin/views/repeater-templates.php:90
-#: admin/views/repeater-templates.php:264
-msgid "Template Location"
-msgstr ""
-
-#: admin/views/repeater-templates.php:113
-msgid "Templates Not Found!"
-msgstr ""
-
-#: admin/views/repeater-templates.php:115
-msgid "You'll need to create and upload templates to your theme directory before you can access the templates with Ajax Load More."
-msgstr ""
-
-#: admin/views/repeater-templates.php:119
-msgid "Manage Directory"
-msgstr ""
-
-#: admin/views/repeater-templates.php:173
-msgid "Default Template"
-msgstr ""
-
-#: admin/views/repeater-templates.php:182
-msgid "Template Code:"
-msgstr ""
-
-#: admin/views/repeater-templates.php:183
-msgid "The PHP and HTML markup for this template."
-msgstr ""
-
-#: admin/views/repeater-templates.php:205
-msgid "This default ALM template is missing from the filesystem! Click the \"Save Template\" button to save the template."
-msgstr ""
-
-#: admin/views/repeater-templates.php:231
-msgid "Save Template"
-msgstr ""
-
-#: admin/views/repeater-templates.php:247
-msgid "Repeater Templates editing has been disabled for this instance of Ajax Load More. To enable the template editing, please remove the <strong>ALM_DISABLE_REPEATER_TEMPLATES</strong> PHP constant from your wp-config.php (or functions.php) and re-activate the plugin."
-msgstr ""
-
-#: admin/views/repeater-templates.php:260
-msgid "You're loading the <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/#default-template\" target=\"_blank\"><b>Default Template</b></a> (<em>default.php</em>) from your current theme directory. To modify this template, you must edit the file directly on your server."
-msgstr ""
-
-#: admin/views/repeater-templates.php:277
-msgid "Add New Template"
-msgstr ""
-
-#: admin/views/repeater-templates.php:311
-msgid "What's a Repeater Template?"
-msgstr ""
-
-#: admin/views/repeater-templates.php:313
-msgid "A <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/\" target=\"_blank\">Repeater Template</a> is a snippet of code that will execute over and over within a <a href=\"https://developer.wordpress.org/themes/basics/the-loop/\" target=\"_blank\">WordPress loop</a>"
 msgstr ""
 
 #: admin/views/shortcode-builder.php:22
