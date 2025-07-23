@@ -268,7 +268,7 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.5.0 - July 24, 2025 =
+= 7.5.0 - July 23, 2025 =
 * NEW: Added required updates for the new Templates add-on.
 * UPDATE: Various UI/UX updates, bug fixes, and improvements.
 
