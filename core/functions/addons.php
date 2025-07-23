@@ -259,9 +259,12 @@ function alm_get_addons() {
 		],
 	];
 
-	// Backwards compatibility for Pro add-ons - Custom Repeaters and Theme Repeaters.
+	/**
+	 * Backwards compatibility for Pro add-on.
+	 * Add Custom Repeaters and Theme Repeaters.
+	 */
 	if ( has_action( 'alm_pro_installed' ) && defined( 'ALM_PRO_VERSION' ) && version_compare( ALM_PRO_VERSION, '1.4.0', '<' ) ) {
-		$backwards = [
+		$compat = [
 			[
 				'name'           => 'Custom Repeaters',
 				'intro'          => 'Extend Ajax Load More with unlimited repeater templates.',
@@ -295,9 +298,9 @@ function alm_get_addons() {
 		];
 
 		// Merge backwards compatibility add-ons with the current add-ons.
-		$addons = array_merge( $addons, $backwards );
+		$addons = array_merge( $addons, $compat );
 
-		// Remove Templates add-on from the list if Pro add-ons are installed.
+		// Remove Templates add-on from the list if Pro add-on installed.
 		foreach ( $addons as $key => $addon ) {
 			if ( $addon['slug'] === 'templates' ) {
 				unset( $addons[ $key ] );

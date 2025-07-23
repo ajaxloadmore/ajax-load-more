@@ -92,7 +92,7 @@ if ( has_action( 'alm_get_theme_repeater' ) ) {
 			</p>
 			<p style="margin: 20px 0 0;">
 				<a href="https://connekthq.com/plugins/ajax-load-more/add-ons/templates/" class="button button-primary" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a>
-				<a href="admin.php?page=ajax-load-more#templates_settings" class="button" target="_blank"><?php _e( 'Manage Directory', 'ajax-load-more' ); ?></a>
+				<a href="admin.php?page=ajax-load-more#templates_settings" class="button"><?php _e( 'Manage Directory', 'ajax-load-more' ); ?></a>
 			</p>
 		</div>
 	<?php } ?>

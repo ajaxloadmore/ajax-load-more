@@ -22,7 +22,7 @@
 			<?php esc_html_e( 'Learn More', 'ajax-load-more' ); ?>
 		</a>
 		<?php if ( has_action( 'alm_get_theme_repeater' ) ) { ?>
-		<a href="admin.php?page=ajax-load-more#templates_settings" class="button" target="_blank"><?php esc_html_e( 'Manage Directory', 'ajax-load-more' ); ?></a>
+		<a href="admin.php?page=ajax-load-more#templates_settings" class="button"><?php esc_html_e( 'Manage Directory', 'ajax-load-more' ); ?></a>
 		<?php } ?>
 	</div>
 </div>
