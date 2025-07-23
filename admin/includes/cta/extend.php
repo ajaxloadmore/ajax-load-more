@@ -14,7 +14,7 @@ $alm_extend_url = 'https://connekthq.com/plugins/ajax-load-more/add-ons/template
 		<span>
 		<?php
 			// translators: %1$s is the opening <a> tag, %2$s is the closing </a> tag.
-			$alm_extend_translation = sprintf( __( 'Unlock unlimited Repeater Templates with the %1$sTemplates%2$s add-on.', 'ajax-load-more' ), '<a href="' . esc_url( $alm_extend_url ) . '">', '</a>' );
+			$alm_extend_translation = sprintf( __( 'Unlock unlimited Repeater Templates with the %1$sTemplates%2$s add-on.', 'ajax-load-more' ), '<a href="' . esc_url( $alm_extend_url ) . '" target="_blank">', '</a>' );
 			echo wp_kses_post( $alm_extend_translation );
 		?>
 		</span>
