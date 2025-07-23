@@ -2,7 +2,7 @@
  * Repater Template admin functionality.
  */
 jQuery(document).ready(function ($) {
-	'use strict';
+	('use strict');
 
 	/**
 	 * Save Custom Repeater Value
@@ -87,9 +87,22 @@ jQuery(document).ready(function ($) {
 		}
 	}
 
+	// Watch for alias input changes.
+	$(document).on('keyup', 'input._alm_repeater_alias', function () {
+		const value = $(this).val();
+		const container = $(this).closest('.row.unlimited');
+		if (container) {
+			const heading = container.find('h3.heading');
+			if (heading && heading.text !== value) {
+				heading.text(value);
+			}
+		}
+	});
+
+	// Save Repeater on button click.
 	$(document).on('click', 'input.save-repeater', function () {
-		var btn = $(this);
-		var editorId = btn.data('editor-id');
+		const btn = $(this);
+		const editorId = btn.data('editor-id');
 		saveRepeater(btn, editorId);
 	});
 
