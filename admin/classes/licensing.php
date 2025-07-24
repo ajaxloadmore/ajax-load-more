@@ -270,7 +270,11 @@ class ALM_Licensing {
 		$show_on         = [ 'dashboard', 'plugins', 'options-general', 'options' ];
 
 		if ( ! $is_admin_screen && ! in_array( $screen->id, $show_on, true ) ) {
-			return; // Exit if screen is not dashboard, plugins, settings, etc or ALM admin.
+			return; // Bail early if not on an admin screen or not in the allowed screens.
+		}
+
+		if ( $screen->id === 'ajax-load-more_page_ajax-load-more-licenses' ) {
+			return; // Don't show notices on the licenses page.
 		}
 
 		// Plugin not activated notices.
