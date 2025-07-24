@@ -10,10 +10,6 @@ $alm_admin_heading = __( 'Licenses', 'ajax-load-more' );
 $alm_pg_title      = has_action( 'alm_pro_installed' ) ? __( 'Pro License', 'ajax-load-more' ) : __( 'Licenses', 'ajax-load-more' );
 $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro license key to enable updates from the plugins dashboard', 'ajax-load-more' ) : __( 'Enter your license keys below to enable <a href="admin.php?page=ajax-load-more-add-ons">add-on</a> updates from the plugins dashboard', 'ajax-load-more' );
 
-if ( isset( $_POST['license_activate'] ) ) {
-	print_r( $_POST );
-}
-
 ?>
 <div class="wrap ajax-load-more main-cnkt-wrap" id="alm-licenses">
 	<?php require_once ALM_PATH . 'admin/includes/components/header.php'; ?>
@@ -39,6 +35,7 @@ if ( isset( $_POST['license_activate'] ) ) {
 			</p>
 			<?php
 			$addons        = has_action( 'alm_pro_installed' ) ? alm_get_pro_addon() : alm_get_addons();
+			$addons        = array_merge( $addons, alm_get_deprecated_addons() );
 			$addon_count   = 0;
 			$alm_licensing = new ALM_Licensing();
 
