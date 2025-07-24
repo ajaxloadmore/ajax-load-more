@@ -34,8 +34,12 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 				?>
 			</p>
 			<?php
-			$addons        = has_action( 'alm_pro_installed' ) ? alm_get_pro_addon() : alm_get_addons();
-			$addons        = array_merge( $addons, alm_get_deprecated_addons() );
+			if ( has_action( 'alm_pro_installed' ) ) {
+				$addons = alm_get_pro_addon(); // Pro add-on.
+			} else {
+				$addons = array_merge( alm_get_addons(), alm_get_deprecated_addons() ); // Standard add-ons.
+			}
+
 			$addon_count   = 0;
 			$alm_licensing = new ALM_Licensing();
 
