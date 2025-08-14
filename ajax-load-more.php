@@ -13,23 +13,6 @@
  *
  * @package AjaxLoadMore
  */
-/*
-* UPGRADE NOTICE: This Ajax Load More update includes to the button animations and loading styles. It's possible that your existing loading style may have be affected.
-* NEW: Modernized the Load More button and Infinite Scroll styles/animations with new SVG based spinners.
-* UPDATE: Removed `button_loading_label` and `prev_button_loading_label` parameters as these are no longer in used with the new loader styles.
-* UPDATE: Automatically set `pause_override` to true if loading style is infinite.
-* UPDATE: Removed `.more` classname from Ajax Load More button.
-* UPDATE: Modernized and cleaned up CSS for various other ALM elements and features.
-* FIX: Fixed issue with Query Loop add-on loading standard Ajax Load More in Block Editor due to changes in the Block Editor.
-* FIX: Fixed accessibility issue when moving user focus with Preloaded active.
-* FIX: Fixed issue with new Templates add-on throwing a PHP error if a template does not exist.
-
-ADDONS
-- Paging
-- Filters
-- Single Posts
- - Cache Ajax requests to get the next post data.
-*/
 
 define( 'ALM_VERSION', '7.6.0' );
 define( 'ALM_RELEASE', 'August 14, 2025' );
@@ -38,7 +21,8 @@ define( 'ALM_STORE_URL', 'https://connekthq.com' );
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
 
 /**
- * Activation hook - Create table & repeater.
+ * Activation hook.
+ * Create DB table & default Repeater Template.
  *
  * @param Boolean $network_wide Enable the plugin for all sites in the network or just the current site. Multisite only.
  * @since 2.0.0
@@ -733,12 +717,14 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 endif;
 
-/**
- * Ajax Load More public render function.
- *
- * @param array $args The shortcode args.
- * @since 4.2.0
- */
-function alm_render( $args ) {
-	echo do_shortcode( AjaxLoadMore::alm_shortcode( $args ) );
-}
+if ( ! function_exists( 'alm_render' ) ) :
+	/**
+	 * Ajax Load More public render function.
+	 *
+	 * @param array $args The shortcode args.
+	 * @since 4.2.0
+	 */
+	function alm_render( $args ) {
+		echo do_shortcode( AjaxLoadMore::alm_shortcode( $args ) );
+	}
+endif;
