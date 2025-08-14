@@ -2,8 +2,7 @@
 /**
  * ALM installation functionality.
  *
- * @package  AjaxLoadMore
- * @since    2.0.0
+ * @package AjaxLoadMore
  */
 
 /**

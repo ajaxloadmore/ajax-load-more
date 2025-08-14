@@ -464,7 +464,7 @@ msgstr ""
 
 #: admin/functions/settings.php:314
 #: admin/shortcode-builder/shortcode-builder.php:189
-msgid "Button Style (Dark)"
+msgid "Load More Button"
 msgstr ""
 
 #: admin/functions/settings.php:321

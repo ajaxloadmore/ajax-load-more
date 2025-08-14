@@ -1,6 +1,7 @@
-import srcsetPolyfill from './srcsetPolyfill';
 import { lazyImages } from '../modules/lazyImages';
 import { EXCLUDED_NODES } from './constants';
+import srcsetPolyfill from './srcsetPolyfill';
+import timeout from './timeout';
 const imagesLoaded = require('imagesloaded');
 
 /**
@@ -10,8 +11,11 @@ const imagesLoaded = require('imagesloaded');
  * @param {Array}  nodes The HTML nodes to append.
  * @return {Promise}     The Promise object.
  */
-export default function displayResults(alm, nodes) {
+export default async function displayResults(alm, nodes) {
 	const { listing: container, transition, speed, images_loaded } = alm;
+
+	await timeout(250); // Add short delay for effect.
+
 	return new Promise((resolve) => {
 		if (!container || !nodes) {
 			resolve(true);
@@ -65,9 +69,11 @@ export default function displayResults(alm, nodes) {
  * @param {Array}  nodes The HTML nodes to append.
  * @return {Promise}     The Promise object.
  */
-export function displayPagingResults(alm, nodes) {
+export async function displayPagingResults(alm, nodes) {
 	const { addons } = alm;
 	const { paging_container: container } = addons;
+
+	await timeout(125); // Add short delay for effect.
 
 	return new Promise((resolve) => {
 		if (!container || !nodes) {
@@ -108,20 +114,20 @@ export function displayPagingResults(alm, nodes) {
  * @param {Array}   nodes         The HTML nodes to append.
  * @param {boolean} useTransition Use CSS transition.
  */
-function display(alm, nodes, useTransition = true) {
+async function display(alm, nodes, useTransition = true) {
 	const { transition_delay: delay, images_loaded } = alm;
 	const offset = useTransition ? parseInt(delay) : 0; // Delay offset timing.
 
+	await timeout(100); // Add short delay for effect.
+
 	if (nodes) {
-		setTimeout(function () {
-			if (useTransition || images_loaded) {
-				nodes.forEach((node, index) => {
-					setTimeout(function () {
-						node.style.opacity = 1;
-					}, index * offset);
-				});
-			}
-			alm.AjaxLoadMore.transitionEnd();
-		}, 50);
+		if (useTransition || images_loaded) {
+			nodes.forEach((node, index) => {
+				setTimeout(function () {
+					node.style.opacity = 1;
+				}, index * offset);
+			});
+		}
+		alm.AjaxLoadMore.transitionEnd();
 	}
 }

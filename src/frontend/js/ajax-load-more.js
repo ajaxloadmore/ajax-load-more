@@ -34,6 +34,7 @@ import setLocalizedVars from './modules/setLocalizedVars';
 import { tableOfContents } from './modules/tableofcontents';
 
 import '../scss/ajax-load-more.scss';
+import timeout from './functions/timeout';
 
 // External packages.
 const qs = require('qs');
@@ -68,12 +69,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 	 * @param {Element} el    The Ajax Load More DOM element/container.
 	 * @param {number}  index The current index number of the Ajax Load More instance.
 	 */
-	const ajaxloadmore = function (el, index) {
-		// Move user to top of page to prevent loading of unnessasry posts
-		if (alm_localize?.scrolltop === 'true') {
-			window.scrollTo(0, 0);
-		}
-
+	const ajaxloadmore = async function (el, index) {
 		// Set ALM Variables
 		let alm = this;
 		alm.AjaxLoadMore = {};
@@ -894,7 +890,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		};
 
 		/**
-		 * Paging add-on first to create required containers.
+		 * Paging add-on initialization to create required containers.
 		 *
 		 * @since 5.0
 		 */
@@ -919,7 +915,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					if (typeof almPagingSetHeight === 'function') {
 						window.almPagingSetHeight(paging_container); // Fade in container height.
 					}
-				}, 275);
+				}, 250);
 			}
 		};
 
@@ -981,7 +977,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 						}
 					}
 					if (typeof window.almSetSinglePost === 'function') {
-						window.almSetSinglePost(alm, data.current_id, data.permalink, data.title);
+						window.almSetSinglePost(alm, data.current_id);
 					}
 					alm.fetchingPreviousPost = false;
 					alm.addons.single_post_init = false;
@@ -1036,22 +1032,17 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			if (!alm.addons.paging) {
 				if (alm.button_labels.done) {
-					setTimeout(function () {
-						alm.button.innerHTML = alm.button_labels.done;
-					}, 75);
+					alm.button.innerHTML = alm.button_labels.done;
 				}
-
 				alm.button.classList.add('done');
 				alm.button.removeAttribute('rel');
 				alm.button.disabled = true;
 			}
 
-			// almDone
 			if (typeof almDone === 'function') {
-				// Delay done until animations complete
 				setTimeout(function () {
 					window.almDone(alm);
-				}, alm.speed + 10);
+				}, alm.speed + 10); // Delay done until animations complete
 			}
 		};
 
@@ -1068,7 +1059,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				alm.buttonPrev.classList.add('done');
 				alm.buttonPrev.style.opacity = '0.5';
 				alm.buttonPrev.disabled = true;
-				if (alm.prev_button_labels.done) {
+				if (alm?.prev_button_labels?.done) {
 					setTimeout(function () {
 						alm.buttonPrev.innerHTML = alm.prev_button_labels.done;
 					}, 75);
@@ -1077,10 +1068,9 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			// almDonePrev Callback.
 			if (typeof almDonePrev === 'function') {
-				// Delay done until animations complete
 				setTimeout(function () {
 					window.almDonePrev(alm);
-				}, alm.speed + 10);
+				}, alm.speed + 10); // Delay done until animations complete
 			}
 		};
 
@@ -1090,10 +1080,10 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 * @since 2.8.4
 		 */
 		alm.AjaxLoadMore.resetBtnText = function () {
-			if (alm.button && alm.button_labels.loading) {
+			if (alm?.button && alm?.button_labels?.loading) {
 				alm.button.innerHTML = alm.button_labels.default;
 			}
-			if (alm.buttonPrev && alm.prev_button_labels.loading) {
+			if (alm?.buttonPrev && alm?.prev_button_labels?.loading) {
 				alm.buttonPrev.innerHTML = alm.prev_button_labels.default;
 			}
 		};
@@ -1324,24 +1314,20 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 * @since 3.5
 		 */
 		alm.AjaxLoadMore.transitionEnd = function () {
-			setTimeout(function () {
-				alm.AjaxLoadMore.resetBtnText();
-				alm.main.classList.remove('alm-loading');
+			alm.main.classList.remove('alm-loading');
+			alm.AjaxLoadMore.resetBtnText();
 
-				// Loading buttons.
-				if (alm.rel === 'prev') {
-					alm?.buttonPrev?.classList?.remove('loading');
-				} else {
-					alm?.button?.classList?.remove('loading');
-				}
-				alm.AjaxLoadMore.triggerAddons(alm);
+			// Loading buttons.
+			if (alm.rel === 'prev') {
+				alm?.buttonPrev?.classList?.remove('loading');
+			} else {
+				alm?.button?.classList?.remove('loading');
+			}
+			alm.AjaxLoadMore.triggerAddons(alm);
 
-				if (!alm.addons.paging) {
-					setTimeout(function () {
-						alm.loading = false; // Delay to prevent loading to fast
-					}, alm.speed * 2);
-				}
-			}, 25);
+			if (!alm.addons.paging) {
+				alm.loading = false;
+			}
 
 			// Hide loading placeholder.
 			placeholder('hide', alm);
@@ -1406,17 +1392,15 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			// Single Post Add-on.
 			if (alm.addons.single_post) {
-				// Add delay for setup and scripts to load.
-				setTimeout(async function () {
-					await alm.AjaxLoadMore.getSinglePost(); // Set next post on load
+				await timeout(1000); // Add delay for setup and scripts to load.
+				await alm.AjaxLoadMore.getSinglePost(); // Set next post on load.
 
-					// Trigger done if custom query and no posts to render
-					if (alm.addons.single_post_query && alm.addons.single_post_order === '') {
-						alm.AjaxLoadMore.triggerDone();
-					}
-					alm.loading = false;
-					tableOfContents(alm, true, true);
-				}, 250);
+				// Trigger done if custom query and no posts to render
+				if (alm.addons.single_post_query && alm.addons.single_post_order === '') {
+					alm.AjaxLoadMore.triggerDone();
+				}
+				alm.loading = false;
+				tableOfContents(alm, true, true);
 			}
 
 			// Query Loop Add-on.
@@ -1426,31 +1410,27 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			// Preloaded + SEO && !Paging.
 			if (alm.addons.preloaded && alm.addons.seo && !alm.addons.paging) {
-				// Add delay for setup and scripts to load.
-				setTimeout(function () {
-					if (typeof almSEO === 'function' && alm.start_page < 1) {
-						window.almSEO(alm, true);
-					}
-				}, 200);
+				await timeout(250); // Add delay for setup and scripts to load.
+				if (typeof almSEO === 'function' && alm.start_page < 1) {
+					window.almSEO(alm, true);
+				}
 			}
 
 			// Preloaded && !Paging.
 			if (alm.addons.preloaded && !alm.addons.paging) {
-				// Add delay for setup and scripts to load.
-				setTimeout(function () {
-					if (alm.addons.preloaded_total_posts <= alm.addons.preloaded_amount) {
-						alm.AjaxLoadMore.triggerDone();
+				await timeout(250); // Add delay for setup and scripts to load.
+				if (alm.addons.preloaded_total_posts <= alm.addons.preloaded_amount) {
+					alm.AjaxLoadMore.triggerDone();
+				}
+				// almEmpty callback.
+				if (alm.addons.preloaded_total_posts === 0) {
+					if (typeof almEmpty === 'function') {
+						window.almEmpty(alm);
 					}
-					// almEmpty callback.
-					if (alm.addons.preloaded_total_posts === 0) {
-						if (typeof almEmpty === 'function') {
-							window.almEmpty(alm);
-						}
-						if (alm.no_results) {
-							noResults(alm.content, alm.no_results);
-						}
+					if (alm.no_results) {
+						noResults(alm.content, alm.no_results);
 					}
-				}, alm.speed);
+				}
 			}
 
 			// Preloaded Add-on ONLY.
@@ -1624,6 +1604,10 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 		// Init Ajax Load More.
 		alm.AjaxLoadMore.init();
+
+		if (alm_localize?.scrolltop === 'true') {
+			window.scrollTo(0, 0); // Move user to top of page to prevent loading on initial page load.
+		}
 	};
 
 	// End ajaxloadmore
@@ -1698,7 +1682,7 @@ export const reset = function (props = {}) {
 		});
 	} else {
 		// Standard ALM
-		almFilter('fade', '200', data, 'filter');
+		almFilter('fade', 200, data, 'filter');
 	}
 };
 

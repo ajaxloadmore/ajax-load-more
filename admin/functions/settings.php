@@ -250,9 +250,9 @@ function alm_container_type_callback() {
 	<label for="_alm_container_type_two">
 		&lt;div&gt; <span style="padding-top: 2px;">&lt;!--<em><?php esc_attr_e( 'Ajax Posts Here', 'ajax-load-more' ); ?></em>--&gt;</span> &lt;/div&gt;
 	</label>
-	<label style="cursor: default !important">
-		<span style="display:block"><?php esc_attr_e( 'You can modify the container type when building a shortcode.', 'ajax-load-more' ); ?></span>
-	</label>
+	<p class="description">
+		<?php esc_attr_e( 'You can modify the container type when building an Ajax Load More instance.', 'ajax-load-more' ); ?>
+	</p>
 	<?php
 }
 
@@ -268,13 +268,14 @@ function alm_class_callback() {
 	<label for="alm_settings[_alm_classname]">
 		<?php
 		// translators: The code tag.
-		$desc = sprintf( __( 'Add custom classes to the %1$s container. Classes are applied globally and will appear with every instance of Ajax Load More.', 'ajax-load-more' ), '<code>.alm-listing</code>' );
+		$desc = sprintf( __( 'Add custom classnames to the %1$s container.', 'ajax-load-more' ), '<code>.alm-listing</code>' );
 		echo wp_kses_post( $desc );
 		?>
-		<span style="display:block"><?php esc_attr_e( 'You can also add classes when building a shortcode.', 'ajax-load-more' ); ?>
 	</label>
-	<br/>
 	<input type="text" id="alm_settings[_alm_classname]" name="alm_settings[_alm_classname]" value="<?php echo esc_attr( $value ); ?>" placeholder="posts listing etc..." />
+	<p class="description">
+		<?php esc_attr_e( 'You can add classes when building an Ajax Load More instance.', 'ajax-load-more' ); ?>
+	</p>
 	<?php
 }
 
@@ -286,53 +287,28 @@ function alm_class_callback() {
 function alm_btn_color_callback() {
 	$options       = get_option( 'alm_settings' );
 	$type          = isset( $options ) && isset( $options['_alm_btn_color'] ) ? $options['_alm_btn_color'] : 'default';
-	$selected      = ' selected="selected"';
 	$loading_class = strpos( $type, 'infinite' ) !== false ? ' loading' : ''; // Set loading class for infinite type only.
-
-	$selected0  = $type === 'default' ? $selected : '';
-	$selected1  = $type === 'blue' ? $selected : '';
-	$selected2  = $type === 'green' ? $selected : '';
-	$selected3  = $type === 'red' ? $selected : '';
-	$selected4  = $type === 'purple' ? $selected : '';
-	$selected5  = $type === 'grey' ? $selected : '';
-	$selected6  = $type === 'white' ? $selected : '';
-	$selected7  = $type === 'infinite classic' ? $selected : '';
-	$selected8  = $type === 'infinite skype' ? $selected : '';
-	$selected9  = $type === 'infinite ring' ? $selected : '';
-	$selected10 = $type === 'infinite fading-blocks' ? $selected : '';
-	$selected11 = $type === 'infinite fading-circles' ? $selected : '';
-	$selected12 = $type === 'infinite chasing-arrows' ? $selected : '';
-	$selected13 = $type === 'light-grey' ? $selected : '';
 	?>
 	<label for="alm_settings_btn_color">
-		<?php esc_attr_e( 'Choose an Ajax loading style. Select between a Button or Infinite Scroll loading style.', 'ajax-load-more' ); ?><br/>
-		<span style="display: block;">
-			<?php esc_attr_e( 'Selecting an Infinite Scroll style will remove the click interaction and load content on scroll.', 'ajax-load-more' ); ?>
+		<?php esc_attr_e( 'Select a Load More button or Infinite Scroll loading style.', 'ajax-load-more' ); ?><br/>
+		<span style="display: block; padding-bottom: 5px; margin-top: -2px;">
+			<?php esc_attr_e( 'Infinite scroll styles will remove button click interactions and load content on scroll.', 'ajax-load-more' ); ?>
 		</span>
 	</label>
 	<select id="alm_settings_btn_color" name="alm_settings[_alm_btn_color]">
-		<optgroup label="<?php esc_attr_e( 'Button Style (Dark)', 'ajax-load-more' ); ?>">
-			<option value="default" class="alm-color default"<?php echo esc_attr( $selected0 ); ?>>Default</option>
-			<option value="blue" class="alm-color blue"<?php echo esc_attr( $selected1 ); ?>>Blue</option>
-			<option value="green" class="alm-color green"<?php echo esc_attr( $selected2 ); ?>>Green</option>
-			<option value="purple" class="alm-color purple"<?php echo esc_attr( $selected4 ); ?>>Purple</option>
-			<option value="grey" class="alm-color grey"<?php echo esc_attr( $selected5 ); ?>>Grey</option>
-		</optgroup>
-		<optgroup label="<?php esc_attr_e( 'Button Style (Light)', 'ajax-load-more' ); ?>">
-			<option value="white" class="alm-color white"<?php echo esc_attr( $selected6 ); ?>>White</option>
-			<option value="grey" class="alm-color light-grey"<?php echo esc_attr( $selected13 ); ?>>Light Grey</option>
-		</optgroup>
-		<optgroup label="<?php esc_attr_e( 'Infinite Scroll (No Button)', 'ajax-load-more' ); ?>">
-			<option value="infinite classic" class="infinite classic"<?php echo esc_attr( $selected7 ); ?>>Classic</option>
-			<option value="infinite skype" class="infinite skype"<?php echo esc_attr( $selected8 ); ?>>Skype</option>
-			<option value="infinite ring" class="infinite ring"<?php echo esc_attr( $selected9 ); ?>>Circle Fill</option>
-			<option value="infinite fading-blocks" class="infinite fading-blocks"<?php echo esc_attr( $selected10 ); ?>>Fading Blocks</option>
-			<option value="infinite fading-circles" class="infinite fading-circles"<?php echo esc_attr( $selected11 ); ?>>Fading Circles</option>
-			<option value="infinite chasing-arrows" class="infinite chasing-arrows"<?php echo esc_attr( $selected12 ); ?>>Chasing Arrows</option>
-		</optgroup>
+		<?php
+		foreach ( alm_get_loaders() as $loader ) {
+			echo '<optgroup label="' . esc_attr( $loader['label'] ) . '">';
+			foreach ( $loader['loaders'] as $option ) {
+				$selected  = $type === $option['value'] ? ' selected="selected"' : '';
+				$pre_class = strpos( $option['value'], 'infinite' ) === false ? ' alm-color' : '';
+				echo '<option value="' . esc_attr( $option['value'] ) . '" class="' . esc_attr( $option['value'] ) . $pre_class . '"' . esc_attr( $selected ) . '>' . esc_html( $option['label'] ) . '</option>';
+			}
+			echo '</optgroup>';
+		}
+		?>
 	</select>
 
-	<div class="clear"></div>
 	<div class="ajax-load-more-wrap core <?php echo esc_attr( $type ); ?>">
 		<span><?php esc_attr_e( 'Click to Preview', 'ajax-load-more' ); ?></span>
 		<div class="alm-btn-wrap">
@@ -341,6 +317,10 @@ function alm_btn_color_callback() {
 			</button>
 		</div>
 	</div>
+
+	<p class="description">
+		<?php esc_attr_e( 'You can modify the loading style when building an Ajax Load More instance.', 'ajax-load-more' ); ?>
+	</p>
 	<?php
 }
 
@@ -371,7 +351,7 @@ function alm_btn_class_callback() {
 	$value   = ! isset( $options['_alm_btn_classname'] ) ? '' : $options['_alm_btn_classname'];
 	?>
 		<label for="alm_settings[_alm_btn_classname]">
-			<?php esc_html_e( 'Add classes to the Load More button.', 'ajax-load-more' ); ?>
+			<?php esc_html_e( 'Add custom classes to the Load More button.', 'ajax-load-more' ); ?>
 		</label>
 		<input type="text" class="btn-classes" id="alm_settings[_alm_btn_classname]" name="alm_settings[_alm_btn_classname]" value="<?php echo esc_attr( $value ); ?>" placeholder="button bg-black rounded etc..." />
 		<script>
@@ -405,8 +385,7 @@ function alm_custom_js_callback() {
 	?>
 	<label for="alm_custom_js"><?php esc_attr_e( 'Enter custom JavaScript code.', 'ajax-load-more' ); ?></label>
 	<textarea id="alm_custom_js" name="alm_settings[_alm_custom_js]" rows="5"><?php echo wp_kses_post( $value ); ?></textarea>
-	<label style="cursor: default !important">
-		<span style="display:block;"><?php esc_attr_e( 'JavaScript will be rendered with every Ajax Load More instance.', 'ajax-load-more' ); ?> </span>
+	<p class="description"><?php esc_attr_e( 'JavaScript will be rendered with every Ajax Load More instance.', 'ajax-load-more' ); ?> </p>
 	</label>
 	<?php
 }
