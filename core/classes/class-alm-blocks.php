@@ -22,9 +22,11 @@ if ( ! class_exists( 'ALM_BLOCK' ) ) :
 		 */
 		public function __construct() {
 			add_action( 'init', [ $this, 'alm_register_block' ] );
-			add_filter( 'block_categories_all', [ $this, 'alm_add_block_category' ] );
 			add_action( 'enqueue_block_editor_assets', [ $this, 'alm_block_editor_assets' ] );
+			add_filter( 'block_categories_all', [ $this, 'alm_add_block_category' ] );
 		}
+
+
 
 		/**
 		 * Register the Ajax Load More WP Block.

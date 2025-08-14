@@ -2,8 +2,7 @@
 /**
  * This file hold data about add-ons.
  *
- * @package ajaxloadmore
- * @since 5.4.2
+ * @package AjaxLoadMore
  */
 
 /**

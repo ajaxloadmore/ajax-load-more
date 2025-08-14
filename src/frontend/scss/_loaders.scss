@@ -4,28 +4,23 @@
 	padding: 10px 0 0;
 	margin: 0 0 25px;
 	position: relative;
-	&::after {
-		display: table;
-		clear: both;
-		height: 0;
-		content: '';
-	}
+
 	.alm-load-more-btn {
-		font-size: 15px;
+		font-size: 14px;
 		font-weight: 500;
 		width: auto;
-		height: 43px;
+		height: 42px;
 		line-height: 1;
-		background: #ed7070;
-		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-		color: #fff;
+		background: map-get($colors, 'default');
 		border: none;
-		border-radius: 4px;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+		color: #fff;
+		border-radius: $radius;
 		margin: 0;
-		padding: 0 20px;
+		padding: 0 $padding;
 		display: inline-block;
 		position: relative;
-		transition: all 0.3s ease;
+		transition: all 0.15s ease;
 		text-align: center;
 		text-decoration: none;
 		appearance: none;
@@ -33,8 +28,8 @@
 		cursor: pointer;
 		&:hover,
 		&.loading {
-			background-color: #e06161;
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09);
+			background-color: map-get($colors, 'default_hover');
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 			color: #fff;
 			text-decoration: none;
 		}
@@ -43,12 +38,39 @@
 			text-decoration: none;
 		}
 
-		/* Loading */
+		/* Loading Icon */
+		&::before {
+			background-color: rgba(#fff, 0);
+			background-image: url(get-loader(#fff));
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: 18px 18px;
+			width: 0;
+			height: 32px;
+			border-radius: 0;
+			opacity: 0;
+			visibility: hidden;
+			display: block;
+			content: '';
+			z-index: 1;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			overflow: hidden;
+			transition: all 0.125s ease;
+			transform: translateY(-50%);
+		}
+
+		/* Loading State */
 		&.loading {
-			pointer-events: none;
+			padding-left: 41px;
 			cursor: wait;
-			outline: none;
-			padding-left: 44px;
+			outline: none !important;
+			&::before {
+				opacity: 1;
+				visibility: visible;
+				width: 42px;
+			}
 		}
 
 		/* Loaded / Done */
@@ -56,7 +78,7 @@
 		&:disabled {
 			pointer-events: none;
 			opacity: 0.15;
-			background-color: #ed7070;
+			background-color: map-get($colors, 'default');
 			outline: none !important;
 			box-shadow: none !important;
 		}
@@ -65,25 +87,19 @@
 		&::before,
 		&.done::before,
 		&:disabled::before {
-			background: none;
-			width: 0;
+			opacity: 0;
+			visibility: hidden;
+		}
+		&:active {
+			transition: none;
 		}
 
-		/* Loading :before */
-		&.loading::before {
-			background: #fff url('../img/ajax-loader.gif') no-repeat center center;
-			width: 30px;
-			height: 31px;
-			margin: 6px;
-			border-radius: 3px;
-			display: inline-block;
-			z-index: 0;
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 0;
-			overflow: hidden;
-			transition: width 0.5s ease-in-out;
+		&.done {
+			cursor: default;
+		}
+
+		&::after {
+			display: none !important;
 		}
 	}
 
@@ -101,121 +117,159 @@
 	}
 }
 
-/* white */
-.ajax-load-more-wrap.white .alm-load-more-btn {
-	background-color: #fff;
-	color: #787878;
-	border: 1px solid #e0e0e0;
-	overflow: hidden;
-	transition: none;
-	outline: none;
-	&:focus,
-	&:hover,
-	&.loading {
-		background-color: #fff;
-		color: #333;
-		border-color: #aaaaaa;
-	}
-	&.done {
-		background-color: #fff;
-		color: #444;
-		border-color: #ccc;
-	}
-	&.loading {
-		color: rgba(255, 255, 255, 0) !important;
-		outline: none !important;
-		background-color: transparent;
-		border-color: transparent !important;
-		box-shadow: none !important;
-		padding-left: 20px;
-		&::before {
-			margin: 0;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: transparent;
-			background-image: url('../img/ajax-loader-lg.gif');
-			background-size: 25px 25px;
-			background-position: center center;
-		}
-	}
-}
-
-/* light grey */
-.ajax-load-more-wrap.light-grey .alm-load-more-btn {
-	background-color: #efefef;
-	color: #787878;
-	border: 1px solid #e0e0e0;
-	overflow: hidden;
-	transition: all 0.075s ease;
-	outline: none;
-	&:focus,
-	&:hover,
-	&.loading,
-	&.done {
-		background-color: #f1f1f1;
-		color: #222;
-		border-color: #aaaaaa;
-	}
-	&.loading {
-		color: rgba(255, 255, 255, 0) !important;
-		outline: none !important;
-		background-color: transparent;
-		border-color: transparent !important;
-		box-shadow: none !important;
-		padding-left: 20px;
-		&::before {
-			margin: 0;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: transparent;
-			background-image: url('../img/ajax-loader-lg.gif');
-			background-size: 25px 25px;
-			background-position: center center;
-		}
-	}
-}
-
 /* Blue */
 .ajax-load-more-wrap.blue .alm-load-more-btn {
-	background-color: #1b91ca;
+	background-color: map-get($colors, 'blue');
 	&:hover,
 	&.loading,
 	&.done {
-		background-color: #1b84b7;
+		background-color: map-get($colors, 'blue_hover');
 	}
 }
 
-/* green */
+/* Green */
 .ajax-load-more-wrap.green .alm-load-more-btn {
-	background-color: #80ca7a;
+	background-color: map-get($colors, 'green');
 	&:hover,
 	&.loading,
 	&.done {
-		background-color: #81c17b;
+		background-color: map-get($colors, 'green_hover');
 	}
 }
 
-/* purple */
+/* Purple */
 .ajax-load-more-wrap.purple .alm-load-more-btn {
-	background-color: #b97eca;
+	background-color: map-get($colors, 'purple');
 	&:hover,
 	&.loading,
 	&.done {
-		background-color: #a477b1;
+		background-color: map-get($colors, 'purple_hover');
 	}
 }
 
-/* grey */
+/* Grey */
 .ajax-load-more-wrap.grey .alm-load-more-btn {
-	background-color: #a09e9e;
+	background-color: map-get($colors, 'grey');
 	&:hover,
 	&.loading,
 	&.done {
-		background-color: #888;
+		background-color: map-get($colors, 'grey_hover');
+	}
+}
+
+/* Dark */
+.ajax-load-more-wrap.dark .alm-load-more-btn {
+	background-color: map-get($colors, 'dark');
+	&:hover,
+	&.loading,
+	&.done {
+		background-color: map-get($colors, 'dark_hover');
+	}
+}
+
+/* Light Styles */
+.ajax-load-more-wrap.is-outline .alm-load-more-btn,
+.ajax-load-more-wrap.white .alm-load-more-btn,
+.ajax-load-more-wrap.light-grey .alm-load-more-btn,
+.ajax-load-more-wrap.white-inverse .alm-load-more-btn {
+	transition-duration: 0.1s;
+	&::before {
+		width: 32px;
+		height: 32px;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		background-color: transparent;
+		background-size: 22px 22px;
+		transition-duration: 0.1s;
+	}
+	&.loading {
+		color: transparent !important;
+		background-color: transparent !important;
+		border-color: transparent !important;
+		box-shadow: none !important;
+		padding: 0 $padding;
+	}
+}
+
+/* Default Outline */
+.ajax-load-more-wrap.is-outline .alm-load-more-btn {
+	color: map-get($colors, 'default');
+	border: 1px solid rgba(map-get($colors, 'default'), 0.6);
+	background-color: #fff;
+	&::before {
+		background-image: url(get-loader());
+	}
+	&:focus,
+	&:hover,
+	&.done {
+		color: map-get($colors, 'default_hover');
+		border-color: map-get($colors, 'default_hover');
+		background-color: #fff;
+	}
+	&:active {
+		border-color: rgba(map-get($colors, 'default_hover'), 0.65);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	}
+}
+
+/* White */
+.ajax-load-more-wrap.white .alm-load-more-btn {
+	background-color: #fff;
+	color: map-get($colors, 'link');
+	border: 1px solid map-get($borders, 'default');
+	&::before {
+		background-image: url(get-loader());
+	}
+	&:focus,
+	&:hover,
+	&.done {
+		background-color: #fff;
+		color: map-get($colors, 'link_hover');
+		border-color: map-get($borders, 'default_active');
+	}
+	&:active {
+		border-color: rgba(map-get($borders, 'default_active'), 0.65);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	}
+}
+
+/* Grey Light */
+.ajax-load-more-wrap.light-grey .alm-load-more-btn {
+	background-color: map-get($colors, 'grey_light');
+	color: map-get($colors, 'dark');
+	border: 1px solid rgba(map-get($colors, 'grey'), 0.2);
+	box-shadow: none;
+	&::before {
+		background-image: url(get-loader());
+	}
+	&:focus,
+	&:hover,
+	&.done {
+		background-color: map-get($colors, 'grey_lighter');
+		color: map-get($colors, 'dark_hover');
+		border-color: rgba(map-get($colors, 'grey'), 0.4);
+	}
+	&:active {
+		border-color: rgba(map-get($colors, 'grey'), 0.2);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	}
+}
+
+/* White Inverse */
+.ajax-load-more-wrap.white-inverse .alm-load-more-btn {
+	background-color: rgba(#fff, 0.35);
+	color: #fff;
+	border: none;
+	box-shadow: none;
+	&::before {
+		background-image: url(get-loader(#ccc));
+	}
+	&:focus,
+	&:hover,
+	&.done {
+		background-color: #fff;
+		color: map-get($colors, 'dark');
 	}
 }
 
@@ -224,21 +278,28 @@
 	> .alm-btn-wrap {
 		.alm-load-more-btn {
 			width: 100%;
-			background-color: transparent !important;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-image: url('../img/spinner.gif');
+			background: none !important;
 			border: none !important;
-			opacity: 0;
-			transition: opacity 0.2s ease;
 			box-shadow: none !important;
+			opacity: 0;
 			overflow: hidden;
 			text-indent: -9999px;
 			cursor: default !important;
 			outline: none !important;
+			padding: 0;
+			transition-duration: 0.1s;
+
 			&::before {
-				display: none !important;
+				width: 28px;
+				height: 28px;
+				background-size: 28px 28px;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				margin: 0;
+				transition-duration: 0.1s;
 			}
+
 			&:focus,
 			&:active {
 				outline: none;
@@ -248,23 +309,43 @@
 			}
 			&.loading {
 				opacity: 1;
+				padding: 0;
 			}
 		}
 	}
-	&.skype > .alm-btn-wrap .alm-load-more-btn {
-		background-image: url('../img/spinner-skype.gif');
+	&.classic > .alm-btn-wrap .alm-load-more-btn {
+		&::before {
+			background-image: url(get-loader());
+		}
 	}
-	&.ring > .alm-btn-wrap .alm-load-more-btn {
-		background-image: url('../img/spinner-ring.gif');
+	&.circle-spinner > .alm-btn-wrap .alm-load-more-btn {
+		&::before {
+			background-image: url(get-circle-spinner());
+		}
 	}
-	&.fading-blocks > .alm-btn-wrap .alm-load-more-btn {
-		background-image: url('../img/loader-fading-blocks.gif');
+	&.fading-circles > .alm-btn-wrap .alm-load-more-btn,
+	&.fading-squares > .alm-btn-wrap .alm-load-more-btn,
+	&.ripples > .alm-btn-wrap .alm-load-more-btn {
+		&::before {
+			width: 38px;
+			height: 38px;
+			background-size: 38px 38px;
+		}
 	}
 	&.fading-circles > .alm-btn-wrap .alm-load-more-btn {
-		background-image: url('../img/loader-fading-circles.gif');
+		&::before {
+			background-image: url(get-fading-circles());
+		}
 	}
-	&.chasing-arrows > .alm-btn-wrap .alm-load-more-btn {
-		background-image: url('../img/spinner-chasing-arrows.gif');
+	&.fading-squares > .alm-btn-wrap .alm-load-more-btn {
+		&::before {
+			background-image: url(get-fading-squares());
+		}
+	}
+	&.ripples > .alm-btn-wrap .alm-load-more-btn {
+		&::before {
+			background-image: url(get-ripples());
+		}
 	}
 }
 

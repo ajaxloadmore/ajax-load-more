@@ -1,3 +1,4 @@
+import timeout from '../functions/timeout';
 import { almFadeIn, almFadeOut } from './fade';
 import { clearTOC } from './tableofcontents';
 
@@ -42,10 +43,9 @@ export default function almFilter(transition, speed = 200, data, type = 'filter'
  * @param {Element} element    Target element.
  * @since 2.13.1
  */
-function almFilterTransition(transition, speed, data, type, element) {
+async function almFilterTransition(transition, speed, data, type, element) {
 	if (transition === 'fade' || transition === 'masonry') {
 		// Fade, Masonry transition
-
 		switch (type) {
 			case 'filter':
 				element.classList.add('alm-is-filtering');
@@ -54,9 +54,8 @@ function almFilterTransition(transition, speed, data, type, element) {
 		}
 
 		// Move to next function
-		setTimeout(function () {
-			almCompleteFilterTransition(speed, data, type, element);
-		}, speed);
+		await timeout(speed);
+		almCompleteFilterTransition(speed, data, type, element);
 	} else {
 		// No transition
 		element.classList.add('alm-is-filtering');
@@ -78,8 +77,7 @@ function almCompleteFilterTransition(speed, data, type, element) {
 	const listing = element.querySelectorAll('.alm-listing'); // Get `.alm-listing` element
 
 	if (!listing || !btnWrap) {
-		// Exit if elements doesn't exist.
-		return false;
+		return false; // Exit if elements don't exist.
 	}
 
 	// Loop over all .alm-listing divs and clear HTML.

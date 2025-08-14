@@ -18,56 +18,67 @@
 			font-size: 14px;
 			font-weight: 500;
 			padding: 5px;
-			display: inline-block;
+			display: inline-flex;
+			align-items: center;
 			position: relative;
-			margin: 0 0 15px;
+			margin: 0 0 10px;
 			text-decoration: none;
+			transition: none;
+			min-height: 20px;
 			&:hover,
 			&:focus {
 				text-decoration: underline;
+			}
+			&::before {
+				opacity: 0;
+				visibility: hidden;
+				display: block;
+				content: '';
+				position: absolute;
+				z-index: 1;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				transition: all 0.075s ease;
+				width: 20px;
+				height: 20px;
+				background: url(get-loader()) no-repeat left center / 20px 20px;
 			}
 			&.loading,
 			&.loading:focus {
 				cursor: wait;
 				text-decoration: none;
+				color: transparent !important;
 				&::before {
-					content: '';
-					display: block;
-					position: absolute;
-					left: -18px;
-					top: 50%;
-					transform: translateY(-50%);
-					width: 16px;
-					height: 16px;
-					background: url('../img/ajax-loader-lg.gif') no-repeat left center;
-					background-size: 16px 16px;
+					opacity: 1;
+					visibility: visible;
 				}
 			}
-			&.skype {
+			&.circle-spinner {
 				&.loading {
 					&::before {
-						background-image: url('../img/spinner-skype.gif');
+						background-image: url(get-circle-spinner());
 					}
 				}
 			}
-			&.ring {
+			&.fading-circles {
 				&.loading {
 					&::before {
-						background-image: url('../img/spinner-ring.gif');
+						background-image: url(get-fading-circles());
 					}
 				}
 			}
-			&.fading-blocks {
+			&.fading-squares {
 				&.loading {
 					&::before {
-						background-image: url('../img/loader-fading-blocks.gif');
+						background-image: url(get-fading-circles());
 					}
 				}
 			}
-			&.chasing-arrows {
+			&.ripples {
 				&.loading {
 					&::before {
-						background-image: url('../img/spinner-chasing-arrows.gif');
+						background-image: url(get-ripples());
 					}
 				}
 			}

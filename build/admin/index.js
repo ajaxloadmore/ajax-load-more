@@ -2902,21 +2902,24 @@ jQuery(document).ready(function ($) {
   });
 
   /**
-   * Button preview pane
+   * Loading Style preview pane.
    * Found on Settings and Shortcode Builder.
-   *
-   * @since 2.8.4
    */
   $('select#alm_settings_btn_color').on('change', function () {
     var color = jQuery(this).val();
+
     // Remove other colors
     var wrap = $('.ajax-load-more-wrap');
-    wrap.attr('class', '');
-    wrap.addClass('ajax-load-more-wrap');
-    wrap.addClass(color);
-    $('#test-alm-button', wrap).removeClass('loading');
+    wrap.attr('class', ''); // Reset classes
+    wrap.addClass('ajax-load-more-wrap'); // Add default class
+    wrap.addClass(color); // Add selected color class
 
-    // Add loading class if Infinite loading style
+    var inverse = color.indexOf('inverse') !== -1 ? ' is-inverse' : '';
+    if (inverse) {
+      wrap.addClass(inverse); // Add inverse class if selected
+    }
+
+    $('#test-alm-button', wrap).removeClass('loading');
     if (color.indexOf('infinite') >= 0) {
       $('#test-alm-button', wrap).addClass('loading');
     }

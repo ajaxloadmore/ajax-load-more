@@ -1,3 +1,4 @@
+import timeout from '../functions/timeout';
 import { almFadeIn, almFadeOut } from './fade';
 
 /**
@@ -15,9 +16,8 @@ export default async function placeholder(type = 'show', alm) {
 	switch (type) {
 		case 'hide':
 			await almFadeOut(placeholder, 175);
-			setTimeout(function () {
-				placeholder.style.display = 'none';
-			}, 75);
+			await timeout(75); // Add short delay for effect.
+			placeholder.style.display = 'none';
 
 			break;
 		default:

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Deprecated functions for Ajax Load More.
+ *
+ * @package AjaxLoadMore
+ */
 
 /**
  * Query by custom taxonomy values.

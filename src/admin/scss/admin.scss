@@ -1179,14 +1179,15 @@ hr.indented {
 	margin-top: 0 !important;
 	max-width: 8%;
 }
-.form-table label + textarea {
-	margin-top: 10px;
-}
 .form-table label span,
+.form-table p.description,
 #alm-shortcode-builder-form label span.description {
 	font-size: 13px;
 	color: $paragraph;
 	padding-top: 10px;
+}
+.form-table p.description {
+	padding-top: 15px;
 }
 #alm-shortcode-builder-form label span.description {
 	display: block;
@@ -1225,14 +1226,20 @@ hr.indented {
 
 // Button Preview.
 .ajax-load-more .ajax-load-more-wrap {
-	position: relative;
-	top: 10px;
-	padding: 20px;
-	border: 1px solid $border;
-	box-shadow: inset 0 0 0 5px rgba(0, 0, 0, 0.025), 0 0 5px rgba(0, 0, 0, 0.1);
+	position: static;
+	border: 1px dashed $border;
 	border-radius: $radius;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 15px 0 0;
+	box-sizing: border-box;
+	* {
+		box-sizing: border-box;
+	}
+
+	&.is-inverse {
+		.alm-btn-wrap {
+			background-color: #303031;
+		}
+	}
 	&.preview-pane.none {
 		display: none;
 	}
@@ -1240,24 +1247,35 @@ hr.indented {
 		text-align: left;
 		padding: 0;
 		margin: 0;
+		padding: 15px;
 	}
 	button {
 		margin: 0 !important;
 		opacity: 1 !important;
 		visibility: visible !important;
 	}
-	span {
+	> span {
 		display: block;
 		font-size: 10px;
 		line-height: 1;
-		border-bottom: 1px solid $border;
-		padding: 0 0 10px;
-		margin: 0 0 20px;
+		padding: 10px 15px;
 		text-transform: uppercase;
+		background-color: #fff;
+		border-bottom: 1px dashed $border;
 	}
-	ul.alm-paging li span {
-		padding: 0;
-		margin: 0;
+	.alm-filter,
+	.alm-filters {
+		padding: 15px 15px 0 !important;
+	}
+	.alm-filters {
+		padding-bottom: 15px !important;
+	}
+	ul.alm-paging {
+		padding: 15px;
+		li span {
+			padding: 0;
+			margin: 0;
+		}
 	}
 }
 
@@ -1277,15 +1295,15 @@ hr.indented {
 	/* Table Overrides */
 	.form-table td,
 	.form-table th {
-		padding: 25px;
-		line-height: 1.5;
+		padding: 20px;
+		line-height: 1.45;
 		vertical-align: top;
 		&:last-of-type {
 			margin: 0;
 		}
 	}
 	.form-table th {
-		font-weight: 600;
+		font-weight: 500;
 		background-color: $light_grey;
 		border-right: 1px solid $light_border;
 		width: 25%;
@@ -1308,7 +1326,7 @@ hr.indented {
 		border-radius: $radius;
 		> div {
 			label {
-				margin: 0;
+				margin: 0 !important;
 				width: 100%;
 			}
 		}
@@ -2855,9 +2873,6 @@ span.cnkt-button.installed,
 	.table-of-contents {
 		position: static !important;
 		width: 100% !important;
-	}
-	.ajax-load-more.settings .form-table td {
-		padding: 24px 20px 20px;
 	}
 	.repeaters input.save-repeater {
 		max-width: 50%;

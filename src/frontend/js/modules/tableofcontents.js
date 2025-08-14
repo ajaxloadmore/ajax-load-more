@@ -1,5 +1,6 @@
 import { almScroll, getOffset } from '../ajax-load-more';
 import setFocus from '../functions/setFocus';
+import timeout from '../functions/timeout';
 
 /**
  * Create a numbered table of contents navigation.
@@ -9,7 +10,7 @@ import setFocus from '../functions/setFocus';
  * @param {boolean} from_preloaded Preloaded boolean.
  * @since 5.2
  */
-export function tableOfContents(alm, init = false, from_preloaded = false) {
+export async function tableOfContents(alm, init = false, from_preloaded = false) {
 	const totalPosts = alm.localize && alm.localize.post_count ? parseInt(alm.localize.post_count) : 0;
 
 	// eslint-disable-next-line eqeqeq
@@ -33,34 +34,34 @@ export function tableOfContents(alm, init = false, from_preloaded = false) {
 
 		// Init.
 		if (init) {
-			setTimeout(function () {
-				// Paged results
-				if ((alm.addons.seo && startPage > 1) || (alm.addons.filters && filterStartPage > 1) || (alm.addons.nextpage && nextpageStartPage > 1)) {
-					// SEO
-					if (alm.addons.seo && startPage > 1) {
-						for (let i = 0; i < startPage; i++) {
-							createTOCButton(alm, i, offset);
-						}
+			await timeout(100); // Add slight delay.
+
+			// Paged results
+			if ((alm.addons.seo && startPage > 1) || (alm.addons.filters && filterStartPage > 1) || (alm.addons.nextpage && nextpageStartPage > 1)) {
+				// SEO
+				if (alm.addons.seo && startPage > 1) {
+					for (let i = 0; i < startPage; i++) {
+						createTOCButton(alm, i, offset);
 					}
-					// Filters
-					if (alm.addons.filters && filterStartPage > 1) {
-						for (let i = 0; i < filterStartPage; i++) {
-							createTOCButton(alm, i, offset);
-						}
-					}
-					// Nextpage
-					if (alm.addons.nextpage && nextpageStartPage > 1) {
-						for (let i = 0; i < nextpageStartPage; i++) {
-							createTOCButton(alm, i, offset);
-						}
-					}
-				} else {
-					if (!from_preloaded && preloaded) {
-						page = page + 1;
-					}
-					createTOCButton(alm, page, offset);
 				}
-			}, 100);
+				// Filters
+				if (alm.addons.filters && filterStartPage > 1) {
+					for (let i = 0; i < filterStartPage; i++) {
+						createTOCButton(alm, i, offset);
+					}
+				}
+				// Nextpage
+				if (alm.addons.nextpage && nextpageStartPage > 1) {
+					for (let i = 0; i < nextpageStartPage; i++) {
+						createTOCButton(alm, i, offset);
+					}
+				}
+			} else {
+				if (!from_preloaded && preloaded) {
+					page = page + 1;
+				}
+				createTOCButton(alm, page, offset);
+			}
 		} else {
 			// Preloaded
 			if (preloaded) {
@@ -95,7 +96,7 @@ export function clearTOC() {
  * @param {string} page   Current page.
  * @param {number} offset The page offset.
  */
-function createTOCButton(alm, page, offset) {
+async function createTOCButton(alm, page, offset) {
 	if (!alm.tableofcontents) {
 		return false;
 	}
@@ -140,6 +141,7 @@ function createTOCButton(alm, page, offset) {
 		const top = typeof getOffset === 'function' ? getOffset(element).top : element.offsetTop;
 		almScroll(top - offset);
 
+		// Set focus on element after slight delay.
 		setTimeout(function () {
 			setFocus(alm, element, target, false);
 		}, 500);

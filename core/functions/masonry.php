@@ -2,8 +2,7 @@
 /**
  * Functions related to Masonry integration.
  *
- * @package ajaxloadmore
- * @version 5.4.2
+ * @package AjaxLoadMore
  */
 
 /**
