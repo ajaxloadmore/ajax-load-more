@@ -7,21 +7,22 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.5.0
+ * Version: 7.6.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-define( 'ALM_VERSION', '7.5.0' );
-define( 'ALM_RELEASE', 'July 23, 2025' );
+define( 'ALM_VERSION', '7.6.0' );
+define( 'ALM_RELEASE', 'August 18, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
 
 /**
- * Activation hook - Create table & repeater.
+ * Activation hook.
+ * Create DB table & default Repeater Template.
  *
  * @param Boolean $network_wide Enable the plugin for all sites in the network or just the current site. Multisite only.
  * @since 2.0.0
@@ -716,12 +717,14 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 endif;
 
-/**
- * Ajax Load More public render function.
- *
- * @param array $args The shortcode args.
- * @since 4.2.0
- */
-function alm_render( $args ) {
-	echo do_shortcode( AjaxLoadMore::alm_shortcode( $args ) );
-}
+if ( ! function_exists( 'alm_render' ) ) :
+	/**
+	 * Ajax Load More public render function.
+	 *
+	 * @param array $args The shortcode args.
+	 * @since 4.2.0
+	 */
+	function alm_render( $args ) {
+		echo do_shortcode( AjaxLoadMore::alm_shortcode( $args ) );
+	}
+endif;

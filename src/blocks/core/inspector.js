@@ -23,15 +23,15 @@ export default function (props) {
 					help={__('Note: Infinite scroll is disabled within the Block Editor.', 'ajax-load-more')}
 					rows={6}
 				/>
-				<Flex
-					gap="5px"
-					justify="flex-start"
-					style={{
-						marginTop: '-10px',
-					}}
-				>
+
+				<Flex gap="5px" justify="flex-start">
+					{!attributes?.shortcode && (
+						<Button size="compact" variant="primary" target="_blank" onClick={() => setAttributes({ shortcode: '[ajax_load_more]' })}>
+							{__('Add Basic', 'ajax-load-more')}
+						</Button>
+					)}
 					<Button href={`${adminurl}/admin.php?page=ajax-load-more-shortcode-builder`} size="compact" variant="secondary" target="_blank">
-						{__('Create Shortcode', 'ajax-load-more')}
+						{__('Create Query', 'ajax-load-more')}
 					</Button>
 				</Flex>
 			</PanelBody>
