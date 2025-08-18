@@ -268,7 +268,7 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 7.6.0 - August 14, 2025 =
+= 7.6.0 - August 18, 2025 =
 * NOTICE: This Ajax Load More update includes to the button animations and loading styles. It's possible that your existing loading style may have be affected.
 * NEW: Modernized the Load More button and Infinite Scroll styles/animations with new SVG based spinners.
 * UPDATE: Removed `button_loading_label` and `prev_button_loading_label` parameters as these are no longer in used with the new loader styles.
