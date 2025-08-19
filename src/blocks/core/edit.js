@@ -6,12 +6,25 @@ import block from './block.json';
 import Inspector from './inspector';
 
 export default function (props) {
-	const { attributes } = props;
+	const { attributes, context } = props;
+
+	// Create query args from block context.
+	const urlQueryArgs = {};
+	block.usesContext.forEach((contextName) => {
+		urlQueryArgs[contextName] = context[contextName] ?? null;
+	});
+
 	return (
 		<>
 			<Inspector {...props} />
 			<EditWrapper>
-				<ServerSideRender block={block.name} attributes={attributes} LoadingResponsePlaceholder={Loader} EmptyResponsePlaceholder={Loader} />
+				<ServerSideRender
+					block={block.name}
+					attributes={attributes}
+					urlQueryArgs={urlQueryArgs}
+					LoadingResponsePlaceholder={Loader}
+					EmptyResponsePlaceholder={Loader}
+				/>
 			</EditWrapper>
 		</>
 	);

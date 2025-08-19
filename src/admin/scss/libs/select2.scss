@@ -7,6 +7,10 @@
 	*display: inline;
 	vertical-align: middle;
 	min-width: 60%;
+	padding: 3px;
+	background-color: #fff;
+	border: 1px solid $border;
+	border-radius: $radius;
 }
 .inner.half .select2-container {
 	min-width: 90%;
@@ -229,10 +233,11 @@
 }
 
 .select2-results li.select2-result-with-children > .select2-result-label {
-	font-weight: 700;
-	font-size: 13px;
+	font-weight: 600;
+	font-size: 14px;
 	cursor: default;
 	border-bottom: 1px solid $light_grey;
+	padding: 15px 10px;
 }
 
 .select2-results .select2-result-label {

@@ -114,7 +114,7 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--fields">
 								<div class="inner">
 									<select name="template-select" class="alm_element">
-										<optgroup label="<?php _e( 'Custom Repeaters', 'ajax-load-more' ); ?>">
+										<optgroup label="<?php _e( 'Repeater Templates', 'ajax-load-more' ); ?>">
 											<option name="default" value="default"><?php _e( 'Default', 'ajax-load-more' ); ?></option>
 											<?php
 											if ( has_action( 'alm_get_custom_repeaters' ) ) {
@@ -128,7 +128,7 @@ $show_max                = 100; // Max number of items to show.
 										<?php
 										// Theme Repeaters
 										if ( has_action( 'alm_list_theme_repeaters' ) ) {
-											echo '<optgroup label="' . __( 'Theme Repeaters', 'ajax-load-more' ) . '">';
+											echo '<optgroup label="' . __( 'Theme Templates', 'ajax-load-more' ) . '">';
 											do_action( 'alm_list_theme_repeaters' );
 											echo '</optgroup>';
 										}
@@ -157,10 +157,12 @@ $show_max                = 100; // Max number of items to show.
 						<!-- ID -->
 						<section class="first">
 							<div class="shortcode-builder--label">
-								<h4><?php _e( 'ID', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding a unique ID will allow you target this specific Ajax Load More instance with the alm_query_args_id() filter', 'ajax-load-more' ); ?>."></a></h4>
+								<h4>
+									<?php _e( 'ID', 'ajax-load-more' ); ?>
+									<a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding a unique ID will allow you target this specific Ajax Load More instance with the alm_query_args filter', 'ajax-load-more' ); ?>."></a></h4>
 								<p>
-									<?php _e( 'Set a unique ID for this Ajax Load More instance. Lowercase alphanumeric characters only.', 'ajax-load-more' ); ?>
-									<small>e.g. my_alm_listing</small>
+									<?php _e( 'Set a unique ID for this Ajax Load More instance.', 'ajax-load-more' ); ?>
+									<small><?php _e( 'Lowercase alphanumeric characters only.', 'ajax-load-more' ); ?><br/>e.g. my_alm_listing</small>
 								</p>
 								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_query_args" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a></p>
 							</div>
@@ -176,40 +178,31 @@ $show_max                = 100; // Max number of items to show.
 						<!-- Loading Style -->
 						<?php
 						$loading_style = ( isset( $alm_options['_alm_btn_color'] ) ) ? $alm_options['_alm_btn_color'] : 'default';
-						$selected      = ' selected="selected"';
 						?>
 						<section>
 							<div class="shortcode-builder--label">
 								<h4><?php _e( 'Button/Loading Style', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'You can define a global button/loading style on the Ajax Load More settings screen', 'ajax-load-more' ); ?>."></a></h4>
-								<p><?php _e( 'Select an Ajax loading style - you can choose between a Button or Infinite Scroll.', 'ajax-load-more' ); ?></p>
+								<p><?php _e( 'Select a Load More button or Infinite Scroll loading style.', 'ajax-load-more' ); ?></p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">
 									<select id="loading-style" class="alm_element" data-default="<?php echo $loading_style; ?>">
-										<optgroup label="<?php _e( 'Button Style (Dark)', 'ajax-load-more' ); ?>">
-											<option value="default" class="alm-color default"<?php echo ( $loading_style === 'default' ) ? $selected : ''; ?>>Red (Default)</option>
-											<option value="blue" class="alm-color blue"<?php echo ( $loading_style === 'blue' ) ? $selected : ''; ?>>Blue</option>
-											<option value="green" class="alm-color green"<?php echo ( $loading_style === 'green' ) ? $selected : ''; ?>>Green</option>
-											<option value="purple" class="alm-color purple"<?php echo ( $loading_style === 'purple' ) ? $selected : ''; ?>>Purple</option>
-											<option value="grey" class="alm-color grey"<?php echo ( $loading_style === 'grey' ) ? $selected : ''; ?>>Grey</option>
-										</optgroup>
-										<optgroup label="<?php _e( 'Button Style (Light)', 'ajax-load-more' ); ?>">
-											<option value="white" class="alm-color white"<?php echo ( $loading_style === 'white' ) ? $selected : ''; ?>>White</option>
-											<option value="light-grey" class="alm-color light-grey"<?php echo ( $loading_style === 'light-grey' ) ? $selected : ''; ?>>Light Grey</option>
-										</optgroup>
-										<optgroup label="<?php _e( 'Infinite Scroll (No Button)', 'ajax-load-more' ); ?>">
-											<option value="infinite classic" class="infinite classic"<?php echo ( $loading_style === 'infinite classic' ) ? $selected : ''; ?>>Classic</option>
-											<option value="infinite skype" class="infinite skype"<?php echo ( $loading_style === 'infinite skype' ) ? $selected : ''; ?>>Skype</option>
-											<option value="infinite ring" class="infinite ring"<?php echo ( $loading_style === 'infinite ring' ) ? $selected : ''; ?>>Circle Fill</option>
-											<option value="infinite fading-blocks" class="infinite fading-blocks"<?php echo ( $loading_style === 'infinite fading-blocks' ) ? $selected : ''; ?>>Fading Blocks</option>
-											<option value="infinite fading-circles" class="infinite fading-circles"<?php echo ( $loading_style === 'infinite fading-circles' ) ? $selected : ''; ?>>Fading Circles</option>
-											<option value="infinite chasing-arrows" class="infinite chasing-arrows"<?php echo ( $loading_style === 'infinite chasing-arrows' ) ? $selected : ''; ?>>Chasing Arrows</option>
-										</optgroup>
+									<?php
+									foreach ( alm_get_loaders() as $loader ) {
+										echo '<optgroup label="' . esc_attr( $loader['label'] ) . '">';
+										foreach ( $loader['loaders'] as $option ) {
+											$selected  = $loading_style === $option['value'] ? ' selected="selected"' : '';
+											$pre_class = strpos( $option['value'], 'infinite' ) === false ? ' alm-color' : '';
+											echo '<option value="' . esc_attr( $option['value'] ) . '" class="' . esc_attr( $option['value'] ) . $pre_class . '"' . esc_attr( $selected ) . '>' . esc_html( $option['label'] ) . '</option>';
+										}
+										echo '</optgroup>';
+									}
+									?>
 									</select>
 									<div class="clear"></div>
 									<div class="ajax-load-more-wrap core target <?php echo $loading_style; ?>" data-base="ajax-load-more-wrap core ">
+										<span><?php esc_attr_e( 'Click to Preview', 'ajax-load-more' ); ?></span>
 										<div class="alm-btn-wrap">
-											<span><?php _e( 'CLICK TO PREVIEW', 'ajax-load-more' ); ?></span>
 											<button class="alm-load-more-btn" type="button">
 												<?php echo apply_filters( 'alm_button_label', __( 'Load More', 'ajax-load-more' ) ); ?>
 											</button>
@@ -445,8 +438,13 @@ $show_max                = 100; // Max number of items to show.
 								<section>
 									<div class="shortcode-builder--label">
 										<h4><?php _e( 'Delay', 'ajax-load-more' ); ?></h4>
-										<p><?php _e( 'Stagger the display of each post incrementally.', 'ajax-load-more' ); ?><br/>
-										<small><?php _e( 'Note: Delay in milliseconds.', 'ajax-load-more' ); ?></small></p>
+										<p>
+											<?php _e( 'Stagger the display of each post incrementally.', 'ajax-load-more' ); ?><br/>
+											<small><?php _e( 'Note: Delay in milliseconds.', 'ajax-load-more' ); ?></small>
+										</p>
+										<p>
+											<a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/transition-delay/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a>
+										</p>
 									</div>
 									<div class="shortcode-builder--fields">
 										<div class="inner">
@@ -1423,7 +1421,7 @@ $show_max                = 100; // Max number of items to show.
 					<div class="expand-wrap">
 						<section class="first">
 							<div class="shortcode-builder--label">
-								<p><?php _e( 'Ajax Load More will automatically create an archive query while viewing site archives.', 'ajax-load-more' ); ?></p>
+								<p><?php _e( 'Ajax Load More can automatically create an archive query on archive pages.', 'ajax-load-more' ); ?></p>
 								<p><?php _e( 'Search, taxonomy, category, tag, date (year, month, day), post type and author archives are currently supported.', 'ajax-load-more' ); ?></p>
 								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/archives/" target="_blank"><?php _e( 'View Docs', 'ajax-load-more' ); ?></a></p>
 							</div>
@@ -1442,7 +1440,7 @@ $show_max                = 100; // Max number of items to show.
 								</div>
 							</div>
 						</section>
-						<p class="warning-callout"><?php _e( '<b>Note</b>: Do not select Query Parameters other than <b>Posts Per Page</b> and/or <b>Post Type</b> when using the Archives integration. Ajax Load More will automatically create the perfect shortcode for you based on the current archive page.', 'ajax-load-more' ); ?></p>
+						<p class="warning-callout"><?php _e( '<b>Note</b>: Do not select Query Parameters other than <b>Posts Per Page</b> and/or <b>Post Type</b> when using the Archives integration. Ajax Load More will automatically create the query for you based on the current archive page.', 'ajax-load-more' ); ?></p>
 					</div>
 				</div>
 			</div>

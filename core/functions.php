@@ -10,6 +10,7 @@
  * Include these files.
  */
 require_once ALM_PATH . 'core/functions/addons.php';
+require_once ALM_PATH . 'core/functions/loaders.php';
 require_once ALM_PATH . 'core/functions/masonry.php';
 require_once ALM_PATH . 'core/functions/query.php';
 require_once ALM_PATH . 'core/functions/deprecated.php';
@@ -64,6 +65,15 @@ function alm_do_inline_css( $setting ) {
 }
 
 /**
+ * Check if the current request is a block editor request.
+ *
+ * @return boolean
+ */
+function alm_is_block_editor() {
+	return defined( 'REST_REQUEST' ) && REST_REQUEST;
+}
+
+/**
  * This function will return HTML of a looped item.
  *
  * @param string  $repeater        The repeater name.
@@ -102,27 +112,25 @@ function alm_loop( $repeater, $theme_repeater, $alm_found_posts = '', $alm_page 
 /**
  * Get the current repeater template file.
  *
- * @param string $repeater current repater name.
+ * @param string $template The current template name.
  * @param string $type     Type of template.
  * @return string          The template file path.
  * @since 2.5.0
  */
-function alm_get_current_repeater( $repeater, $type ) {
-	$template = $repeater;
-	$include  = '';
+function alm_get_current_repeater( $template, $type ) {
+	$include = '';
 
 	// $content = get_the_content(null, null, 8879);
 	// $new_html = preg_replace("/(^<div[^>]*>|<\/div>$)/i", "", $content);
 	// echo apply_filters( 'the_content', $new_html );
 
-	if ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
-		// Custom Repeaters v1.
-		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
-		if ( ! file_exists( $include ) ) {
-			alm_get_default_repeater(); // Confirm file exists.
-		}
-	} elseif ( $type === 'template_' && has_action( 'alm_unlimited_installed' ) ) {
-		// Custom Repeaters 2.5+.
+	if ( $type === 'template_' && class_exists( 'ALMTemplates' ) ) {
+		// Templates add-on.
+		$base_dir = AjaxLoadMore::alm_get_repeater_path();
+		$include  = $base_dir . '/' . $template . '.php';
+
+	} elseif ( $type === 'template_' && defined( 'ALM_UNLIMITED_VERSION' ) ) {
+		// Custom Repeaters v2 add-on.
 		if ( ALM_UNLIMITED_VERSION >= '2.5' ) {
 			// Get path to repeater (alm_templates).
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
@@ -133,16 +141,17 @@ function alm_get_current_repeater( $repeater, $type ) {
 			$include = ( $blog_id > 1 ) ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $template . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $template . '.php';
 		}
 
-		if ( ! file_exists( $include ) ) {
-			$include = alm_get_default_repeater(); // Confirm file exists.
-		}
+	} elseif ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
+		// Custom Repeaters v1 add-on.
+		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
+
 	} else {
-		// Default repeater.
+		// Default.
 		$include = alm_get_default_repeater();
 	}
 
-	// Security check.
-	if ( ! alm_is_valid_path( $template ) ) {
+	// Confirm file exists and run security check.
+	if ( ! file_exists( $include ) || ! alm_is_valid_path( $include ) ) {
 		$include = alm_get_default_repeater();
 	}
 
@@ -163,22 +172,20 @@ function alm_get_default_repeater() {
 
 	// Load repeater template from current theme folder.
 	if ( is_child_theme() ) {
-		$template_theme_file = get_stylesheet_directory() . '/' . $dir . '/default.php';
+		$template = get_stylesheet_directory() . '/' . $dir . '/default.php';
 		// If child theme does not have repeater template, then use the parent theme dir.
-		if ( ! file_exists( $template_theme_file ) ) {
-			$template_theme_file = get_template_directory() . '/' . $dir . '/default.php';
+		if ( ! file_exists( $template ) ) {
+			$template = get_template_directory() . '/' . $dir . '/default.php';
 		}
 	} else {
-		$template_theme_file = get_template_directory() . '/' . $dir . '/default.php';
+		$template = get_template_directory() . '/' . $dir . '/default.php';
 	}
 
 	// If theme or child theme contains the template, use that file.
-	if ( file_exists( $template_theme_file ) ) {
-		$file = $template_theme_file;
+	if ( file_exists( $template ) ) {
+		$file = $template;
 	}
 
-	// @since 2.0.
-	// @updated 3.5.
 	if ( $file === null ) {
 		$file = AjaxLoadMore::alm_get_repeater_path() . '/default.php';
 	}

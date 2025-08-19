@@ -18,7 +18,7 @@ $alm_pg_desc       = ( has_action( 'alm_pro_installed' ) ) ? __( 'Enter your Pro
 			// Display Filters CTA.
 			$alm_filters_cta = alm_get_addon( 'filters' );
 			if ( $alm_filters_cta ) {
-				echo wp_kses_post( alm_display_featured_addon( $alm_filters_cta, 'Upgrade Now' ) );
+				alm_display_featured_addon( $alm_filters_cta, 'Upgrade Now' );
 			}
 			?>
 		</div>

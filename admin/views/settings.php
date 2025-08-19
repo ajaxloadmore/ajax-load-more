@@ -39,6 +39,7 @@ $alm_admin_heading = __( 'Settings', 'ajax-load-more' );
 											'alm_filters_settings',
 											'alm_theme_repeaters_settings',
 											'alm_prev_post_settings',
+											'alm_templates_settings',
 										],
 										true
 									) ? $nav_title . 's' : $nav_title;

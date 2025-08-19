@@ -205,34 +205,37 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 
 // File location on Theme Repeaters
 .ajax-load-more .file-location {
-	border: 1px solid $border;
-	background: #fff;
+	border-top: 1px dashed $border;
+	background: #fbfbfb;
+	color: $paragraph;
 	margin: 0;
-	padding: 0;
+	padding: 0 20px 0 25px;
 	line-height: 1;
 	display: flex;
+	align-items: center;
+	gap: 10px;
 	flex-wrap: nowrap;
 	font-family: Consolas, monaco, monospace;
-	border-radius: 3px;
-	p,
+	border-radius: 0 0 3px 3px;
+	span,
 	code {
-		padding: 12px 16px;
+		padding: 15px 0;
 		line-height: 18px;
 		font-size: 12px;
 	}
-	p {
-		background: $light_grey;
-		color: #555;
-		font-weight: 600;
+	span {
 		margin: 0;
 		width: auto;
-		display: inline;
-		border-right: 1px solid $border;
+		cursor: default;
+		font-size: 13px;
+		color: $grey_text;
 	}
 	code {
-		color: $grey_text;
+		color: $paragraph;
 		background: transparent;
-		cursor: help;
+		cursor: default;
+		text-align: right;
+		padding-left: 0;
 	}
 }
 
@@ -338,7 +341,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	cursor: pointer;
 	width: 100%;
 	position: relative;
-	font-size: 16px;
+	font-size: 15px;
 	background: $light_grey;
 	border-bottom: 1px solid $border;
 	&:hover:after,
@@ -349,15 +352,19 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	&:focus {
 		color: #222;
 		outline: none;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 	&::after {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		font-family: 'FontAwesome';
 		content: '\f056';
 		color: $border;
 		position: absolute;
-		left: 13px;
-		top: 16px;
+		left: 10px;
+		top: 50%;
+		transform: translateY(-50%);
 		height: 20px;
 		width: 20px;
 	}
@@ -826,6 +833,9 @@ a.button-small {
 	&.no-padding-btm {
 		padding-bottom: 0;
 	}
+	&.no-padding-top {
+		padding-top: 0;
+	}
 	.column {
 		grid-column: span 12 / span 12;
 		@media screen and (min-width: $break) {
@@ -1169,14 +1179,15 @@ hr.indented {
 	margin-top: 0 !important;
 	max-width: 8%;
 }
-.form-table label + textarea {
-	margin-top: 10px;
-}
 .form-table label span,
+.form-table p.description,
 #alm-shortcode-builder-form label span.description {
 	font-size: 13px;
 	color: $paragraph;
 	padding-top: 10px;
+}
+.form-table p.description {
+	padding-top: 15px;
 }
 #alm-shortcode-builder-form label span.description {
 	display: block;
@@ -1215,14 +1226,20 @@ hr.indented {
 
 // Button Preview.
 .ajax-load-more .ajax-load-more-wrap {
-	position: relative;
-	top: 10px;
-	padding: 20px;
-	border: 1px solid $border;
-	box-shadow: inset 0 0 0 5px rgba(0, 0, 0, 0.025), 0 0 5px rgba(0, 0, 0, 0.1);
+	position: static;
+	border: 1px dashed $border;
 	border-radius: $radius;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 15px 0 0;
+	box-sizing: border-box;
+	* {
+		box-sizing: border-box;
+	}
+
+	&.is-inverse {
+		.alm-btn-wrap {
+			background-color: #303031;
+		}
+	}
 	&.preview-pane.none {
 		display: none;
 	}
@@ -1230,24 +1247,35 @@ hr.indented {
 		text-align: left;
 		padding: 0;
 		margin: 0;
+		padding: 15px;
 	}
 	button {
 		margin: 0 !important;
 		opacity: 1 !important;
 		visibility: visible !important;
 	}
-	span {
+	> span {
 		display: block;
 		font-size: 10px;
 		line-height: 1;
-		border-bottom: 1px solid $border;
-		padding: 0 0 10px;
-		margin: 0 0 20px;
+		padding: 10px 15px;
 		text-transform: uppercase;
+		background-color: #fff;
+		border-bottom: 1px dashed $border;
 	}
-	ul.alm-paging li span {
-		padding: 0;
-		margin: 0;
+	.alm-filter,
+	.alm-filters {
+		padding: 15px 15px 0 !important;
+	}
+	.alm-filters {
+		padding-bottom: 15px !important;
+	}
+	ul.alm-paging {
+		padding: 15px;
+		li span {
+			padding: 0;
+			margin: 0;
+		}
 	}
 }
 
@@ -1267,15 +1295,15 @@ hr.indented {
 	/* Table Overrides */
 	.form-table td,
 	.form-table th {
-		padding: 25px;
-		line-height: 1.5;
+		padding: 20px;
+		line-height: 1.45;
 		vertical-align: top;
 		&:last-of-type {
 			margin: 0;
 		}
 	}
 	.form-table th {
-		font-weight: 600;
+		font-weight: 500;
 		background-color: $light_grey;
 		border-right: 1px solid $light_border;
 		width: 25%;
@@ -1298,7 +1326,7 @@ hr.indented {
 		border-radius: $radius;
 		> div {
 			label {
-				margin: 0;
+				margin: 0 !important;
 				width: 100%;
 			}
 		}
@@ -1508,7 +1536,7 @@ hr.indented {
 			font-weight: 400;
 			color: $paragraph;
 			font-size: 12px;
-			padding-top: 3px;
+			padding-top: 1px;
 			opacity: 0.75;
 		}
 	}
@@ -1551,7 +1579,7 @@ hr.indented {
 		height: 30px;
 		text-decoration: none;
 		display: block;
-		padding: 0 10px;
+		padding: 0 12px;
 		cursor: pointer;
 		&:hover,
 		&:focus {
@@ -1939,7 +1967,7 @@ hr.indented {
 			font-size: 13px;
 			display: block;
 			flex: 1;
-			padding: 7px 14px;
+			padding: 8px 12px;
 			background: #77498e;
 			color: #fff;
 			border: none;
@@ -2023,6 +2051,9 @@ span.cnkt-button.installed,
 		background-color: $light_grey;
 		border-radius: 3px;
 		border: 1px solid $border;
+	}
+	& :last-child {
+		margin-bottom: 0;
 	}
 }
 .ajax-load-more .cnkt-sidebar .cta-inner.padding-bottom {
@@ -2253,37 +2284,42 @@ span.cnkt-button.installed,
 	width: 100%;
 }
 
-// Add Repeater Template
+// Add Repeater Template.
 .ajax-load-more {
 	.alm-add-template {
 		text-align: center;
-		margin: 20px 0 5px !important;
+		margin: 20px 0 0 !important;
 		display: block;
-		font-size: 14px;
-		font-weight: 500;
 		text-transform: none !important;
 		text-align: center;
-		a {
+		a,
+		button {
+			font-size: 14px;
+			font-weight: 600;
 			background: $light_grey;
-			border: 1px solid $border;
+			border-bottom: 1px solid #dedede;
 			color: $grey;
-			display: inline-block;
-			padding: 15px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 15px 20px;
+			gap: 8px;
 			line-height: 1;
 			border-radius: $radius;
 			text-decoration: none;
 			transition: $transition;
+			box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
 			i {
-				color: $red;
-				margin: 0 4px 0 0;
+				color: $alm_red;
+				margin: 0;
 				position: relative;
 				left: -1px;
-				font-size: 16px;
+				font-size: 18px;
 			}
 			&:hover,
 			&:focus {
-				background: $red;
-				border-color: $red;
+				background: $alm_red;
+				border-color: $alm_red;
 				color: #fff;
 				text-shadow: none;
 				color: #fff;
@@ -2292,14 +2328,19 @@ span.cnkt-button.installed,
 					opacity: 0.65;
 				}
 			}
+			&[disabled],
 			&.active {
-				opacity: 0.5;
-				cursor: default;
-				color: #333 !important;
-				background: $light_border !important;
-				border-color: $light_border !important;
+				pointer-events: none;
+				cursor: not-allowed;
+				filter: grayscale(1);
+				background: $light_grey;
+				border: 1px solid $border;
+				color: $paragraph;
+				opacity: 0.85;
+				box-shadow: inset 1px 1px 0 #fff, 0 0 0 3px rgba(0, 0, 0, 0.025);
 				i {
-					color: $grey;
+					color: $paragraph;
+					opacity: 0.5;
 				}
 			}
 		}
@@ -2310,6 +2351,9 @@ span.cnkt-button.installed,
 	height: 10px;
 	clear: both;
 	display: block;
+	&.md {
+		height: 15px;
+	}
 	&.lg {
 		height: 20px;
 	}
@@ -2522,7 +2566,6 @@ span.cnkt-button.installed,
  * Repeater Template options dropdown
  * @since 2.4.1
  */
-
 .ajax-load-more .row.template {
 	position: relative;
 	&:first-of-type {
@@ -2536,15 +2579,20 @@ span.cnkt-button.installed,
 // Repeater Options
 .alm-drop-btn.alm-repeater-options {
 	position: absolute;
-	top: -42px;
-	right: 7px;
+	top: -41px;
+	right: 6px;
 	z-index: 8;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	a.target {
 		padding: 5px 9px;
 		box-shadow: none;
 		border: none;
 		> i {
-			font-size: 24px;
+			font-size: 20px;
 			position: static;
 			transform: none;
 			margin: 0;
@@ -2825,9 +2873,6 @@ span.cnkt-button.installed,
 	.table-of-contents {
 		position: static !important;
 		width: 100% !important;
-	}
-	.ajax-load-more.settings .form-table td {
-		padding: 24px 20px 20px;
 	}
 	.repeaters input.save-repeater {
 		max-width: 50%;

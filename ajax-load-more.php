@@ -7,7 +7,7 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.4.2
+ * Version: 7.6.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
@@ -18,17 +18,17 @@
 * NEW: Added support for Ajax Load More Search add-on.
 * UPDATE: Refactored default WP_Query to use alm_do_query function for routing queries.
 * UPDATE: Various bug fixes and other improvements.
-
 */
 
-define( 'ALM_VERSION', '7.4.2' );
-define( 'ALM_RELEASE', 'June 10, 2025' );
+define( 'ALM_VERSION', '7.6.0' );
+define( 'ALM_RELEASE', 'August 18, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
 
 /**
- * Activation hook - Create table & repeater.
+ * Activation hook.
+ * Create DB table & default Repeater Template.
  *
  * @param Boolean $network_wide Enable the plugin for all sites in the network or just the current site. Multisite only.
  * @since 2.0.0
@@ -112,11 +112,11 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			require_once ALM_PATH . 'core/integration/elementor/elementor.php';
 
 			if ( is_admin() ) {
-				require_once 'admin/admin.php';
-				require_once 'admin/admin-functions.php';
-				require_once 'admin/vendor/connekt-plugin-installer/class-connekt-plugin-installer.php';
+				require_once ALM_PATH . 'admin/admin.php';
+				require_once ALM_PATH . 'admin/admin-functions.php';
+				require_once ALM_PATH . 'admin/vendor/connekt-plugin-installer/class-connekt-plugin-installer.php';
 				if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
-					require_once __DIR__ . '/core/libs/EDD_SL_Plugin_Updater.php'; // Include EDD helper if other plugins have not.
+					require_once ALM_PATH . '/core/libs/EDD_SL_Plugin_Updater.php'; // Include EDD helper if other plugins have not.
 				}
 			}
 		}
@@ -151,8 +151,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_COMMENTS_ITEM_NAME' ) ) {
 				define( 'ALM_COMMENTS_ITEM_NAME', '12172' );
 			}
-			if ( ! defined( 'ALM_UNLIMITED_ITEM_NAME' ) ) {
-				define( 'ALM_UNLIMITED_ITEM_NAME', '3118' );
+			if ( ! defined( 'ALM_ELEMENTOR_ITEM_NAME' ) ) {
+				define( 'ALM_ELEMENTOR_ITEM_NAME', '70951' );
 			}
 			if ( ! defined( 'ALM_FILTERS_ITEM_NAME' ) ) {
 				define( 'ALM_FILTERS_ITEM_NAME', '35992' );
@@ -178,8 +178,8 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_SEO_ITEM_NAME' ) ) {
 				define( 'ALM_SEO_ITEM_NAME', '3482' );
 			}
-			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
-				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
+			if ( ! defined( 'ALM_TEMPLATES_ITEM_NAME' ) ) {
+				define( 'ALM_TEMPLATES_ITEM_NAME', '124259' );
 			}
 			if ( ! defined( 'ALM_PRO_ITEM_NAME' ) ) {
 				define( 'ALM_PRO_ITEM_NAME', '42166' );
@@ -187,14 +187,19 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			if ( ! defined( 'ALM_WOO_ITEM_NAME' ) ) {
 				define( 'ALM_WOO_ITEM_NAME', '62770' );
 			}
-			if ( ! defined( 'ALM_ELEMENTOR_ITEM_NAME' ) ) {
-				define( 'ALM_ELEMENTOR_ITEM_NAME', '70951' );
+
+			// Deprecated add-ons.
+			if ( ! defined( 'ALM_UNLIMITED_ITEM_NAME' ) ) {
+				define( 'ALM_UNLIMITED_ITEM_NAME', '3118' );
+			}
+			if ( ! defined( 'ALM_THEME_REPEATERS_ITEM_NAME' ) ) {
+				define( 'ALM_THEME_REPEATERS_ITEM_NAME', '8860' );
 			}
 			if ( ! defined( 'ALM_RESTAPI_ITEM_NAME' ) ) {
 				define( 'ALM_RESTAPI_ITEM_NAME', '17105' );
 			}
 			if ( ! defined( 'ALM_USERS_ITEM_NAME' ) ) {
-				define( 'ALM_USERS_ITEM_NAME', '32311' ); // Deprecated.
+				define( 'ALM_USERS_ITEM_NAME', '32311' );
 			}
 		}
 
@@ -717,12 +722,14 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 endif;
 
-/**
- * Ajax Load More public render function.
- *
- * @param array $args The shortcode args.
- * @since 4.2.0
- */
-function alm_render( $args ) {
-	echo do_shortcode( AjaxLoadMore::alm_shortcode( $args ) );
-}
+if ( ! function_exists( 'alm_render' ) ) :
+	/**
+	 * Ajax Load More public render function.
+	 *
+	 * @param array $args The shortcode args.
+	 * @since 4.2.0
+	 */
+	function alm_render( $args ) {
+		echo do_shortcode( AjaxLoadMore::alm_shortcode( $args ) );
+	}
+endif;

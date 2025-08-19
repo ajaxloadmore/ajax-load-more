@@ -1,6 +1,6 @@
 {
 	"name": "ajax-load-more",
-	"version": "7.0.2",
+	"version": "7.6.0",
 	"description": "Ajax Load More WordPress Plugin",
 	"scripts": {
 		"watch": "npm run dev",
@@ -14,6 +14,9 @@
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"lint:php": "composer run lint",
+		"deploy": "mkdirp ./_out && npm run build && npm run deploy:files && npm run deploy:dirs",
+		"deploy:files": "copyfiles 'ajax-load-more.php' 'README.txt' 'LICENSE.txt' 'uninstall.php' ./_out",
+		"deploy:dirs": "copyfiles './admin/**/**/*' './build/**/**/*' './core**/**/*' './lang**/**/*' ./_out",
 		"postinstall": "composer install"
 	},
 	"author": "connekt",
@@ -49,6 +52,7 @@
 		"eslint-webpack-plugin": "^4.0.0",
 		"imagesloaded": "^4.1.4",
 		"mini-css-extract-plugin": "^2.7.6",
+		"mkdirp": "^3.0.1",
 		"npm-run-all": "^4.1.5",
 		"postcss-import": "^15.1.0",
 		"postcss-loader": "^7.3.3",

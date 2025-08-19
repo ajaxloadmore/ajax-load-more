@@ -2,7 +2,7 @@
 /**
  * ALM Admin Notice Class.
  *
- * @package ALMFilters
+ * @package AjaxLoadMore
  */
 
 if ( ! class_exists( 'ALM_Notices' ) ) {
@@ -93,7 +93,10 @@ if ( ! class_exists( 'ALM_Notices' ) ) {
 				<div class="alm-admin-notice notice <?php echo esc_attr( $notice['class'] ); ?><?php echo $notice['dismissible'] ? ' is-dismissible' : ''; ?>">
 				<?php
 				if ( $notice['type'] ) {
-					echo wp_kses_post( $this->alm_filters_get_svg( $notice['type'] ) );
+					$svg = $this->get_svg( $notice['type'] );
+					if ( $svg ) {
+						echo wp_kses_post( $svg );
+					}
 				}
 				echo wp_kses_post( $open ) . wp_kses_post( $notice['text'] ) . wp_kses_post( $close );
 				?>
@@ -108,7 +111,7 @@ if ( ! class_exists( 'ALM_Notices' ) ) {
 		 * @param string $svg The SVG to render.
 		 * @return string     The SVG as HTML.
 		 */
-		public function alm_filters_get_svg( $svg = '' ) {
+		public function get_svg( $svg = '' ) {
 			switch ( $svg ) {
 				case 'success':
 					return '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00a32a"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>';

@@ -133,7 +133,7 @@ class ALM_Licensing {
 			switch ( $license_data->error ) {
 				case 'expired':
 					$msg = sprintf(
-						// translators: %1$s is the plugin name, %2$s is the expiration date, %3$s is the renewal link, %4$s is the renewal text.
+					// translators: %1$s is the plugin name, %2$s is the expiration date, %3$s is the renewal link, %4$s is the renewal text.
 						__( 'Your %1$s license key expired on %2$s &rarr; <a href="%3$s">%4$s</a>', 'ajax-load-more' ),
 						$name,
 						date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) ),
@@ -145,7 +145,7 @@ class ALM_Licensing {
 				case 'disabled':
 				case 'revoked':
 					$msg = sprintf(
-						// translators: %s is the plugin name.
+					// translators: %s is the plugin name.
 						__( 'Your %s license key has been disabled.', 'ajax-load-more' ),
 						$name,
 					);
@@ -153,7 +153,7 @@ class ALM_Licensing {
 
 				case 'missing':
 					$msg = sprintf(
-						// translators: %s is the plugin name.
+					// translators: %s is the plugin name.
 						__( 'Invalid %s license key. Are you sure this license is correct?.', 'ajax-load-more' ),
 						$name,
 					);
@@ -162,7 +162,7 @@ class ALM_Licensing {
 				case 'invalid':
 				case 'site_inactive':
 					$msg = sprintf(
-						// translators: %s is the plugin name.
+					// translators: %s is the plugin name.
 						__( 'Your license is not active for this URL.', 'ajax-load-more' ),
 						$name,
 					);
@@ -222,7 +222,7 @@ class ALM_Licensing {
 		$this->delete_license_status( $option, $transient_name );
 
 		$msg = sprintf(
-			// translators: %s is the plugin name.
+		// translators: %s is the plugin name.
 			__( '%s license deactivated.', 'ajax-load-more' ),
 			$name
 		);
@@ -270,7 +270,11 @@ class ALM_Licensing {
 		$show_on         = [ 'dashboard', 'plugins', 'options-general', 'options' ];
 
 		if ( ! $is_admin_screen && ! in_array( $screen->id, $show_on, true ) ) {
-			return; // Exit if screen is not dashboard, plugins, settings, etc or ALM admin.
+			return; // Bail early if not on an admin screen or not in the allowed screens.
+		}
+
+		if ( $screen->id === 'ajax-load-more_page_ajax-load-more-licenses' ) {
+			return; // Don't show notices on the licenses page.
 		}
 
 		// Plugin not activated notices.
@@ -454,17 +458,20 @@ class ALM_Licensing {
 	public function alm_plugin_row( $plugin_name ) {
 		$addons = alm_get_addons();
 		$addons = array_merge( alm_get_addons(), alm_get_pro_addon() );
+
 		foreach ( $addons as $addon ) {
-			if ( $plugin_name === $addon['path'] . '/' . $addon['path'] . '.php' ) {
+			$is_active = in_array( $plugin_name, apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true );
+			if ( $is_active && $plugin_name === $addon['path'] . '/' . $addon['path'] . '.php' ) {
 				$status = get_option( $addon['status'] );
 				// If not valid, display message.
 				if ( $status !== 'valid' ) {
 					$name  = $addon['name'];
-					$style = 'margin: 5px 20px 6px 40px;';
+					$style = 'position: relative; margin: 0; padding: 15px 12px; background: #ffffe5;';
 					$title = $name === 'Ajax Load More Pro' ? '<strong>' . $name . '</strong>' : '<strong>Ajax Load More: ' . $name . '</strong>';
 
-					$row = '</tr><tr class="plugin-update-tr"><td colspan="3" class="plugin-update"><div class="update-message" style="' . $style . '">';
-					/* translators: %1$s is replaced with link href */
+					$row = '</tr><tr class="plugin-update-tr active"><td colspan="4" class="plugin-update"><div class="update-message alm-update-message" style="' . $style . '">';
+					// translators: %1$s is the plugin name, %2$s is the closing tag, %3$s is the addon name, %4$s is the purchase link, %5$s is the closing tag.
+					$row .= '<span class="dashicons dashicons-warning" style="margin-right: 6px; opacity: 0.5;"></span>';
 					$row .= sprintf( wp_kses_post( __( '%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s', 'ajax-load-more' ) ), '<a href="admin.php?page=ajax-load-more-licenses">', '</a>', $title, '<a href="' . $addon['url'] . '" target="blank">', '</a>' );
 					$row .= '</div></td>';
 

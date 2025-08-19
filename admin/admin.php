@@ -14,7 +14,7 @@ if ( ! class_exists( 'ALM_Notices' ) ) {
 }
 require_once plugin_dir_path( __FILE__ ) . 'functions/layouts.php';
 require_once plugin_dir_path( __FILE__ ) . 'functions/plugin-updates.php';
-require_once plugin_dir_path( __FILE__ ) . 'functions/repeater-templates.php';
+require_once plugin_dir_path( __FILE__ ) . 'functions/templates.php';
 require_once plugin_dir_path( __FILE__ ) . 'functions/settings.php';
 require_once plugin_dir_path( __FILE__ ) . 'classes/licensing.php';
 ( new ALM_Licensing() )->register();
@@ -349,12 +349,12 @@ function alm_settings_page() {
 }
 
 /**
- *  Custom Repeaters.
+ *  Custom Repeaters v1.
  *
  *  @since 2.0.0
  */
 function alm_repeater_page() {
-	include_once ALM_PATH . 'admin/views/repeater-templates.php';
+	include_once ALM_PATH . 'admin/views/templates.php';
 }
 
 /**
@@ -549,27 +549,30 @@ function alm_enqueue_admin_scripts() {
 		'alm-admin',
 		'alm_admin_localize',
 		[
-			'ajax_admin_url'   => admin_url( 'admin-ajax.php' ),
-			'ajax_load_more'   => __( 'Ajax Load More', 'ajax-load-more' ),
-			'active'           => __( 'Active', 'ajax-load-more' ),
-			'inactive'         => __( 'Inactive', 'ajax-load-more' ),
-			'applying_layout'  => __( 'Applying Layout', 'ajax-load-more' ),
-			'template_updated' => __( 'Template Updated', 'ajax-load-more' ),
-			'alm_admin_nonce'  => wp_create_nonce( 'alm_repeater_nonce' ),
-			'select_authors'   => __( 'Select Author(s)', 'ajax-load-more' ),
-			'select_cats'      => __( 'Select Categories', 'ajax-load-more' ),
-			'select_tags'      => __( 'Select Tags', 'ajax-load-more' ),
-			'select'           => __( 'Select', 'ajax-load-more' ),
-			'jump_to_option'   => __( 'Jump to Option', 'ajax-load-more' ),
-			'jump_to_template' => __( 'Jump to Template', 'ajax-load-more' ),
-			'install_now'      => __( 'Are you sure you want to install this Ajax Load More extension?', 'ajax-load-more' ),
-			'install_btn'      => __( 'Install Now', 'ajax-load-more' ),
-			'activate_btn'     => __( 'Activate', 'ajax-load-more' ),
-			'settings_saving'  => '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' . __( 'Saving Settings', 'ajax-load-more' ),
-			'settings_saved'   => '<i class="fa fa-check" aria-hidden="true"></i> ' . __( 'Settings Saved Successfully', 'ajax-load-more' ),
-			'settings_error'   => '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' . __( 'Error Saving Settings', 'ajax-load-more' ),
-			'shortcode_max'    => __( 'There is a maximum of 3 tax_query objects while using the shortcode builder', 'ajax-load-more' ),
-			'restapi'          => [
+			'ajax_admin_url'       => admin_url( 'admin-ajax.php' ),
+			'ajax_load_more'       => __( 'Ajax Load More', 'ajax-load-more' ),
+			'active'               => __( 'Active', 'ajax-load-more' ),
+			'inactive'             => __( 'Inactive', 'ajax-load-more' ),
+			'applying_layout'      => __( 'Applying Layout', 'ajax-load-more' ),
+			'template_updated'     => __( 'Template Updated', 'ajax-load-more' ),
+			'updating_template'    => __( 'Updating Template...', 'ajax-load-more' ),
+			'saving_template'      => __( 'Saving template...', 'ajax-load-more' ),
+			'something_went_wrong' => __( 'Something went wrong and the data could not be saved.', 'ajax-load-more' ),
+			'alm_admin_nonce'      => wp_create_nonce( 'alm_repeater_nonce' ),
+			'select_authors'       => __( 'Select Author(s)', 'ajax-load-more' ),
+			'select_cats'          => __( 'Select Categories', 'ajax-load-more' ),
+			'select_tags'          => __( 'Select Tags', 'ajax-load-more' ),
+			'select'               => __( 'Select', 'ajax-load-more' ),
+			'jump_to_option'       => __( 'Jump to Option', 'ajax-load-more' ),
+			'jump_to_template'     => __( 'Jump to Template', 'ajax-load-more' ),
+			'install_now'          => __( 'Are you sure you want to install this Ajax Load More extension?', 'ajax-load-more' ),
+			'install_btn'          => __( 'Install Now', 'ajax-load-more' ),
+			'activate_btn'         => __( 'Activate', 'ajax-load-more' ),
+			'settings_saving'      => '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' . __( 'Saving Settings', 'ajax-load-more' ),
+			'settings_saved'       => '<i class="fa fa-check" aria-hidden="true"></i> ' . __( 'Settings Saved Successfully', 'ajax-load-more' ),
+			'settings_error'       => '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' . __( 'Error Saving Settings', 'ajax-load-more' ),
+			'shortcode_max'        => __( 'There is a maximum of 3 tax_query objects while using the shortcode builder', 'ajax-load-more' ),
+			'restapi'              => [
 				'url'       => function_exists( 'get_rest_url' ) ? get_rest_url() : '',
 				'namespace' => ALM_REST_NAMESPACE,
 			],

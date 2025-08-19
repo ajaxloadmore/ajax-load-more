@@ -1,12 +1,13 @@
 require('./libs/jquery.drops');
 require('./libs/jquery.tooltipster.min');
 require('./libs/select2.min');
+import './modules/templates';
 import '../scss/admin.scss';
 
 var ajax_load_more = ajax_load_more || {};
 
 jQuery(document).ready(function ($) {
-	'use strict';
+	('use strict');
 	ajax_load_more.options = {
 		speed: 200,
 	};
@@ -37,20 +38,20 @@ jQuery(document).ready(function ($) {
 	 * Build the header admin menu based on the sidebar.
 	 */
 	function createAdminMenu() {
-		let adminmenu = document.querySelector('#adminmenu .toplevel_page_ajax-load-more > ul');
+		const adminmenu = document.querySelector('#adminmenu .toplevel_page_ajax-load-more > ul');
 		if (!adminmenu) {
 			return;
 		}
 
-		let alm_header = document.querySelector('.ajax-load-more header.header-wrap');
+		const alm_header = document.querySelector('.ajax-load-more header.header-wrap');
 		if (!alm_header) {
 			return;
 		}
 
-		let menu = adminmenu.cloneNode(true);
+		const menu = adminmenu.cloneNode(true);
 		menu.setAttribute('class', '');
 
-		let nav = document.createElement('nav');
+		const nav = document.createElement('nav');
 		nav.appendChild(menu);
 		alm_header.appendChild(nav);
 	}
@@ -257,21 +258,24 @@ jQuery(document).ready(function ($) {
 	});
 
 	/**
-	 * Button preview pane
+	 * Loading Style preview pane.
 	 * Found on Settings and Shortcode Builder.
-	 *
-	 * @since 2.8.4
 	 */
 	$('select#alm_settings_btn_color').on('change', function () {
 		var color = jQuery(this).val();
+
 		// Remove other colors
 		var wrap = $('.ajax-load-more-wrap');
-		wrap.attr('class', '');
-		wrap.addClass('ajax-load-more-wrap');
-		wrap.addClass(color);
-		$('#test-alm-button', wrap).removeClass('loading');
+		wrap.attr('class', ''); // Reset classes
+		wrap.addClass('ajax-load-more-wrap'); // Add default class
+		wrap.addClass(color); // Add selected color class
 
-		// Add loading class if Infinite loading style
+		var inverse = color.indexOf('inverse') !== -1 ? ' is-inverse' : '';
+		if (inverse) {
+			wrap.addClass(inverse); // Add inverse class if selected
+		}
+
+		$('#test-alm-button', wrap).removeClass('loading');
 		if (color.indexOf('infinite') >= 0) {
 			$('#test-alm-button', wrap).addClass('loading');
 		}
@@ -330,16 +334,6 @@ jQuery(document).ready(function ($) {
 	ajax_load_more.copyToClipboard = function (text) {
 		window.prompt('Copy link to your clipboard: Press Ctrl + C then hit Enter to copy.', text);
 	};
-
-	// Copy link on repeater templates
-	$('.alm-dropdown button.copy').click(function () {
-		var container = $(this).closest('.repeater-wrap'), // find closet wrap
-			el = container.data('name'); // get template name
-
-		if (el === 'default') el = 'template-default';
-		var c = $('#' + el).val(); // Get textarea val()
-		ajax_load_more.copyToClipboard(c);
-	});
 
 	/*
 	 *  Expand/Collapse shortcode headings

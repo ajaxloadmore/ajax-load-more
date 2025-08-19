@@ -14,15 +14,12 @@
  */
 function alm_save_repeater() {
 	$form_data = filter_input_array( INPUT_POST );
-
 	if ( ! current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) ) || ! isset( $form_data['nonce'] ) ) {
-		// Bail early if missing WP capabilities or nonce.
-		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) );
+		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) ); // Bail early if missing WP capabilities or nonce.
 	}
 
 	if ( ! wp_verify_nonce( $form_data['nonce'], 'alm_repeater_nonce' ) ) {
-		// Verify nonce.
-		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) );
+		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) ); // Verify nonce.
 	}
 
 	global $wpdb;
@@ -36,25 +33,34 @@ function alm_save_repeater() {
 	$t = trim( stripslashes( $form_data['type'] ) ); // Type.
 	$a = trim( stripslashes( $form_data['alias'] ) ); // Alias.
 
-		// Default.
+	// Default.
 	if ( $t === 'default' ) {
-		// Create base Repeater Template directory).
+		// Default Repeater Template.
 		$base_dir = AjaxLoadMore::alm_get_repeater_path();
 		AjaxLoadMore::alm_mkdir( $base_dir );
 		$f = $base_dir . '/default.php';
+
 	} elseif ( $t === 'unlimited' ) {
-		// Custom Repeaters >= 2.5.
-		if ( ALM_UNLIMITED_VERSION >= '2.5' ) {
-			// Get path to repeater dir (alm_templates).
+
+		if ( defined( 'ALM_UNLIMITED_VERSION' ) ) {
+			// Custom Repeaters v2 (legacy).
+			if ( ALM_UNLIMITED_VERSION >= '2.5' ) {
+				// Get path to repeater dir (alm_templates).
+				$base_dir = AjaxLoadMore::alm_get_repeater_path();
+				AjaxLoadMore::alm_mkdir( $base_dir );
+				$f = $base_dir . '/' . $n . '.php';
+			} else {
+				$f = $blog_id > 1 ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $n . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $n . '.php';
+			}
+		} else {
+			// Ajax Load More Templates
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
 			AjaxLoadMore::alm_mkdir( $base_dir );
 			$f = $base_dir . '/' . $n . '.php';
-		} else {
-			$f = $blog_id > 1 ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $n . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $n . '.php';
 		}
 	} else {
-		// Custom Repeaters v1.
-		$f = ALM_REPEATER_PATH . 'repeaters/' . $n . '.php';
+		// Custom Repeaters v1 (legacy).
+		$f = defined( 'ALM_REPEATER_PATH' ) ? ALM_REPEATER_PATH . 'repeaters/' . $n . '.php' : AjaxLoadMore::alm_get_repeater_path() . '/' . $n . '.php';
 	}
 
 	// Write Repeater Template.
@@ -83,7 +89,7 @@ function alm_save_repeater() {
 	if ( $t === 'default' ) {
 		$data_update = [ 'repeaterDefault' => "$c" ];
 		$data_where  = [ 'name' => 'default' ];
-	} elseif ( $t === 'unlimited' ) { // Custom Repeaters v2.
+	} elseif ( $t === 'unlimited' ) { // Custom Repeaters v2/Templates.
 		$table_name  = $wpdb->prefix . 'alm_unlimited';
 		$data_update = [
 			'repeaterDefault' => "$c",
@@ -113,24 +119,22 @@ add_action( 'wp_ajax_alm_save_repeater', 'alm_save_repeater' );
 
 /**
  * Update Repeater Template from database.
- * User case: User deletes plugin, then installs again and the version has not change. Click 'Update from DB' option to load template.
+ * Use-case: User deletes plugin, then installs again and the version has not change. Click 'Update from DB' option to load template.
  *
  * @since 2.5.0
+ * @return void
  */
 function alm_update_repeater() {
 	$form_data = filter_input_array( INPUT_POST );
-
 	if ( ! current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) ) || ! isset( $form_data['nonce'] ) ) {
-		// Bail early if missing WP capabilities or nonce.
-		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) );
+		wp_die( esc_attr__( 'You don\'t belong here.', 'ajax-load-more' ) ); // Bail early if missing WP capabilities or nonce.
 	}
 
 	if ( ! wp_verify_nonce( $form_data['nonce'], 'alm_repeater_nonce' ) ) {
-		// Verify nonce.
-		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) );
+		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) ); // Verify nonce.
 	}
 
-	// Get form variabless.
+	// Get form variables.
 	$n = Trim( stripslashes( str_replace( '/', '', $form_data['repeater'] ) ) ); // Repeater name.
 	$t = Trim( stripslashes( $form_data['type'] ) ); // Repeater type (default | unlimited).
 
@@ -149,7 +153,6 @@ function alm_update_repeater() {
 
 	// Return template value as a string.
 	echo $repeater ? $repeater : ''; // phpcs:ignore
-
 	wp_die();
 }
 add_action( 'wp_ajax_alm_update_repeater', 'alm_update_repeater' );
@@ -158,6 +161,7 @@ add_action( 'wp_ajax_alm_update_repeater', 'alm_update_repeater' );
  * This function will export a repeater template and force download.
  *
  * @since 3.6
+ * @return void
  */
 function alm_repeaters_export() {
 	$form_data = filter_input_array( INPUT_POST );

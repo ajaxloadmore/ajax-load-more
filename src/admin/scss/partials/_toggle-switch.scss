@@ -1,11 +1,10 @@
-
 // Toggle Switch.
 .ajax-load-more {
 	.alm-toggle-switch {
 		display: flex;
 		clear: both;
 		margin: 0;
-		padding: 2px $padding_sm 0;
+		padding: 0 $padding_sm;
 		overflow: hidden;
 		position: relative;
 		top: 1px;
@@ -33,9 +32,8 @@
 				}
 				&.active {
 					background: #fff;
-					font-weight: 600;
 					border-bottom-color: #fff;
-					color: $grey;
+					color: $grey_dark;
 				}
 			}
 		}

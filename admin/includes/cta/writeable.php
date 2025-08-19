@@ -11,10 +11,10 @@ $alm_file = $alm_path . '/default.php'; // Default ALM repeater.
 
 if ( file_exists( $alm_file ) ) {
 	if ( is_writable( $alm_file ) ) {
-		$status_text = __( 'Read/Write access is enabled within the Ajax Load More Repeater Template directory.', 'ajax-load-more' );
+		$status_text = __( 'Read/Write access is enabled within the Ajax Load More Repeater Templates directory.', 'ajax-load-more' );
 		$status_icon = alm_status_icon( 'success', '', $status_text );
 	} else {
-		$status_text = __( 'You must enable read/write access to save repeater template data. Please contact your hosting provider or site administrator for more information.', 'ajax-load-more' );
+		$status_text = __( 'You must enable read/write access to save Repeater Template data. Please contact your hosting provider or site administrator for more information.', 'ajax-load-more' );
 		$status_icon = alm_status_icon( 'failed', '', $status_text );
 	}
 } else {

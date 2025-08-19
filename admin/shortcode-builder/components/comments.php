@@ -120,7 +120,7 @@
 							<?php
 							// Get Theme Repeaters
 							if ( has_action( 'alm_list_theme_repeaters' ) ) {
-								echo '<optgroup label="' . __( 'Theme Repeaters', 'ajax-load-more' ) . '">';
+								echo '<optgroup label="' . __( 'Theme Templates', 'ajax-load-more' ) . '">';
 								do_action( 'alm_list_theme_repeaters' );
 								echo '</optgroup>';
 							}

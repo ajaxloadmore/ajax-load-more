@@ -30,7 +30,10 @@
 					"layer",
 					"variants",
 					"responsive",
-					"screen"
+					"screen",
+					"function",
+					"return",
+					"if"
 				]
 			}
 		]
