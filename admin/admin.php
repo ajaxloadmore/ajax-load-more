@@ -196,6 +196,25 @@ function alm_admin_menu() {
 		];
 	}
 
+	// Search.
+	if ( class_exists( 'ALM_Search' ) && class_exists( 'ALM_Search_Admin' ) ) {
+		$alm_search_page = add_submenu_page(
+			'ajax-load-more',
+			__( 'Search', 'ajax-load-more' ),
+			__( 'Search', 'ajax-load-more' ),
+			apply_filters( 'alm_user_role', 'edit_theme_options' ),
+			'ajax-load-more-search',
+			'alm_search_page'
+		);
+		add_action( 'load-' . $alm_search_page, 'alm_load_admin_js' );
+
+		// Add to custom admin menu.
+		$alm_menu_items[] = [
+			'label' => __( 'Search', 'ajax-load-more' ),
+			'slug'  => 'ajax-load-more-search',
+		];
+	}
+
 	// WooCommerce.
 	if ( has_action( 'alm_woocommerce_installed' ) && in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) { // phpcs:ignore
 		$alm_woocommerce_page = add_submenu_page(
@@ -453,6 +472,18 @@ function alm_filters_page() {
 		include_once ALM_FILTERS_PATH . 'admin/views/filters.php';
 	} else {
 		include_once ALM_PATH . 'admin/views/filters.php';
+	}
+}
+
+/**
+ * Search Add-on page.
+ *
+ * @since 5.3.0
+ */
+function alm_search_page() {
+	if ( class_exists( 'ALM_Search' ) && class_exists( 'ALM_Search_Admin' ) ) {
+		$page = new ALM_Search_Admin();
+		$page->render_settings_page();
 	}
 }
 

@@ -466,7 +466,7 @@ class ALM_Licensing {
 				// If not valid, display message.
 				if ( $status !== 'valid' ) {
 					$name  = $addon['name'];
-					$style = 'position: relative; margin: 0; padding: 15px 12px; background: #ffffe5;';
+					$style = 'position: relative; margin: 0; padding: 15px 12px; background: #fcf9e8; border-bottom: 1px solid #dbe0e5;';
 					$title = $name === 'Ajax Load More Pro' ? '<strong>' . $name . '</strong>' : '<strong>Ajax Load More: ' . $name . '</strong>';
 
 					$row = '</tr><tr class="plugin-update-tr active"><td colspan="4" class="plugin-update"><div class="update-message alm-update-message" style="' . $style . '">';
@@ -474,7 +474,6 @@ class ALM_Licensing {
 					$row .= '<span class="dashicons dashicons-warning" style="margin-right: 6px; opacity: 0.5;"></span>';
 					$row .= sprintf( wp_kses_post( __( '%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s', 'ajax-load-more' ) ), '<a href="admin.php?page=ajax-load-more-licenses">', '</a>', $title, '<a href="' . $addon['url'] . '" target="blank">', '</a>' );
 					$row .= '</div></td>';
-
 					echo wp_kses_post( $row );
 				}
 			}
