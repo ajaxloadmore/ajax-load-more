@@ -1,4 +1,4 @@
-=== WordPress Infinite Scroll - Ajax Load More ===
+=== Ajax Load More - Infinite Scroll ===
 Contributors: dcooney, connekthq
 Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
@@ -13,9 +13,9 @@ The ultimate infinite scroll and lazy load solution for your WordPress powered w
 
 == Description ==
 
-Ajax Load More is the ultimate WordPress infinite scroll plugin for lazy loading posts, single posts, pages, comments and more with Ajax powered queries.
+Ajax Load More is the ultimate plugin for infinite scrolling and lazy loading posts, single posts, pages, comments, and more with Ajax powered queries.
 
-Build complex custom WordPress queries with the Ajax Load More shortcode builder then add the generated shortcode to your page via the content editor or directly into your template files.
+Build complex custom WordPress queries with the Ajax Load More query builder then add the generated shortcode to your page via the content editor, Ajax Load More Block or directly into your template files.
 
 Ajax Load More is compatible for endless scrolling with popular eCommerce plugins such as WooCommerce and Easy Digital Downloads.
 
