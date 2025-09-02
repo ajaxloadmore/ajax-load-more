@@ -6,8 +6,6 @@
  * @since 7.5
  */
 
-use Elementor\Core\Logger\Items\PHP;
-
 /**
  * Dispatch query based on args.
  * Note: This function is used to determine if a standard WP_Query or a ALM_Search_Query should be used.
