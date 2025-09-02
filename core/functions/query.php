@@ -26,13 +26,13 @@ function alm_do_query( $args = [], $fields = 'all' ) {
 
 	if ( alm_use_search( $args ) ) {
 		// ALM Search Query.
-		$results          = new ALM_Search_Query( $args, true );
-		$args['post__in'] = $results->posts;
-		$args['orderby']  = 'post__in';
+		$query = new ALM_Search_Query( $args, true );
+	} else {
+		// Default WP_Query.
+		$query = new WP_Query( $args );
 	}
 
-	// Run WP_Query.
-	$query = new WP_Query( $args );
+	// Return query data.
 	return $fields === 'ids' ? $query->posts : $query;
 }
 
@@ -43,13 +43,13 @@ function alm_do_query( $args = [], $fields = 'all' ) {
  * @return boolean
  */
 function alm_use_search( $args = [] ) {
-	$search = isset( $args['s'] ) && ! empty( $args['s'] );
+	$search_term = isset( $args['s'] ) && ! empty( $args['s'] );
 
-	if ( empty( $args ) || ! $search || ! class_exists( 'ALM_Search_Query' ) ) {
+	if ( empty( $args ) || ! $search_term || ! class_exists( 'ALM_Search_Query' ) ) {
 		return false; // Bail early if missing args or ALM_Search_Query doesn't exist.
 	}
 
-	// Get the search engine.
-	$engine = isset( $args['engine'] ) && ! empty( $args['engine'] );
-	return $search && $engine ? true : false; // Return true if search and engine is set.
+	$engine = isset( $args['engine'] ) && ! empty( $args['engine'] ); // Get the search engine.
+
+	return $search_term && $engine ? true : false; // Return true if search and engine is set.
 }
