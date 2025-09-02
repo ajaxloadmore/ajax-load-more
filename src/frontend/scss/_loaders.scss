@@ -20,18 +20,19 @@
 		padding: 0 $padding;
 		display: inline-block;
 		position: relative;
-		transition: all 0.15s ease;
+		transition: all 0.1s ease;
 		text-align: center;
 		text-decoration: none;
 		appearance: none;
 		user-select: none;
 		cursor: pointer;
 		&:hover,
+		&:focus,
 		&.loading {
-			background-color: map-get($colors, 'default_hover');
 			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 			color: #fff;
 			text-decoration: none;
+			filter: brightness(1.1);
 		}
 		&:active {
 			box-shadow: none;
@@ -40,36 +41,36 @@
 
 		/* Loading Icon */
 		&::before {
-			background-color: rgba(#fff, 0);
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-color: transparent;
 			background-image: url(get-loader(#fff));
 			background-repeat: no-repeat;
 			background-position: center center;
-			background-size: 18px 18px;
-			width: 0;
-			height: 32px;
+			background-size: 20px 20px;
+			width: 100%;
+			height: 100%;
+			transition: all 0.1s ease;
 			border-radius: 0;
 			opacity: 0;
 			visibility: hidden;
 			display: block;
 			content: '';
 			z-index: 1;
-			position: absolute;
-			left: 0;
-			top: 50%;
 			overflow: hidden;
-			transition: all 0.125s ease;
-			transform: translateY(-50%);
 		}
 
 		/* Loading State */
 		&.loading {
-			padding-left: 41px;
 			cursor: wait;
 			outline: none !important;
+			color: transparent !important;
+			border-color: transparent !important;
+			box-shadow: none !important;
 			&::before {
 				opacity: 1;
 				visibility: visible;
-				width: 42px;
 			}
 		}
 
@@ -120,41 +121,21 @@
 /* Blue */
 .ajax-load-more-wrap.blue .alm-load-more-btn {
 	background-color: map-get($colors, 'blue');
-	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'blue_hover');
-	}
 }
 
 /* Green */
 .ajax-load-more-wrap.green .alm-load-more-btn {
 	background-color: map-get($colors, 'green');
-	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'green_hover');
-	}
 }
 
 /* Purple */
 .ajax-load-more-wrap.purple .alm-load-more-btn {
 	background-color: map-get($colors, 'purple');
-	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'purple_hover');
-	}
 }
 
 /* Grey */
 .ajax-load-more-wrap.grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey');
-	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'grey_hover');
-	}
 }
 
 /* Dark */
@@ -163,7 +144,7 @@
 	&:hover,
 	&.loading,
 	&.done {
-		background-color: map-get($colors, 'dark_hover');
+		filter: brightness(1.15);
 	}
 }
 
@@ -188,7 +169,6 @@
 		background-color: transparent !important;
 		border-color: transparent !important;
 		box-shadow: none !important;
-		padding: 0 $padding;
 	}
 }
 
