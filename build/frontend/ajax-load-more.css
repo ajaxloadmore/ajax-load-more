@@ -178,7 +178,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: transparent;
-  background-size: 22px 22px;
+  background-size: 24px 24px;
   transition-duration: 0.1s;
 }
 .ajax-load-more-wrap.is-outline .alm-load-more-btn.loading,
