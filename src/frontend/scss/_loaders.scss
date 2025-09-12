@@ -184,8 +184,8 @@
 	transition-duration: 0.1s;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 	&::before {
-		width: 32px;
-		height: 32px;
+		width: 22px;
+		height: 22px;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
@@ -243,7 +243,7 @@
 	}
 }
 
-/* Grey Light Outlin */
+/* Grey Light Outline */
 .ajax-load-more-wrap.light-grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey_light');
 	color: map-get($colors, 'dark');
@@ -299,9 +299,9 @@
 			transition-duration: 0.1s;
 
 			&::before {
-				width: 28px;
-				height: 28px;
-				background-size: 28px 28px;
+				width: 30px;
+				height: 30px;
+				background-size: 30px 30px;
 				left: 50%;
 				top: 50%;
 				transform: translate(-50%, -50%);
