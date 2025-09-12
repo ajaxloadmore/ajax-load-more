@@ -1293,20 +1293,15 @@ jQuery(document).ready(function ($) {
 		}
 
 		// ---------------------------
-		// - Button Label
+		// - Button Labels
 		// ---------------------------
 
-		var button_label = $('.btn-label input#button-label').val().trim(),
-			button_loading_label = $('.btn-label input#button-loading-label').val().trim(),
-			button_done_label = $('.btn-label input#button-done-label').val().trim();
+		var button_label = $('.btn-label input#button-label').val().trim();
+		var button_done_label = $('.btn-label input#button-done-label').val().trim();
 
 		// Button Label
 		if (button_label !== '' && button_label !== 'Load More') {
 			output += ' button_label="' + button_label + '"';
-		}
-		// Loading Label
-		if (button_loading_label !== '') {
-			output += ' button_loading_label="' + button_loading_label + '"';
 		}
 		// Done Label
 		if (button_done_label !== '') {

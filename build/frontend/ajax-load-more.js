@@ -13895,8 +13895,8 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
    */
   var ajaxloadmore = /*#__PURE__*/function () {
     var _ref = ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee12(el, index) {
-      var _el$dataset, _alm, _alm2, _alm3, _alm4, _alm5, _alm6, _alm_localize, _alm7, _alm8, _alm9, _alm10, _alm11, _alm12, _alm13, _alm14, _alm15, _alm16, _alm17, _alm18, _alm19, _alm20, _alm_localize2, _alm21, _alm22, _alm23, _alm24, _alm25, _alm26, _alm_localize5;
-      var alm, almChildren, almChildArray, btnWrap, alm_no_results, _alm27, resize;
+      var _el$dataset, _alm, _alm2, _alm3, _alm4, _alm5, _alm6, _alm_localize, _alm7, _alm8, _alm9, _alm10, _alm11, _alm12, _alm13, _alm14, _alm15, _alm16, _alm17, _alm18, _alm_localize2, _alm19, _alm20, _alm21, _alm22, _alm23, _alm24, _alm_localize5;
+      var alm, almChildren, almChildArray, btnWrap, alm_no_results, _alm25, resize;
       return ajax_load_more_regeneratorRuntime().wrap(function _callee12$(_context12) {
         while (1) switch (_context12.prev = _context12.next) {
           case 0:
@@ -13971,33 +13971,31 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
             // Button Labels.
             alm.button_labels = {
               "default": purify.sanitize((_alm6 = alm) === null || _alm6 === void 0 || (_alm6 = _alm6.listing) === null || _alm6 === void 0 || (_alm6 = _alm6.dataset) === null || _alm6 === void 0 ? void 0 : _alm6.buttonLabel) || purify.sanitize((_alm_localize = alm_localize) === null || _alm_localize === void 0 ? void 0 : _alm_localize.button_label),
-              loading: purify.sanitize((_alm7 = alm) === null || _alm7 === void 0 || (_alm7 = _alm7.listing) === null || _alm7 === void 0 || (_alm7 = _alm7.dataset) === null || _alm7 === void 0 ? void 0 : _alm7.buttonLoadingLabel) || null,
-              done: purify.sanitize((_alm8 = alm) === null || _alm8 === void 0 || (_alm8 = _alm8.listing) === null || _alm8 === void 0 || (_alm8 = _alm8.dataset) === null || _alm8 === void 0 ? void 0 : _alm8.buttonDoneLabel) || null
+              done: purify.sanitize((_alm7 = alm) === null || _alm7 === void 0 || (_alm7 = _alm7.listing) === null || _alm7 === void 0 || (_alm7 = _alm7.dataset) === null || _alm7 === void 0 ? void 0 : _alm7.buttonDoneLabel) || null
             };
             alm.prev_button_labels = {
-              "default": purify.sanitize((_alm9 = alm) === null || _alm9 === void 0 || (_alm9 = _alm9.listing) === null || _alm9 === void 0 || (_alm9 = _alm9.dataset) === null || _alm9 === void 0 ? void 0 : _alm9.prevButtonLabel),
-              loading: purify.sanitize((_alm10 = alm) === null || _alm10 === void 0 || (_alm10 = _alm10.listing) === null || _alm10 === void 0 || (_alm10 = _alm10.dataset) === null || _alm10 === void 0 ? void 0 : _alm10.prevButtonLoadingLabel) || null,
-              done: purify.sanitize((_alm11 = alm) === null || _alm11 === void 0 || (_alm11 = _alm11.listing) === null || _alm11 === void 0 || (_alm11 = _alm11.dataset) === null || _alm11 === void 0 ? void 0 : _alm11.prevButtonDoneLabel) || null
+              "default": purify.sanitize((_alm8 = alm) === null || _alm8 === void 0 || (_alm8 = _alm8.listing) === null || _alm8 === void 0 || (_alm8 = _alm8.dataset) === null || _alm8 === void 0 ? void 0 : _alm8.prevButtonLabel),
+              done: purify.sanitize((_alm9 = alm) === null || _alm9 === void 0 || (_alm9 = _alm9.listing) === null || _alm9 === void 0 || (_alm9 = _alm9.dataset) === null || _alm9 === void 0 ? void 0 : _alm9.prevButtonDoneLabel) || null
             };
-            alm.urls = ((_alm12 = alm) === null || _alm12 === void 0 || (_alm12 = _alm12.listing) === null || _alm12 === void 0 || (_alm12 = _alm12.dataset) === null || _alm12 === void 0 ? void 0 : _alm12.urls) === 'false' ? false : true;
+            alm.urls = ((_alm10 = alm) === null || _alm10 === void 0 || (_alm10 = _alm10.listing) === null || _alm10 === void 0 || (_alm10 = _alm10.dataset) === null || _alm10 === void 0 ? void 0 : _alm10.urls) === 'false' ? false : true;
             alm.placeholder = alm.main.querySelector('.alm-placeholder') || false;
-            alm.scroll_distance = ((_alm13 = alm) === null || _alm13 === void 0 || (_alm13 = _alm13.listing) === null || _alm13 === void 0 ? void 0 : _alm13.dataset.scrollDistance) || 100;
-            alm.scroll_container = ((_alm14 = alm) === null || _alm14 === void 0 || (_alm14 = _alm14.listing) === null || _alm14 === void 0 ? void 0 : _alm14.dataset.scrollContainer) || null;
-            alm.scroll_direction = ((_alm15 = alm) === null || _alm15 === void 0 || (_alm15 = _alm15.listing) === null || _alm15 === void 0 || (_alm15 = _alm15.dataset) === null || _alm15 === void 0 ? void 0 : _alm15.scrollDirection) || 'vertical';
-            alm.max_pages = (_alm16 = alm) !== null && _alm16 !== void 0 && (_alm16 = _alm16.listing) !== null && _alm16 !== void 0 && (_alm16 = _alm16.dataset) !== null && _alm16 !== void 0 && _alm16.maxPages ? parseInt(alm.listing.dataset.maxPages) : 0;
-            alm.pause_override = ((_alm17 = alm) === null || _alm17 === void 0 || (_alm17 = _alm17.listing) === null || _alm17 === void 0 || (_alm17 = _alm17.dataset) === null || _alm17 === void 0 ? void 0 : _alm17.pauseOverride) || false; // true | false
-            alm.pause = ((_alm18 = alm) === null || _alm18 === void 0 || (_alm18 = _alm18.listing) === null || _alm18 === void 0 || (_alm18 = _alm18.dataset) === null || _alm18 === void 0 ? void 0 : _alm18.pause) || false; // true | false
-            alm.transition = ((_alm19 = alm) === null || _alm19 === void 0 || (_alm19 = _alm19.listing) === null || _alm19 === void 0 || (_alm19 = _alm19.dataset) === null || _alm19 === void 0 ? void 0 : _alm19.transition) || 'fade'; // Transition
-            alm.transition_delay = ((_alm20 = alm) === null || _alm20 === void 0 || (_alm20 = _alm20.listing) === null || _alm20 === void 0 || (_alm20 = _alm20.dataset) === null || _alm20 === void 0 ? void 0 : _alm20.transitionDelay) || 0;
+            alm.scroll_distance = ((_alm11 = alm) === null || _alm11 === void 0 || (_alm11 = _alm11.listing) === null || _alm11 === void 0 ? void 0 : _alm11.dataset.scrollDistance) || 100;
+            alm.scroll_container = ((_alm12 = alm) === null || _alm12 === void 0 || (_alm12 = _alm12.listing) === null || _alm12 === void 0 ? void 0 : _alm12.dataset.scrollContainer) || null;
+            alm.scroll_direction = ((_alm13 = alm) === null || _alm13 === void 0 || (_alm13 = _alm13.listing) === null || _alm13 === void 0 || (_alm13 = _alm13.dataset) === null || _alm13 === void 0 ? void 0 : _alm13.scrollDirection) || 'vertical';
+            alm.max_pages = (_alm14 = alm) !== null && _alm14 !== void 0 && (_alm14 = _alm14.listing) !== null && _alm14 !== void 0 && (_alm14 = _alm14.dataset) !== null && _alm14 !== void 0 && _alm14.maxPages ? parseInt(alm.listing.dataset.maxPages) : 0;
+            alm.pause_override = ((_alm15 = alm) === null || _alm15 === void 0 || (_alm15 = _alm15.listing) === null || _alm15 === void 0 || (_alm15 = _alm15.dataset) === null || _alm15 === void 0 ? void 0 : _alm15.pauseOverride) || false; // true | false
+            alm.pause = ((_alm16 = alm) === null || _alm16 === void 0 || (_alm16 = _alm16.listing) === null || _alm16 === void 0 || (_alm16 = _alm16.dataset) === null || _alm16 === void 0 ? void 0 : _alm16.pause) || false; // true | false
+            alm.transition = ((_alm17 = alm) === null || _alm17 === void 0 || (_alm17 = _alm17.listing) === null || _alm17 === void 0 || (_alm17 = _alm17.dataset) === null || _alm17 === void 0 ? void 0 : _alm17.transition) || 'fade'; // Transition
+            alm.transition_delay = ((_alm18 = alm) === null || _alm18 === void 0 || (_alm18 = _alm18.listing) === null || _alm18 === void 0 || (_alm18 = _alm18.dataset) === null || _alm18 === void 0 ? void 0 : _alm18.transitionDelay) || 0;
             alm.speed = (_alm_localize2 = alm_localize) !== null && _alm_localize2 !== void 0 && _alm_localize2.speed ? parseInt(alm_localize.speed) : 250;
-            alm.images_loaded = ((_alm21 = alm) === null || _alm21 === void 0 || (_alm21 = _alm21.listing) === null || _alm21 === void 0 || (_alm21 = _alm21.dataset) === null || _alm21 === void 0 ? void 0 : _alm21.imagesLoaded) === 'true';
-            alm.destroy_after = (_alm22 = alm) !== null && _alm22 !== void 0 && (_alm22 = _alm22.listing) !== null && _alm22 !== void 0 && (_alm22 = _alm22.dataset) !== null && _alm22 !== void 0 && _alm22.destroyAfter ? parseInt(alm.listing.dataset.destroyAfter) : false;
-            alm.lazy_images = ((_alm23 = alm) === null || _alm23 === void 0 || (_alm23 = _alm23.listing.dataset) === null || _alm23 === void 0 ? void 0 : _alm23.lazyImages) === 'true' ? true : false;
-            alm.integration.woocommerce = ((_alm24 = alm) === null || _alm24 === void 0 || (_alm24 = _alm24.listing) === null || _alm24 === void 0 || (_alm24 = _alm24.dataset) === null || _alm24 === void 0 ? void 0 : _alm24.woocommerce) === 'true' ? true : false;
-            alm.scroll = ((_alm25 = alm) === null || _alm25 === void 0 || (_alm25 = _alm25.listing) === null || _alm25 === void 0 || (_alm25 = _alm25.dataset) === null || _alm25 === void 0 ? void 0 : _alm25.scroll) === 'false' ? false : true;
+            alm.images_loaded = ((_alm19 = alm) === null || _alm19 === void 0 || (_alm19 = _alm19.listing) === null || _alm19 === void 0 || (_alm19 = _alm19.dataset) === null || _alm19 === void 0 ? void 0 : _alm19.imagesLoaded) === 'true';
+            alm.destroy_after = (_alm20 = alm) !== null && _alm20 !== void 0 && (_alm20 = _alm20.listing) !== null && _alm20 !== void 0 && (_alm20 = _alm20.dataset) !== null && _alm20 !== void 0 && _alm20.destroyAfter ? parseInt(alm.listing.dataset.destroyAfter) : false;
+            alm.lazy_images = ((_alm21 = alm) === null || _alm21 === void 0 || (_alm21 = _alm21.listing.dataset) === null || _alm21 === void 0 ? void 0 : _alm21.lazyImages) === 'true' ? true : false;
+            alm.integration.woocommerce = ((_alm22 = alm) === null || _alm22 === void 0 || (_alm22 = _alm22.listing) === null || _alm22 === void 0 || (_alm22 = _alm22.dataset) === null || _alm22 === void 0 ? void 0 : _alm22.woocommerce) === 'true' ? true : false;
+            alm.scroll = ((_alm23 = alm) === null || _alm23 === void 0 || (_alm23 = _alm23.listing) === null || _alm23 === void 0 || (_alm23 = _alm23.dataset) === null || _alm23 === void 0 ? void 0 : _alm23.scroll) === 'false' ? false : true;
             alm.orginal_posts_per_page = parseInt(alm.listing.dataset.postsPerPage); // Used for paging add-on
             alm.posts_per_page = parseInt(alm.listing.dataset.postsPerPage);
-            alm.offset = (_alm26 = alm) !== null && _alm26 !== void 0 && (_alm26 = _alm26.listing) !== null && _alm26 !== void 0 && (_alm26 = _alm26.dataset) !== null && _alm26 !== void 0 && _alm26.offset ? parseInt(alm.listing.dataset.offset) : 0;
+            alm.offset = (_alm24 = alm) !== null && _alm24 !== void 0 && (_alm24 = _alm24.listing) !== null && _alm24 !== void 0 && (_alm24 = _alm24.dataset) !== null && _alm24 !== void 0 && _alm24.offset ? parseInt(alm.listing.dataset.offset) : 0;
             alm.paged = false;
 
             // Add-on Shortcode Params
@@ -14138,7 +14136,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
             if (alm.integration.woocommerce) {
               // If woocommerce, get the default woocommerce results block
               alm.resultsText = document.querySelectorAll('.woocommerce-result-count');
-              if (((_alm27 = alm) === null || _alm27 === void 0 || (_alm27 = _alm27.resultsText) === null || _alm27 === void 0 ? void 0 : _alm27.length) < 1) {
+              if (((_alm25 = alm) === null || _alm25 === void 0 || (_alm25 = _alm25.resultsText) === null || _alm25 === void 0 ? void 0 : _alm25.length) < 1) {
                 alm.resultsText = document.querySelectorAll('.alm-results-text');
               }
             } else {
@@ -14182,14 +14180,8 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
               if (!alm.addons.paging) {
                 if (alm.rel === 'prev') {
                   alm.buttonPrev.classList.add('loading');
-                  if (alm.prev_button_labels.loading) {
-                    alm.buttonPrev.innerHTML = alm.prev_button_labels.loading;
-                  }
                 } else {
                   alm.button.classList.add('loading');
-                  if (alm.button_labels.loading) {
-                    alm.button.innerHTML = alm.button_labels.loading;
-                  }
                 }
               }
 
@@ -14205,7 +14197,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              */
             alm.AjaxLoadMore.ajax = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee() {
               var type,
-                _alm28,
+                _alm26,
                 params,
                 cache,
                 _args = arguments;
@@ -14223,7 +14215,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                   case 5:
                     // Standard ALM.
                     params = getAjaxParams(alm, type); // Cache.
-                    if (!((_alm28 = alm) !== null && _alm28 !== void 0 && (_alm28 = _alm28.addons) !== null && _alm28 !== void 0 && _alm28.cache && !['totalposts', 'totalpages'].includes(type))) {
+                    if (!((_alm26 = alm) !== null && _alm26 !== void 0 && (_alm26 = _alm26.addons) !== null && _alm26 !== void 0 && _alm26.cache && !['totalposts', 'totalpages'].includes(type))) {
                       _context.next = 13;
                       break;
                     }
@@ -14389,7 +14381,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              */
             alm.AjaxLoadMore.render = /*#__PURE__*/function () {
               var _ref4 = ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee8(data) {
-                var _alm33;
+                var _alm31;
                 var html, meta, total, totalposts, nodes, temp, paging_container, currentPage;
                 return ajax_load_more_regeneratorRuntime().wrap(function _callee8$(_context8) {
                   while (1) switch (_context8.prev = _context8.next) {
@@ -14636,14 +14628,14 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                         // ALM Done.
                         if (!alm.addons.single_post) {
                           if (alm.addons.nextpage) {
-                            var _alm29, _alm30;
+                            var _alm27, _alm28;
                             // Nextpage.
-                            if (((_alm29 = alm) === null || _alm29 === void 0 || (_alm29 = _alm29.localize) === null || _alm29 === void 0 ? void 0 : _alm29.post_count) + (alm.addons.nextpage_startpage - 1) >= ((_alm30 = alm) === null || _alm30 === void 0 || (_alm30 = _alm30.localize) === null || _alm30 === void 0 ? void 0 : _alm30.total_posts)) {
+                            if (((_alm27 = alm) === null || _alm27 === void 0 || (_alm27 = _alm27.localize) === null || _alm27 === void 0 ? void 0 : _alm27.post_count) + (alm.addons.nextpage_startpage - 1) >= ((_alm28 = alm) === null || _alm28 === void 0 || (_alm28 = _alm28.localize) === null || _alm28 === void 0 ? void 0 : _alm28.total_posts)) {
                               alm.AjaxLoadMore.triggerDone();
                             }
                           } else {
-                            var _alm31, _alm32;
-                            if (((_alm31 = alm) === null || _alm31 === void 0 || (_alm31 = _alm31.localize) === null || _alm31 === void 0 ? void 0 : _alm31.post_count) >= ((_alm32 = alm) === null || _alm32 === void 0 || (_alm32 = _alm32.localize) === null || _alm32 === void 0 ? void 0 : _alm32.total_posts)) {
+                            var _alm29, _alm30;
+                            if (((_alm29 = alm) === null || _alm29 === void 0 || (_alm29 = _alm29.localize) === null || _alm29 === void 0 ? void 0 : _alm29.post_count) >= ((_alm30 = alm) === null || _alm30 === void 0 || (_alm30 = _alm30.localize) === null || _alm30 === void 0 ? void 0 : _alm30.total_posts)) {
                               alm.AjaxLoadMore.triggerDone();
                             }
                           }
@@ -14748,7 +14740,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                       /**
                        * Set Focus for accessibility.
                        */
-                      if ((_alm33 = alm) !== null && _alm33 !== void 0 && (_alm33 = _alm33.last_loaded) !== null && _alm33 !== void 0 && _alm33.length) {
+                      if ((_alm31 = alm) !== null && _alm31 !== void 0 && (_alm31 = _alm31.last_loaded) !== null && _alm31 !== void 0 && _alm31.length) {
                         setFocus(alm, alm.last_loaded[0], total, alm_is_filtering);
                       }
                       alm.main.classList.remove('alm-is-filtering'); // Remove filtering class.
@@ -14776,10 +14768,10 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              */
             alm.AjaxLoadMore.noresults = function () {
               if (!alm.addons.paging) {
-                var _alm34, _alm35;
+                var _alm32, _alm33;
                 // Add .done class, reset btn text
-                (_alm34 = alm) === null || _alm34 === void 0 || (_alm34 = _alm34.button) === null || _alm34 === void 0 || (_alm34 = _alm34.classList) === null || _alm34 === void 0 || _alm34.remove('loading');
-                (_alm35 = alm) === null || _alm35 === void 0 || (_alm35 = _alm35.button) === null || _alm35 === void 0 || (_alm35 = _alm35.classList) === null || _alm35 === void 0 || _alm35.add('done');
+                (_alm32 = alm) === null || _alm32 === void 0 || (_alm32 = _alm32.button) === null || _alm32 === void 0 || (_alm32 = _alm32.classList) === null || _alm32 === void 0 || _alm32.remove('loading');
+                (_alm33 = alm) === null || _alm33 === void 0 || (_alm33 = _alm33.button) === null || _alm33 === void 0 || (_alm33 = _alm33.classList) === null || _alm33 === void 0 || _alm33.add('done');
                 alm.AjaxLoadMore.resetBtnText();
               }
 
@@ -15013,11 +15005,11 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
               alm.loading = false;
               placeholder('hide', alm);
               if (!alm.addons.paging) {
-                var _alm36;
+                var _alm34;
                 alm.buttonPrev.classList.add('done');
                 alm.buttonPrev.style.opacity = '0.5';
                 alm.buttonPrev.disabled = true;
-                if ((_alm36 = alm) !== null && _alm36 !== void 0 && (_alm36 = _alm36.prev_button_labels) !== null && _alm36 !== void 0 && _alm36.done) {
+                if ((_alm34 = alm) !== null && _alm34 !== void 0 && (_alm34 = _alm34.prev_button_labels) !== null && _alm34 !== void 0 && _alm34.done) {
                   setTimeout(function () {
                     alm.buttonPrev.innerHTML = alm.prev_button_labels.done;
                   }, 75);
@@ -15038,11 +15030,11 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              * @since 2.8.4
              */
             alm.AjaxLoadMore.resetBtnText = function () {
-              var _alm37, _alm38, _alm39, _alm40;
-              if ((_alm37 = alm) !== null && _alm37 !== void 0 && _alm37.button && (_alm38 = alm) !== null && _alm38 !== void 0 && (_alm38 = _alm38.button_labels) !== null && _alm38 !== void 0 && _alm38.loading) {
+              var _alm35, _alm36, _alm37, _alm38;
+              if ((_alm35 = alm) !== null && _alm35 !== void 0 && _alm35.button && (_alm36 = alm) !== null && _alm36 !== void 0 && (_alm36 = _alm36.button_labels) !== null && _alm36 !== void 0 && _alm36.loading) {
                 alm.button.innerHTML = alm.button_labels["default"];
               }
-              if ((_alm39 = alm) !== null && _alm39 !== void 0 && _alm39.buttonPrev && (_alm40 = alm) !== null && _alm40 !== void 0 && (_alm40 = _alm40.prev_button_labels) !== null && _alm40 !== void 0 && _alm40.loading) {
+              if ((_alm37 = alm) !== null && _alm37 !== void 0 && _alm37.buttonPrev && (_alm38 = alm) !== null && _alm38 !== void 0 && (_alm38 = _alm38.prev_button_labels) !== null && _alm38 !== void 0 && _alm38.loading) {
                 alm.buttonPrev.innerHTML = alm.prev_button_labels["default"];
               }
             };
@@ -15268,11 +15260,11 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
 
               // Loading buttons.
               if (alm.rel === 'prev') {
-                var _alm41;
-                (_alm41 = alm) === null || _alm41 === void 0 || (_alm41 = _alm41.buttonPrev) === null || _alm41 === void 0 || (_alm41 = _alm41.classList) === null || _alm41 === void 0 || _alm41.remove('loading');
+                var _alm39;
+                (_alm39 = alm) === null || _alm39 === void 0 || (_alm39 = _alm39.buttonPrev) === null || _alm39 === void 0 || (_alm39 = _alm39.classList) === null || _alm39 === void 0 || _alm39.remove('loading');
               } else {
-                var _alm42;
-                (_alm42 = alm) === null || _alm42 === void 0 || (_alm42 = _alm42.button) === null || _alm42 === void 0 || (_alm42 = _alm42.classList) === null || _alm42 === void 0 || _alm42.remove('loading');
+                var _alm40;
+                (_alm40 = alm) === null || _alm40 === void 0 || (_alm40 = _alm40.button) === null || _alm40 === void 0 || (_alm40 = _alm40.classList) === null || _alm40 === void 0 || _alm40.remove('loading');
               }
               alm.AjaxLoadMore.triggerAddons(alm);
               if (!alm.addons.paging) {
@@ -15291,10 +15283,10 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              * @since 4.1
              */
             alm.AjaxLoadMore.setLocalizedVar = function () {
-              var _alm43;
+              var _alm41;
               var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
               var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-              if ((_alm43 = alm) !== null && _alm43 !== void 0 && _alm43.localize && name !== '' && value !== '') {
+              if ((_alm41 = alm) !== null && _alm41 !== void 0 && _alm41.localize && name !== '' && value !== '') {
                 alm.localize[name] = value; // Set ALM localize var.
                 window[alm.localized_var][name] = value; // Update vars.
               }
@@ -15306,7 +15298,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              * @since 2.0
              */
             alm.AjaxLoadMore.init = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee11() {
-              var nextpage_pages, _alm44, nextpage_first, nextpage_total;
+              var nextpage_pages, _alm42, nextpage_first, nextpage_total;
               return ajax_load_more_regeneratorRuntime().wrap(function _callee11$(_context11) {
                 while (1) switch (_context11.prev = _context11.next) {
                   case 0:
@@ -15421,7 +15413,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                         nextpage_pages = alm.listing.querySelectorAll('.alm-nextpage'); // All Next Page Items.
                         if (nextpage_pages) {
                           nextpage_first = nextpage_pages[0];
-                          nextpage_total = nextpage_first.dataset.totalPosts ? parseInt(nextpage_first.dataset.totalPosts) : (_alm44 = alm) === null || _alm44 === void 0 || (_alm44 = _alm44.localize) === null || _alm44 === void 0 ? void 0 : _alm44.total_posts; // Disable if last page loaded
+                          nextpage_total = nextpage_first.dataset.totalPosts ? parseInt(nextpage_first.dataset.totalPosts) : (_alm42 = alm) === null || _alm42 === void 0 || (_alm42 = _alm42.localize) === null || _alm42 === void 0 ? void 0 : _alm42.total_posts; // Disable if last page loaded
                           if (nextpage_pages.length === nextpage_total || parseInt(nextpage_first.dataset.page) === nextpage_total) {
                             alm.AjaxLoadMore.triggerDone();
                           }
@@ -15475,8 +15467,8 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                       //  Filters, Facets & Preloaded Facets
                       if (alm.addons.preloaded && alm.addons.filters && alm.facets) {
                         if (typeof almFiltersFacets === 'function') {
-                          var _alm45;
-                          var facets = (_alm45 = alm) === null || _alm45 === void 0 || (_alm45 = _alm45.localize) === null || _alm45 === void 0 ? void 0 : _alm45.facets;
+                          var _alm43;
+                          var facets = (_alm43 = alm) === null || _alm43 === void 0 || (_alm43 = _alm43.localize) === null || _alm43 === void 0 ? void 0 : _alm43.facets;
                           if (facets) {
                             window.almFiltersFacets(facets);
                           }
@@ -15553,8 +15545,8 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              * @since 2.7.0
              */
             window.almGetParentContainer = function () {
-              var _alm46;
-              return (_alm46 = alm) === null || _alm46 === void 0 ? void 0 : _alm46.listing;
+              var _alm44;
+              return (_alm44 = alm) === null || _alm44 === void 0 ? void 0 : _alm44.listing;
             };
 
             /**

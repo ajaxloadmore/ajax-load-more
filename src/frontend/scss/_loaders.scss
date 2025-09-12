@@ -9,67 +9,68 @@
 		font-size: 14px;
 		font-weight: 500;
 		width: auto;
-		height: 42px;
+		height: 44px;
 		line-height: 1;
 		background: map-get($colors, 'default');
 		border: none;
-		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+		box-shadow: none;
 		color: #fff;
 		border-radius: $radius;
 		margin: 0;
 		padding: 0 $padding;
 		display: inline-block;
 		position: relative;
-		transition: all 0.15s ease;
+		transition: all 0.1s ease;
 		text-align: center;
 		text-decoration: none;
 		appearance: none;
 		user-select: none;
 		cursor: pointer;
 		&:hover,
-		&.loading {
-			background-color: map-get($colors, 'default_hover');
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		&:focus {
 			color: #fff;
 			text-decoration: none;
+			filter: brightness(1.08);
 		}
 		&:active {
 			box-shadow: none;
 			text-decoration: none;
+			filter: brightness(1);
 		}
 
 		/* Loading Icon */
 		&::before {
-			background-color: rgba(#fff, 0);
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-color: transparent;
 			background-image: url(get-loader(#fff));
 			background-repeat: no-repeat;
 			background-position: center center;
-			background-size: 18px 18px;
-			width: 0;
-			height: 32px;
+			background-size: 20px 20px;
+			width: 100%;
+			height: 100%;
+			transition: all 0.1s ease;
 			border-radius: 0;
 			opacity: 0;
 			visibility: hidden;
 			display: block;
 			content: '';
 			z-index: 1;
-			position: absolute;
-			left: 0;
-			top: 50%;
 			overflow: hidden;
-			transition: all 0.125s ease;
-			transform: translateY(-50%);
 		}
 
 		/* Loading State */
 		&.loading {
-			padding-left: 41px;
 			cursor: wait;
 			outline: none !important;
+			color: transparent !important;
+			border-color: transparent !important;
+			box-shadow: none !important;
+			filter: brightness(1);
 			&::before {
 				opacity: 1;
 				visibility: visible;
-				width: 42px;
 			}
 		}
 
@@ -117,13 +118,20 @@
 	}
 }
 
+/* Default */
+.ajax-load-more-wrap.default .alm-load-more-btn {
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'default'), 0.65);
+	}
+}
+
 /* Blue */
 .ajax-load-more-wrap.blue .alm-load-more-btn {
 	background-color: map-get($colors, 'blue');
 	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'blue_hover');
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'blue'), 0.65);
 	}
 }
 
@@ -131,9 +139,8 @@
 .ajax-load-more-wrap.green .alm-load-more-btn {
 	background-color: map-get($colors, 'green');
 	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'green_hover');
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'green'), 0.65);
 	}
 }
 
@@ -141,9 +148,8 @@
 .ajax-load-more-wrap.purple .alm-load-more-btn {
 	background-color: map-get($colors, 'purple');
 	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'purple_hover');
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'purple'), 0.65);
 	}
 }
 
@@ -151,9 +157,8 @@
 .ajax-load-more-wrap.grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey');
 	&:hover,
-	&.loading,
-	&.done {
-		background-color: map-get($colors, 'grey_hover');
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'grey'), 0.65);
 	}
 }
 
@@ -161,9 +166,13 @@
 .ajax-load-more-wrap.dark .alm-load-more-btn {
 	background-color: map-get($colors, 'dark');
 	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'dark'), 0.65);
+	}
+	&:hover,
 	&.loading,
 	&.done {
-		background-color: map-get($colors, 'dark_hover');
+		filter: brightness(1.15);
 	}
 }
 
@@ -173,6 +182,7 @@
 .ajax-load-more-wrap.light-grey .alm-load-more-btn,
 .ajax-load-more-wrap.white-inverse .alm-load-more-btn {
 	transition-duration: 0.1s;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 	&::before {
 		width: 32px;
 		height: 32px;
@@ -188,7 +198,6 @@
 		background-color: transparent !important;
 		border-color: transparent !important;
 		box-shadow: none !important;
-		padding: 0 $padding;
 	}
 }
 
@@ -213,7 +222,7 @@
 	}
 }
 
-/* White */
+/* White Outline */
 .ajax-load-more-wrap.white .alm-load-more-btn {
 	background-color: #fff;
 	color: map-get($colors, 'link');
@@ -234,11 +243,11 @@
 	}
 }
 
-/* Grey Light */
+/* Grey Light Outlin */
 .ajax-load-more-wrap.light-grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey_light');
 	color: map-get($colors, 'dark');
-	border: 1px solid rgba(map-get($colors, 'grey'), 0.2);
+	border: 1px solid rgba(map-get($colors, 'grey'), 0.25);
 	box-shadow: none;
 	&::before {
 		background-image: url(get-loader());
@@ -248,10 +257,10 @@
 	&.done {
 		background-color: map-get($colors, 'grey_lighter');
 		color: map-get($colors, 'dark_hover');
-		border-color: rgba(map-get($colors, 'grey'), 0.4);
+		border-color: rgba(map-get($colors, 'grey'), 0.5);
 	}
 	&:active {
-		border-color: rgba(map-get($colors, 'grey'), 0.2);
+		border-color: rgba(map-get($colors, 'grey'), 0.25);
 		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 }
@@ -303,6 +312,7 @@
 			&:focus,
 			&:active {
 				outline: none;
+				filter: none;
 			}
 			&.done {
 				opacity: 0;
