@@ -144,12 +144,10 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		// Button Labels.
 		alm.button_labels = {
 			default: DOMPurify.sanitize(alm?.listing?.dataset?.buttonLabel) || DOMPurify.sanitize(alm_localize?.button_label),
-			loading: DOMPurify.sanitize(alm?.listing?.dataset?.buttonLoadingLabel) || null,
 			done: DOMPurify.sanitize(alm?.listing?.dataset?.buttonDoneLabel) || null,
 		};
 		alm.prev_button_labels = {
 			default: DOMPurify.sanitize(alm?.listing?.dataset?.prevButtonLabel),
-			loading: DOMPurify.sanitize(alm?.listing?.dataset?.prevButtonLoadingLabel) || null,
 			done: DOMPurify.sanitize(alm?.listing?.dataset?.prevButtonDoneLabel) || null,
 		};
 
@@ -362,14 +360,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			if (!alm.addons.paging) {
 				if (alm.rel === 'prev') {
 					alm.buttonPrev.classList.add('loading');
-					if (alm.prev_button_labels.loading) {
-						alm.buttonPrev.innerHTML = alm.prev_button_labels.loading;
-					}
 				} else {
 					alm.button.classList.add('loading');
-					if (alm.button_labels.loading) {
-						alm.button.innerHTML = alm.button_labels.loading;
-					}
 				}
 			}
 

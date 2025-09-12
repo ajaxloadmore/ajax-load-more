@@ -9,11 +9,11 @@
 		font-size: 14px;
 		font-weight: 500;
 		width: auto;
-		height: 42px;
+		height: 44px;
 		line-height: 1;
 		background: map-get($colors, 'default');
 		border: none;
-		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+		box-shadow: none;
 		color: #fff;
 		border-radius: $radius;
 		margin: 0;
@@ -27,16 +27,15 @@
 		user-select: none;
 		cursor: pointer;
 		&:hover,
-		&:focus,
-		&.loading {
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		&:focus {
 			color: #fff;
 			text-decoration: none;
-			filter: brightness(1.1);
+			filter: brightness(1.08);
 		}
 		&:active {
 			box-shadow: none;
 			text-decoration: none;
+			filter: brightness(1);
 		}
 
 		/* Loading Icon */
@@ -68,6 +67,7 @@
 			color: transparent !important;
 			border-color: transparent !important;
 			box-shadow: none !important;
+			filter: brightness(1);
 			&::before {
 				opacity: 1;
 				visibility: visible;
@@ -118,29 +118,57 @@
 	}
 }
 
+/* Default */
+.ajax-load-more-wrap.default .alm-load-more-btn {
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'default'), 0.65);
+	}
+}
+
 /* Blue */
 .ajax-load-more-wrap.blue .alm-load-more-btn {
 	background-color: map-get($colors, 'blue');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'blue'), 0.65);
+	}
 }
 
 /* Green */
 .ajax-load-more-wrap.green .alm-load-more-btn {
 	background-color: map-get($colors, 'green');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'green'), 0.65);
+	}
 }
 
 /* Purple */
 .ajax-load-more-wrap.purple .alm-load-more-btn {
 	background-color: map-get($colors, 'purple');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'purple'), 0.65);
+	}
 }
 
 /* Grey */
 .ajax-load-more-wrap.grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'grey'), 0.65);
+	}
 }
 
 /* Dark */
 .ajax-load-more-wrap.dark .alm-load-more-btn {
 	background-color: map-get($colors, 'dark');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'dark'), 0.65);
+	}
 	&:hover,
 	&.loading,
 	&.done {
@@ -154,6 +182,7 @@
 .ajax-load-more-wrap.light-grey .alm-load-more-btn,
 .ajax-load-more-wrap.white-inverse .alm-load-more-btn {
 	transition-duration: 0.1s;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 	&::before {
 		width: 32px;
 		height: 32px;
@@ -193,7 +222,7 @@
 	}
 }
 
-/* White */
+/* White Outline */
 .ajax-load-more-wrap.white .alm-load-more-btn {
 	background-color: #fff;
 	color: map-get($colors, 'link');
@@ -214,11 +243,11 @@
 	}
 }
 
-/* Grey Light */
+/* Grey Light Outlin */
 .ajax-load-more-wrap.light-grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey_light');
 	color: map-get($colors, 'dark');
-	border: 1px solid rgba(map-get($colors, 'grey'), 0.2);
+	border: 1px solid rgba(map-get($colors, 'grey'), 0.25);
 	box-shadow: none;
 	&::before {
 		background-image: url(get-loader());
@@ -228,10 +257,10 @@
 	&.done {
 		background-color: map-get($colors, 'grey_lighter');
 		color: map-get($colors, 'dark_hover');
-		border-color: rgba(map-get($colors, 'grey'), 0.4);
+		border-color: rgba(map-get($colors, 'grey'), 0.5);
 	}
 	&:active {
-		border-color: rgba(map-get($colors, 'grey'), 0.2);
+		border-color: rgba(map-get($colors, 'grey'), 0.25);
 		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 }
@@ -283,6 +312,7 @@
 			&:focus,
 			&:active {
 				outline: none;
+				filter: none;
 			}
 			&.done {
 				opacity: 0;
