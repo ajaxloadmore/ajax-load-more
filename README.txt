@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 7.6.0
+Stable tag: 7.6.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,10 +268,13 @@ How to install Ajax Load More.
 
 == Changelog ==
 
+= 7.6.0.1 - September 12, 2025 =
+* NEW: Further optimization and modernized the Load More button and Infinite Scroll styles/animations with new SVG based spinners.
+* UPDATE: Removed `button_loading_label` and `prev_button_loading_label` parameters as these are no longer in used with the new loader styles.
+
 = 7.6.0 - August 18, 2025 =
 * NOTICE: This Ajax Load More update includes to the button animations and loading styles. It's possible that your existing loading style may have be affected.
 * NEW: Modernized the Load More button and Infinite Scroll styles/animations with new SVG based spinners.
-* UPDATE: Removed `button_loading_label` and `prev_button_loading_label` parameters as these are no longer in used with the new loader styles.
 * UPDATE: Automatically set `pause_override` to true if loading style is infinite.
 * UPDATE: Removed `.more` classname from Ajax Load More button.
 * UPDATE: Modernized and cleaned up CSS for various other ALM elements and features.
