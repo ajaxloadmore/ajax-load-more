@@ -13,7 +13,7 @@
 		line-height: 1;
 		background: map-get($colors, 'default');
 		border: none;
-		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+		box-shadow: none;
 		color: #fff;
 		border-radius: $radius;
 		margin: 0;
@@ -27,16 +27,15 @@
 		user-select: none;
 		cursor: pointer;
 		&:hover,
-		&:focus,
-		&.loading {
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		&:focus {
 			color: #fff;
 			text-decoration: none;
-			filter: brightness(1.1);
+			filter: brightness(1.08);
 		}
 		&:active {
 			box-shadow: none;
 			text-decoration: none;
+			filter: brightness(1);
 		}
 
 		/* Loading Icon */
@@ -68,6 +67,7 @@
 			color: transparent !important;
 			border-color: transparent !important;
 			box-shadow: none !important;
+			filter: brightness(1);
 			&::before {
 				opacity: 1;
 				visibility: visible;
@@ -118,29 +118,57 @@
 	}
 }
 
+/* Default */
+.ajax-load-more-wrap.default .alm-load-more-btn {
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'default'), 0.5);
+	}
+}
+
 /* Blue */
 .ajax-load-more-wrap.blue .alm-load-more-btn {
 	background-color: map-get($colors, 'blue');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'blue'), 0.5);
+	}
 }
 
 /* Green */
 .ajax-load-more-wrap.green .alm-load-more-btn {
 	background-color: map-get($colors, 'green');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'green'), 0.5);
+	}
 }
 
 /* Purple */
 .ajax-load-more-wrap.purple .alm-load-more-btn {
 	background-color: map-get($colors, 'purple');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'purple'), 0.5);
+	}
 }
 
 /* Grey */
 .ajax-load-more-wrap.grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'grey'), 0.5);
+	}
 }
 
 /* Dark */
 .ajax-load-more-wrap.dark .alm-load-more-btn {
 	background-color: map-get($colors, 'dark');
+	&:hover,
+	&:focus {
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'dark'), 0.5);
+	}
 	&:hover,
 	&.loading,
 	&.done {
@@ -283,6 +311,7 @@
 			&:focus,
 			&:active {
 				outline: none;
+				filter: none;
 			}
 			&.done {
 				opacity: 0;
