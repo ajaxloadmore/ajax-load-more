@@ -26,8 +26,6 @@ if ( ! class_exists( 'ALM_BLOCK' ) ) :
 			add_filter( 'block_categories_all', [ $this, 'alm_add_block_category' ] );
 		}
 
-
-
 		/**
 		 * Register the Ajax Load More WP Block.
 		 *
