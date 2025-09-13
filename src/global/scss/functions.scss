@@ -1,36 +1,36 @@
 // Loaders.
-@function get-loader($color: #65686d) {
+@function get-loader($color: #7f8287) {
 	$color: '#{$color}';
 	$fill: str-replace($color, '#', '');
 	@return 'data:image/svg+xml,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2400 2400" xml:space="preserve"><g stroke-width="200" stroke-linecap="round" stroke="%23#{$fill}" fill="none"><line x1="1200" y1="600" x2="1200" y2="100"/><line opacity="0.5" x1="1200" y1="2300" x2="1200" y2="1800"/><line opacity="0.917" x1="900" y1="680.4" x2="650" y2="247.4"/><line opacity="0.417" x1="1750" y1="2152.6" x2="1500" y2="1719.6"/><line opacity="0.833" x1="680.4" y1="900" x2="247.4" y2="650"/><line opacity="0.333" x1="2152.6" y1="1750" x2="1719.6" y2="1500"/><line opacity="0.75" x1="600" y1="1200" x2="100" y2="1200"/><line opacity="0.25" x1="2300" y1="1200" x2="1800" y2="1200"/><line opacity="0.667" x1="680.4" y1="1500" x2="247.4" y2="1750"/><line opacity="0.167" x1="2152.6" y1="650" x2="1719.6" y2="900"/><line opacity="0.583" x1="900" y1="1719.6" x2="650" y2="2152.6"/><line opacity="0.083" x1="1750" y1="247.4" x2="1500" y2="680.4"/><animateTransform attributeName="transform" attributeType="XML" type="rotate" keyTimes="0;0.08333;0.16667;0.25;0.33333;0.41667;0.5;0.58333;0.66667;0.75;0.83333;0.91667" values="0 1199 1199;30 1199 1199;60 1199 1199;90 1199 1199;120 1199 1199;150 1199 1199;180 1199 1199;210 1199 1199;240 1199 1199;270 1199 1199;300 1199 1199;330 1199 1199" dur="0.83333s" begin="0s" repeatCount="indefinite" calcMode="discrete"/></g></svg>';
 }
 
-@function get-circle-spinner($color: #65686d) {
+@function get-circle-spinner($color: #7f8287) {
 	$color: '#{$color}';
 	$fill: str-replace($color, '#', '');
 	@return 'data:image/svg+xml,<svg fill="%23#{$fill}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite"/></path></svg>';
 }
 
-@function get-fading-circles($color: #65686d) {
+@function get-fading-circles($color: #7f8287) {
 	$color: '#{$color}';
 	$fill: str-replace($color, '#', '');
 	@return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="%23#{$fill}" stroke="%23#{$fill}" stroke-width="5" r="15" cx="40" cy="100"><animate attributeName="opacity" calcMode="spline" dur="1.5" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></circle><circle fill="%23#{$fill}" stroke="%23#{$fill}" stroke-width="5" r="15" cx="100" cy="100"><animate attributeName="opacity" calcMode="spline" dur="1.5" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></circle><circle fill="%23#{$fill}" stroke="%23#{$fill}" stroke-width="5" r="15" cx="160" cy="100"><animate attributeName="opacity" calcMode="spline" dur="1.5" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></circle></svg>';
 }
 
-@function get-fading-squares($color: #65686d) {
+@function get-fading-squares($color: #7f8287) {
 	$color: '#{$color}';
 	$fill: str-replace($color, '#', '');
 	@return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%23#{$fill}" stroke="%23#{$fill}" stroke-width="10" width="30" height="30" x="25" y="85"><animate attributeName="opacity" calcMode="spline" dur="1.5" values="1;0.25;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></rect><rect fill="%23#{$fill}" stroke="%23#{$fill}" stroke-width="10" width="30" height="30" x="85" y="85"><animate attributeName="opacity" calcMode="spline" dur="1.5" values="1;0.25;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></rect><rect fill="%23#{$fill}" stroke="%23#{$fill}" stroke-width="10" width="30" height="30" x="145" y="85"><animate attributeName="opacity" calcMode="spline" dur="1.5" values="1;0.25;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></rect></svg>';
 }
 
-@function get-ripples($color: #65686d) {
+@function get-ripples($color: #7f8287) {
 	$color: '#{$color}';
 	$fill: str-replace($color, '#', '');
 	@return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="none" stroke-opacity="1" stroke="%23#{$fill}" stroke-width=".5" cx="100" cy="100" r="0"><animate attributeName="r" calcMode="spline" dur="1" values="1;80" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate><animate attributeName="stroke-width" calcMode="spline" dur="1" values="0;25" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" calcMode="spline" dur="1" values="1;0" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate></circle></svg>';
 }
 
 /* Select arrow replacement */
-@function get-select-arrow($color: #65686d) {
+@function get-select-arrow($color: #7f8287) {
 	$color: '#{$color}';
 	$fill: str-replace($color, '#', '');
 	@return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="%23#{$fill}"><path d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/></svg>';

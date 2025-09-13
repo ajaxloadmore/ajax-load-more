@@ -11,9 +11,9 @@
 		width: auto;
 		height: 44px;
 		line-height: 1;
-		background: map-get($colors, 'default');
 		border: none;
-		box-shadow: none;
+		background: map-get($colors, 'default');
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 		color: #fff;
 		border-radius: $radius;
 		margin: 0;
@@ -30,12 +30,13 @@
 		&:focus {
 			color: #fff;
 			text-decoration: none;
-			filter: brightness(1.08);
+			background: map-get($colors, 'default_hover');
 		}
 		&:active {
-			box-shadow: none;
+			background: map-get($colors, 'default');
+			box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(0, 0, 0, 0.05);
 			text-decoration: none;
-			filter: brightness(1);
+			transition: none;
 		}
 
 		/* Loading Icon */
@@ -44,10 +45,10 @@
 			left: 0;
 			top: 0;
 			background-color: transparent;
-			background-image: url(get-loader(#fff));
+			background-image: url(get-loader());
 			background-repeat: no-repeat;
 			background-position: center center;
-			background-size: 20px 20px;
+			background-size: 24px 24px;
 			width: 100%;
 			height: 100%;
 			transition: all 0.1s ease;
@@ -66,8 +67,9 @@
 			outline: none !important;
 			color: transparent !important;
 			border-color: transparent !important;
+			background-color: transparent !important;
 			box-shadow: none !important;
-			filter: brightness(1);
+			text-decoration: none;
 			&::before {
 				opacity: 1;
 				visibility: visible;
@@ -90,9 +92,6 @@
 		&:disabled::before {
 			opacity: 0;
 			visibility: hidden;
-		}
-		&:active {
-			transition: none;
 		}
 
 		&.done {
@@ -118,20 +117,18 @@
 	}
 }
 
-/* Default */
-.ajax-load-more-wrap.default .alm-load-more-btn {
-	&:hover,
-	&:focus {
-		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'default'), 0.65);
-	}
-}
-
 /* Blue */
 .ajax-load-more-wrap.blue .alm-load-more-btn {
 	background-color: map-get($colors, 'blue');
 	&:hover,
-	&:focus {
-		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'blue'), 0.65);
+	&:focus,
+	&.loading {
+		color: #fff;
+		text-decoration: none;
+		background: map-get($colors, 'blue_hover');
+	}
+	&:active {
+		background-color: map-get($colors, 'blue');
 	}
 }
 
@@ -139,8 +136,14 @@
 .ajax-load-more-wrap.green .alm-load-more-btn {
 	background-color: map-get($colors, 'green');
 	&:hover,
-	&:focus {
-		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'green'), 0.65);
+	&:focus,
+	&.loading {
+		color: #fff;
+		text-decoration: none;
+		background: map-get($colors, 'green_hover');
+	}
+	&:active {
+		background-color: map-get($colors, 'green');
 	}
 }
 
@@ -148,8 +151,14 @@
 .ajax-load-more-wrap.purple .alm-load-more-btn {
 	background-color: map-get($colors, 'purple');
 	&:hover,
-	&:focus {
-		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'purple'), 0.65);
+	&:focus,
+	&.loading {
+		color: #fff;
+		text-decoration: none;
+		background: map-get($colors, 'purple_hover');
+	}
+	&:active {
+		background-color: map-get($colors, 'purple');
 	}
 }
 
@@ -157,8 +166,14 @@
 .ajax-load-more-wrap.grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey');
 	&:hover,
-	&:focus {
-		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'grey'), 0.65);
+	&:focus,
+	&.loading {
+		color: #fff;
+		text-decoration: none;
+		background: map-get($colors, 'grey_hover');
+	}
+	&:active {
+		background-color: map-get($colors, 'grey');
 	}
 }
 
@@ -166,13 +181,14 @@
 .ajax-load-more-wrap.dark .alm-load-more-btn {
 	background-color: map-get($colors, 'dark');
 	&:hover,
-	&:focus {
-		box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(map-get($colors, 'dark'), 0.65);
+	&:focus,
+	&.loading {
+		color: #fff;
+		text-decoration: none;
+		background: map-get($colors, 'dark_hover');
 	}
-	&:hover,
-	&.loading,
-	&.done {
-		filter: brightness(1.15);
+	&:active {
+		background-color: map-get($colors, 'dark');
 	}
 }
 
@@ -181,18 +197,6 @@
 .ajax-load-more-wrap.white .alm-load-more-btn,
 .ajax-load-more-wrap.light-grey .alm-load-more-btn,
 .ajax-load-more-wrap.white-inverse .alm-load-more-btn {
-	transition-duration: 0.1s;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-	&::before {
-		width: 32px;
-		height: 32px;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		background-color: transparent;
-		background-size: 24px 24px;
-		transition-duration: 0.1s;
-	}
 	&.loading {
 		color: transparent !important;
 		background-color: transparent !important;
@@ -204,21 +208,18 @@
 /* Default Outline */
 .ajax-load-more-wrap.is-outline .alm-load-more-btn {
 	color: map-get($colors, 'default');
-	border: 1px solid rgba(map-get($colors, 'default'), 0.6);
+	border: 1px solid rgba(map-get($colors, 'default'), 0.75);
 	background-color: #fff;
-	&::before {
-		background-image: url(get-loader());
-	}
 	&:focus,
 	&:hover,
 	&.done {
+		background-color: rgba(map-get($colors, 'default'), 0.05);
 		color: map-get($colors, 'default_hover');
 		border-color: map-get($colors, 'default_hover');
-		background-color: #fff;
 	}
 	&:active {
-		border-color: rgba(map-get($colors, 'default_hover'), 0.65);
-		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+		background-color: rgba(map-get($colors, 'default'), 0.025);
+		border-color: map-get($colors, 'default');
 	}
 }
 
@@ -227,9 +228,6 @@
 	background-color: #fff;
 	color: map-get($colors, 'link');
 	border: 1px solid map-get($borders, 'default');
-	&::before {
-		background-image: url(get-loader());
-	}
 	&:focus,
 	&:hover,
 	&.done {
@@ -238,20 +236,16 @@
 		border-color: map-get($borders, 'default_active');
 	}
 	&:active {
+		background-color: map-get($colors, 'grey_lighter');
 		border-color: rgba(map-get($borders, 'default_active'), 0.65);
-		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 }
 
-/* Grey Light Outlin */
+/* Grey Light Outline */
 .ajax-load-more-wrap.light-grey .alm-load-more-btn {
 	background-color: map-get($colors, 'grey_light');
 	color: map-get($colors, 'dark');
 	border: 1px solid rgba(map-get($colors, 'grey'), 0.25);
-	box-shadow: none;
-	&::before {
-		background-image: url(get-loader());
-	}
 	&:focus,
 	&:hover,
 	&.done {
@@ -260,25 +254,29 @@
 		border-color: rgba(map-get($colors, 'grey'), 0.5);
 	}
 	&:active {
+		background-color: map-get($colors, 'grey_lightr');
 		border-color: rgba(map-get($colors, 'grey'), 0.25);
-		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 }
 
 /* White Inverse */
 .ajax-load-more-wrap.white-inverse .alm-load-more-btn {
-	background-color: rgba(#fff, 0.35);
+	background-color: rgba(#fff, 0.3);
 	color: #fff;
 	border: none;
 	box-shadow: none;
 	&::before {
-		background-image: url(get-loader(#ccc));
+		background-image: url(get-loader(map-get($colors, 'grey_light')));
 	}
 	&:focus,
 	&:hover,
 	&.done {
-		background-color: #fff;
+		background-color: rgba(#fff, 0.925);
 		color: map-get($colors, 'dark');
+	}
+	&:active {
+		background-color: rgba(#fff, 0.85);
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 	}
 }
 
@@ -296,23 +294,14 @@
 			cursor: default !important;
 			outline: none !important;
 			padding: 0;
-			transition-duration: 0.1s;
 
 			&::before {
-				width: 28px;
-				height: 28px;
 				background-size: 28px 28px;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%, -50%);
-				margin: 0;
-				transition-duration: 0.1s;
 			}
 
 			&:focus,
 			&:active {
 				outline: none;
-				filter: none;
 			}
 			&.done {
 				opacity: 0;
@@ -337,8 +326,6 @@
 	&.fading-squares > .alm-btn-wrap .alm-load-more-btn,
 	&.ripples > .alm-btn-wrap .alm-load-more-btn {
 		&::before {
-			width: 38px;
-			height: 38px;
 			background-size: 38px 38px;
 		}
 	}

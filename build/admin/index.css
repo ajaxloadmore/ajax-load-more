@@ -1703,8 +1703,8 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-results .select2-result.alm-color.purple .select2-result-label::after {
-  background-color: #6146e5;
-  border-color: #6146e5;
+  background-color: #7e46e5;
+  border-color: #7e46e5;
 }
 
 .select2-results .select2-result.alm-color.red .select2-result-label::after {
