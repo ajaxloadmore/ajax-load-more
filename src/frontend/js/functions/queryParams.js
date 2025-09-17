@@ -22,6 +22,7 @@ export function getAjaxParams(alm, queryType) {
 		posts_per_page: parseInt(alm.posts_per_page),
 		page: parseInt(alm.page),
 		offset: parseInt(alm.offset),
+		original_offset: parseInt(alm.offset),
 		post_type: alm.post_type,
 		repeater: alm.repeater,
 		seo_start_page: alm.start_page,

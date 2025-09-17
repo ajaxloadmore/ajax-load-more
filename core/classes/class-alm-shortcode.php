@@ -849,6 +849,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				'orderby'                   => $orderby,
 				'exclude'                   => $exclude,
 				'offset'                    => $offset,
+				'original_offset'           => $offset,
 				'posts_per_page'            => $posts_per_page,
 				'lang'                      => $lang,
 				'css_classes'               => $css_classes,
