@@ -95,7 +95,8 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$date_query_relation  = isset( $a['date_query_relation'] ) ? $a['date_query_relation'] : '';
 
 			// Search.
-			$s = isset( $a['search'] ) ? $a['search'] : '';
+			$s      = isset( $a['search'] ) ? trim( $a['search'] ) : '';
+			$engine = isset( $a['engine'] ) ? $a['engine'] : '';
 
 			// Custom Args.
 			$custom_args = isset( $a['custom_args'] ) ? $a['custom_args'] : '';
@@ -122,23 +123,44 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$exclude      = isset( $a['exclude'] ) ? $a['exclude'] : '';
 
 			// Offset.
-			$offset = isset( $a['offset'] ) ? $a['offset'] : 0;
+			$offset          = isset( $a['offset'] ) ? $a['offset'] : 0;
+			$original_offset = isset( $a['original_offset'] ) ? $a['original_offset'] : 0;
 
 			// Post Status.
-			$post_status = isset( $a['post_status'] ) ? $a['post_status'] : 'publish';
-			$post_status = empty( $post_status ) ? 'publish' : $post_status;
-			if ( $post_status !== 'publish' && $post_status !== 'inherit' ) {
-				// If not 'publish', confirm user has rights to view these posts.
+			$post_status      = isset( $a['post_status'] ) && ! empty( $a['post_status'] ) ? $a['post_status'] : 'publish'; // Default to publish.
+			$allowed_statuses = [ 'publish', 'inherit' ];
+
+			if ( ! in_array( $post_status, $allowed_statuses, true ) ) {
+				// Handle post status exceptions.
 				if ( current_user_can( apply_filters( 'alm_user_role_post_status', 'edit_theme_options' ) ) ) {
+					// Admin users can view all post statuses.
 					$post_status = $post_status;
 				} else {
-					$post_status = apply_filters( 'alm_allow_future_posts', false ) ? $post_status : 'publish';
-					// e.g. add_filter( 'alm_allow_future_posts', '__return_true' ).
+					// Switch over the post status and check if it's allowed via filter.
+					switch ( $post_status ) {
+						case 'private':
+							$post_status = apply_filters( 'alm_allow_private_posts', false ) ? $post_status : 'publish';
+							break;
+						case 'future':
+							$post_status = apply_filters( 'alm_allow_future_posts', false ) ? $post_status : 'publish';
+							break;
+						case 'draft':
+							$post_status = apply_filters( 'alm_allow_draft_posts', false ) ? $post_status : 'publish';
+							break;
+						case 'pending':
+							$post_status = apply_filters( 'alm_allow_pending_posts', false ) ? $post_status : 'publish';
+							break;
+						case 'trash':
+							$post_status = apply_filters( 'alm_allow_trash_posts', false ) ? $post_status : 'publish';
+							break;
+					}
 				}
 			}
 
-			// Advanced Custom Fields.
-			// Only used for Relationship Field. Gallery, Repeater and Flex Content is in the ACF extension.
+			/**
+			 * Advanced Custom Fields.
+			 * Used with Relationship Field. Gallery, Repeater and Flex Content is in the ACF extension.
+			 */
 			if ( $is_ajax ) {
 				$acf = ( isset( $a['acf'] ) ) ? true : false;
 				if ( $acf ) {
@@ -147,7 +169,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 					$acf_field_name        = isset( $a['acf']['field_name'] ) ? $a['acf']['field_name'] : ''; // Field Name.
 					$acf_parent_field_name = isset( $a['acf']['parent_field_name'] ) ? $a['acf']['parent_field_name'] : ''; // Parent Field Name.
 				}
-			} else { // phpcs:ignore
+			} else {
 				// If Preloaded, $a needs to access acf data differently.
 				if ( isset( $a['acf'] ) && $a['acf'] === 'true' ) {
 					$acf_post_id           = isset( $a['acf_post_id'] ) ? $a['acf_post_id'] : ''; // Post ID.
@@ -162,6 +184,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 				'post_type'           => $post_type,
 				'posts_per_page'      => $posts_per_page,
 				'offset'              => $offset,
+				'original_offset'     => $original_offset,
 				'order'               => $order,
 				'orderby'             => $orderby,
 				'post_status'         => $post_status,
@@ -311,6 +334,13 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			// Search Term.
 			if ( ! empty( $s ) ) {
 				$args['s'] = $s;
+			} else {
+				unset( $args['s'] );
+			}
+
+			// Search Engine.
+			if ( ! empty( $engine ) ) {
+				$args['engine'] = $engine;
 			}
 
 			// Custom Args.

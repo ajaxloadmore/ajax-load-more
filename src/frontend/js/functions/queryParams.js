@@ -22,6 +22,7 @@ export function getAjaxParams(alm, queryType) {
 		posts_per_page: parseInt(alm.posts_per_page),
 		page: parseInt(alm.page),
 		offset: parseInt(alm.offset),
+		original_offset: parseInt(alm.offset),
 		post_type: alm.post_type,
 		repeater: alm.repeater,
 		seo_start_page: alm.start_page,
@@ -193,6 +194,9 @@ export function getAjaxParams(alm, queryType) {
 	if (alm.listing.dataset.s) {
 		data.search = alm.listing.dataset.s;
 	}
+	if (alm.listing.dataset.engine) {
+		data.engine = alm.listing.dataset.engine;
+	}
 	if (alm.listing.dataset.customArgs) {
 		data.custom_args = alm.listing.dataset.customArgs;
 	}
@@ -201,7 +205,6 @@ export function getAjaxParams(alm, queryType) {
 	}
 
 	// Cache Params
-
 	if (addons.cache) {
 		data.cache_id = addons.cache_id;
 		data.cache_logged_in = addons.cache_logged_in;
@@ -338,6 +341,7 @@ export function getRestAPIParams(alm) {
 		post__not_in: alm.listing.dataset.postNotIn,
 		search: alm.listing.dataset.search,
 		s: alm.listing.dataset.s,
+		engine: alm.listing.dataset.engine,
 		custom_args: alm.listing.dataset.customArgs,
 		vars: alm.listing.dataset.vars,
 		lang: alm.lang,

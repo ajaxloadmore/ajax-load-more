@@ -204,6 +204,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'day'                          => '',
 						'author'                       => '',
 						'search'                       => '',
+						'engine'                       => '',
 						'custom_args'                  => '',
 						'post_status'                  => '',
 						'order'                        => 'DESC',
@@ -841,12 +842,14 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				'post__in'                  => $post__in,
 				'post__not_in'              => $post__not_in,
 				'search'                    => $search,
+				'engine'                    => $engine,
 				'custom_args'               => $custom_args,
 				'post_status'               => $post_status,
 				'order'                     => $order,
 				'orderby'                   => $orderby,
 				'exclude'                   => $exclude,
 				'offset'                    => $offset,
+				'original_offset'           => $offset,
 				'posts_per_page'            => $posts_per_page,
 				'lang'                      => $lang,
 				'css_classes'               => $css_classes,
@@ -1217,6 +1220,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 
 			// Search.
 			$ajaxloadmore .= $search ? ' data-search="' . esc_attr( $search ) . '"' : '';
+			$ajaxloadmore .= $engine ? ' data-engine="' . esc_attr( $engine ) . '"' : '';
 
 			// Custom Args.
 			$ajaxloadmore .= $custom_args ? ' data-custom-args="' . esc_attr( $custom_args ) . '"' : '';
