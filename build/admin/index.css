@@ -2334,7 +2334,8 @@ body.ajax-load-more_page_ajax-load-more-cache,
 body.ajax-load-more_page_ajax-load-more-filters,
 body.ajax-load-more_page_ajax-load-more-pro,
 body.ajax-load-more_page_ajax-load-more-go-pro,
-body.ajax-load-more_page_ajax-load-more-woocommerce {
+body.ajax-load-more_page_ajax-load-more-woocommerce,
+body.ajax-load-more_page_ajax-load-more-search {
   height: auto !important;
 }
 body.toplevel_page_ajax-load-more #wpcontent,
@@ -2348,7 +2349,8 @@ body.ajax-load-more_page_ajax-load-more-cache #wpcontent,
 body.ajax-load-more_page_ajax-load-more-filters #wpcontent,
 body.ajax-load-more_page_ajax-load-more-pro #wpcontent,
 body.ajax-load-more_page_ajax-load-more-go-pro #wpcontent,
-body.ajax-load-more_page_ajax-load-more-woocommerce #wpcontent {
+body.ajax-load-more_page_ajax-load-more-woocommerce #wpcontent,
+body.ajax-load-more_page_ajax-load-more-search #wpcontent {
   padding-left: 0;
   padding-bottom: 20px;
 }
@@ -2363,7 +2365,8 @@ body.ajax-load-more_page_ajax-load-more-cache #wpbody-content,
 body.ajax-load-more_page_ajax-load-more-filters #wpbody-content,
 body.ajax-load-more_page_ajax-load-more-pro #wpbody-content,
 body.ajax-load-more_page_ajax-load-more-go-pro #wpbody-content,
-body.ajax-load-more_page_ajax-load-more-woocommerce #wpbody-content {
+body.ajax-load-more_page_ajax-load-more-woocommerce #wpbody-content,
+body.ajax-load-more_page_ajax-load-more-search #wpbody-content {
   padding-bottom: 0;
 }
 body.toplevel_page_ajax-load-more #wpfooter,
@@ -2377,7 +2380,8 @@ body.ajax-load-more_page_ajax-load-more-cache #wpfooter,
 body.ajax-load-more_page_ajax-load-more-filters #wpfooter,
 body.ajax-load-more_page_ajax-load-more-pro #wpfooter,
 body.ajax-load-more_page_ajax-load-more-go-pro #wpfooter,
-body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter {
+body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter,
+body.ajax-load-more_page_ajax-load-more-search #wpfooter {
   padding-top: 0;
   padding-bottom: 0;
   line-height: 42px;
@@ -2398,7 +2402,8 @@ body.ajax-load-more_page_ajax-load-more-cache #wpfooter p,
 body.ajax-load-more_page_ajax-load-more-filters #wpfooter p,
 body.ajax-load-more_page_ajax-load-more-pro #wpfooter p,
 body.ajax-load-more_page_ajax-load-more-go-pro #wpfooter p,
-body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
+body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p,
+body.ajax-load-more_page_ajax-load-more-search #wpfooter p {
   line-height: 42px;
 }
 
