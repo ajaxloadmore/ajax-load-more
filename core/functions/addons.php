@@ -320,6 +320,18 @@ function alm_get_deprecated_addons() {
 }
 
 /**
+ * Get a list of deprecated add-on action hooks.
+ *
+ * @return array
+ */
+function alm_get_deprecated_addon_actions() {
+	return [
+		'alm_unlimited_installed',
+		'alm_theme_repeaters_installed',
+	];
+}
+
+/**
  * Get addon details by add-on slug.
  *
  * @param string $slug The addon slug.

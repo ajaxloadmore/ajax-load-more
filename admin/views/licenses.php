@@ -59,8 +59,8 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 					continue; // Exit if not installed.
 				}
 
-				if ( has_action( 'alm_templates_installed' ) && ( $action === 'alm_unlimited_installed' || $action === 'alm_theme_repeaters_installed' ) ) {
-					continue; // Exit if Custom Repeaters or Theme Repeaters if Templates is installed.
+				if ( in_array( $action, alm_get_deprecated_addon_actions(), true ) && has_action( 'alm_templates_installed' ) ) {
+					continue; // Exit if Custom Repeaters or Theme Repeaters and Templates is installed.
 				}
 
 				++$addon_count;

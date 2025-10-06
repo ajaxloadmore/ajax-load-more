@@ -466,7 +466,7 @@ class ALM_Licensing {
 				// If not valid, display message.
 				if ( $status !== 'valid' ) {
 					$name  = $addon['name'];
-					$style = 'position: relative; margin: 0; padding: 15px 12px; background: #ffffe5;';
+					$style = 'position: relative; margin: 0; padding: 15px 12px; background: #fcf9e8;';
 					$title = $name === 'Ajax Load More Pro' ? '<strong>' . $name . '</strong>' : '<strong>Ajax Load More: ' . $name . '</strong>';
 
 					$row = '</tr><tr class="plugin-update-tr active"><td colspan="4" class="plugin-update"><div class="update-message alm-update-message" style="' . $style . '">';
