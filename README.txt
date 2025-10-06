@@ -1,39 +1,39 @@
-=== Ajax Load More - Infinite Scroll ===
+=== Ajax Load More – Infinite Scroll, Lazy Load & Load More ===
 Contributors: dcooney, connekthq
 Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 7.6.1
+Stable tag: 7.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The ultimate infinite scroll and lazy load solution for your WordPress powered website.
+Add infinite scroll, lazy loading, and load more buttons to posts, pages, and WooCommerce products — fast and fully customizable for WordPress.
 
 == Description ==
 
-Ajax Load More is the ultimate plugin for infinite scrolling and lazy loading posts, single posts, pages, comments, and more with Ajax powered queries.
+Ajax Load More is the most powerful **infinite scroll**, **lazy load**, and **load more** plugin for WordPress. Use it to automatically load posts, pages, custom post types, comments, and WooCommerce products without refreshing the page.
 
-Build complex custom WordPress queries with the Ajax Load More query builder then add the generated shortcode to your page via the content editor, Ajax Load More Block or directly into your template files.
+Build custom WordPress queries visually with the Ajax Load More **Query/Shortcode Builder**, then embed them anywhere using blocks, shortcodes, or template tags.
 
-Ajax Load More is compatible for endless scrolling with popular eCommerce plugins such as WooCommerce and Easy Digital Downloads.
+Ajax Load More is developer-friendly, performance-optimized, and compatible with popular plugins like WooCommerce, Advanced Custom Fields, and Elementor.
 
 &rarr; [Get More Information](https://connekthq.com/plugins/ajax-load-more/)
 
 ### Features
 
--  **Shortcode Builder** - Create a custom Ajax Load More shortcode in seconds by adjusting various WordPress query parameters in the inuitive shortcode builder.
+-  **Query/Shortcode Builder** - Create a custom Ajax Load More query in seconds by adjusting various WordPress query parameters included with the inuitive shortcode builder.
 -  **Query Parameters** - Query WordPress by many different content types. Query by Post Type, Category, Tags, Custom Taxonomies, Search Term, Date Query, Authors and more!
 -  **Ajax Filtering** - The Ajax Load More [custom filtering](https://connekthq.com/plugins/ajax-load-more/examples/filtering/) method will allow you to filter and update your Ajax query results.
--  **Templates** - Edit and extend the functionality of Ajax Load More by creating your own Repeater Template to match the look and feel of your website.
+-  **Templates** - Edit and extend the functionality of Ajax Load More by creating your own template to match the look and feel of your website.
 -  **Multiple Instances** - Include multiple instances of Ajax Load More on a single page, post or template.
 -  **Multisite Compatibility** - Manage Repeater Templates across all sites in your network.
 -  **Setting Panel** - Customize Ajax Load More by configuring the various plugin settings.
 
 Check out the **[website](https://connekthq.com/plugins/ajax-load-more/)** for more information on the features and functionality of Ajax Load More.
 
-### What Makes Ajax Load More Different?
+### Why Ajax Load More is the Best Infinite Scroll Plugin for WordPress
 
 Ajax Load More differs from the other WordPress infinite scroll plugins because with ALM, you create the query for displaying the data. This gives you full control over the content you are loading and displaying to your users.
 
@@ -63,25 +63,21 @@ Check out the examples below:
 
 ### Parameters
 
-Ajax Load More accepts a variety of WordPress query and display parameters that are passed to WordPress via shortcode or [PHP function](https://connekthq.com/plugins/ajax-load-more/docs/implementation-methods).
+Ajax Load More accepts a variety of WordPress query and display parameters that are passed to WordPress via shortcode or [PHP function/Template Tag](https://connekthq.com/plugins/ajax-load-more/docs/implementation-methods).
 
 These parameters allow you to customize the content of the infinite scroll experience by selecting query parameters such as Post Types, Taxonomies, Categories, Tags, Dates, etc… you can also control interactive properties such as button labels, scrolling options and transition styles.
 
 &rarr; [View Parameters](https://connekthq.com/plugins/ajax-load-more/docs/shortcode-parameters/)
 
-### Shortcode Builder
+### Query/Shortcode Builder
 
-The Ajax Load More [Shortcode Builder](https://connekthq.com/plugins/ajax-load-more/docs/shortcode-builder/) provides an intuitive and easy-to-use admin interface that transforms complex WordPress queries into manageable shortcodes.
+The Ajax Load More [Query/Shortcode Builder](https://connekthq.com/plugins/ajax-load-more/docs/shortcode-builder/) provides an intuitive and easy-to-use admin interface that transforms complex WordPress queries into manageable shortcodes.
 
 &rarr; [View Shortcode Builder](https://connekthq.com/plugins/ajax-load-more/docs/shortcode-builder/)
-
----
 
 #### Example Ajax Load More Shortcode
 
     [ajax_load_more post_type="post, portfolio" posts_per_page="6" button_label="Load More"]
-
----
 
 #### Examples & Demos
 
@@ -112,6 +108,17 @@ The Ajax Load More [Shortcode Builder](https://connekthq.com/plugins/ajax-load-m
 **Note**: The [Templates Add-On](https://connekthq.com/plugins/ajax-load-more/templates/) has been installed for use on each of our product demos.
 
 [youtube https://www.youtube.com/watch?v=EQ57i6dkOew]
+
+### Who Uses Ajax Load More?
+
+Ajax Load More is perfect for developers, bloggers, and store owners who want to:
+
+- Improve user experience by reducing page load times.
+- Increase page views and ad revenue by keeping users on the page longer.
+- Create a modern, seamless browsing experience.
+- Simplify navigation on content-heavy sites.
+- Enhance the look and feel of their website with custom templates and layouts.
+- Easily integrate infinite scroll into any WordPress theme or plugin.
 
 ### Add-ons
 
@@ -267,6 +274,10 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.6.2 - October 6, 2025 =
+* FIX: Fixed issue with License page displaying incorrect products in some instances.
+* UPDATE: Various UI/UX updates and improvements.
 
 = 7.6.1 - September 17, 2025 =
 * UPDATE: Added functionality required for latest Filters add-on updates.
