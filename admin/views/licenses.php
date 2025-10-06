@@ -55,10 +55,14 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 				$constant       = 'ALM_' . strtoupper( str_replace( '-', '_', sanitize_title_with_dashes( $name ) ) ) . '_LICENSE_KEY'; // e.g. ALM_CALL_TO_ACTION_LICENSE_KEY.
 				$license        = defined( $constant ) ? constant( $constant ) : get_option( $key );
 
-				// If installed.
 				if ( ! has_action( $action ) ) {
-					continue;
+					continue; // Exit if not installed.
 				}
+
+				if ( has_action( 'alm_templates_installed' ) && ( $action === 'alm_unlimited_installed' || $action === 'alm_theme_repeaters_installed' ) ) {
+					continue; // Exit if Custom Repeaters or Theme Repeaters if Templates is installed.
+				}
+
 				++$addon_count;
 
 				// Check license status.
