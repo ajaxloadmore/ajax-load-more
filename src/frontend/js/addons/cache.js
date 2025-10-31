@@ -21,6 +21,7 @@ export function cacheCreateParams(alm) {
 
 /**
  * Create unique cache slug from query params.
+ * TODO: Remove this? Do we need this function?
  *
  * @param {Object} alm  The ALM object.
  * @param {Object} data The data object.

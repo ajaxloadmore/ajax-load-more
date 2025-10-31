@@ -382,18 +382,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			} else {
 				// Standard ALM.
 				const params = getAjaxParams(alm, type);
-				// Cache.
-				if (alm?.addons?.cache && !['totalposts', 'totalpages'].includes(type)) {
-					// Get cache if available and not a totalposts or totalpages request.
-					const cache = await getCache(alm, Object.assign({}, params));
-					if (cache) {
-						alm.AjaxLoadMore.render(cache);
-					} else {
-						alm.AjaxLoadMore.adminajax(params, type);
-					}
-				} else {
-					alm.AjaxLoadMore.adminajax(params, type);
-				}
+				alm.AjaxLoadMore.adminajax(params, type);
 			}
 		};
 

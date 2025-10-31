@@ -14,6 +14,22 @@
  * @package AjaxLoadMore
  */
 
+/*
+ * CACHE UPDATES
+ * =============
+ * Standard
+ * Single Posts
+ * Next Page
+ * Comments
+ * WooCommerce
+ * Elementor
+ * Filters
+ *
+ * Remove `cache_id`. Shouldn't be needed if we pass in all the parameters.
+ * Dynamically generate cache files. Use Preloaded with a bypass hook to create the files on the server.
+
+*/
+
 define( 'ALM_VERSION', '7.6.2' );
 define( 'ALM_RELEASE', 'October 6, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
@@ -463,29 +479,39 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		public function alm_query_posts() {
 			$params = filter_input_array( INPUT_GET );
 
+			// Cache.
+			$cache           = isset( $params['cache'] ) && $params['cache'] === 'true' ? true : false;
+			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false; // TODO: Remove.
+			$cache_logged_in = isset( $params['cache_logged_in'] ) ? $params['cache_logged_in'] : false;
+			$use_cache       = $cache_logged_in === 'true' && is_user_logged_in() ? false : true;
+
+			/**
+			 * Cache Add-on.
+			 * Get the cached data.
+			 */
+			if ( $cache && method_exists( 'ALMCache', 'get_cache' ) && $use_cache ) {
+				$cache_data = ALMCache::get_cache( $params );
+				if ( $cache_data ) {
+					wp_send_json( $cache_data );
+				}
+			}
+
 			// WPML fix for category/tag/taxonomy archives.
 			if ( ( isset( $params['category'] ) && $params['category'] ) || ( isset( $params['taxonomy'] ) && $params['taxonomy'] ) || ( isset( $params['tag'] ) && $params['tag'] ) ) {
 				unset( $_REQUEST['post_id'] );
 			}
 
-			$id            = isset( $params['id'] ) ? $params['id'] : '';
-			$post_id       = isset( $params['post_id'] ) ? $params['post_id'] : '';
-			$slug          = isset( $params['slug'] ) ? $params['slug'] : '';
-			$canonical_url = isset( $params['canonical_url'] ) ? esc_attr( $params['canonical_url'] ) : esc_url( $_SERVER['HTTP_REFERER'] ); // phpcs:ignore
+			$id      = isset( $params['id'] ) ? $params['id'] : '';
+			$post_id = isset( $params['post_id'] ) ? $params['post_id'] : '';
+			$slug    = isset( $params['slug'] ) ? $params['slug'] : '';
 
 			// Ajax Query Type.
-			$query_type = isset( $params['query_type'] ) ? $params['query_type'] : 'standard'; // 'standard' or 'totalposts' - totalposts returns $alm_found_posts.
+			$query_type = isset( $params['query_type'] ) ? $params['query_type'] : 'standard'; // 'standard' or 'totalposts'. totalposts returns $alm_found_posts.
 
 			// Filters.
 			$is_filters     = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
 			$filters_target = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
 			$filters_facets = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
-
-			// Cache.
-			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false;
-			$cache_slug      = isset( $params['cache_slug'] ) && $params['cache_slug'] ? $params['cache_slug'] : '';
-			$cache_logged_in = isset( $params['cache_logged_in'] ) ? $params['cache_logged_in'] : false;
-			$do_create_cache = $cache_logged_in === 'true' && is_user_logged_in() ? false : true;
 
 			// Offset.
 			$offset = isset( $params['offset'] ) ? $params['offset'] : 0;
@@ -537,10 +563,16 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$seo_start_page = isset( $params['seo_start_page'] ) ? $params['seo_start_page'] : 1;
 
 			// Set up initial WP_Query $args.
-			$args = ALM_QUERY_ARGS::alm_build_queryargs( $params, true );
-
+			$args           = ALM_QUERY_ARGS::alm_build_queryargs( $params, true );
 			$args['paged']  = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 			$args['offset'] = $offset + ( $posts_per_page * $page );
+
+			/**
+			 * Custom `alm_query` parameter in the WP_Query
+			 * Value is accessed elsewhere for filters & hooks etc.
+			 */
+			$args['alm_query']      = $single_post ? 'single_posts' : 'alm';
+			$args['alm_query_type'] = $query_type;
 
 			// Get current page number for determining item number.
 			$alm_page_count = $page === 0 ? 1 : $page + 1;
@@ -569,12 +601,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			 */
 			$args = apply_filters( 'alm_query_args_' . $id, $args, $post_id );
 
-			/**
-			 * Custom `alm_query` parameter in the WP_Query
-			 * Value is accessed elsewhere for filters & hooks etc.
-			 */
-			$args['alm_query'] = $single_post ? 'single_posts' : 'alm';
-
 			// Dispatch WP_Query.
 			$alm_query = new WP_Query( $args );
 
@@ -585,26 +611,30 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			 */
 			$alm_query = apply_filters( 'alm_query_after_' . $id, $alm_query, $post_id );
 
-			// If preloaded, update loop counter and total posts.
+			// Preloaded: Update loop counter and total posts.
 			if ( has_action( 'alm_preload_installed' ) && $preloaded === 'true' ) {
 				$alm_total_posts = $alm_query->found_posts - $offset + $preloaded_amount;
-				if ( $old_offset > 0 ) {
-					$alm_loop_count = $old_offset;
-				} else {
-					$alm_loop_count = $offset;
-				}
+				$alm_loop_count  = $old_offset > 0 ? $old_offset : $offset;
 			} else {
 				$alm_total_posts = $alm_query->found_posts - $offset;
 				$alm_loop_count  = 0;
 			}
 
 			if ( $query_type === 'totalposts' ) {
-				// Paging add-on.
-				wp_send_json(
-					[
-						'totalposts' => $alm_total_posts,
-					]
-				);
+				// Used with combined Preloaded & Paging add-ons.
+				$totalposts_data = [
+					'totalposts' => $alm_total_posts,
+				];
+
+				/**
+				 * Cache Add-on.
+				 * Generate the cache.
+				 */
+				if ( $cache && method_exists( 'ALMCache', 'create_cache' ) && $use_cache ) {
+					ALMCache::create_cache( $params, $totalposts_data );
+				}
+
+				wp_send_json( $totalposts_data );
 
 			} else {
 
@@ -672,8 +702,16 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					 * Cache Add-on.
 					 * Create the cache file.
 					 */
-					if ( $cache_id && method_exists( 'ALMCache', 'create_cache_file' ) && $do_create_cache ) {
-						ALMCache::create_cache_file( $cache_id, $cache_slug, $canonical_url, $data, $alm_current, $alm_found_posts, $facets );
+					if ( $cache_id && method_exists( 'ALMCache', 'create_cache_file' ) && $use_cache ) {
+						// ALMCache::create_cache_file( $cache_id, $cache_slug, $canonical_url, $data, $alm_current, $alm_found_posts, $facets );
+					}
+
+					/**
+					 * Cache Add-on.
+					 * Generate the cache.
+					 */
+					if ( $cache && method_exists( 'ALMCache', 'create_cache' ) && $use_cache ) {
+						ALMCache::create_cache( $params, $return );
 					}
 
 					wp_send_json( $return );
