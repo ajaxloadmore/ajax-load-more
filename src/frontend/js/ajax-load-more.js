@@ -1461,37 +1461,41 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				}
 			}
 
-			// Window Load.
-			alm.window.addEventListener('load', function () {
-				// Masonry & Preloaded.
-				if (alm.transition === 'masonry' && alm.addons.preloaded) {
-					// Wrap almMasonry in anonymous async/await function
-					(async function () {
-						await almMasonry(alm, true, false);
-						alm.masonry.init = false;
-					})().catch(() => {
-						console.error('There was an error with ALM Masonry');
-					});
-				}
-
-				//  Filters, Facets & Preloaded Facets
-				if (alm.addons.preloaded && alm.addons.filters && alm.facets) {
-					if (typeof almFiltersFacets === 'function') {
-						const facets = alm?.localize?.facets;
-						if (facets) {
-							window.almFiltersFacets(facets);
-						}
-					}
-				}
-
-				// Window Load Callback.
-				if (typeof almOnLoad === 'function') {
-					window.almOnLoad(alm); // eslint-disable-line
-				}
-			});
-
 			setPreloadedParams(alm); // Set preloaded params.
 		};
+
+		// DOM Ready Handler.
+		document.addEventListener('DOMContentLoaded', () => {
+			if (!alm) {
+				return;
+			}
+
+			// Masonry & Preloaded.
+			if (alm.transition === 'masonry' && alm.addons.preloaded) {
+				// Wrap almMasonry in anonymous async/await function
+				(async function () {
+					await almMasonry(alm, true, false);
+					alm.masonry.init = false;
+				})().catch(() => {
+					console.error('There was an error with ALM Masonry');
+				});
+			}
+
+			//  Filters, Facets & Preloaded Facets
+			if (alm.addons.preloaded && alm.addons.filters && alm.facets) {
+				if (typeof almFiltersFacets === 'function') {
+					const facets = alm?.localize?.facets;
+					if (facets) {
+						window.almFiltersFacets(facets);
+					}
+				}
+			}
+
+			// Window Load Callback.
+			if (typeof almOnLoad === 'function') {
+				window.almOnLoad(alm); // eslint-disable-line
+			}
+		});
 
 		/**
 		 * Handle API errors by reseting the loading state and button text.
