@@ -2,14 +2,14 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.6.1\n"
+"Project-Id-Version: Ajax Load More 7.6.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-17T19:10:11+00:00\n"
+"POT-Creation-Date: 2025-10-31T12:51:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: admin/admin.php:276
 #: admin/admin.php:284
-#: admin/views/licenses.php:257
+#: admin/views/licenses.php:261
 msgid "Go Pro"
 msgstr ""
 
@@ -154,12 +154,12 @@ msgid "Help"
 msgstr ""
 
 #: admin/admin.php:554
-#: admin/views/licenses.php:128
+#: admin/views/licenses.php:132
 msgid "Active"
 msgstr ""
 
 #: admin/admin.php:555
-#: admin/views/licenses.php:131
+#: admin/views/licenses.php:135
 msgid "Inactive"
 msgstr ""
 
@@ -2708,7 +2708,7 @@ msgid "View All Examples"
 msgstr ""
 
 #: admin/views/licenses.php:21
-#: admin/views/licenses.php:109
+#: admin/views/licenses.php:113
 msgid "License Key"
 msgstr ""
 
@@ -2724,97 +2724,97 @@ msgstr ""
 msgid "Enter the license key for each of your Ajax Load More add-ons to receive plugin updates directly from the <a href=\"plugins.php\">WP Plugins dashboard</a>."
 msgstr ""
 
-#: admin/views/licenses.php:91
+#: admin/views/licenses.php:95
 msgid "View Add-on"
 msgstr ""
 
-#: admin/views/licenses.php:105
+#: admin/views/licenses.php:109
 msgid "A valid license is required to activate and receive plugin updates directly in your WordPress dashboard"
 msgstr ""
 
-#: admin/views/licenses.php:105
+#: admin/views/licenses.php:109
 msgid "Purchase Now"
 msgstr ""
 
-#: admin/views/licenses.php:117
+#: admin/views/licenses.php:121
 msgid "Enter License Key"
 msgstr ""
 
-#: admin/views/licenses.php:131
+#: admin/views/licenses.php:135
 msgid "Expired"
 msgstr ""
 
-#: admin/views/licenses.php:138
+#: admin/views/licenses.php:142
 msgid "Activate License"
 msgstr ""
 
-#: admin/views/licenses.php:142
+#: admin/views/licenses.php:146
 msgid "Deactivate License"
 msgstr ""
 
-#: admin/views/licenses.php:148
+#: admin/views/licenses.php:152
 msgid "Refresh Status"
 msgstr ""
 
-#: admin/views/licenses.php:161
+#: admin/views/licenses.php:165
 msgid "Renew License"
 msgstr ""
 
-#: admin/views/licenses.php:177
+#: admin/views/licenses.php:181
 msgid "Expires:"
 msgstr ""
 
-#: admin/views/licenses.php:181
+#: admin/views/licenses.php:185
 msgid "Lifetime"
 msgstr ""
 
-#: admin/views/licenses.php:194
-#: admin/views/licenses.php:207
+#: admin/views/licenses.php:198
+#: admin/views/licenses.php:211
 msgid "Activations:"
 msgstr ""
 
-#: admin/views/licenses.php:196
+#: admin/views/licenses.php:200
 msgid "Unlimited"
 msgstr ""
 
-#: admin/views/licenses.php:211
+#: admin/views/licenses.php:215
 msgid "View Upgrades"
 msgstr ""
 
 #. translators: the license key expiration date
-#: admin/views/licenses.php:235
+#: admin/views/licenses.php:239
 msgid "Activation limit reached. You can purchase additional %1$s licenses from <a href=\"%2$s\" target=\"_blank\">your account</a>."
 msgstr ""
 
-#: admin/views/licenses.php:257
+#: admin/views/licenses.php:261
 msgid "You do not have any Ajax Load More add-ons installed"
 msgstr ""
 
-#: admin/views/licenses.php:257
+#: admin/views/licenses.php:261
 msgid "Browse Add-ons"
 msgstr ""
 
-#: admin/views/licenses.php:264
+#: admin/views/licenses.php:268
 msgid "About Licenses"
 msgstr ""
 
-#: admin/views/licenses.php:267
+#: admin/views/licenses.php:271
 msgid "License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target=\"_blank\" href=\"https://connekthq.com/account/\">Account</a> section on our website"
 msgstr ""
 
-#: admin/views/licenses.php:268
+#: admin/views/licenses.php:272
 msgid "If you cannot locate your key please open a support ticket by filling out the <a href=\"https://connekthq.com/support/\">support form</a> and reference the email address used when you completed the purchase."
 msgstr ""
 
-#: admin/views/licenses.php:269
+#: admin/views/licenses.php:273
 msgid "Are you having issues updating an add-on?"
 msgstr ""
 
-#: admin/views/licenses.php:270
+#: admin/views/licenses.php:274
 msgid "Try deactivating and re-activating the license. Once you've done that, try running the update again."
 msgstr ""
 
-#: admin/views/licenses.php:275
+#: admin/views/licenses.php:279
 msgid "Your Account"
 msgstr ""
 

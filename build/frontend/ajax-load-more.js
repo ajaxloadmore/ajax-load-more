@@ -15301,10 +15301,10 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              *
              * @since 2.0
              */
-            alm.AjaxLoadMore.init = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee11() {
+            alm.AjaxLoadMore.init = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee10() {
               var nextpage_pages, _alm42, nextpage_first, nextpage_total;
-              return ajax_load_more_regeneratorRuntime().wrap(function _callee11$(_context11) {
-                while (1) switch (_context11.prev = _context11.next) {
+              return ajax_load_more_regeneratorRuntime().wrap(function _callee10$(_context10) {
+                while (1) switch (_context10.prev = _context10.next) {
                   case 0:
                     // Preloaded and Destroy After is 1.
                     if (alm.addons.preloaded && alm.destroy_after === 1) {
@@ -15345,13 +15345,13 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
 
                     // Single Post Add-on.
                     if (!alm.addons.single_post) {
-                      _context11.next = 11;
+                      _context10.next = 11;
                       break;
                     }
-                    _context11.next = 6;
+                    _context10.next = 6;
                     return timeout(1000);
                   case 6:
-                    _context11.next = 8;
+                    _context10.next = 8;
                     return alm.AjaxLoadMore.getSinglePost();
                   case 8:
                     // Set next post on load.
@@ -15370,10 +15370,10 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
 
                     // Preloaded + SEO && !Paging.
                     if (!(alm.addons.preloaded && alm.addons.seo && !alm.addons.paging)) {
-                      _context11.next = 16;
+                      _context10.next = 16;
                       break;
                     }
-                    _context11.next = 15;
+                    _context10.next = 15;
                     return timeout(250);
                   case 15:
                     // Add delay for setup and scripts to load.
@@ -15382,10 +15382,10 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                     }
                   case 16:
                     if (!(alm.addons.preloaded && !alm.addons.paging)) {
-                      _context11.next = 21;
+                      _context10.next = 21;
                       break;
                     }
-                    _context11.next = 19;
+                    _context10.next = 19;
                     return timeout(250);
                   case 19:
                     // Add delay for setup and scripts to load.
@@ -15445,53 +15445,57 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                       }
                     }
 
-                    // Window Load.
-                    alm.window.addEventListener('load', function () {
-                      // Masonry & Preloaded.
-                      if (alm.transition === 'masonry' && alm.addons.preloaded) {
-                        // Wrap almMasonry in anonymous async/await function
-                        ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee10() {
-                          return ajax_load_more_regeneratorRuntime().wrap(function _callee10$(_context10) {
-                            while (1) switch (_context10.prev = _context10.next) {
-                              case 0:
-                                _context10.next = 2;
-                                return almMasonry(alm, true, false);
-                              case 2:
-                                alm.masonry.init = false;
-                              case 3:
-                              case "end":
-                                return _context10.stop();
-                            }
-                          }, _callee10);
-                        }))()["catch"](function () {
-                          console.error('There was an error with ALM Masonry');
-                        });
-                      }
-
-                      //  Filters, Facets & Preloaded Facets
-                      if (alm.addons.preloaded && alm.addons.filters && alm.facets) {
-                        if (typeof almFiltersFacets === 'function') {
-                          var _alm43;
-                          var facets = (_alm43 = alm) === null || _alm43 === void 0 || (_alm43 = _alm43.localize) === null || _alm43 === void 0 ? void 0 : _alm43.facets;
-                          if (facets) {
-                            window.almFiltersFacets(facets);
-                          }
-                        }
-                      }
-
-                      // Window Load Callback.
-                      if (typeof almOnLoad === 'function') {
-                        window.almOnLoad(alm); // eslint-disable-line
-                      }
-                    });
-
                     setPreloadedParams(alm); // Set preloaded params.
-                  case 27:
+                  case 26:
                   case "end":
-                    return _context11.stop();
+                    return _context10.stop();
                 }
-              }, _callee11);
+              }, _callee10);
             }));
+
+            // DOM Ready Handler.
+            document.addEventListener('DOMContentLoaded', function () {
+              if (!alm) {
+                return;
+              }
+
+              // Masonry & Preloaded.
+              if (alm.transition === 'masonry' && alm.addons.preloaded) {
+                // Wrap almMasonry in anonymous async/await function
+                ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee11() {
+                  return ajax_load_more_regeneratorRuntime().wrap(function _callee11$(_context11) {
+                    while (1) switch (_context11.prev = _context11.next) {
+                      case 0:
+                        _context11.next = 2;
+                        return almMasonry(alm, true, false);
+                      case 2:
+                        alm.masonry.init = false;
+                      case 3:
+                      case "end":
+                        return _context11.stop();
+                    }
+                  }, _callee11);
+                }))()["catch"](function () {
+                  console.error('There was an error with ALM Masonry');
+                });
+              }
+
+              //  Filters, Facets & Preloaded Facets
+              if (alm.addons.preloaded && alm.addons.filters && alm.facets) {
+                if (typeof almFiltersFacets === 'function') {
+                  var _alm43;
+                  var facets = (_alm43 = alm) === null || _alm43 === void 0 || (_alm43 = _alm43.localize) === null || _alm43 === void 0 ? void 0 : _alm43.facets;
+                  if (facets) {
+                    window.almFiltersFacets(facets);
+                  }
+                }
+              }
+
+              // Window Load Callback.
+              if (typeof almOnLoad === 'function') {
+                window.almOnLoad(alm); // eslint-disable-line
+              }
+            });
 
             /**
              * Handle API errors by reseting the loading state and button text.
@@ -15589,7 +15593,7 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
             if (((_alm_localize5 = alm_localize) === null || _alm_localize5 === void 0 ? void 0 : _alm_localize5.scrolltop) === 'true') {
               window.scrollTo(0, 0); // Move user to top of page to prevent loading on initial page load.
             }
-          case 144:
+          case 145:
           case "end":
             return _context12.stop();
         }
