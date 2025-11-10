@@ -29,15 +29,14 @@
 				<a target="blank" href="https://connekthq.com/support/?product=Ajax%20Load%20More"><i class="fa fa-question-circle"></i> <?php esc_attr_e( 'Get Support', 'ajax-load-more' ); ?></a>
 			</li>
 			<?php } ?>
-			<li>
-				<a target="blank" href="https://wordpress.org/support/view/plugin-reviews/ajax-load-more"><i class="fa fa-star"></i> <?php esc_attr_e( 'Reviews', 'ajax-load-more' ); ?></a>
-			</li>
-			<li>
-				<a target="blank" href="https://wordpress.org/plugins/ajax-load-more/"><i class="fa fa-wordpress"></i> <?php esc_attr_e( 'WordPress', 'ajax-load-more' ); ?></a>
-			</li>
-			<li>
-				<a target="blank" href="https://github.com/ajaxloadmore/ajax-load-more"><i class="fa fa-github"></i> <?php esc_attr_e( 'Github', 'ajax-load-more' ); ?></a>
-			</li>
 		</ul>
+	</div>
+	<div class="major-publishing-actions">
+		<a href="https://wordpress.org/plugins/ajax-load-more/" class="button button-primary" target="blank">
+			<?php esc_attr_e( 'WordPress', 'ajax-load-more' ); ?>
+		</a>
+		<a href="https://github.com/ajaxloadmore/ajax-load-more" class="button" target="_blank">
+			<?php esc_html_e( 'Github', 'ajax-load-more-filters' ); ?>
+		</a>
 	</div>
 </div>

@@ -1,10 +1,9 @@
-import { API_DATA_SHAPE } from '../functions/constants';
+import { API_DEFAULT_DATA_SHAPE } from '../functions/constants';
 import dispatchScrollEvent from '../functions/dispatchScrollEvent';
 import { setButtonAtts } from '../functions/getButtonURL';
 import { lazyImages } from '../modules/lazyImages';
 import loadItems from '../modules/loadItems';
 import { createLoadPreviousButton } from '../modules/loadPrevious';
-import { createCache } from './cache';
 
 /**
  * Create add-on params for ALM.
@@ -47,6 +46,7 @@ export function queryLoopCreateParams(alm) {
 	alm.pause = 'true'; // Pause ALM by default.
 	return alm;
 }
+
 /**
  * Init the Query Loop functionality.
  * @param {Object} alm The alm object.
@@ -80,89 +80,60 @@ export function queryLoopInit(alm) {
 }
 
 /**
- * Set the button URLs.
- *
- * @param {Object}      alm     The alm object.
- * @param {HTMLElement} element The element to search.
- */
-function setButtonURLs(alm, element = document) {
-	const { rel, button, buttonPrev, page, pagePrev = 1 } = alm;
-	const { next = '', prev = '' } = getQueryLoopConfig(element);
-
-	// Set button state & URL.
-	if (rel === 'prev' && buttonPrev) {
-		if (prev) {
-			setButtonAtts(buttonPrev, pagePrev - 1, prev);
-		} else {
-			alm.AjaxLoadMore.triggerDonePrev();
-		}
-	} else {
-		if (next) {
-			setButtonAtts(button, page + 1, next);
-		} else {
-			alm.AjaxLoadMore.triggerDone();
-		}
-	}
-}
-
-/**
  * Get the content, title and results text from the Ajax response.
  *
- * @param {Object} alm        The alm object.
- * @param {string} url        The request URL.
- * @param {Object} response   Query response.
- * @param {string} cache_slug The cache slug.
- * @return {Object}           Results data.
+ * @param {Object} alm  The alm object.
+ * @param {string} url  The request URL.
+ * @param {string} html The HTML data as a string.
+ * @return {Object}     Results data.
  */
-export function queryLoopGetContent(alm, url, response, cache_slug) {
-	const data = API_DATA_SHAPE;
-	const { status, data: resData } = response;
-
-	if (status !== 200 || !resData) {
-		return data; // Bail early if response is not OK or empty.
+export function queryLoopGetContent(alm, url, html = '') {
+	if (!html) {
+		return API_DEFAULT_DATA_SHAPE; // Bail early if missing html content.
 	}
 
 	const { addons, canonical_url } = alm;
 	const { queryloop_settings = {} } = addons;
 
-	// Create temp div to hold response data.
-	const content = document.createElement('div');
-	content.innerHTML = resData;
+	// Create temp div to hold html data.
+	const tempDiv = document.createElement('div');
+	tempDiv.innerHTML = html;
 
 	// Get container.
-	const container = content?.querySelector(`${queryloop_settings?.classes?.container} ${queryloop_settings?.classes?.listing}`);
+	const container = tempDiv.querySelector(`${queryloop_settings?.classes?.container}`);
 	if (!container) {
 		console.warn('Ajax Load More: Unable to locate Query Loop container.');
 		return data;
 	}
 
-	// Get the first item and append data attributes.
-	const item = container ? container.querySelector(queryloop_settings?.classes?.element) : null;
-	if (item) {
-		// Get current page from config settings.
-		const { paged = 1 } = getQueryLoopConfig(content);
+	const listing = container?.querySelector(`${queryloop_settings?.classes?.listing}`);
+	const raw = container?.querySelector('pre[data-rel="ajax-load-more"]');
 
-		item.classList.add('alm-query-loop');
-		item.dataset.url = paged > 1 ? url : canonical_url;
-		item.dataset.page = paged;
-		item.dataset.title = content.querySelector('title').innerHTML;
-	}
+	// Create a new content container that holds both listing and raw query loop config.
+	const content = document.createElement('div');
+	content.className = container.classList.toString();
+	content.appendChild(listing);
+	content.appendChild(raw);
 
-	// Count the number of returned items.
-	const items = container.querySelectorAll(queryloop_settings?.classes?.element);
+	// Get the returned items.
+	const items = content.querySelectorAll(queryloop_settings?.classes?.element);
 	if (items) {
-		// Set the html to the elementor container data.
-		data.html = container ? container.innerHTML : '';
-		data.meta.postcount = items.length;
-		data.meta.totalposts = items.length;
+		// Set first item data attributes.
+		const { paged = 1 } = getQueryLoopConfig(content); // Get current page from config settings.
+		items[0].classList.add('alm-query-loop');
+		items[0].dataset.url = paged > 1 ? url : canonical_url;
+		items[0].dataset.page = paged;
+		items[0].dataset.title = tempDiv.querySelector('title').innerHTML;
 
-		// Create cache file.
-		createCache(alm, data, cache_slug);
+		// Return data object.
+		return {
+			html: content.innerHTML,
+			meta: {
+				postcount: items.length,
+				totalposts: items.length,
+			},
+		};
 	}
-
-	// Set the button URLs.
-	alm.page = alm.page + 1;
-	setButtonURLs(alm, content);
 
 	return data;
 }
@@ -178,6 +149,8 @@ export function queryLoop(content, alm) {
 		alm.AjaxLoadMore.triggerDone();
 		return false;
 	}
+
+	setButtonURLs(alm, content); // Set button state & URL.
 
 	return new Promise((resolve) => {
 		const { addons } = alm;
@@ -240,6 +213,32 @@ function getQueryLoopConfig(element) {
 		return {};
 	}
 	return JSON.parse(raw?.innerHTML);
+}
+
+/**
+ * Set the button URLs.
+ *
+ * @param {Object}      alm     The alm object.
+ * @param {HTMLElement} element The element to search.
+ */
+function setButtonURLs(alm, element = document) {
+	const { rel, button, buttonPrev, page, pagePrev = 1 } = alm;
+	const { next = '', prev = '' } = getQueryLoopConfig(element);
+
+	// Set button state & URL.
+	if (rel === 'prev' && buttonPrev) {
+		if (prev) {
+			setButtonAtts(buttonPrev, pagePrev - 1, prev);
+		} else {
+			alm.AjaxLoadMore.triggerDonePrev();
+		}
+	} else {
+		if (next) {
+			setButtonAtts(button, page + 1, next);
+		} else {
+			alm.AjaxLoadMore.triggerDone();
+		}
+	}
 }
 
 /**

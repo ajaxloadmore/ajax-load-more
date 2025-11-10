@@ -15,22 +15,51 @@
  */
 
 /*
- * CACHE UPDATES
- * =============
- * Standard
- * Single Posts
- * Next Page
- * Comments
- * WooCommerce
- * Elementor
- * Filters
- *
- * Remove `cache_id`. Shouldn't be needed if we pass in all the parameters.
- * Dynamically generate cache files. Use Preloaded with a bypass hook to create the files on the server.
+* UPGRADE NOTICE: Cache users must update to Cache 3.0 or greater when updating core Ajax Load More.
+* NEW: Added required updates and new functionality for new Cache add-on 3.0.
+* UPDATE: Code cleanup and organization throughout core plugin.
+
+ADD-ON UPDATES:
+
+- Filters 3.2.1
+* FIX: Fixed issue with hitting paged URL and user not being scrolled to the current page.
+
+- Cache 3.0.0
+	- ALM Cache is no stored in native WP transients for better performance and scalability.
+	- Static files are no longer created on the server.
+
+- NextPage 1.9.0
+
+- Comments 1.3.0
+* NEW: Added support for Ajax Load More Cache 3.0.
+* UPDATE: Various code cleanups and organization.
+* UPDATE: Updated WP compatibility.
+
+- Elementor - 1.3.0
+* NEW: Added support for Ajax Load More Cache.
+* UPDATE: Updated Elementor tested up to versioning for better update support.
+* UPDATE: Various code cleanups and organization.
+
+- WooCommerce - 1.3.0
+* NEW: Added support for Ajax Load More Cache 3.0.
+* NEW: Add new hooks for disabling integration functions.
+* FIX: Fixed issue with WooCommerce taxonomies and archives setting.
+
+- ACF - 1.4.0
+* NEW: Added support for Ajax Load More Cache 3.0.
+* UPDATE: Various code cleanups and organization.
+
+- Users - 1.2.0
+* NEW: Added support for Ajax Load More Cache 3.0.
+* UPDATE: Various code cleanups and organization.
+
+- Terms - 1.2.0
+* NEW: Added support for Ajax Load More Cache 3.0.
+* UPDATE: Various code cleanups and organization.
 
 */
 
-define( 'ALM_VERSION', '7.6.3' );
+define( 'ALM_VERSION', '7.7.0' );
 define( 'ALM_RELEASE', 'October 31, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
@@ -118,7 +147,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			require_once ALM_PATH . 'core/classes/class-alm-woocommerce.php'; // Load Woocommerce Class.
 			require_once ALM_PATH . 'core/classes/class-alm-enqueue.php'; // Load Enqueue Class.
 			require_once ALM_PATH . 'core/classes/class-alm-queryargs.php'; // Load Query Args Class.
-			require_once ALM_PATH . 'core/classes/class-alm-localize.php'; // Load Localize Class.
+			require_once ALM_PATH . 'core/classes/class-alm-localize.php'; // Load  Class.
 			require_once ALM_PATH . 'core/integration/elementor/elementor.php';
 
 			if ( is_admin() ) {
@@ -479,23 +508,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		public function alm_query_posts() {
 			$params = filter_input_array( INPUT_GET );
 
-			// Cache.
-			$cache           = isset( $params['cache'] ) && $params['cache'] === 'true' ? true : false;
-			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false; // TODO: Remove.
-			$cache_logged_in = isset( $params['cache_logged_in'] ) ? $params['cache_logged_in'] : false;
-			$use_cache       = $cache_logged_in === 'true' && is_user_logged_in() ? false : true;
-
-			/**
-			 * Cache Add-on.
-			 * Get the cached data.
-			 */
-			if ( $cache && method_exists( 'ALMCache', 'get_cache' ) && $use_cache ) {
-				$cache_data = ALMCache::get_cache( $params );
-				if ( $cache_data ) {
-					wp_send_json( $cache_data );
-				}
-			}
-
 			// WPML fix for category/tag/taxonomy archives.
 			if ( ( isset( $params['category'] ) && $params['category'] ) || ( isset( $params['taxonomy'] ) && $params['taxonomy'] ) || ( isset( $params['tag'] ) && $params['tag'] ) ) {
 				unset( $_REQUEST['post_id'] );
@@ -571,8 +583,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			 * Custom `alm_query` parameter in the WP_Query
 			 * Value is accessed elsewhere for filters & hooks etc.
 			 */
-			$args['alm_query']      = $single_post ? 'single_posts' : 'alm';
-			$args['alm_query_type'] = $query_type;
+			$args['alm_query'] = $single_post ? 'single_posts' : 'alm';
 
 			// Get current page number for determining item number.
 			$alm_page_count = $page === 0 ? 1 : $page + 1;
@@ -621,20 +632,12 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			}
 
 			if ( $query_type === 'totalposts' ) {
-				// Used with combined Preloaded & Paging add-ons.
-				$totalposts_data = [
-					'totalposts' => $alm_total_posts,
-				];
-
-				/**
-				 * Cache Add-on.
-				 * Generate the cache.
-				 */
-				if ( $cache && method_exists( 'ALMCache', 'create_cache' ) && $use_cache ) {
-					ALMCache::create_cache( $params, $totalposts_data );
-				}
-
-				wp_send_json( $totalposts_data );
+				// Combined Preloaded & Paging add-ons.
+				wp_send_json(
+					[
+						'totalposts' => $alm_total_posts,
+					]
+				);
 
 			} else {
 
@@ -696,22 +699,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					if ( $is_filters && $filters_target && $filters_facets && function_exists( 'alm_filters_get_facets' ) ) {
 						$facets           = alm_filters_get_facets( $args, $filters_target );
 						$return['facets'] = $facets;
-					}
-
-					/**
-					 * Cache Add-on.
-					 * Create the cache file.
-					 */
-					if ( $cache_id && method_exists( 'ALMCache', 'create_cache_file' ) && $use_cache ) {
-						// ALMCache::create_cache_file( $cache_id, $cache_slug, $canonical_url, $data, $alm_current, $alm_found_posts, $facets );
-					}
-
-					/**
-					 * Cache Add-on.
-					 * Generate the cache.
-					 */
-					if ( $cache && method_exists( 'ALMCache', 'create_cache' ) && $use_cache ) {
-						ALMCache::create_cache( $params, $return );
 					}
 
 					wp_send_json( $return );

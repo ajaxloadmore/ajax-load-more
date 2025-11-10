@@ -1,4 +1,5 @@
-import { getCacheSlug } from '../addons/cache';
+import { getCacheId } from '../addons/cache';
+import getCurrentPage from './getCurrentPage';
 
 /**
  * Build the data object to send with the Ajax request.
@@ -16,7 +17,7 @@ export function getAjaxParams(alm, type) {
 		action: 'alm_get_posts',
 		query_type: type,
 		id: alm.id,
-		post_id: parseInt(alm.post_id),
+		post_id: alm.post_id,
 		slug: alm.slug,
 		canonical_url: encodeURIComponent(alm.canonical_url),
 		posts_per_page: parseInt(alm.posts_per_page),
@@ -204,12 +205,16 @@ export function getAjaxParams(alm, type) {
 		data.vars = alm.listing.dataset.vars;
 	}
 
+	// Get the actual current page number.
+	alm.currentPage = getCurrentPage(alm, data);
+	data.currentPage = alm.currentPage;
+	console.log('Current Page:', alm.currentPage);
+
 	// Cache Params
 	if (addons.cache) {
 		data.cache = true;
-		data.cache_id = addons.cache_id;
 		data.cache_logged_in = addons.cache_logged_in;
-		data.cache_slug = getCacheSlug(alm, data); // TODO: Can this be removed?
+		data.cache_id = getCacheId(alm, data);
 	}
 
 	return data;

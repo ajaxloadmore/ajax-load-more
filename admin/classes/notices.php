@@ -22,8 +22,8 @@ if ( ! class_exists( 'ALM_Notices' ) ) {
 		 * Construct class.
 		 */
 		public function __construct() {
-			add_action( 'admin_notices', [ &$this, 'alm_admin_notices' ] );
-			add_filter( 'wp_kses_allowed_html', [ &$this, 'alm_wp_kses_allowed_html' ] );
+			add_action( 'admin_notices', [ $this, 'alm_admin_notices' ] );
+			add_filter( 'wp_kses_allowed_html', [ $this, 'alm_wp_kses_allowed_html' ] );
 		}
 
 		/**

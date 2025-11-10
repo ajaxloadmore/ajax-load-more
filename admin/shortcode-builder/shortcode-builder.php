@@ -138,8 +138,7 @@ $show_max                = 100; // Max number of items to show.
 							</div>
 						</section>
 						<?php
-						// Custom Repeaters CTA.
-						// TODO: Update this to reference the new Templates add-on.
+						// Templates CTA.
 						if ( ! has_action( 'alm_get_unlimited_repeaters' ) && ! has_action( 'alm_theme_repeaters_installed' ) ) {
 							echo '<div class="call-out--shortcode-builder">';
 							include ALM_PATH . 'admin/includes/cta/extend.php';

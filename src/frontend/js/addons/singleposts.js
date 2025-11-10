@@ -1,5 +1,4 @@
-import { API_DATA_SHAPE } from '../functions/constants';
-import { createCache } from './cache';
+import { API_DEFAULT_DATA_SHAPE } from '../functions/constants';
 
 /**
  * Create add-on params for ALM.
@@ -56,53 +55,49 @@ export function singlepostsCreateParams(alm) {
 /**
  * Create the HTML for loading Single Posts.
  *
- * @param {Object} alm        The alm object.
- * @param {Object} response   Query response.
- * @param {string} cache_slug The cache slug.
- * @return {Object}           Results data.
+ * @param {Object} alm  The alm object.
+ * @param {string} html The HTML data as a string.
+ * @return {Object}     Results data.
  * @since 5.1.8.1
  */
-export function singlepostsHTML(alm, response, cache_slug) {
-	const data = API_DATA_SHAPE;
-	const { status, data: resData } = response;
+export function singlepostsHTML(alm, html = '') {
 	const { single_post_target, single_post_id } = alm.addons; // Get target elements.
 
-	if (status !== 200 || !resData || !single_post_target) {
-		return data; // Bail early if response is not OK or empty.
+	if (!html || !single_post_target) {
+		return API_DEFAULT_DATA_SHAPE; // Bail early if missing requirements.
 	}
 
-	// Create temp div to hold response data.
-	const div = document.createElement('div');
-	div.innerHTML = resData;
+	// Create temp div to hold html data.
+	const tempDiv = document.createElement('div');
+	tempDiv.innerHTML = html;
 
-	// Get target element.
-	const html = div.querySelector(single_post_target);
-
-	if (!html) {
+	// Get target ref element.
+	const ref = tempDiv.querySelector(single_post_target);
+	if (!ref) {
 		console.warn(`Ajax Load More: Unable to find ${single_post_target} element.`);
-		return data;
+		return API_DEFAULT_DATA_SHAPE;
 	}
 
 	// Get any custom target elements.
 	if (window?.almSinglePostsCustomElements) {
-		const customElements = singlepostsGetCustomElements(div, window?.almSinglePostsCustomElements, single_post_id);
+		const customElements = singlepostsGetCustomElements(tempDiv, window?.almSinglePostsCustomElements, single_post_id);
 		if (customElements) {
 			// Get first element in HTML.
-			const target = html.querySelector('article, section, div');
+			const target = ref.querySelector('article, section, div');
 			if (target) {
 				target.appendChild(customElements);
 			}
 		}
 	}
 
-	data.html = html.innerHTML;
-	data.meta = {
-		postcount: 1,
-		totalposts: 1,
+	// Build return data.
+	return {
+		html: ref.innerHTML,
+		meta: {
+			postcount: 1,
+			totalposts: 1,
+		},
 	};
-
-	createCache(alm, data, cache_slug); // Create cache file.
-	return data;
 }
 
 /**
