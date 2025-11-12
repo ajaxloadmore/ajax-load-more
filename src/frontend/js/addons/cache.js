@@ -29,22 +29,26 @@ export function cacheCreateParams(alm) {
 export function getCacheId(alm, data) {
 	const { addons, id = '' } = alm;
 
-	// Generate a cache ID for specific addons that perform full page fetches.
+	// Generate a cache ID for specific addons that perform full page fetches (Woo, Elementor, Query Loop).
 	if (addons.woocommerce || addons.elementor || addons.queryloop) {
 		const url = getButtonURL(alm, alm.rel); // Get the target URL.
 		const settings = getAddOnSettings(alm); // Get addon settings.
-
 		return createMD5Hash(`${url}-${id}-${settings}`); // Combine params to generate cache ID.
 	}
 
-	const copy = { ...data }; // Create a shallow copy of the data object so we don't modify the main data object.
+	// Create a shallow copy of the data object so we don't modify the main data object.
+	const copy = { ...data };
 
 	// Remove the following params to prevent unnecessary cache misses on paged results.
 	delete copy.page;
 	delete copy.seo_start_page;
 	delete copy.filters_startpage;
+	delete copy.paging;
 	delete copy.preloaded;
 	delete copy.preloaded_amount;
+	delete copy.cache;
+	delete copy.cache_logged_in;
+	delete copy.cache_id;
 
 	return createMD5Hash(copy);
 }

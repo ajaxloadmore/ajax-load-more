@@ -896,6 +896,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 					$cache_return   = apply_filters( 'alm_cache_shortcode', $options );
 					$alm_auto_cache = isset( $_GET['alm_auto_cache'] );
 					$paging         = $alm_auto_cache ? false : $paging; // Disable paging if auto generate cache active.
+					$pause          = $alm_auto_cache ? 'true' : $pause; // Disable pause if auto generate cache active.
 					$ajaxloadmore  .= wp_kses_post( $cache_return );
 				}
 			}

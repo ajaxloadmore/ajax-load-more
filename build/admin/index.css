@@ -4935,7 +4935,7 @@ span.cnkt-button.installed,
 .ajax-load-more .form-table input[type=radio] + label span {
   display: inline-block;
   color: #6a7178;
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
 .shortcode-builder input[type=radio] + label,

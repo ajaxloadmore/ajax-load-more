@@ -208,7 +208,6 @@ export function getAjaxParams(alm, type) {
 	// Get the actual current page number.
 	alm.currentPage = getCurrentPage(alm, data);
 	data.currentPage = alm.currentPage;
-	console.log('Current Page:', alm.currentPage);
 
 	// Cache Params
 	if (addons.cache) {

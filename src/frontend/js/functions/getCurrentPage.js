@@ -22,7 +22,6 @@ export default function getCurrentPage(alm, data) {
 		if (data.seo_start_page > 1 || data.filters_startpage > 1) {
 			return currentPage; // Return current page as-is when SEO or Filters add-on is active.
 		}
-
 		return currentPage + 1; // Add another page for preloaded initial page.
 	}
 
