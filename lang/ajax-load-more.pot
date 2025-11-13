@@ -9,14 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-13T15:50:17+00:00\n"
+"POT-Creation-Date: 2025-11-13T16:58:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
 
 #. Plugin Name of the plugin
 #: ajax-load-more.php
-#: admin/admin.php:529
+#: admin/admin.php:560
 #: core/integration/elementor/elementor.php:19
 #: src/blocks/core/render.php:29
 #: _out/admin/admin.php:529
@@ -45,7 +45,7 @@ msgid "https://connekthq.com"
 msgstr ""
 
 #: admin/admin.php:80
-#: admin/admin.php:568
+#: admin/admin.php:599
 #: admin/functions/layouts.php:18
 #: admin/functions/templates.php:18
 #: admin/functions/templates.php:130
@@ -58,7 +58,7 @@ msgid "You don't belong here."
 msgstr ""
 
 #: admin/admin.php:83
-#: admin/admin.php:572
+#: admin/admin.php:603
 #: admin/functions/layouts.php:23
 #: admin/functions/templates.php:22
 #: admin/functions/templates.php:134
@@ -90,7 +90,7 @@ msgstr ""
 #: admin/admin.php:119
 #: admin/admin.php:127
 #: admin/views/settings.php:9
-#: ajax-load-more.php:324
+#: ajax-load-more.php:328
 #: _out/admin/admin.php:118
 #: _out/admin/admin.php:119
 #: _out/admin/admin.php:127
@@ -141,15 +141,25 @@ msgstr ""
 #: admin/admin.php:190
 #: admin/admin.php:191
 #: admin/admin.php:200
+#: admin/shortcode-builder/shortcode-builder.php:1237
+#: admin/views/filters.php:35
+#: _out/admin/shortcode-builder/shortcode-builder.php:1237
+#: _out/admin/views/filters.php:35
+msgid "Search"
+msgstr ""
+
+#: admin/admin.php:209
+#: admin/admin.php:210
+#: admin/admin.php:219
 #: _out/admin/admin.php:190
 #: _out/admin/admin.php:191
 #: _out/admin/admin.php:200
 msgid "WooCommerce"
 msgstr ""
 
-#: admin/admin.php:210
-#: admin/admin.php:211
-#: admin/admin.php:219
+#: admin/admin.php:229
+#: admin/admin.php:230
+#: admin/admin.php:238
 #: admin/shortcode-builder/shortcode-builder.php:27
 #: admin/shortcode-builder/shortcode-builder.php:48
 #: admin/views/add-ons.php:9
@@ -162,9 +172,9 @@ msgstr ""
 msgid "Add-ons"
 msgstr ""
 
-#: admin/admin.php:230
-#: admin/admin.php:231
-#: admin/admin.php:239
+#: admin/admin.php:249
+#: admin/admin.php:250
+#: admin/admin.php:258
 #: admin/shortcode-builder/shortcode-builder.php:30
 #: admin/shortcode-builder/shortcode-builder.php:78
 #: admin/views/extensions.php:9
@@ -177,10 +187,10 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: admin/admin.php:247
-#: admin/admin.php:248
-#: admin/admin.php:256
-#: admin/admin.php:262
+#: admin/admin.php:266
+#: admin/admin.php:267
+#: admin/admin.php:275
+#: admin/admin.php:281
 #: _out/admin/admin.php:247
 #: _out/admin/admin.php:248
 #: _out/admin/admin.php:256
@@ -188,8 +198,8 @@ msgstr ""
 msgid "Pro"
 msgstr ""
 
-#: admin/admin.php:263
-#: admin/admin.php:271
+#: admin/admin.php:282
+#: admin/admin.php:290
 #: admin/views/licenses.php:261
 #: _out/admin/admin.php:263
 #: _out/admin/admin.php:271
@@ -197,9 +207,9 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: admin/admin.php:295
-#: admin/admin.php:296
-#: admin/admin.php:304
+#: admin/admin.php:314
+#: admin/admin.php:315
+#: admin/admin.php:323
 #: admin/views/help.php:9
 #: _out/admin/admin.php:295
 #: _out/admin/admin.php:296
@@ -208,113 +218,113 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: admin/admin.php:530
+#: admin/admin.php:561
 #: admin/views/licenses.php:132
 #: _out/admin/admin.php:530
 #: _out/admin/views/licenses.php:132
 msgid "Active"
 msgstr ""
 
-#: admin/admin.php:531
+#: admin/admin.php:562
 #: admin/views/licenses.php:135
 #: _out/admin/admin.php:531
 #: _out/admin/views/licenses.php:135
 msgid "Inactive"
 msgstr ""
 
-#: admin/admin.php:532
+#: admin/admin.php:563
 #: _out/admin/admin.php:532
 msgid "Applying Layout"
 msgstr ""
 
-#: admin/admin.php:533
+#: admin/admin.php:564
 #: _out/admin/admin.php:533
 msgid "Template Updated"
 msgstr ""
 
-#: admin/admin.php:534
+#: admin/admin.php:565
 #: _out/admin/admin.php:534
 msgid "Updating Template..."
 msgstr ""
 
-#: admin/admin.php:535
+#: admin/admin.php:566
 #: _out/admin/admin.php:535
 msgid "Saving template..."
 msgstr ""
 
-#: admin/admin.php:536
+#: admin/admin.php:567
 #: admin/functions/templates.php:113
 #: _out/admin/admin.php:536
 #: _out/admin/functions/templates.php:113
 msgid "Something went wrong and the data could not be saved."
 msgstr ""
 
-#: admin/admin.php:538
+#: admin/admin.php:569
 #: _out/admin/admin.php:538
 msgid "Select Author(s)"
 msgstr ""
 
-#: admin/admin.php:539
+#: admin/admin.php:570
 #: _out/admin/admin.php:539
 msgid "Select Categories"
 msgstr ""
 
-#: admin/admin.php:540
+#: admin/admin.php:571
 #: _out/admin/admin.php:540
 msgid "Select Tags"
 msgstr ""
 
-#: admin/admin.php:541
+#: admin/admin.php:572
 #: _out/admin/admin.php:541
 msgid "Select"
 msgstr ""
 
-#: admin/admin.php:542
+#: admin/admin.php:573
 #: _out/admin/admin.php:542
 msgid "Jump to Option"
 msgstr ""
 
-#: admin/admin.php:543
+#: admin/admin.php:574
 #: _out/admin/admin.php:543
 msgid "Jump to Template"
 msgstr ""
 
-#: admin/admin.php:544
+#: admin/admin.php:575
 #: _out/admin/admin.php:544
 msgid "Are you sure you want to install this Ajax Load More extension?"
 msgstr ""
 
-#: admin/admin.php:545
+#: admin/admin.php:576
 #: _out/admin/admin.php:545
 msgid "Install Now"
 msgstr ""
 
-#: admin/admin.php:546
+#: admin/admin.php:577
 #: _out/admin/admin.php:546
 msgid "Activate"
 msgstr ""
 
-#: admin/admin.php:547
+#: admin/admin.php:578
 #: _out/admin/admin.php:547
 msgid "Saving Settings"
 msgstr ""
 
-#: admin/admin.php:548
+#: admin/admin.php:579
 #: _out/admin/admin.php:548
 msgid "Settings Saved Successfully"
 msgstr ""
 
-#: admin/admin.php:549
+#: admin/admin.php:580
 #: _out/admin/admin.php:549
 msgid "Error Saving Settings"
 msgstr ""
 
-#: admin/admin.php:550
+#: admin/admin.php:581
 #: _out/admin/admin.php:550
 msgid "There is a maximum of 3 tax_query objects while using the shortcode builder"
 msgstr ""
 
-#: admin/admin.php:597
+#: admin/admin.php:628
 #: _out/admin/admin.php:597
 msgid "No terms exist within this taxonomy"
 msgstr ""
@@ -611,7 +621,7 @@ msgstr ""
 #: admin/functions/settings.php:316
 #: admin/shortcode-builder/shortcode-builder.php:206
 #: admin/shortcode-builder/shortcode-builder.php:379
-#: ajax-load-more.php:426
+#: ajax-load-more.php:430
 #: _out/admin/functions/settings.php:316
 #: _out/admin/shortcode-builder/shortcode-builder.php:206
 #: _out/admin/shortcode-builder/shortcode-builder.php:379
@@ -1297,6 +1307,7 @@ msgid "Cache"
 msgstr ""
 
 #: admin/shortcode-builder/components/cache.php:7
+#: _out/admin/shortcode-builder/components/cache.php:7
 msgid "Turn on caching of Ajax requests."
 msgstr ""
 
@@ -3235,13 +3246,6 @@ msgstr ""
 msgid "Select an Author to query(by ID)."
 msgstr ""
 
-#: admin/shortcode-builder/shortcode-builder.php:1237
-#: admin/views/filters.php:35
-#: _out/admin/shortcode-builder/shortcode-builder.php:1237
-#: _out/admin/views/filters.php:35
-msgid "Search"
-msgstr ""
-
 #: admin/shortcode-builder/shortcode-builder.php:1241
 #: _out/admin/shortcode-builder/shortcode-builder.php:1241
 msgid "Enter a search term to query."
@@ -3678,32 +3682,32 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:301
+#: ajax-load-more.php:305
 #: _out/ajax-load-more.php:301
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:410
+#: ajax-load-more.php:414
 #: _out/ajax-load-more.php:410
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:411
+#: ajax-load-more.php:415
 #: _out/ajax-load-more.php:411
 msgid "No results found."
 msgstr ""
 
-#: ajax-load-more.php:435
+#: ajax-load-more.php:439
 #: _out/ajax-load-more.php:435
 msgid "Load Previous"
 msgstr ""
 
-#: core/classes/class-alm-blocks.php:93
+#: core/classes/class-alm-blocks.php:91
 #: _out/core/classes/class-alm-blocks.php:93
 msgid "Remove"
 msgstr ""
 
-#: core/classes/class-alm-noscript.php:136
+#: core/classes/class-alm-noscript.php:139
 #: _out/core/classes/class-alm-noscript.php:136
 msgid "Pages: "
 msgstr ""
@@ -3855,22 +3859,6 @@ msgstr ""
 
 #: src/blocks/filters/render.php:24
 msgid "You must enter an Ajax Load More target for this filter."
-msgstr ""
-
-#: _out/admin/shortcode-builder/components/cache.php:7
-msgid "Turn on content caching."
-msgstr ""
-
-#: _out/admin/shortcode-builder/components/cache.php:29
-msgid "Cache ID"
-msgstr ""
-
-#: _out/admin/shortcode-builder/components/cache.php:30
-msgid "You must generate a unique ID for this cached query to be used as a content identifier."
-msgstr ""
-
-#: _out/admin/shortcode-builder/components/cache.php:38
-msgid "Generate Cache ID"
 msgstr ""
 
 #: src/blocks/core/inspector.js:23
