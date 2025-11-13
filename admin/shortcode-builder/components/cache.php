@@ -4,7 +4,7 @@
 	<div class="expand-wrap">
 		<section class="first">
 			<div class="shortcode-builder--label">
-				<p><?php _e( 'Turn on content caching.', 'ajax-load-more' ); ?></p>
+				<p><?php _e( 'Turn on caching of Ajax requests.', 'ajax-load-more' ); ?></p>
 			</div>
 			<div class="shortcode-builder--fields">
 				<div class="inner">
@@ -21,28 +21,6 @@
 				</div>
 			</div>
 		</section>
-
-		<div class="cache_id nested-component">
-			<div class="nested-component--inner">
-				<section>
-				<div class="shortcode-builder--label">
-					<h4><?php _e( 'Cache ID', 'ajax-load-more' ); ?></h4>
-					<p><?php _e( 'You must generate a unique ID for this cached query to be used as a content identifier.', 'ajax-load-more' ); ?></p>
-				</div>
-				<div class="shortcode-builder--fields">
-					<div class="inner">
-						<input type="text" class="alm_element" name="cache-id" id="cache-id">
-						<div class="clear"></div>
-						<p class="generate-id">
-							<a href="javascript:void(0);" data-id="cache-id">
-								<i class="fa fa-random"></i> <?php _e( 'Generate Cache ID', 'ajax-load-more' ); ?>
-							</a>
-						</p>
-					</div>
-				</div>
-				</section>
-			</div>
-		</div>
 	</div>
 </div>
 <?php } ?>
