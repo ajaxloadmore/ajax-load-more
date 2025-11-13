@@ -7,66 +7,12 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.6.3
+ * Version: 7.7.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
-
-/*
-* UPGRADE NOTICE: Cache users must update to Cache 3.0 or greater when updating core Ajax Load More.
-* NEW: Added required updates and new functionality for new Cache add-on 3.0.
-* UPDATE: Code cleanup and organization throughout core plugin.
-
-ADD-ON UPDATES:
-
-- Filters 3.2.1
-* FIX: Fixed issue with hitting paged URL and user not being scrolled to the current page.
-
-- Cache 3.0.0
-* UPGRADE NOTICE: Updating to Cache 3.0 and greater requires Ajax Load More 7.7.0 and greater or the Cache will not function.
-* NEW: Cache now supports ALL Ajax Load More functionality and add-ons including Filters, Next Page, WooCommerce, Elementor, ACF, Single Posts, Query Loop etc.
-* NEW: ALM Cache is now stored in WordPress Transients vs files on the server. This improves performance and reliability. This is a major improvement and change to the way the cache is stored and managed going forward.
-* NEW: Transient data is stored for 1 hour by default. This can be modified with the `alm_cache_expiration` filter. See documentation for details.
-* NEW: Removed Cache admin page. Cache can now be managed from the main Ajax Load More admin settings page or the admin bar menu.
-* UPDATE: Removed `cache_id` parameter as it is no longer needed with the new cache configuration. Cache ID is now a dynamically generated hash based on query params, url, and settings.
-* NEW: Added new `alm_cache_created` and `alm_cache_deleted` hooks that are fired after creating and deleting the cache.
-* NEW: Updated unistaller hook to clear up all data on unistall.
-
-
-- NextPage - 1.9.0
-* NEW: Added support for Ajax Load More Cache 3.0.
-* UPDATE: Various code cleanups and organization.
-
-- Comments - 1.3.0
-* NEW: Added support for Ajax Load More Cache 3.0.
-* UPDATE: Various code cleanups and organization.
-* UPDATE: Updated WP compatibility.
-
-- Elementor - 1.3.0
-* NEW: Added support for Ajax Load More Cache.
-* UPDATE: Updated Elementor tested up to versioning for better update support.
-* UPDATE: Various code cleanups and organization.
-
-- WooCommerce - 1.3.0
-* NEW: Added support for Ajax Load More Cache 3.0.
-* NEW: Add new hooks for disabling integration functions.
-* FIX: Fixed issue with WooCommerce taxonomies and archives setting.
-
-- ACF - 1.4.0
-* NEW: Added support for Ajax Load More Cache 3.0.
-* UPDATE: Various code cleanups and organization.
-
-- Users - 1.2.0
-* NEW: Added support for Ajax Load More Cache 3.0.
-* UPDATE: Various code cleanups and organization.
-
-- Terms - 1.2.0
-* NEW: Added support for Ajax Load More Cache 3.0.
-* UPDATE: Various code cleanups and organization.
-
-*/
 
 define( 'ALM_VERSION', '7.7.0' );
 define( 'ALM_RELEASE', 'October 31, 2025' );

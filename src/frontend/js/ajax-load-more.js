@@ -351,10 +351,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					const cache = await getCache(alm, Object.assign({}, params));
 					if (cache) {
 						// Render cache results.
-						console.log('Cache Hit: Rendering results from Ajax Load More Cache.'); // TODO: Remove line after testing.
 						alm.AjaxLoadMore.render(cache, type);
 					} else {
-						console.log('Cache Miss: Fetching results from server.'); // TODO: Remove line after testing.
 						alm.AjaxLoadMore.adminajax(params, type);
 					}
 				} else {
