@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-13T15:23:54+00:00\n"
+"POT-Creation-Date: 2025-11-13T15:50:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -1297,23 +1297,7 @@ msgid "Cache"
 msgstr ""
 
 #: admin/shortcode-builder/components/cache.php:7
-#: _out/admin/shortcode-builder/components/cache.php:7
-msgid "Turn on content caching."
-msgstr ""
-
-#: admin/shortcode-builder/components/cache.php:29
-#: _out/admin/shortcode-builder/components/cache.php:29
-msgid "Cache ID"
-msgstr ""
-
-#: admin/shortcode-builder/components/cache.php:30
-#: _out/admin/shortcode-builder/components/cache.php:30
-msgid "You must generate a unique ID for this cached query to be used as a content identifier."
-msgstr ""
-
-#: admin/shortcode-builder/components/cache.php:38
-#: _out/admin/shortcode-builder/components/cache.php:38
-msgid "Generate Cache ID"
+msgid "Turn on caching of Ajax requests."
 msgstr ""
 
 #: admin/shortcode-builder/components/comments.php:3
@@ -3871,6 +3855,22 @@ msgstr ""
 
 #: src/blocks/filters/render.php:24
 msgid "You must enter an Ajax Load More target for this filter."
+msgstr ""
+
+#: _out/admin/shortcode-builder/components/cache.php:7
+msgid "Turn on content caching."
+msgstr ""
+
+#: _out/admin/shortcode-builder/components/cache.php:29
+msgid "Cache ID"
+msgstr ""
+
+#: _out/admin/shortcode-builder/components/cache.php:30
+msgid "You must generate a unique ID for this cached query to be used as a content identifier."
+msgstr ""
+
+#: _out/admin/shortcode-builder/components/cache.php:38
+msgid "Generate Cache ID"
 msgstr ""
 
 #: src/blocks/core/inspector.js:23
