@@ -178,22 +178,9 @@ function alm_admin_menu() {
 
 	// Cache.
 	if ( has_action( 'alm_cache_installed' ) ) {
-		$alm_cache_page = add_submenu_page(
-			'ajax-load-more',
-			__( 'Cache', 'ajax-load-more' ),
-			__( 'Cache', 'ajax-load-more' ),
-			apply_filters( 'alm_user_role', 'edit_theme_options' ),
-			'ajax-load-more-cache',
-			'alm_cache_page'
-		);
-		add_action( 'load-' . $alm_cache_page, 'alm_load_admin_js' );
-		add_action( 'load-' . $alm_cache_page, 'alm_load_cache_admin_js' );
-
-		// Add to custom admin menu.
-		$alm_menu_items[] = [
-			'label' => __( 'Cache', 'ajax-load-more' ),
-			'slug'  => 'ajax-load-more-cache',
-		];
+		// Load cache admin js/css.
+		add_action( 'load-' . $alm_settings_page, 'alm_load_admin_js' );
+		add_action( 'load-' . $alm_settings_page, 'alm_load_cache_admin_js' );
 	}
 
 	// WooCommerce.
@@ -421,23 +408,12 @@ function alm_licenses_page() {
 }
 
 /**
- *  Cache Add-on page
+ *  Pro Add-on page
  *
  *  @since 3.6.0
  */
 function alm_pro_page() {
 	include_once ALM_PRO_ADMIN_PATH . 'admin/views/pro.php';
-}
-
-/**
- * Cache Add-on page
- *
- * @since 2.6.0
- */
-function alm_cache_page() {
-	if ( defined( 'ALM_CACHE_ADMIN_PATH' ) && file_exists( ALM_CACHE_ADMIN_PATH . 'admin/views/cache.php' ) ) {
-		include_once ALM_CACHE_ADMIN_PATH . 'admin/views/cache.php';
-	}
 }
 
 /**

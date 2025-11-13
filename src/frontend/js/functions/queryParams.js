@@ -1,22 +1,23 @@
-import { getCacheSlug } from '../addons/cache';
+import { getCacheId } from '../addons/cache';
+import getCurrentPage from './getCurrentPage';
 
 /**
  * Build the data object to send with the Ajax request.
  *
- * @param {Object} alm       The ALM object.
- * @param {string} queryType The query type.
- * @return {Object}          The data object.
+ * @param {Object} alm  The ALM object.
+ * @param {string} type The query type.
+ * @return {Object}     The data object.
  * @since 3.6
  */
-export function getAjaxParams(alm, queryType) {
+export function getAjaxParams(alm, type) {
 	const { addons, extensions } = alm;
 
 	// Defaults
 	const data = {
 		action: 'alm_get_posts',
-		query_type: queryType,
+		query_type: type,
 		id: alm.id,
-		post_id: parseInt(alm.post_id),
+		post_id: alm.post_id,
 		slug: alm.slug,
 		canonical_url: encodeURIComponent(alm.canonical_url),
 		posts_per_page: parseInt(alm.posts_per_page),
@@ -204,11 +205,15 @@ export function getAjaxParams(alm, queryType) {
 		data.vars = alm.listing.dataset.vars;
 	}
 
+	// Get the actual current page number.
+	alm.currentPage = getCurrentPage(alm, data);
+	data.currentPage = alm.currentPage;
+
 	// Cache Params
 	if (addons.cache) {
-		data.cache_id = addons.cache_id;
+		data.cache = true;
 		data.cache_logged_in = addons.cache_logged_in;
-		data.cache_slug = getCacheSlug(alm, data);
+		data.cache_id = getCacheId(alm, data);
 	}
 
 	return data;

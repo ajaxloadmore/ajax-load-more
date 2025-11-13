@@ -890,18 +890,13 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 			}
 
 			// Cache Add-on.
-			if ( has_action( 'alm_cache_installed' ) && $cache === 'true' ) {
-				// Confirm cache version is 2.0 or greater.
-				$cache_version_check = defined( 'ALM_CACHE_VERSION' ) && version_compare( ALM_CACHE_VERSION, '2.0', '>=' );
-				if ( $cache_version_check ) {
-					$cache_return   = apply_filters(
-						'alm_cache_shortcode',
-						$cache,
-						$cache_id,
-						$options
-					);
+			if ( has_action( 'alm_cache_installed' ) && defined( 'ALM_CACHE_VERSION' ) && $cache === 'true' ) {
+				// Confirm Cache version is 3.0 or greater. Otherwise, do not use the Cache add-on.
+				if ( version_compare( ALM_CACHE_VERSION, '3.0', '>=' ) ) {
+					$cache_return   = apply_filters( 'alm_cache_shortcode', $options );
 					$alm_auto_cache = isset( $_GET['alm_auto_cache'] );
-					$paging         = $alm_auto_cache ? false : $paging;    // Disable paging if auto generate cache active.
+					$paging         = $alm_auto_cache ? false : $paging; // Disable paging if auto generate cache active.
+					$pause          = $alm_auto_cache ? 'true' : $pause; // Disable pause if auto generate cache active.
 					$ajaxloadmore  .= wp_kses_post( $cache_return );
 				}
 			}

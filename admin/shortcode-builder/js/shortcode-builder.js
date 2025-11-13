@@ -223,14 +223,7 @@ jQuery(document).ready(function ($) {
 
 		var cache = $('#alm-cache input[name=cache]:checked').val();
 		if (cache !== 'false' && cache !== undefined) {
-			$('.cache_id').slideDown(250, 'alm_easeInOutQuad');
 			output += ' cache="' + cache + '"';
-			var cache_id = $('input#cache-id').val();
-			if (cache_id) {
-				output += ' cache_id="' + cache_id + '"';
-			}
-		} else {
-			$('.cache_id').slideUp(250, 'alm_easeInOutQuad');
 		}
 
 		// ---------------------------

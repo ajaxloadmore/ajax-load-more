@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 7.6.3
+Stable tag: 7.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -274,6 +274,11 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.7.0 - November 12, 2025 =
+* UPGRADE NOTICE: Cache users must update to Cache 3.0 or greater when updating core Ajax Load More or the cache will no longer function.
+* NEW: Added required updates and new functionality for new Cache add-on 3.0.
+* UPDATE: Code cleanup and organization throughout core plugin.
 
 = 7.6.3 - October 31, 2025 =
 * HOTFIX: Fixed issue with Preloaded and Filter add-on facets not initializing correctly on page load.

@@ -1,7 +1,7 @@
 // ALM Modules
 import axios from 'axios';
 import DOMPurify from 'dompurify';
-import { cacheCreateParams, getCache } from './addons/cache';
+import { cacheCreateParams, createCache, getCache } from './addons/cache';
 import { ctaCreateParams } from './addons/call-to-actions';
 import { commentsCreateParams } from './addons/comments';
 import { elementor, elementorCreateParams, elementorGetContent, elementorInit, elementorLoaded } from './addons/elementor';
@@ -13,6 +13,10 @@ import { queryLoop, queryLoopCreateParams, queryLoopGetContent, queryLoopInit, q
 import { createSEOOffset, seoCreateParams } from './addons/seo';
 import { singlepostsCreateParams, singlepostsHTML } from './addons/singleposts';
 import { wooCreateParams, wooGetContent, wooInit, wooReset, woocommerce, woocommerceLoaded } from './addons/woocommerce';
+import { acfParams } from './extensions/acf';
+import { restapiParams } from './extensions/restapi';
+import { termsParams } from './extensions/terms';
+import { usersParams } from './extensions/users';
 import displayResults, { displayPagingResults } from './functions/displayResults';
 import formatHTML from './functions/formatHTML';
 import { getButtonURL } from './functions/getButtonURL';
@@ -22,6 +26,7 @@ import noResults from './functions/noResults';
 import { domParser, tableParser } from './functions/parsers';
 import { getAjaxParams, getRestAPIParams } from './functions/queryParams';
 import setFocus from './functions/setFocus';
+import timeout from './functions/timeout';
 import triggerWindowResize from './functions/windowResize';
 import almDebug from './modules/almDebug';
 import { almFadeIn, almFadeOut } from './modules/fade';
@@ -34,7 +39,7 @@ import setLocalizedVars from './modules/setLocalizedVars';
 import { tableOfContents } from './modules/tableofcontents';
 
 import '../scss/ajax-load-more.scss';
-import timeout from './functions/timeout';
+import { API_DEFAULT_DATA_SHAPE } from './functions/constants';
 
 // External packages.
 const qs = require('qs');
@@ -192,61 +197,20 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 		// Extension Shortcode Params
 
-		// Users
-		alm.extensions.users = alm.listing.dataset.users === 'true';
-		if (alm.extensions.users) {
-			// Override paging params for users
-			alm.orginal_posts_per_page = parseInt(alm.listing.dataset.usersPerPage);
-			alm.posts_per_page = parseInt(alm.listing.dataset.usersPerPage);
-		}
-
-		// REST API.
-		alm.extensions.restapi = alm.listing.dataset.restapi === 'true';
-		if (alm.extensions.restapi) {
-			alm.extensions.restapi_base_url = alm.listing.dataset.restapiBaseUrl;
-			alm.extensions.restapi_namespace = alm.listing.dataset.restapiNamespace;
-			alm.extensions.restapi_endpoint = alm.listing.dataset.restapiEndpoint;
-			alm.extensions.restapi_template_id = alm.listing.dataset.restapiTemplateId;
-			alm.extensions.restapi_debug = alm.listing.dataset.restapiDebug;
-			if (alm.extensions.restapi_template_id === '') {
-				alm.extensions.restapi = false;
-			}
-		}
-
-		// ACF.
-		alm.extensions.acf = alm.listing.dataset.acf === 'true' ? true : false;
-		if (alm.extensions.acf) {
-			alm.extensions.acf_field_type = alm.listing.dataset.acfFieldType;
-			alm.extensions.acf_field_name = alm.listing.dataset.acfFieldName;
-			alm.extensions.acf_parent_field_name = alm.listing.dataset.acfParentFieldName;
-			alm.extensions.acf_row_index = alm.listing.dataset.acfRowIndex;
-			alm.extensions.acf_post_id = alm.listing.dataset.acfPostId;
-			// if field type, name or post ID is empty.
-			if (alm.extensions.acf_field_type === undefined || alm.extensions.acf_field_name === undefined || alm.extensions.acf_post_id === undefined) {
-				alm.extensions.acf = false;
-			}
-		}
-
-		// Term Query.
-		alm.extensions.term_query = alm.listing.dataset.termQuery === 'true';
-		if (alm.extensions.term_query) {
-			alm.extensions.term_query_taxonomy = alm.listing.dataset.termQueryTaxonomy;
-			alm.extensions.term_query_hide_empty = alm.listing.dataset.termQueryHideEmpty;
-			alm.extensions.term_query_number = alm.listing.dataset.termQueryNumber;
-		}
+		alm = usersParams(alm); // Users
+		alm = restapiParams(alm); // REST API
+		alm = acfParams(alm); // ACF
+		alm = termsParams(alm); // Terms
 
 		/* Pause */
 		if (alm.pause === undefined || (alm.addons.seo && alm.start_page > 1)) {
-			// SEO only.
-			alm.pause = false;
+			alm.pause = false; // SEO only.
 		}
 		if (alm.addons.preloaded && alm.addons.seo && alm.start_page > 0) {
-			// SEO + Preloaded.
-			alm.pause = false;
+			alm.pause = false; // SEO + Preloaded.
 		}
 		if (alm.addons.filters && alm.addons.filters_startpage > 0) {
-			// Filters.
-			alm.pause = false;
+			alm.pause = false; // Filters.
 		}
 		if (alm.addons.preloaded && alm.addons.paging) {
 			alm.pause = true;
@@ -370,24 +334,24 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		};
 
 		/**
-		 * The core Ajax Load More Ajax function.
+		 * Dispatch HTTP request.
 		 *
 		 * @param {string} type The type of Ajax request [standard|totalposts|totalpages].
 		 * @since 2.6.0
 		 */
 		alm.AjaxLoadMore.ajax = async function (type = 'standard') {
-			// Dispatch HTTP request.
 			if (alm.extensions.restapi) {
-				alm.AjaxLoadMore.restapi(alm);
+				alm.AjaxLoadMore.restapi(alm); // REST API.
 			} else {
-				// Standard ALM.
 				const params = getAjaxParams(alm, type);
+
 				// Cache.
-				if (alm?.addons?.cache && !['totalposts', 'totalpages'].includes(type)) {
+				if (alm?.addons?.cache) {
 					// Get cache if available and not a totalposts or totalpages request.
 					const cache = await getCache(alm, Object.assign({}, params));
 					if (cache) {
-						alm.AjaxLoadMore.render(cache);
+						// Render cache results.
+						alm.AjaxLoadMore.render(cache, type);
 					} else {
 						alm.AjaxLoadMore.adminajax(params, type);
 					}
@@ -406,7 +370,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 */
 		alm.AjaxLoadMore.adminajax = async function (params, type) {
 			let { ajaxurl: url } = alm_localize; // Get Ajax URL
-			const { cache_slug = '' } = params; // Deconstruct query params.
+			const { cache_id = '' } = params; // Deconstruct query params.
+			const is_paging_query = ['totalposts', 'totalpages'].includes(type);
 
 			/**
 			 * Single Posts.
@@ -427,103 +392,50 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			const data = await axios
 				.get(url, { params })
 				.then(function (response) {
+					const { data = API_DEFAULT_DATA_SHAPE } = response;
+
 					if (alm.addons.single_post && alm.addons.single_post_target) {
-						return singlepostsHTML(alm, response, cache_slug); // Single Posts
+						return singlepostsHTML(alm, data); // Single Posts
 					} else if (alm.addons.woocommerce) {
-						return wooGetContent(alm, url, response, cache_slug); // WooCommerce.
+						return wooGetContent(alm, url, data); // WooCommerce.
 					} else if (alm.addons.elementor) {
-						return elementorGetContent(alm, url, response, cache_slug); // Elementor
+						return elementorGetContent(alm, url, data); // Elementor
 					} else if (alm.addons.queryloop) {
-						return queryLoopGetContent(alm, url, response, cache_slug); // Query Loop
+						return queryLoopGetContent(alm, url, data); // Query Loop
 					}
-					return response.data; // Standard ALM.
+
+					return data; // Standard ALM.
 				})
 				.catch(function (error) {
 					alm.AjaxLoadMore.error(error);
 				});
 
-			switch (type) {
-				case 'totalposts':
-				case 'totalpages':
-					if (alm.addons.paging && alm.addons.nextpage && typeof almBuildPagination === 'function') {
-						window.almBuildPagination(data.totalpages, alm);
-						alm.totalpages = data.totalpages;
-					} else {
-						if (alm.addons.paging && typeof almBuildPagination === 'function') {
-							window.almBuildPagination(data.totalposts, alm);
-						}
-					}
-					break;
+			// Cache.
+			createCache(alm, data, cache_id, is_paging_query);
 
-				default:
-					alm.AjaxLoadMore.render(data);
-					break;
-			}
-		};
-
-		/**
-		 * Send request to the WP REST API
-		 *
-		 * @param {Object} alm The Ajax Load More object.
-		 * @since 5.0.0
-		 */
-		alm.AjaxLoadMore.restapi = function (alm) {
-			const { rest_api_url } = alm_localize; // Get Rest API URL
-			const { restapi_base_url, restapi_namespace, restapi_endpoint, restapi_template_id } = alm.extensions;
-
-			const alm_rest_template = wp.template(restapi_template_id);
-			const alm_rest_url = `${rest_api_url}${restapi_base_url}/${restapi_namespace}/${restapi_endpoint}`;
-			const params = getRestAPIParams(alm);
-
-			axios
-				.get(alm_rest_url, { params })
-				.then(function (response) {
-					// Success
-					const results = response.data; // Get data from response
-					const { html: items = null, meta = null } = results;
-					const postcount = meta && meta.postcount ? meta.postcount : 0;
-					const totalposts = meta && meta.totalposts ? meta.totalposts : 0;
-
-					// loop results to get data from each.
-					let data = '';
-					for (let i = 0; i < items.length; i++) {
-						const result = items[i];
-						data += alm_rest_template(result);
-					}
-
-					// Rest API debug.
-					if (alm.extensions.restapi_debug === 'true') {
-						console.log('ALM RestAPI Debug:', items); // eslint-disable-line no-console
-					}
-
-					// Create results object.
-					const obj = {
-						html: data,
-						meta: {
-							postcount,
-							totalposts,
-						},
-					};
-					alm.AjaxLoadMore.render(obj);
-				})
-				.catch(function (error) {
-					// Error
-					alm.AjaxLoadMore.error(error);
-				});
+			alm.AjaxLoadMore.render(data, type); // Render results.
 		};
 
 		/**
 		 * Display/render results function.
 		 *
 		 * @param {Object} data The results of the Ajax request.
+		 * @param {string} type The type of Ajax request [standard|totalposts|totalpages].
 		 * @since 2.6.0
 		 */
-		alm.AjaxLoadMore.render = async function (data) {
-			if (alm.addons.single_post) {
-				alm.AjaxLoadMore.getSinglePost(); // Fetch  single post data for next post.
+		alm.AjaxLoadMore.render = async function (data, type = 'standard') {
+			// If type is totalposts or totalpages, build pagination only.
+			if (['totalposts', 'totalpages'].includes(type)) {
+				buildPagination(alm, data);
+				return;
 			}
 
-			// Parse incoming data.
+			if (alm.addons.single_post) {
+				// Fetch the next post for the Single Post add-on.
+				alm.AjaxLoadMore.getSinglePost();
+			}
+
+			// Deconstruct render data.
 			const { html, meta } = data;
 			const total = meta ? parseInt(meta.postcount) : parseInt(alm.posts_per_page);
 
@@ -602,8 +514,9 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 						alm.page = alm.addons.filters_startpage - 1; // Set new page number.
 					}
 				}
+
 				// Filters onLoad
-				if (typeof almFiltersOnload === 'function') {
+				if (alm.addons.filters && typeof almFiltersOnload === 'function') {
 					window.almFiltersOnload(alm);
 				}
 			}
@@ -635,7 +548,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			// Render results.
 			if (total > 0) {
 				/**
-				 * WooCommerce || Elementor Add-on
+				 * WooCommerce | Elementor Add-on | Query Loop Add-on.
 				 */
 				if (alm.addons.woocommerce || alm.addons.elementor || alm.addons.queryloop) {
 					const temp = document.createElement('div');
@@ -812,6 +725,56 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		};
 
 		/**
+		 * Send request to the WP REST API
+		 *
+		 * @param {Object} alm The Ajax Load More object.
+		 * @since 5.0.0
+		 */
+		alm.AjaxLoadMore.restapi = function (alm) {
+			const { rest_api_url } = alm_localize; // Get Rest API URL
+			const { restapi_base_url, restapi_namespace, restapi_endpoint, restapi_template_id } = alm.extensions;
+
+			const alm_rest_template = wp.template(restapi_template_id);
+			const alm_rest_url = `${rest_api_url}${restapi_base_url}/${restapi_namespace}/${restapi_endpoint}`;
+			const params = getRestAPIParams(alm);
+
+			axios
+				.get(alm_rest_url, { params })
+				.then(function (response) {
+					// Success
+					const results = response.data; // Get data from response
+					const { html: items = null, meta = null } = results;
+					const postcount = meta && meta.postcount ? meta.postcount : 0;
+					const totalposts = meta && meta.totalposts ? meta.totalposts : 0;
+
+					// loop results to get data from each.
+					let content = '';
+					for (let i = 0; i < items.length; i++) {
+						const result = items[i];
+						content += alm_rest_template(result);
+					}
+
+					// Rest API debug.
+					if (alm.extensions.restapi_debug === 'true') {
+						console.log('ALM RestAPI Debug:', items); // eslint-disable-line no-console
+					}
+
+					// Create results data object.
+					const data = {
+						html: content,
+						meta: {
+							postcount,
+							totalposts,
+						},
+					};
+					alm.AjaxLoadMore.render(data);
+				})
+				.catch(function (error) {
+					alm.AjaxLoadMore.error(error);
+				});
+		};
+
+		/**
 		 * Function runs when no results are returned.
 		 *
 		 * @since 5.3.1
@@ -845,6 +808,24 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			// ALM Done
 			alm.AjaxLoadMore.triggerDone();
 		};
+
+		/**
+		 * Dispatch almBuildPagination function after Ajax request.
+		 * `almBuildPagination` is defined in the Paging add-on.
+		 *
+		 * @param {Object} alm  The Ajax Load More object.
+		 * @param {Object} data The data object from the Ajax response.
+		 */
+		function buildPagination(alm, data) {
+			if (alm.addons.paging && alm.addons.nextpage && typeof almBuildPagination === 'function') {
+				window.almBuildPagination(data.totalpages, alm);
+				alm.totalpages = data.totalpages;
+			} else {
+				if (alm.addons.paging && typeof almBuildPagination === 'function') {
+					window.almBuildPagination(data.totalposts, alm);
+				}
+			}
+		}
 
 		/**
 		 * Init Paging + Preloaded add-ons.
@@ -1384,7 +1365,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			// Single Post Add-on.
 			if (alm.addons.single_post) {
-				await timeout(1000); // Add delay for setup and scripts to load.
+				await timeout(250); // Add delay for setup and scripts to load.
 				await alm.AjaxLoadMore.getSinglePost(); // Set next post on load.
 
 				// Trigger done if custom query and no posts to render
