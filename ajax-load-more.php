@@ -20,8 +20,8 @@
 * UPDATE: Various bug fixes and other improvements.
 */
 
-define( 'ALM_VERSION', '7.6.2' );
-define( 'ALM_RELEASE', 'October 6, 2025' );
+define( 'ALM_VERSION', '7.7.0' );
+define( 'ALM_RELEASE', 'November 13, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
