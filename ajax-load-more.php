@@ -15,7 +15,7 @@
  */
 
 define( 'ALM_VERSION', '7.7.0' );
-define( 'ALM_RELEASE', 'October 31, 2025' );
+define( 'ALM_RELEASE', 'November 13, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
