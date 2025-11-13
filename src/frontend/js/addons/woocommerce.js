@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { API_DATA_SHAPE } from '../functions/constants';
+import { API_DEFAULT_DATA_SHAPE } from '../functions/constants';
 import dispatchScrollEvent from '../functions/dispatchScrollEvent';
 import { setButtonAtts } from '../functions/getButtonURL';
 import { setContentContainersParams } from '../functions/setContentParams';
 import { lazyImages } from '../modules/lazyImages';
 import loadItems from '../modules/loadItems';
 import { createLoadPreviousButton } from '../modules/loadPrevious';
-import { createCache } from './cache';
 
 /**
  * Create add-on params for ALM.
@@ -130,19 +129,15 @@ export function woocommerce(content, alm) {
 /**
  * Get the content, title and results from the Ajax request.
  *
- * @param {Object} alm        The alm object.
- * @param {string} url        The request URL.
- * @param {Object} response   Query response.
- * @param {string} cache_slug The cache slug.
- * @return {Object}           Results data.
+ * @param {Object} alm  The alm object.
+ * @param {string} url  The request URL.
+ * @param {string} html The HTML data as a string.
+ * @return {Object}     Results data.
  * @since 5.3.0
  */
-export function wooGetContent(alm, url, response, cache_slug) {
-	const data = API_DATA_SHAPE;
-	const { status, data: resData } = response;
-
-	if (status !== 200 || !resData) {
-		return data; // Bail early if response is not OK or empty.
+export function wooGetContent(alm, url, html = '') {
+	if (!html) {
+		return API_DEFAULT_DATA_SHAPE; // Bail early if missing html content.
 	}
 
 	const { addons, pagePrev, rel = 'next', page, localize } = alm;
@@ -152,45 +147,40 @@ export function wooGetContent(alm, url, response, cache_slug) {
 	// Get the page number.
 	const currentPage = rel === 'prev' ? pagePrev : page + 1;
 
-	// Create temp div to hold response data.
-	const content = document.createElement('div');
-	content.innerHTML = resData;
-
-	// Get Page Title
-	const title = content.querySelector('title').innerHTML;
-	data.pageTitle = title;
+	// Create temp div to hold html data.
+	const tempDiv = document.createElement('div');
+	tempDiv.innerHTML = html;
 
 	// Get WooCommerce products container.
-	const container = content.querySelector(woocommerce_settings.container);
+	const container = tempDiv.querySelector(woocommerce_settings.container);
 	if (!container) {
 		console.warn(`Ajax Load More WooCommerce: Unable to find WooCommerce ${woocommerce_settings.container} element.`);
-		return data;
+		return API_DEFAULT_DATA_SHAPE;
 	}
 
-	// Get the first item and append data attributes.
-	const item = container ? container.querySelector(woocommerce_settings.products) : null;
-	if (item) {
-		item.classList.add('alm-woocommerce');
-		item.dataset.url = url;
-		item.dataset.page = currentPage;
-		item.dataset.pageTitle = title;
-	}
-
-	// Count the number of returned items.
+	// Get the returned items.
 	const items = container.querySelectorAll(woocommerce_settings.products);
 	if (items) {
-		// Set the html to the elementor container data.
-		data.html = container ? container.innerHTML : '';
-		data.meta.postcount = items.length;
-		data.meta.totalposts = total_posts;
+		// Set first item data attributes.
+		items[0].classList.add('alm-woocommerce');
+		items[0].dataset.url = url;
+		items[0].dataset.page = currentPage;
+		items[0].dataset.pageTitle = tempDiv.querySelector('title').innerHTML;
 
-		createCache(alm, data, cache_slug); // Create cache file.
+		// Update the results Text.
+		almWooCommerceResultsText(tempDiv, alm);
+
+		// Return data object.
+		return {
+			html: container.innerHTML,
+			meta: {
+				postcount: items.length,
+				totalposts: total_posts,
+			},
+		};
 	}
 
-	// Results Text
-	almWooCommerceResultsText(content, alm);
-
-	return data;
+	return API_DEFAULT_DATA_SHAPE; // Return default data shape if no items found.
 }
 
 /**

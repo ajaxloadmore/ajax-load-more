@@ -7,7 +7,7 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.6.2
+ * Version: 7.7.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
@@ -108,7 +108,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			require_once ALM_PATH . 'core/classes/class-alm-woocommerce.php'; // Load Woocommerce Class.
 			require_once ALM_PATH . 'core/classes/class-alm-enqueue.php'; // Load Enqueue Class.
 			require_once ALM_PATH . 'core/classes/class-alm-queryargs.php'; // Load Query Args Class.
-			require_once ALM_PATH . 'core/classes/class-alm-localize.php'; // Load Localize Class.
+			require_once ALM_PATH . 'core/classes/class-alm-localize.php'; // Load  Class.
 			require_once ALM_PATH . 'core/integration/elementor/elementor.php';
 
 			if ( is_admin() ) {
@@ -472,24 +472,17 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				unset( $_REQUEST['post_id'] );
 			}
 
-			$id            = isset( $params['id'] ) ? $params['id'] : '';
-			$post_id       = isset( $params['post_id'] ) ? $params['post_id'] : '';
-			$slug          = isset( $params['slug'] ) ? $params['slug'] : '';
-			$canonical_url = isset( $params['canonical_url'] ) ? esc_attr( $params['canonical_url'] ) : esc_url( $_SERVER['HTTP_REFERER'] ); // phpcs:ignore
+			$id      = isset( $params['id'] ) ? $params['id'] : '';
+			$post_id = isset( $params['post_id'] ) ? $params['post_id'] : '';
+			$slug    = isset( $params['slug'] ) ? $params['slug'] : '';
 
 			// Ajax Query Type.
-			$query_type = isset( $params['query_type'] ) ? $params['query_type'] : 'standard'; // 'standard' or 'totalposts' - totalposts returns $alm_found_posts.
+			$query_type = isset( $params['query_type'] ) ? $params['query_type'] : 'standard'; // 'standard' or 'totalposts'. totalposts returns $alm_found_posts.
 
 			// Filters.
 			$is_filters     = isset( $params['filters'] ) && has_action( 'alm_filters_installed' ) ? true : false;
 			$filters_target = $is_filters && isset( $params['filters_target'] ) ? $params['filters_target'] : 0;
 			$filters_facets = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
-
-			// Cache.
-			$cache_id        = isset( $params['cache_id'] ) && $params['cache_id'] ? $params['cache_id'] : false;
-			$cache_slug      = isset( $params['cache_slug'] ) && $params['cache_slug'] ? $params['cache_slug'] : '';
-			$cache_logged_in = isset( $params['cache_logged_in'] ) ? $params['cache_logged_in'] : false;
-			$do_create_cache = $cache_logged_in === 'true' && is_user_logged_in() ? false : true;
 
 			// Offset.
 			$offset = isset( $params['offset'] ) ? $params['offset'] : 0;
@@ -604,7 +597,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			}
 
 			if ( $query_type === 'totalposts' ) {
-				// Paging add-on.
+				// Combined Preloaded & Paging add-ons.
 				wp_send_json(
 					[
 						'totalposts' => $alm_total_posts,
@@ -671,14 +664,6 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 					if ( $is_filters && $filters_target && $filters_facets && function_exists( 'alm_filters_get_facets' ) ) {
 						$facets           = alm_filters_get_facets( $args, $filters_target );
 						$return['facets'] = $facets;
-					}
-
-					/**
-					 * Cache Add-on.
-					 * Create the cache file.
-					 */
-					if ( $cache_id && method_exists( 'ALMCache', 'create_cache_file' ) && $do_create_cache ) {
-						ALMCache::create_cache_file( $cache_id, $cache_slug, $canonical_url, $data, $alm_current, $alm_found_posts, $facets );
 					}
 
 					wp_send_json( $return );
