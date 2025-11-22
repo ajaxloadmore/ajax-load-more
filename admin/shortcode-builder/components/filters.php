@@ -91,7 +91,7 @@ if ( has_action( 'alm_filters_installed' ) ) { ?>
 				<section>
 					<div class="shortcode-builder--label">
 						<h4><?php esc_attr_e( 'Paging Parameters', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding paging parameters will allow for deep linking to a paged filter.', 'ajax-load-more' ); ?>"></a></h4>
-						<p><?php wp_kses_post( _e( 'Add <span>?pg={x}</span> to the browser querystring as users load additional pages.', 'ajax-load-more' ) ); ?></p>
+						<p><?php echo wp_kses_post( __( 'Add <span>?pg={x}</span> to the browser querystring as users load additional pages.', 'ajax-load-more' ) ); ?></p>
 					</div>
 					<div class="shortcode-builder--fields">
 						<div class="inner">
