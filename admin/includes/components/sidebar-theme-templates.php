@@ -11,6 +11,7 @@
 	<div class="cta-inner">
 		<p>
 		<?php
+		// translators: 1: URL to Repeater Templates docs.
 		$desc = sprintf( __( 'Theme Templates are <a href="%1$s" target="_blank">Repeater Templates</a> loaded from the active theme directory.', 'ajax-load-more' ), 'https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/' );
 		echo wp_kses_post( $desc );
 		?>

@@ -472,6 +472,7 @@ class ALM_Licensing {
 					$row = '</tr><tr class="plugin-update-tr active"><td colspan="4" class="plugin-update"><div class="update-message alm-update-message" style="' . $style . '">';
 					// translators: %1$s is the plugin name, %2$s is the closing tag, %3$s is the addon name, %4$s is the purchase link, %5$s is the closing tag.
 					$row .= '<span class="dashicons dashicons-warning" style="margin-right: 6px; opacity: 0.5;"></span>';
+					// translators: %1$s is the opening tag, %2$s is the closing tag, %3$s is the addon name, %4$s is the purchase link, %5$s is the closing tag.
 					$row .= sprintf( wp_kses_post( __( '%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s', 'ajax-load-more' ) ), '<a href="admin.php?page=ajax-load-more-licenses">', '</a>', $title, '<a href="' . $addon['url'] . '" target="blank">', '</a>' );
 					$row .= '</div></td>';
 					echo wp_kses_post( $row );

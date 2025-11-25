@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-13T16:58:37+00:00\n"
+"POT-Creation-Date: 2025-11-25T18:40:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -440,7 +440,8 @@ msgstr ""
 msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> to update."
 msgstr ""
 
-#: admin/classes/licensing.php:475
+#. translators: %1$s is the opening tag, %2$s is the closing tag, %3$s is the addon name, %4$s is the purchase link, %5$s is the closing tag.
+#: admin/classes/licensing.php:476
 #: _out/admin/classes/licensing.php:475
 msgid "%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s"
 msgstr ""
@@ -871,13 +872,13 @@ msgstr ""
 msgid "What's a Repeater Template?"
 msgstr ""
 
-#: admin/includes/components/sidebar-repeater-templates.php:15
+#: admin/includes/components/sidebar-repeater-templates.php:16
 #: _out/admin/includes/components/sidebar-repeater-templates.php:15
 msgid "A <a href=\"%1$s\" target=\"_blank\">Repeater Template</a> is a snippet of code that will execute over and over within a <a href=\"%2$s\" target=\"_blank\">WordPress loop</a>."
 msgstr ""
 
-#: admin/includes/components/sidebar-repeater-templates.php:28
-#: admin/includes/components/sidebar-theme-templates.php:22
+#: admin/includes/components/sidebar-repeater-templates.php:29
+#: admin/includes/components/sidebar-theme-templates.php:23
 #: admin/includes/components/theme-templates.php:94
 #: admin/shortcode-builder/shortcode-builder.php:166
 #: admin/views/filters.php:41
@@ -896,17 +897,18 @@ msgstr ""
 msgid "What's a Theme Template?"
 msgstr ""
 
-#: admin/includes/components/sidebar-theme-templates.php:14
+#. translators: 1: URL to Repeater Templates docs.
+#: admin/includes/components/sidebar-theme-templates.php:15
 #: _out/admin/includes/components/sidebar-theme-templates.php:14
 msgid "Theme Templates are <a href=\"%1$s\" target=\"_blank\">Repeater Templates</a> loaded from the active theme directory."
 msgstr ""
 
-#: admin/includes/components/sidebar-theme-templates.php:18
+#: admin/includes/components/sidebar-theme-templates.php:19
 #: _out/admin/includes/components/sidebar-theme-templates.php:18
 msgid "Manage and maintain Ajax Load More templates with your favorite code editor and push updates via GIT or SFTP."
 msgstr ""
 
-#: admin/includes/components/sidebar-theme-templates.php:25
+#: admin/includes/components/sidebar-theme-templates.php:26
 #: admin/includes/components/theme-templates.php:95
 #: _out/admin/includes/components/sidebar-theme-templates.php:25
 #: _out/admin/includes/components/theme-templates.php:95

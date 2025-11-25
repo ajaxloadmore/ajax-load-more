@@ -11,7 +11,7 @@ import { pagingComplete, pagingCreateParams } from './addons/paging';
 import { preloadedCreateParams, setPreloadedParams } from './addons/preloaded';
 import { queryLoop, queryLoopCreateParams, queryLoopGetContent, queryLoopInit, queryLoopLoaded } from './addons/query-loop';
 import { createSEOOffset, seoCreateParams } from './addons/seo';
-import { singlepostsCreateParams, singlepostsHTML } from './addons/singleposts';
+import { singlepostsCreateParams, singlepostsHTML, singlepostsQueryParams } from './addons/singleposts';
 import { wooCreateParams, wooGetContent, wooInit, wooReset, woocommerce, woocommerceLoaded } from './addons/woocommerce';
 import { acfParams } from './extensions/acf';
 import { restapiParams } from './extensions/restapi';
@@ -431,8 +431,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			}
 
 			if (alm.addons.single_post) {
-				// Fetch the next post for the Single Post add-on.
-				alm.AjaxLoadMore.getSinglePost();
+				alm.AjaxLoadMore.getSinglePost(); // Fetch the next post for the Single Post add-on.
 			}
 
 			// Deconstruct render data.
@@ -913,60 +912,47 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 */
 		alm.AjaxLoadMore.getSinglePost = async function () {
 			if (alm.fetchingPreviousPost) {
-				return;
+				return; // Exit if fetching.
 			}
 			alm.fetchingPreviousPost = true; // Set loading flag.
 
 			// Create data params.
-			const params = {
-				action: 'alm_get_single',
-				id: alm.addons.single_post_id,
-				initial_id: alm.addons.single_post_init_id,
-				order: alm.addons.single_post_order,
-				taxonomy: alm.addons.single_post_taxonomy,
-				excluded_terms: alm.addons.single_post_excluded_terms,
-				post_type: alm.post_type,
-				init: alm.addons.single_post_init,
-			};
+			const params = singlepostsQueryParams(alm);
 
 			// Send HTTP request via Axios.
-			const singlePostData = await axios
+			await axios
 				.get(alm_localize.ajaxurl, { params })
 				.then(function (response) {
-					// Get data from response.
-					const { data } = response;
+					const { data } = response; // Deconstruct data from response.
 
 					if (data.has_previous_post) {
-						alm.listing.dataset.singlePostId = data.prev_id; // Update single-post-id on instance
+						// Update ALM instance variables.
+						alm.listing.dataset.singlePostId = data.prev_id; // Update single-post-id on HTML instance.
 						alm.addons.single_post_id = data.prev_id;
 						alm.addons.single_post_permalink = data.prev_permalink;
 						alm.addons.single_post_title = data.prev_title;
 						alm.addons.single_post_slug = data.prev_slug;
-						alm.addons.single_post_cache = data.cache;
-					} else {
-						alm.addons.single_post_cache = false;
-						if (!data.has_previous_post) {
-							alm.AjaxLoadMore.triggerDone();
+
+						if (typeof window.almSetSinglePost === 'function' && data?.current_id) {
+							window.almSetSinglePost(alm, data.current_id);
 						}
+					} else {
+						alm.AjaxLoadMore.triggerDone(); // No more posts.
 					}
-					if (typeof window.almSetSinglePost === 'function') {
-						window.almSetSinglePost(alm, data.current_id);
-					}
-					alm.fetchingPreviousPost = false;
-					alm.addons.single_post_init = false;
+
+					alm.fetchingPreviousPost = false; // Set loading flag to false.
+					alm.addons.single_post_init = false; // Reset init flag.
 
 					return data;
 				})
 				.catch(function (error) {
-					// Error
+					// Handle error.
 					alm.AjaxLoadMore.error(error);
 					alm.fetchingPreviousPost = false;
 				});
-
-			// Send the response.
-			return singlePostData;
 		};
 
+		// Initialize Single Post add-on variables.
 		if (alm.addons.single_post_id) {
 			alm.fetchingPreviousPost = false;
 			alm.addons.single_post_init = true;
@@ -1296,6 +1282,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			} else {
 				alm?.button?.classList?.remove('loading');
 			}
+
 			alm.AjaxLoadMore.triggerAddons(alm);
 
 			if (!alm.addons.paging) {
