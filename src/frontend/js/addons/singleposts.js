@@ -40,7 +40,6 @@ export function singlepostsCreateParams(alm) {
 		alm.addons.single_post_permalink = '';
 		alm.addons.single_post_title = '';
 		alm.addons.single_post_slug = '';
-		alm.addons.single_post_cache = false;
 		alm.addons.single_post_title_template = listing.dataset.singlePostTitleTemplate;
 		alm.addons.single_post_siteTitle = listing.dataset.singlePostSiteTitle;
 		alm.addons.single_post_siteTagline = listing.dataset.singlePostSiteTagline;
@@ -50,6 +49,28 @@ export function singlepostsCreateParams(alm) {
 		alm.addons.single_post_controls = listing.dataset.singlePostControls;
 	}
 	return alm;
+}
+
+/**
+ * Build the data object to send with the Ajax request.
+ *
+ * @param {Object} alm The ALM object.
+ * @return {Object}    The data object.
+ */
+export function singlepostsQueryParams(alm) {
+	const { addons } = alm;
+	const params = {
+		action: 'alm_get_single',
+		id: parseInt(addons.single_post_id),
+		initial_id: parseInt(addons.single_post_init_id),
+		order: addons.single_post_order,
+		taxonomy: addons.single_post_taxonomy,
+		excluded_terms: addons.single_post_excluded_terms,
+		post_type: alm.post_type,
+		init: addons.single_post_init,
+	};
+
+	return params;
 }
 
 /**

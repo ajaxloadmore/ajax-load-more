@@ -14,6 +14,10 @@
  * @package AjaxLoadMore
  */
 
+/*
+* NEW: Added support for caching initial Single Posts add-on query.
+*/
+
 define( 'ALM_VERSION', '7.7.0' );
 define( 'ALM_RELEASE', 'November 13, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
