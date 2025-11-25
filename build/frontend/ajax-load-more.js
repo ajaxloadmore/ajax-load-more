@@ -18035,7 +18035,7 @@ function _display() {
           delay = alm.transition_delay, images_loaded = alm.images_loaded;
           offset = useTransition ? parseInt(delay) : 0; // Delay offset timing.
           _context3.next = 5;
-          return timeout(100);
+          return timeout(50);
         case 5:
           // Add short delay for effect.
 
@@ -20834,7 +20834,6 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                         if (typeof window.almSetSinglePost === 'function' && data !== null && data !== void 0 && data.current_id) {
                           window.almSetSinglePost(alm, data.current_id);
                         }
-                        createCache(alm, data, cache_id, true); // Maybe cache the results.
                       } else {
                         alm.AjaxLoadMore.triggerDone(); // No more posts.
                       }

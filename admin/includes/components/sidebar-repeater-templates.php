@@ -11,6 +11,7 @@
 	<div class="cta-inner">
 		<p>
 		<?php
+		// translators: 1: URL to Repeater Templates docs. 2: URL to WordPress Loop docs.
 		$desc = sprintf(
 			__(
 				'A <a href="%1$s" target="_blank">Repeater Template</a> is a snippet of code that will execute over and over within a <a href="%2$s" target="_blank">WordPress loop</a>.',

@@ -118,7 +118,7 @@ async function display(alm, nodes, useTransition = true) {
 	const { transition_delay: delay, images_loaded } = alm;
 	const offset = useTransition ? parseInt(delay) : 0; // Delay offset timing.
 
-	await timeout(100); // Add short delay for effect.
+	await timeout(50); // Add short delay for effect.
 
 	if (nodes) {
 		if (useTransition || images_loaded) {

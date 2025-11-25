@@ -936,8 +936,6 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 						if (typeof window.almSetSinglePost === 'function' && data?.current_id) {
 							window.almSetSinglePost(alm, data.current_id);
 						}
-
-						createCache(alm, data, cache_id, true); // Maybe cache the results.
 					} else {
 						alm.AjaxLoadMore.triggerDone(); // No more posts.
 					}
@@ -1284,6 +1282,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			} else {
 				alm?.button?.classList?.remove('loading');
 			}
+
 			alm.AjaxLoadMore.triggerAddons(alm);
 
 			if (!alm.addons.paging) {
