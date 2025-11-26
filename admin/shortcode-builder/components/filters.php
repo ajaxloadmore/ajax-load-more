@@ -7,12 +7,12 @@
 
 if ( has_action( 'alm_filters_installed' ) ) { ?>
 <div class="row input filters add-on" id="alm-filters">
-	<h3 class="heading" tabindex="0"><?php esc_attr_e( 'Filters', 'ajax-load-more' ); ?></h3>
+	<h3 class="heading" tabindex="0"><?php esc_html_e( 'Filters', 'ajax-load-more' ); ?></h3>
 	<div class="expand-wrap">
 
 		<section class="first">
 			<div class="shortcode-builder--label">
-				<p><?php esc_attr_e( 'Enable filters with this Ajax Load More instance.', 'ajax-load-more' ); ?></p>
+				<p><?php esc_html_e( 'Enable filters with this Ajax Load More instance.', 'ajax-load-more' ); ?></p>
 			</div>
 			<div class="shortcode-builder--fields">
 				<div class="inner">
@@ -46,7 +46,7 @@ if ( has_action( 'alm_filters_installed' ) ) { ?>
 								$count  = 0;
 								$return = '';
 								foreach ( $current_filters as $the_filter ) {
-									$count++;
+									++$count;
 									$value   = str_replace( ALM_FILTERS_PREFIX, '', $the_filter );
 									$return .= '<option value="' . $value . '">' . $value . '</option>';
 								}
@@ -57,7 +57,7 @@ if ( has_action( 'alm_filters_installed' ) ) { ?>
 									echo '</select>';
 								} else {
 									?>
-										<p><?php esc_attr_e( 'You don\'t have any filters! The first step is to create one', 'ajax-load-more' ); ?>!</p>
+										<p><?php esc_html_e( 'You don\'t have any filters! The first step is to create one', 'ajax-load-more' ); ?>!</p>
 									<?php
 								}
 							}
@@ -69,8 +69,8 @@ if ( has_action( 'alm_filters_installed' ) ) { ?>
 
 				<section>
 					<div class="shortcode-builder--label">
-						<h4><?php esc_attr_e( 'URLs', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php esc_attr_e( 'Querystring URLs allow  users to share deep links to filtered content.', 'ajax-load-more' ); ?>"></a></h4>
-							<p><?php esc_attr_e( 'Update the browser querystring with active filters values.', 'ajax-load-more' ); ?><br/><small>e.g. ?category=design&tag=mobile</small></p>
+						<h4><?php esc_html_e( 'URLs', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php esc_attr_e( 'Querystring URLs allow  users to share deep links to filtered content.', 'ajax-load-more' ); ?>"></a></h4>
+						<p><?php esc_html_e( 'Update the browser querystring with active filters values.', 'ajax-load-more' ); ?><br/><small>e.g. ?category=design&tag=mobile</small></p>
 						</div>
 					<div class="shortcode-builder--fields">
 						<div class="inner">
@@ -90,8 +90,8 @@ if ( has_action( 'alm_filters_installed' ) ) { ?>
 
 				<section>
 					<div class="shortcode-builder--label">
-						<h4><?php esc_attr_e( 'Paging Parameters', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding paging parameters will allow for deep linking to a paged filter.', 'ajax-load-more' ); ?>"></a></h4>
-						<p><?php wp_kses_post( _e( 'Add <span>?pg={x}</span> to the browser querystring as users load additional pages.', 'ajax-load-more' ) ); ?></p>
+						<h4><?php esc_html_e( 'Paging Parameters', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Adding paging parameters will allow for deep linking to a paged filter.', 'ajax-load-more' ); ?>"></a></h4>
+						<p><?php esc_html_e( 'Add ?pg={x} to the querystring as users load additional pages.', 'ajax-load-more' ); ?></p>
 					</div>
 					<div class="shortcode-builder--fields">
 						<div class="inner">
@@ -111,8 +111,8 @@ if ( has_action( 'alm_filters_installed' ) ) { ?>
 
 				<section>
 					<div class="shortcode-builder--label">
-						<h4><?php esc_attr_e( 'Scroll', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php esc_attr_e( 'When a user filters a list they will be auto scrolled back to the top.', 'ajax-load-more' ); ?>"></a></h4>
-						<p><?php esc_attr_e( 'Automatically scroll users to the top of list after a filter update.', 'ajax-load-more' ); ?></p>
+						<h4><?php esc_html_e( 'Scroll', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php esc_attr_e( 'When a user filters a list they will be auto scrolled back to the top.', 'ajax-load-more' ); ?>"></a></h4>
+						<p><?php esc_html_e( 'Automatically scroll users to the top of list after a filter update.', 'ajax-load-more' ); ?></p>
 					</div>
 					<div class="shortcode-builder--fields">
 						<div class="inner">

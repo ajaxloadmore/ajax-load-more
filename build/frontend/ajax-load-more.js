@@ -18650,7 +18650,8 @@ function getTypeParams(alm, type) {
  * @return {Object}    The data object.
  * @since 3.6
  */
-function getRestAPIParams(alm) {
+function getRestParams(alm) {
+  var addons = alm.addons;
   var data = {
     id: alm.id,
     post_id: parseInt(alm.post_id),
@@ -18700,6 +18701,17 @@ function getRestAPIParams(alm) {
     preloaded_amount: alm.addons.preloaded_amount,
     seo_start_page: alm.start_page
   };
+
+  // Get the actual current page number.
+  alm.currentPage = getCurrentPage(alm, data);
+  data.currentPage = alm.currentPage;
+
+  // Cache Params
+  if (addons.cache) {
+    data.cache = true;
+    data.cache_logged_in = addons.cache_logged_in;
+    data.cache_id = getCacheId(alm, data);
+  }
   return data;
 }
 ;// CONCATENATED MODULE: ./src/frontend/js/functions/windowResize.js
@@ -20100,8 +20112,9 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
              * @since 2.6.0
              */
             alm.AjaxLoadMore.ajax = /*#__PURE__*/ajax_load_more_asyncToGenerator( /*#__PURE__*/ajax_load_more_regeneratorRuntime().mark(function _callee() {
+              var _alm26;
               var type,
-                _alm26,
+                is_restapi,
                 params,
                 cache,
                 _args = arguments;
@@ -20109,34 +20122,39 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                 while (1) switch (_context.prev = _context.next) {
                   case 0:
                     type = _args.length > 0 && _args[0] !== undefined ? _args[0] : 'standard';
-                    if (!alm.extensions.restapi) {
-                      _context.next = 5;
-                      break;
-                    }
-                    alm.AjaxLoadMore.restapi(alm); // REST API.
-                    _context.next = 14;
-                    break;
-                  case 5:
-                    params = getAjaxParams(alm, type); // Cache.
+                    is_restapi = alm.extensions.restapi ? true : false;
+                    params = is_restapi ? getRestParams(alm) : getAjaxParams(alm, type); // Cache.
                     if (!((_alm26 = alm) !== null && _alm26 !== void 0 && (_alm26 = _alm26.addons) !== null && _alm26 !== void 0 && _alm26.cache)) {
-                      _context.next = 13;
+                      _context.next = 10;
                       break;
                     }
-                    _context.next = 9;
+                    _context.next = 6;
                     return getCache(alm, Object.assign({}, params));
-                  case 9:
+                  case 6:
                     cache = _context.sent;
                     if (cache) {
                       // Render cache results.
                       alm.AjaxLoadMore.render(cache, type);
                     } else {
+                      if (is_restapi) {
+                        // REST API request.
+                        alm.AjaxLoadMore.restapi(params);
+                      } else {
+                        // Standard admin-ajax.php request.
+                        alm.AjaxLoadMore.adminajax(params, type);
+                      }
+                    }
+                    _context.next = 11;
+                    break;
+                  case 10:
+                    if (is_restapi) {
+                      // REST API request.
+                      alm.AjaxLoadMore.restapi(params);
+                    } else {
+                      // Standard admin-ajax.php request.
                       alm.AjaxLoadMore.adminajax(params, type);
                     }
-                    _context.next = 14;
-                    break;
-                  case 13:
-                    alm.AjaxLoadMore.adminajax(params, type);
-                  case 14:
+                  case 11:
                   case "end":
                     return _context.stop();
                 }
@@ -20621,10 +20639,13 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
             /**
              * Send request to the WP REST API
              *
-             * @param {Object} alm The Ajax Load More object.
+             * @param {Object} params The query parameters object.
              * @since 5.0.0
              */
-            alm.AjaxLoadMore.restapi = function (alm) {
+            alm.AjaxLoadMore.restapi = function (params) {
+              var _params$cache_id2 = params.cache_id,
+                cache_id = _params$cache_id2 === void 0 ? '' : _params$cache_id2; // Deconstruct query params.
+
               var _alm_localize4 = alm_localize,
                 rest_api_url = _alm_localize4.rest_api_url; // Get Rest API URL
               var _alm$extensions = alm.extensions,
@@ -20634,7 +20655,6 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                 restapi_template_id = _alm$extensions.restapi_template_id;
               var alm_rest_template = wp.template(restapi_template_id);
               var alm_rest_url = "".concat(rest_api_url).concat(restapi_base_url, "/").concat(restapi_namespace, "/").concat(restapi_endpoint);
-              var params = getRestAPIParams(alm);
               lib_axios.get(alm_rest_url, {
                 params: params
               }).then(function (response) {
@@ -20667,6 +20687,9 @@ var isBlockEditor = document.body.classList.contains('wp-admin');
                     totalposts: totalposts
                   }
                 };
+
+                // Cache.
+                createCache(alm, data, cache_id);
                 alm.AjaxLoadMore.render(data);
               })["catch"](function (error) {
                 alm.AjaxLoadMore.error(error);

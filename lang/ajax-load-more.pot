@@ -2,14 +2,14 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.7.0\n"
+"Project-Id-Version: Ajax Load More 7.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-25T18:40:26+00:00\n"
+"POT-Creation-Date: 2025-11-26T18:49:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -90,7 +90,7 @@ msgstr ""
 #: admin/admin.php:119
 #: admin/admin.php:127
 #: admin/views/settings.php:9
-#: ajax-load-more.php:328
+#: ajax-load-more.php:324
 #: _out/admin/admin.php:118
 #: _out/admin/admin.php:119
 #: _out/admin/admin.php:127
@@ -622,7 +622,7 @@ msgstr ""
 #: admin/functions/settings.php:316
 #: admin/shortcode-builder/shortcode-builder.php:206
 #: admin/shortcode-builder/shortcode-builder.php:379
-#: ajax-load-more.php:430
+#: ajax-load-more.php:426
 #: _out/admin/functions/settings.php:316
 #: _out/admin/shortcode-builder/shortcode-builder.php:206
 #: _out/admin/shortcode-builder/shortcode-builder.php:379
@@ -1607,8 +1607,7 @@ msgid "Adding paging parameters will allow for deep linking to a paged filter."
 msgstr ""
 
 #: admin/shortcode-builder/components/filters.php:94
-#: _out/admin/shortcode-builder/components/filters.php:94
-msgid "Add <span>?pg={x}</span> to the browser querystring as users load additional pages."
+msgid "Add ?pg={x} to the querystring as users load additional pages."
 msgstr ""
 
 #: admin/shortcode-builder/components/filters.php:114
@@ -3684,22 +3683,22 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:305
+#: ajax-load-more.php:301
 #: _out/ajax-load-more.php:301
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:414
+#: ajax-load-more.php:410
 #: _out/ajax-load-more.php:410
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:415
+#: ajax-load-more.php:411
 #: _out/ajax-load-more.php:411
 msgid "No results found."
 msgstr ""
 
-#: ajax-load-more.php:439
+#: ajax-load-more.php:435
 #: _out/ajax-load-more.php:435
 msgid "Load Previous"
 msgstr ""
@@ -3861,6 +3860,10 @@ msgstr ""
 
 #: src/blocks/filters/render.php:24
 msgid "You must enter an Ajax Load More target for this filter."
+msgstr ""
+
+#: _out/admin/shortcode-builder/components/filters.php:94
+msgid "Add <span>?pg={x}</span> to the browser querystring as users load additional pages."
 msgstr ""
 
 #: src/blocks/core/inspector.js:23
