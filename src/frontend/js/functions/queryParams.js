@@ -304,7 +304,9 @@ export function getTypeParams(alm, type) {
  * @return {Object}    The data object.
  * @since 3.6
  */
-export function getRestAPIParams(alm) {
+export function getRestParams(alm) {
+	const { addons } = alm;
+
 	const data = {
 		id: alm.id,
 		post_id: parseInt(alm.post_id),
@@ -354,5 +356,17 @@ export function getRestAPIParams(alm) {
 		preloaded_amount: alm.addons.preloaded_amount,
 		seo_start_page: alm.start_page,
 	};
+
+	// Get the actual current page number.
+	alm.currentPage = getCurrentPage(alm, data);
+	data.currentPage = alm.currentPage;
+
+	// Cache Params
+	if (addons.cache) {
+		data.cache = true;
+		data.cache_logged_in = addons.cache_logged_in;
+		data.cache_id = getCacheId(alm, data);
+	}
+
 	return data;
 }

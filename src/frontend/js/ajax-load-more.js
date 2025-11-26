@@ -24,7 +24,7 @@ import getScrollPercentage from './functions/getScrollPercentage';
 import getTotals from './functions/getTotals';
 import noResults from './functions/noResults';
 import { domParser, tableParser } from './functions/parsers';
-import { getAjaxParams, getRestAPIParams } from './functions/queryParams';
+import { getAjaxParams, getRestParams } from './functions/queryParams';
 import setFocus from './functions/setFocus';
 import timeout from './functions/timeout';
 import triggerWindowResize from './functions/windowResize';
@@ -340,22 +340,31 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 * @since 2.6.0
 		 */
 		alm.AjaxLoadMore.ajax = async function (type = 'standard') {
-			if (alm.extensions.restapi) {
-				alm.AjaxLoadMore.restapi(alm); // REST API.
-			} else {
-				const params = getAjaxParams(alm, type);
+			const is_restapi = alm.extensions.restapi ? true : false;
+			const params = is_restapi ? getRestParams(alm) : getAjaxParams(alm, type);
 
-				// Cache.
-				if (alm?.addons?.cache) {
-					// Get cache if available and not a totalposts or totalpages request.
-					const cache = await getCache(alm, Object.assign({}, params));
-					if (cache) {
-						// Render cache results.
-						alm.AjaxLoadMore.render(cache, type);
+			// Cache.
+			if (alm?.addons?.cache) {
+				// Get cache if available.
+				const cache = await getCache(alm, Object.assign({}, params));
+				if (cache) {
+					// Render cache results.
+					alm.AjaxLoadMore.render(cache, type);
+				} else {
+					if (is_restapi) {
+						// REST API request.
+						alm.AjaxLoadMore.restapi(params);
 					} else {
+						// Standard admin-ajax.php request.
 						alm.AjaxLoadMore.adminajax(params, type);
 					}
+				}
+			} else {
+				if (is_restapi) {
+					// REST API request.
+					alm.AjaxLoadMore.restapi(params);
 				} else {
+					// Standard admin-ajax.php request.
 					alm.AjaxLoadMore.adminajax(params, type);
 				}
 			}
@@ -726,16 +735,17 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		/**
 		 * Send request to the WP REST API
 		 *
-		 * @param {Object} alm The Ajax Load More object.
+		 * @param {Object} params The query parameters object.
 		 * @since 5.0.0
 		 */
-		alm.AjaxLoadMore.restapi = function (alm) {
+		alm.AjaxLoadMore.restapi = function (params) {
+			const { cache_id = '' } = params; // Deconstruct query params.
+
 			const { rest_api_url } = alm_localize; // Get Rest API URL
 			const { restapi_base_url, restapi_namespace, restapi_endpoint, restapi_template_id } = alm.extensions;
 
 			const alm_rest_template = wp.template(restapi_template_id);
 			const alm_rest_url = `${rest_api_url}${restapi_base_url}/${restapi_namespace}/${restapi_endpoint}`;
-			const params = getRestAPIParams(alm);
 
 			axios
 				.get(alm_rest_url, { params })
@@ -766,6 +776,10 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 							totalposts,
 						},
 					};
+
+					// Cache.
+					createCache(alm, data, cache_id);
+
 					alm.AjaxLoadMore.render(data);
 				})
 				.catch(function (error) {
