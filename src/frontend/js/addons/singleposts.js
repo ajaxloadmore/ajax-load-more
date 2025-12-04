@@ -60,13 +60,12 @@ export function singlepostsCreateParams(alm) {
 export function singlepostsQueryParams(alm) {
 	const { addons } = alm;
 	const params = {
-		action: 'alm_get_single',
 		id: parseInt(addons.single_post_id),
-		initial_id: parseInt(addons.single_post_init_id),
 		order: addons.single_post_order,
 		taxonomy: addons.single_post_taxonomy,
 		excluded_terms: addons.single_post_excluded_terms,
 		post_type: alm.post_type,
+		initial_id: parseInt(addons.single_post_init_id),
 		init: addons.single_post_init,
 	};
 

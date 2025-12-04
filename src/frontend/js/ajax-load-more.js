@@ -17,6 +17,8 @@ import { acfParams } from './extensions/acf';
 import { restapiParams } from './extensions/restapi';
 import { termsParams } from './extensions/terms';
 import { usersParams } from './extensions/users';
+import { apiRequest } from './functions/apiRequest';
+import { API_DEFAULT_DATA_SHAPE } from './functions/constants';
 import displayResults, { displayPagingResults } from './functions/displayResults';
 import formatHTML from './functions/formatHTML';
 import { getButtonURL } from './functions/getButtonURL';
@@ -39,7 +41,6 @@ import setLocalizedVars from './modules/setLocalizedVars';
 import { tableOfContents } from './modules/tableofcontents';
 
 import '../scss/ajax-load-more.scss';
-import { API_DEFAULT_DATA_SHAPE } from './functions/constants';
 
 // External packages.
 const qs = require('qs');
@@ -930,40 +931,34 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			}
 			alm.fetchingPreviousPost = true; // Set loading flag.
 
-			// Create data params.
-			const params = singlepostsQueryParams(alm);
+			const { rest_api } = alm_localize; // Get Rest API URL.
+			const url = `${rest_api}alm/single-post/next`;
+			const data = await apiRequest(url, singlepostsQueryParams(alm)); // Send fetch request.
 
-			// Send HTTP request via Axios.
-			await axios
-				.get(alm_localize.ajaxurl, { params })
-				.then(function (response) {
-					const { data } = response; // Deconstruct data from response.
+			if (!data) {
+				alm.fetchingPreviousPost = false;
+				alm.addons.single_post_init = false;
+				return;
+			}
 
-					if (data.has_previous_post) {
-						// Update ALM instance variables.
-						alm.listing.dataset.singlePostId = data.prev_id; // Update single-post-id on HTML instance.
-						alm.addons.single_post_id = data.prev_id;
-						alm.addons.single_post_permalink = data.prev_permalink;
-						alm.addons.single_post_title = data.prev_title;
-						alm.addons.single_post_slug = data.prev_slug;
+			const { has_previous_post = false } = data;
+			if (has_previous_post) {
+				// Update ALM instance variables.
+				alm.listing.dataset.singlePostId = data.prev_id;
+				alm.addons.single_post_id = data.prev_id;
+				alm.addons.single_post_permalink = data.prev_permalink;
+				alm.addons.single_post_title = data.prev_title;
+				alm.addons.single_post_slug = data.prev_slug;
 
-						if (typeof window.almSetSinglePost === 'function' && data?.current_id) {
-							window.almSetSinglePost(alm, data.current_id);
-						}
-					} else {
-						alm.AjaxLoadMore.triggerDone(); // No more posts.
-					}
+				if (typeof window.almSetSinglePost === 'function' && data?.current_id) {
+					window.almSetSinglePost(alm, data.current_id);
+				}
+			} else {
+				alm.AjaxLoadMore.triggerDone(); // No more posts.
+			}
 
-					alm.fetchingPreviousPost = false; // Set loading flag to false.
-					alm.addons.single_post_init = false; // Reset init flag.
-
-					return data;
-				})
-				.catch(function (error) {
-					// Handle error.
-					alm.AjaxLoadMore.error(error);
-					alm.fetchingPreviousPost = false;
-				});
+			alm.fetchingPreviousPost = false; // Set loading flag to false.
+			alm.addons.single_post_init = false; // Reset init flag.
 		};
 
 		// Initialize Single Post add-on variables.
@@ -1069,7 +1064,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 */
 		alm.AjaxLoadMore.click = function (e) {
 			if (isBlockEditor && alm.addons.queryloop) {
-				return; //
+				return; // Exit if in Block Editor with Query Loop add-on.
 			}
 
 			const button = e.currentTarget || e.target;
@@ -1366,7 +1361,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			// Single Post Add-on.
 			if (alm.addons.single_post) {
-				await timeout(250); // Add delay for setup and scripts to load.
+				await timeout(200); // Add delay for setup and scripts to load.
 				await alm.AjaxLoadMore.getSinglePost(); // Set next post on load.
 
 				// Trigger done if custom query and no posts to render
