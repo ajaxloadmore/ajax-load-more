@@ -932,7 +932,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			alm.fetchingPreviousPost = true; // Set loading flag.
 
 			const { rest_api } = alm_localize; // Get Rest API URL.
-			const url = `${rest_api}alm/single-post/next`;
+			const url = `${rest_api}alm/single-post/next-post`;
 			const data = await apiRequest(url, singlepostsQueryParams(alm)); // Send fetch request.
 
 			if (!data) {
