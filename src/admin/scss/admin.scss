@@ -1,24 +1,25 @@
+@use './variables' as *;
+@use './libs/tooltipster';
+@use './libs/select2-core';
+@use './partials/alm-settings-feedback';
+@use './partials/alm-tabbed-wrapper';
+@use './partials/alm-status';
+@use './partials/alm-stats';
+@use './partials/builder-option-toggle';
+@use './partials/cache';
+@use './partials/codemirror';
+@use './partials/cta-upgrade';
+@use './partials/header';
+@use './partials/pro-listing';
+@use './partials/select2';
+@use './partials/shortcode-builder';
+@use './partials/sidebar';
+@use './partials/template-tags';
+@use './partials/toggle-switch';
+@use './partials/woocommerce';
+@use './partials/license';
+
 @import '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-@import './variables';
-@import './libs/tooltipster';
-@import './libs/select2';
-@import './partials/alm-settings-feedback';
-@import './partials/alm-tabbed-wrapper';
-@import './partials/alm-status';
-@import './partials/alm-stats';
-@import './partials/builder-option-toggle';
-@import './partials/cache';
-@import './partials/codemirror';
-@import './partials/cta-upgrade';
-@import './partials/header';
-@import './partials/pro-listing';
-@import './partials/select2';
-@import './partials/shortcode-builder';
-@import './partials/sidebar';
-@import './partials/template-tags';
-@import './partials/toggle-switch';
-@import './partials/woocommerce';
-@import './partials/license';
 
 body.toplevel_page_ajax-load-more,
 body.ajax-load-more_page_ajax-load-more-repeaters,
@@ -1131,7 +1132,9 @@ hr.indented {
 	margin: 15px 0;
 	line-height: normal !important;
 	height: auto !important;
-	box-shadow: inset 0 -15px 15px rgba(0, 0, 0, 0.1), 0 1px 0px #ca5252;
+	box-shadow:
+		inset 0 -15px 15px rgba(0, 0, 0, 0.1),
+		0 1px 0px #ca5252;
 	text-shadow: none !important;
 	max-width: 20%;
 	border-radius: 2px;
@@ -1139,7 +1142,9 @@ hr.indented {
 		display: none;
 	}
 	&:hover {
-		box-shadow: inset 0 -15px 15px rgba(0, 0, 0, 0.1), 0 0 3px rgba(255, 255, 255, 1);
+		box-shadow:
+			inset 0 -15px 15px rgba(0, 0, 0, 0.1),
+			0 0 3px rgba(255, 255, 255, 1);
 	}
 	&:active {
 		background: #d0413f !important;
@@ -2337,7 +2342,9 @@ span.cnkt-button.installed,
 				border: 1px solid $border;
 				color: $paragraph;
 				opacity: 0.85;
-				box-shadow: inset 1px 1px 0 #fff, 0 0 0 3px rgba(0, 0, 0, 0.025);
+				box-shadow:
+					inset 1px 1px 0 #fff,
+					0 0 0 3px rgba(0, 0, 0, 0.025);
 				i {
 					color: $paragraph;
 					opacity: 0.5;

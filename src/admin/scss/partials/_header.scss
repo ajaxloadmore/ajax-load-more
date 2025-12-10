@@ -1,5 +1,6 @@
+@use '../variables' as *;
+
 .ajax-load-more {
-	// Admin Header.
 	.alm-admin-toolbar {
 		display: flex;
 		justify-content: space-between;

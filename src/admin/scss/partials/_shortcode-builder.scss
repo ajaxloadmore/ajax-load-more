@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .shortcode-builder {
 	a.group {
 		border-radius: 0 0 $radius $radius;

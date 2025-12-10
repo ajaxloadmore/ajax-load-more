@@ -1,10 +1,12 @@
-.ajax-load-more{
-	.alm-cta-upgrade{
+@use '../variables' as *;
+
+.ajax-load-more {
+	.alm-cta-upgrade {
 		padding: 5px;
 		border: 1px solid $border;
 		border-radius: $radius_lg;
 		background-color: #fff;
-		a{
+		a {
 			text-decoration: none;
 			width: 100%;
 			text-align: center;
@@ -16,33 +18,33 @@
 				flex-wrap: wrap;
 				padding: $padding;
 				background: $light_grey;
-				background: linear-gradient(90deg, rgba(255,255,255,0.4948354341736695) 50%, rgba(247,247,247,1) 100%);
+				background: linear-gradient(90deg, rgba(255, 255, 255, 0.4948354341736695) 50%, rgba(247, 247, 247, 1) 100%);
 
 				text-align: left;
 			}
 			&:hover,
-			&:focus{
-				h2{
+			&:focus {
+				h2 {
 					text-decoration: underline;
 				}
 				.cnkt-button {
 					background-color: $purple_hover;
 				}
 			}
-			.img{
+			.img {
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				img {
 					padding: $padding_sm;
 				}
-				@media screen and (min-width: $tablet){
+				@media screen and (min-width: $tablet) {
 					width: 50%;
 					img {
 						padding: $padding_sm 0;
 					}
 				}
-				@media screen and (min-width: $lg){
+				@media screen and (min-width: $lg) {
 					width: 45%;
 				}
 			}
@@ -50,15 +52,15 @@
 				width: 100%;
 				background-color: $light_grey;
 				padding: $padding $padding_lg;
-				@media screen and (min-width: $tablet){
+				@media screen and (min-width: $tablet) {
 					width: 50%;
 					background-color: transparent;
 				}
-				@media screen and (min-width: $lg){
+				@media screen and (min-width: $lg) {
 					width: 55%;
 				}
-				@media screen and (min-width: $tablet) and (max-width: $lg){
-					p.lg{
+				@media screen and (min-width: $tablet) and (max-width: $lg) {
+					p.lg {
 						display: none;
 					}
 				}
@@ -66,7 +68,7 @@
 					font-size: 20px;
 				}
 			}
-			.cnkt-button{
+			.cnkt-button {
 				padding: 12px 24px;
 				text-align: center;
 				margin-top: 10px;

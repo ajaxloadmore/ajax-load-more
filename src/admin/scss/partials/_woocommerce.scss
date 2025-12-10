@@ -1,5 +1,7 @@
-.woocommerce-help{
-	&--item{
+@use '../variables' as *;
+
+.woocommerce-help {
+	&--item {
 		width: 100%;
 		display: flex;
 		flex-wrap: nowrap;
@@ -7,21 +9,21 @@
 		padding-top: 20px;
 		margin-top: 20px;
 		border-top: 1px solid $light_border;
-		div{
+		div {
 			flex: 1;
 			padding: 20px 20px 20px 30px;
-			@media screen and (max-width: 600px){
+			@media screen and (max-width: 600px) {
 				padding: 20px 0;
 			}
 		}
-		.img{
+		.img {
 			padding: 0;
 			flex: none;
 			width: 30%;
-			@media screen and (max-width: 600px){
+			@media screen and (max-width: 600px) {
 				display: none;
 			}
-			img{
+			img {
 				border: 1px solid $light_border;
 				padding: 2px;
 				border-radius: 4px;

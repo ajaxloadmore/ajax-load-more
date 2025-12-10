@@ -1,7 +1,4 @@
-@import '../../global/scss/colors';
-@import '../../global/scss/functions';
-@import './variables';
-@import './loaders';
-@import './loaders-previous';
-@import './listing';
-@import './tableofcontents';
+@use './loaders';
+@use './loaders-previous';
+@use './listing';
+@use './tableofcontents';

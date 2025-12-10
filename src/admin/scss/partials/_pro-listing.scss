@@ -1,25 +1,26 @@
-/* Pro Add-on Listing */
-.alm-pro-listing{
+@use '../variables' as *;
+
+.alm-pro-listing {
 	padding: 0;
 	border-top: none;
 	position: relative;
 	display: grid;
 	gap: 5px;
 	grid-template-columns: repeat(1, 1fr);
-	@media screen and (min-width: $tablet){
+	@media screen and (min-width: $tablet) {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	@media screen and (min-width: 1300px){
+	@media screen and (min-width: 1300px) {
 		grid-template-columns: repeat(3, 1fr);
 	}
-	&.loading{
+	&.loading {
 		pointer-events: none;
 	}
-	&--header{
-   	color: $grey;
-   	position: relative;
-   	margin-bottom: $padding;
-		@media screen and (min-width: $break){
+	&--header {
+		color: $grey;
+		position: relative;
+		margin-bottom: $padding;
+		@media screen and (min-width: $break) {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -28,25 +29,25 @@
 		h2 {
 			margin: 0 0 10px;
 		}
-		p{
-			@media screen and (min-width: $break){
+		p {
+			@media screen and (min-width: $break) {
 				margin: 0 !important;
 			}
 		}
-   	div.totals{
-      	font-size: 13px;
-      	opacity: 0.7;
-      	font-weight: normal;
-      	text-transform: none;
+		div.totals {
+			font-size: 13px;
+			opacity: 0.7;
+			font-weight: normal;
+			text-transform: none;
 			span {
 				font-weight: 600;
 			}
-   	}
+		}
 	}
 
-	.item{
+	.item {
 		width: 100%;
-   	display: flex;
+		display: flex;
 		margin: 0;
 
 		&.loading {
@@ -59,65 +60,65 @@
 		h2,
 		p,
 		img,
-		.state{
+		.state {
 			transition: all 0.15s ease;
 		}
-		a{
+		a {
 			text-decoration: none !important;
 			padding: 0 45px 0 0;
 			position: relative;
-         display: flex;
-   		border: 1px solid #e1e1e1;
-         transition: all 0.15s ease;
-         border-radius: 2px;
-         @media screen and (max-width: 1100px){
-            padding: 0 10px 20px;
-         }
-         &:hover,
-         &:focus{
-            border-color: #bbb;
-            h2{
-               text-decoration: none;
-            }
-         }
+			display: flex;
+			border: 1px solid #e1e1e1;
+			transition: all 0.15s ease;
+			border-radius: 2px;
+			@media screen and (max-width: 1100px) {
+				padding: 0 10px 20px;
+			}
+			&:hover,
+			&:focus {
+				border-color: #bbb;
+				h2 {
+					text-decoration: none;
+				}
+			}
 		}
-		&--detail{
+		&--detail {
 			padding: 20px;
 			position: relative;
 			min-height: 110px;
 			display: flex;
 			align-items: flex-start;
-			@media screen and (max-width: 1100px){
-   		   display: block;
-   		   text-align: center;
-   		   img{
-      		   padding-bottom: 20px;
-   		   }
-         }
-			div{
-   			padding: 0;
+			@media screen and (max-width: 1100px) {
+				display: block;
+				text-align: center;
+				img {
+					padding-bottom: 20px;
+				}
 			}
-			img{
+			div {
+				padding: 0;
+			}
+			img {
 				width: 100px;
 				height: auto;
 				margin-right: 20px;
 			}
-			a{
+			a {
 				text-decoration: none;
 				&:hover,
-				&:focus{
+				&:focus {
 					text-decoration: none;
-					h2{
-   					text-decoration: none;
+					h2 {
+						text-decoration: none;
 					}
 				}
 			}
-			h2{
+			h2 {
 				margin: 0 0 7px;
 				font-size: 16px;
 				line-height: 1;
 				transition: all 0.15s ease;
-				span{
+				span {
 					font-weight: 400;
 					opacity: 0.4;
 					font-size: 12px;
@@ -127,23 +128,23 @@
 					text-decoration: none !important;
 				}
 			}
-			p{
+			p {
 				margin: 0;
 				padding: 0;
 				font-size: 14px;
-				&.link{
+				&.link {
 					font-size: 13px;
 					padding-top: 2px;
 					opacity: 0;
 					transition: opacity 0.15s ease;
 				}
 			}
-			.highlight-addon{
+			.highlight-addon {
 				padding-top: 15px;
 				font-size: 12px;
 				margin: 0;
 
-				span{
+				span {
 					display: inline-block;
 					padding: 5px;
 					position: relative;
@@ -155,40 +156,40 @@
 			}
 		}
 		.loader,
-		.result{
+		.result {
 			position: absolute;
-   		right: 9px;
-   		bottom: 9px;
+			right: 9px;
+			bottom: 9px;
 			visibility: hidden;
-   		opacity: 0;
+			opacity: 0;
 			z-index: 2;
-   		transition: all 0.25s ease;
+			transition: all 0.25s ease;
 		}
-		.loader{
+		.loader {
 			width: 16px;
 			height: 16px;
 			background: rgba(255, 255, 255, 0.6) url('../img/ui/loader.gif') no-repeat center center;
 		}
-		.result{
-   		font-size: 12px;
-   		&.in-view{
+		.result {
+			font-size: 12px;
+			&.in-view {
 				visibility: visible;
-      		opacity: 0.7;
-   		}
-   		.type{
-      		background: #47bd79;
-      		color: #fff;
-      		display: none;
-      		border-radius: 2px;
-      		padding: 3px 6px;
-      		display: inline-block;
-   		}
-   		.type.inactive{
-      		background: #c54545;
-      		display: none;
-   		}
+				opacity: 0.7;
+			}
+			.type {
+				background: #47bd79;
+				color: #fff;
+				display: none;
+				border-radius: 2px;
+				padding: 3px 6px;
+				display: inline-block;
+			}
+			.type.inactive {
+				background: #c54545;
+				display: none;
+			}
 		}
-		.state{
+		.state {
 			width: 22px;
 			height: 22px;
 			position: absolute;
@@ -203,43 +204,48 @@
 			text-decoration: none !important;
 			font-size: 12px;
 			transition: all 0.15s ease;
-			&::before{
+			&::before {
 				font-family: 'FontAwesome';
 				content: '\f00c';
 				display: block;
-
 			}
 		}
 
-		&.active{
-   		a{
-      		border-color: #57d48c;
-   		}
-			&:hover{
-				.state{
-      			opacity: 0.9;
+		&.active {
+			a {
+				border-color: #57d48c;
+			}
+			&:hover {
+				.state {
+					opacity: 0.9;
 				}
 			}
 		}
 
-		&.inactive{
-			h2, p, img, .state{
+		&.inactive {
+			h2,
+			p,
+			img,
+			.state {
 				opacity: 0.5;
 			}
-			.state{
+			.state {
 				background: #e1e1e1;
-				&::before{
+				&::before {
 					opacity: 0;
 				}
 			}
-			&:hover{
-				h2, p, img, .state{
+			&:hover {
+				h2,
+				p,
+				img,
+				.state {
 					opacity: 0.8;
 				}
 
-				.state{
-   				background: #ccc;
-					&::before{
+				.state {
+					background: #ccc;
+					&::before {
 						opacity: 1;
 					}
 				}

@@ -1,5 +1,6 @@
-@import '../../../global/scss/colors';
-@import '../../../global/scss/functions';
+@use '../../../global/scss/colors' as *;
+@use '../../../global/scss/functions' as *;
+@use '../variables' as *;
 
 .select2-results .select2-result.alm-color .select2-result-label {
 	position: relative;

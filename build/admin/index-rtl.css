@@ -27,7 +27,7 @@
 /* If you're using the icon option, use this next selector to style them */
 .tooltipster-icon {
   cursor: help;
-  margin-left: 4px;
+  margin-right: 4px;
 }
 
 /* This is the base styling required to make all Tooltipsters work */
@@ -36,7 +36,7 @@
   font-size: 0;
   line-height: 0;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   z-index: 9999999;
   pointer-events: none;
@@ -56,7 +56,7 @@
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: -1;
 }
 
@@ -68,72 +68,56 @@
 }
 
 .tooltipster-arrow-top span, .tooltipster-arrow-top-right span, .tooltipster-arrow-top-left span {
-  border-left: 8px solid transparent !important;
   border-right: 8px solid transparent !important;
+  border-left: 8px solid transparent !important;
   border-top: 8px solid;
   bottom: -7px;
 }
 
 .tooltipster-arrow-top .tooltipster-arrow-border, .tooltipster-arrow-top-right .tooltipster-arrow-border, .tooltipster-arrow-top-left .tooltipster-arrow-border {
-  border-left: 9px solid transparent !important;
   border-right: 9px solid transparent !important;
+  border-left: 9px solid transparent !important;
   border-top: 9px solid;
   bottom: -7px;
 }
 
 .tooltipster-arrow-bottom span, .tooltipster-arrow-bottom-right span, .tooltipster-arrow-bottom-left span {
-  border-left: 8px solid transparent !important;
   border-right: 8px solid transparent !important;
+  border-left: 8px solid transparent !important;
   border-bottom: 8px solid;
   top: -7px;
 }
 
 .tooltipster-arrow-bottom .tooltipster-arrow-border, .tooltipster-arrow-bottom-right .tooltipster-arrow-border, .tooltipster-arrow-bottom-left .tooltipster-arrow-border {
-  border-left: 9px solid transparent !important;
   border-right: 9px solid transparent !important;
+  border-left: 9px solid transparent !important;
   border-bottom: 9px solid;
   top: -7px;
 }
 
 .tooltipster-arrow-top span, .tooltipster-arrow-top .tooltipster-arrow-border, .tooltipster-arrow-bottom span, .tooltipster-arrow-bottom .tooltipster-arrow-border {
-  left: 0;
   right: 0;
+  left: 0;
   margin: 0 auto;
 }
 
 .tooltipster-arrow-top-left span, .tooltipster-arrow-bottom-left span {
-  left: 6px;
-}
-
-.tooltipster-arrow-top-left .tooltipster-arrow-border, .tooltipster-arrow-bottom-left .tooltipster-arrow-border {
-  left: 5px;
-}
-
-.tooltipster-arrow-top-right span, .tooltipster-arrow-bottom-right span {
   right: 6px;
 }
 
-.tooltipster-arrow-top-right .tooltipster-arrow-border, .tooltipster-arrow-bottom-right .tooltipster-arrow-border {
+.tooltipster-arrow-top-left .tooltipster-arrow-border, .tooltipster-arrow-bottom-left .tooltipster-arrow-border {
   right: 5px;
 }
 
+.tooltipster-arrow-top-right span, .tooltipster-arrow-bottom-right span {
+  left: 6px;
+}
+
+.tooltipster-arrow-top-right .tooltipster-arrow-border, .tooltipster-arrow-bottom-right .tooltipster-arrow-border {
+  left: 5px;
+}
+
 .tooltipster-arrow-left span, .tooltipster-arrow-left .tooltipster-arrow-border {
-  border-top: 8px solid transparent !important;
-  border-bottom: 8px solid transparent !important;
-  border-left: 8px solid;
-  top: 50%;
-  margin-top: -7px;
-  right: -7px;
-}
-
-.tooltipster-arrow-left .tooltipster-arrow-border {
-  border-top: 9px solid transparent !important;
-  border-bottom: 9px solid transparent !important;
-  border-left: 9px solid;
-  margin-top: -8px;
-}
-
-.tooltipster-arrow-right span, .tooltipster-arrow-right .tooltipster-arrow-border {
   border-top: 8px solid transparent !important;
   border-bottom: 8px solid transparent !important;
   border-right: 8px solid;
@@ -142,10 +126,26 @@
   left: -7px;
 }
 
-.tooltipster-arrow-right .tooltipster-arrow-border {
+.tooltipster-arrow-left .tooltipster-arrow-border {
   border-top: 9px solid transparent !important;
   border-bottom: 9px solid transparent !important;
   border-right: 9px solid;
+  margin-top: -8px;
+}
+
+.tooltipster-arrow-right span, .tooltipster-arrow-right .tooltipster-arrow-border {
+  border-top: 8px solid transparent !important;
+  border-bottom: 8px solid transparent !important;
+  border-left: 8px solid;
+  top: 50%;
+  margin-top: -7px;
+  right: -7px;
+}
+
+.tooltipster-arrow-right .tooltipster-arrow-border {
+  border-top: 9px solid transparent !important;
+  border-bottom: 9px solid transparent !important;
+  border-left: 9px solid;
   margin-top: -8px;
 }
 
@@ -176,7 +176,7 @@
 
 .tooltipster-swing {
   opacity: 0;
-  transform: rotateZ(4deg);
+  transform: rotateZ(-4deg);
   transition-property: transform;
 }
 
@@ -212,12 +212,12 @@
 }
 
 .tooltipster-slide {
-  left: -40px;
-  -webkit-transition-property: left;
-  -moz-transition-property: left;
-  -o-transition-property: left;
-  -ms-transition-property: left;
-  transition-property: left;
+  right: -40px;
+  -webkit-transition-property: right;
+  -moz-transition-property: right;
+  -o-transition-property: right;
+  -ms-transition-property: right;
+  transition-property: right;
   -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
   -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
   -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
@@ -232,7 +232,7 @@
   -o-transition-property: all;
   -ms-transition-property: all;
   transition-property: all;
-  left: 0px !important;
+  right: 0px !important;
   opacity: 0;
 }
 
@@ -265,14 +265,14 @@
 }
 
 #alm-builder .select2-container li {
-  padding-right: 0;
+  padding-left: 0;
 }
 
 .select2-container a.select2-choice {
   display: block;
   height: 38px;
   line-height: 37px;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 0;
   overflow: hidden;
   position: relative;
   border: 1px solid #e7e7e7;
@@ -307,7 +307,7 @@
 }
 
 .select2-container .select2-choice span {
-  padding-right: 40px;
+  padding-left: 40px;
   margin: 0;
   width: 100%;
   display: block;
@@ -318,13 +318,13 @@
 }
 
 .select2-container .select2-choice abbr:hover {
-  background-position: right -11px;
+  background-position: left -11px;
   cursor: pointer;
 }
 
 .select2-drop-mask {
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   z-index: 8;
   background-color: #fff;
@@ -345,7 +345,7 @@
   font-size: 13px;
   overflow: hidden;
   margin-top: 2px;
-  margin-left: -1px;
+  margin-right: -1px;
 }
 .select2-drop.select2-drop-above {
   margin-top: -2px;
@@ -356,7 +356,7 @@
   width: 30px;
   height: 100%;
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
 }
 
@@ -386,7 +386,7 @@
   height: 35px !important;
   line-height: 35px !important;
   box-shadow: none !important;
-  background: #fff url(../admin/img/ui/icon-search.png) no-repeat right 7px center;
+  background: #fff url(../admin/img/ui/icon-search.png) no-repeat left 7px center;
   background-size: 16px 16px;
 }
 
@@ -424,8 +424,8 @@
   display: inline-block;
   font-size: 12px;
   line-height: 13px;
-  margin: 0 5px 5px 0;
-  padding: 5px 10px 5px 27px;
+  margin: 0 0 5px 5px;
+  padding: 5px 27px 5px 10px;
   border-radius: 3px;
   background: #fff;
   border: 1px solid #e7e7e7;
@@ -434,16 +434,16 @@
 }
 
 #alm-builder ul.select2-choices .select2-input {
-  background: #fff url(../admin/img/ui/bkg-select.png) no-repeat right center;
+  background: #fff url(../admin/img/ui/bkg-select.png) no-repeat left center;
 }
 #alm-builder ul.select2-choices .select2-input.select2-focused {
-  background: #fff url(../admin/img/ui/icon-search.png) no-repeat right 7px center;
+  background: #fff url(../admin/img/ui/icon-search.png) no-repeat left 7px center;
   background-size: 16px 16px;
 }
 
 #alm-builder ul.select2-choices li.select2-search-choice a {
   position: absolute;
-  left: 3px;
+  right: 3px;
   top: 3px;
   width: 17px;
   height: 17px;
@@ -580,7 +580,7 @@ disabled look for disabled choices in the results dropdown
 .select2-container.select2-container-disabled .select2-choice div {
   background-color: #f4f4f4;
   background-image: none;
-  border-left: 0;
+  border-right: 0;
 }
 
 .select2-container.select2-container-disabled .select2-choice abbr {
@@ -596,19 +596,19 @@ disabled look for disabled choices in the results dropdown
   padding: 0;
   position: absolute;
   width: 1px;
-  left: 0;
+  right: 0;
 }
 
 .alm-settings-feedback {
   position: fixed;
   top: 50px;
-  right: 10px;
+  left: 10px;
   width: auto;
   height: auto;
   background: #fff;
-  border-left: 5px solid #5cc583;
+  border-right: 5px solid #5cc583;
   color: #444;
-  padding: 25px 30px 25px 25px;
+  padding: 25px 25px 25px 30px;
   line-height: 1;
   z-index: 99999;
   border-radius: 2px;
@@ -623,13 +623,13 @@ disabled look for disabled choices in the results dropdown
   opacity: 1;
   visibility: visible;
   top: 50px;
-  right: 25px;
+  left: 25px;
 }
 .alm-settings-feedback.--saved {
   opacity: 1;
   visibility: visible;
   top: 50px;
-  right: 25px;
+  left: 25px;
 }
 .alm-settings-feedback.--saved i {
   opacity: 1;
@@ -640,11 +640,11 @@ disabled look for disabled choices in the results dropdown
   opacity: 1;
   visibility: visible;
   top: 25px;
-  right: 25px;
+  left: 25px;
 }
 .alm-settings-feedback i {
   opacity: 0.6;
-  margin: 0 3px 0 0;
+  margin: 0 0 0 3px;
 }
 
 #alm_OptionsForm {
@@ -654,7 +654,7 @@ disabled look for disabled choices in the results dropdown
   width: 100%;
   height: 100%;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   z-index: 10;
   background: rgba(255, 255, 255, 0.65);
@@ -696,8 +696,8 @@ disabled look for disabled choices in the results dropdown
     background-color: #f7f7f7;
     padding: 0;
     border: 1px solid #efefef;
-    border-right: none;
-    border-radius: 6px 6px 0 6px;
+    border-left: none;
+    border-radius: 6px 6px 6px 0;
     position: relative;
     z-index: 1;
     margin: 0;
@@ -726,7 +726,7 @@ disabled look for disabled choices in the results dropdown
   }
   .ajax-load-more .alm-tabbed-wrapper--nav ul li:first-of-type button {
     border-top: 1px solid #efefef;
-    border-radius: 6px 0 0 0;
+    border-radius: 0 6px 0 0;
   }
 }
 @media screen and (max-width: 640px) {
@@ -751,7 +751,7 @@ disabled look for disabled choices in the results dropdown
   background: none;
   line-height: 1.4;
   padding: 12px 10px;
-  text-align: left;
+  text-align: right;
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
@@ -770,7 +770,7 @@ disabled look for disabled choices in the results dropdown
 }
 .ajax-load-more .alm-tabbed-wrapper--nav button i.fa-handshake-o {
   position: relative;
-  left: -2px;
+  right: -2px;
 }
 .ajax-load-more .alm-tabbed-wrapper--nav button.active {
   font-weight: 600;
@@ -795,7 +795,7 @@ disabled look for disabled choices in the results dropdown
 }
 @media screen and (min-width: 640px) {
   .ajax-load-more .alm-tabbed-wrapper--sections {
-    border-radius: 0 6px 6px 0;
+    border-radius: 6px 0 0 6px;
   }
 }
 .ajax-load-more .alm-tabbed-wrapper--section {
@@ -886,8 +886,8 @@ disabled look for disabled choices in the results dropdown
 }
 .alm-stats > div div:not(.alm-stats--stat) {
   border: 1px solid #e7e7e7;
-  padding: 0 15px 0 12px;
-  border-radius: 0 3px 3px 0;
+  padding: 0 12px 0 15px;
+  border-radius: 3px 0 0 3px;
 }
 
 .ajax-load-more .builder-option-toggle {
@@ -895,24 +895,24 @@ disabled look for disabled choices in the results dropdown
   flex-wrap: nowrap;
 }
 .ajax-load-more .builder-option-toggle input {
-  border-radius: 3px 0 0 3px;
+  border-radius: 0 3px 3px 0;
   margin: 0;
   width: auto;
   flex: 1;
 }
 .ajax-load-more .builder-option-toggle--buttons {
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px 0 0 3px;
   padding: 3px;
   width: auto;
   border: 1px solid #e7e7e7;
   background-color: #fcfcfc;
-  border-left: none;
+  border-right: none;
   display: flex;
 }
 .ajax-load-more .builder-option-toggle--buttons button {
   height: 100%;
   border: 1px solid #e7e7e7;
-  border-left-width: 0;
+  border-right-width: 0;
   margin: 0;
   font-weight: 600;
   font-size: 11px;
@@ -932,11 +932,11 @@ disabled look for disabled choices in the results dropdown
   border-color: #ccc;
 }
 .ajax-load-more .builder-option-toggle--buttons button:first-child {
-  border-radius: 3px 0 0 3px;
-  border-left-width: 1px;
+  border-radius: 0 3px 3px 0;
+  border-right-width: 1px;
 }
 .ajax-load-more .builder-option-toggle--buttons button:last-child {
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px 0 0 3px;
 }
 .ajax-load-more .builder-option-toggle--buttons button.active {
   border-color: #6b7280;
@@ -952,7 +952,7 @@ disabled look for disabled choices in the results dropdown
   margin-top: 0 !important;
 }
 .alm-cache .cnkt-main h3.heading {
-  padding-right: 90px !important;
+  padding-left: 90px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -976,7 +976,7 @@ disabled look for disabled choices in the results dropdown
 }
 .alm-cache .cnkt-main .alm-cache-search-wrap i {
   position: absolute;
-  right: 15px;
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: #ccc;
@@ -987,7 +987,7 @@ disabled look for disabled choices in the results dropdown
   position: relative;
 }
 .alm-cache .cnkt-main .alm-cache-listing .toggle-all {
-  right: 0;
+  left: 0;
   top: -45px;
 }
 .alm-cache .cnkt-main hr {
@@ -1027,7 +1027,7 @@ disabled look for disabled choices in the results dropdown
   position: relative;
 }
 .alm-cache .cnkt-main .alm-dir-listing h3.heading {
-  padding-left: 40px !important;
+  padding-right: 40px !important;
 }
 .alm-cache .cnkt-main .alm-dir-listing h3.heading::after {
   content: "\f07c";
@@ -1037,7 +1037,7 @@ disabled look for disabled choices in the results dropdown
 }
 .alm-cache .cnkt-main .alm-dir-listing .dir-title .delete {
   position: absolute;
-  right: 10px;
+  left: 10px;
   top: 10px;
   font-weight: 400;
   font-size: 13px;
@@ -1071,7 +1071,7 @@ disabled look for disabled choices in the results dropdown
   display: block;
   width: 100%;
   background: none !important;
-  padding-left: 28px;
+  padding-right: 28px;
   margin: 0 0 10px;
 }
 .alm-cache .cnkt-main .alm-dir-listing ul.cache-details li i {
@@ -1079,7 +1079,7 @@ disabled look for disabled choices in the results dropdown
   font-size: 16px;
   position: absolute;
   top: 6px;
-  left: 4px;
+  right: 4px;
 }
 .alm-cache .cnkt-main .alm-dir-listing ul.cache-details li a {
   word-break: break-word;
@@ -1092,8 +1092,8 @@ disabled look for disabled choices in the results dropdown
   border-radius: 3px;
   background: #fff;
   cursor: pointer;
-  margin: 0 2px 0 0;
-  text-align: left;
+  margin: 0 0 0 2px;
+  text-align: right;
   color: #878787;
   font-size: 13px;
   padding: 2px 4px;
@@ -1153,7 +1153,7 @@ disabled look for disabled choices in the results dropdown
 }
 
 .CodeMirror-linenumber.CodeMirror-gutter-elt {
-  padding: 0 20px 0 0 !important;
+  padding: 0 0 0 20px !important;
 }
 
 .ajax-load-more .sm-margin .CodeMirror {
@@ -1177,7 +1177,7 @@ disabled look for disabled choices in the results dropdown
 .ajax-load-more .CodeMirror-gutters {
   /* Line Number color */
   background: #fff;
-  border-right: 1px solid #e7e7e7;
+  border-left: 1px solid #e7e7e7;
   border-radius: 2px;
 }
 
@@ -1247,8 +1247,8 @@ disabled look for disabled choices in the results dropdown
     flex-wrap: wrap;
     padding: 20px;
     background: #f7f7f7;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4948354342) 50%, rgb(247, 247, 247) 100%);
-    text-align: left;
+    background: linear-gradient(-90deg, rgba(255, 255, 255, 0.4948354342) 50%, rgb(247, 247, 247) 100%);
+    text-align: right;
   }
 }
 .ajax-load-more .alm-cta-upgrade a:hover h2, .ajax-load-more .alm-cta-upgrade a:focus h2 {
@@ -1336,20 +1336,20 @@ disabled look for disabled choices in the results dropdown
   }
 }
 .ajax-load-more .alm-admin-toolbar--logo svg {
-  margin-right: 10px;
+  margin-left: 10px;
   width: 42px;
   height: 42px;
 }
 .ajax-load-more .alm-admin-toolbar a.plugin-link {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
-  margin: 0 0 0 10px;
+  margin: 0 10px 0 0;
   vertical-align: top;
   font-size: 13px;
   font-weight: 400;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  padding: 7px 9px 7px 8px;
+  padding: 7px 8px 7px 9px;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -1359,7 +1359,7 @@ disabled look for disabled choices in the results dropdown
   line-height: 1;
 }
 .ajax-load-more .alm-admin-toolbar a.plugin-link span.dashicons {
-  margin-right: 5px;
+  margin-left: 5px;
   font-size: 16px;
   width: 16px;
   height: 16px;
@@ -1399,7 +1399,7 @@ disabled look for disabled choices in the results dropdown
   position: relative;
   padding: 9px 15px;
   border-radius: 3px;
-  margin-right: 5px;
+  margin-left: 5px;
   transition: all 0.15s ease;
 }
 .ajax-load-more .alm-admin-nav nav a:hover, .ajax-load-more .alm-admin-nav nav a:focus, .ajax-load-more .alm-admin-nav nav a.current {
@@ -1489,7 +1489,7 @@ disabled look for disabled choices in the results dropdown
 }
 .alm-pro-listing .item a {
   text-decoration: none !important;
-  padding: 0 45px 0 0;
+  padding: 0 0 0 45px;
   position: relative;
   display: flex;
   border: 1px solid #e1e1e1;
@@ -1529,7 +1529,7 @@ disabled look for disabled choices in the results dropdown
 .alm-pro-listing .item--detail img {
   width: 100px;
   height: auto;
-  margin-right: 20px;
+  margin-left: 20px;
 }
 .alm-pro-listing .item--detail a {
   text-decoration: none;
@@ -1552,7 +1552,7 @@ disabled look for disabled choices in the results dropdown
   font-size: 12px;
   position: relative;
   top: 0;
-  left: 3px;
+  right: 3px;
   text-decoration: none !important;
 }
 .alm-pro-listing .item--detail p {
@@ -1575,7 +1575,7 @@ disabled look for disabled choices in the results dropdown
   display: inline-block;
   padding: 5px;
   position: relative;
-  left: -5px;
+  right: -5px;
   line-height: 1;
   background-color: #fff8d7;
   font-weight: 500;
@@ -1583,7 +1583,7 @@ disabled look for disabled choices in the results dropdown
 .alm-pro-listing .item .loader,
 .alm-pro-listing .item .result {
   position: absolute;
-  right: 9px;
+  left: 9px;
   bottom: 9px;
   visibility: hidden;
   opacity: 0;
@@ -1618,7 +1618,7 @@ disabled look for disabled choices in the results dropdown
   width: 22px;
   height: 22px;
   position: absolute;
-  right: 6px;
+  left: 6px;
   top: 6px;
   border-radius: 3px;
   background: #57d48c;
@@ -1678,7 +1678,7 @@ disabled look for disabled choices in the results dropdown
   content: "";
   display: block;
   position: absolute;
-  right: 20px;
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
@@ -1757,7 +1757,7 @@ disabled look for disabled choices in the results dropdown
   content: "";
   background: #efefef;
   position: absolute;
-  left: -18px;
+  right: -18px;
   top: -10px;
   z-index: 1;
 }
@@ -1799,9 +1799,9 @@ disabled look for disabled choices in the results dropdown
 }
 .shortcode-builder--label {
   background-color: #fcfcfc;
-  border-right: 1px solid #efefef;
+  border-left: 1px solid #efefef;
   width: 35%;
-  padding-right: 30px;
+  padding-left: 30px;
 }
 .shortcode-builder--label.full {
   width: 100%;
@@ -1833,7 +1833,7 @@ disabled look for disabled choices in the results dropdown
 }
 .shortcode-builder--fields section {
   width: 104%;
-  margin-left: -2%;
+  margin-right: -2%;
   border: none;
 }
 .shortcode-builder--fields .half {
@@ -1862,7 +1862,7 @@ disabled look for disabled choices in the results dropdown
 }
 .shortcode-builder--fields ul li {
   width: 50%;
-  padding-right: 10px;
+  padding-left: 10px;
 }
 .shortcode-builder--fields ul li label {
   margin-bottom: 0 !important;
@@ -1875,7 +1875,7 @@ disabled look for disabled choices in the results dropdown
     width: 100%;
   }
   .shortcode-builder--label {
-    border-right: none;
+    border-left: none;
     border-bottom: 1px solid #efefef;
   }
 }
@@ -1887,11 +1887,11 @@ disabled look for disabled choices in the results dropdown
 .shortcode-builder .flex-input input {
   margin: 0;
   flex: 1;
-  border-radius: 3px 0 0 3px;
+  border-radius: 0 3px 3px 0;
 }
 .shortcode-builder .flex-input span {
   border: 1px solid #e1e1e1;
-  border-left: none;
+  border-right: none;
   margin: 0;
   font-weight: 600;
   font-size: 11px;
@@ -1899,7 +1899,7 @@ disabled look for disabled choices in the results dropdown
   padding: 0 15px;
   display: flex;
   align-items: center;
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px 0 0 3px;
 }
 .shortcode-builder .nested-component {
   padding: 0;
@@ -1907,7 +1907,7 @@ disabled look for disabled choices in the results dropdown
 }
 .shortcode-builder .nested-component::after, .shortcode-builder .nested-component::before {
   top: 0;
-  left: 35px;
+  right: 35px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -1920,13 +1920,13 @@ disabled look for disabled choices in the results dropdown
   border-color: rgba(255, 255, 255, 0);
   border-top-color: #fcfcfc;
   border-width: 10px;
-  margin-left: -10px;
+  margin-right: -10px;
 }
 .shortcode-builder .nested-component::before {
   border-color: rgba(239, 239, 239, 0);
   border-top-color: #e7e7e7;
   border-width: 11px;
-  margin-left: -11px;
+  margin-right: -11px;
   z-index: 1;
 }
 .shortcode-builder .nested-component--inner {
@@ -1939,7 +1939,7 @@ disabled look for disabled choices in the results dropdown
   content: "";
 }
 .shortcode-builder .nested-component .nested-component .shortcode-builder--label {
-  border-left: 6px solid #efefef;
+  border-right: 6px solid #efefef;
 }
 .shortcode-builder .section-intro {
   margin: 0 0 10px;
@@ -1953,7 +1953,7 @@ disabled look for disabled choices in the results dropdown
   border-bottom: 1px solid #e7e7e7;
 }
 .shortcode-builder .section-anchor-nav li {
-  margin: 0 10px 5px 0;
+  margin: 0 0 5px 10px;
   padding: 0;
   font-size: 12px;
 }
@@ -1997,7 +1997,7 @@ disabled look for disabled choices in the results dropdown
 }
 .ajax-load-more .cnkt-sidebar .major-publishing-actions i {
   opacity: 0.4;
-  margin: 0 2px 0 0;
+  margin: 0 0 0 2px;
 }
 .ajax-load-more .cnkt-sidebar .major-publishing-actions.space-between {
   justify-content: space-between;
@@ -2025,13 +2025,13 @@ disabled look for disabled choices in the results dropdown
   padding: 15px 0;
 }
 .ajax-load-more .cnkt-sidebar .cta--header .alm-status {
-  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Template Tags */
 .ajax-load-more .template-tags {
   overflow: hidden;
-  border-left: 4px solid #dfd8c2;
+  border-right: 4px solid #dfd8c2;
   padding: 12px 15px;
   background: #fff9ea;
   margin: 10px 0 0;
@@ -2078,7 +2078,7 @@ disabled look for disabled choices in the results dropdown
   width: 100%;
 }
 .ajax-load-more .alm-toggle-switch li {
-  margin: 0 5px 0 0;
+  margin: 0 0 0 5px;
   padding: 0;
   background: none;
   list-style: none;
@@ -2115,7 +2115,7 @@ disabled look for disabled choices in the results dropdown
 }
 .woocommerce-help--item div {
   flex: 1;
-  padding: 20px 20px 20px 30px;
+  padding: 20px 30px 20px 20px;
 }
 @media screen and (max-width: 600px) {
   .woocommerce-help--item div {
@@ -2171,7 +2171,7 @@ disabled look for disabled choices in the results dropdown
   display: inline-block;
   border-radius: 10px;
   position: relative;
-  left: -1px;
+  right: -1px;
   background-color: #bf3538;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(191, 53, 56, 0.2);
 }
@@ -2183,7 +2183,7 @@ disabled look for disabled choices in the results dropdown
   display: block;
   text-decoration: none;
   padding: 5px;
-  margin-right: -10px;
+  margin-left: -10px;
   color: #6a7178;
 }
 .ajax-load-more .alm-license--header a:hover, .ajax-load-more .alm-license--header a:focus {
@@ -2251,7 +2251,7 @@ disabled look for disabled choices in the results dropdown
 .ajax-load-more .alm-license--actions .button-link svg {
   width: 14px;
   height: 14px;
-  margin-left: -2px;
+  margin-right: -2px;
 }
 .ajax-load-more .alm-license--stats {
   border-top: 1px solid #e7e7e7;
@@ -2292,8 +2292,8 @@ disabled look for disabled choices in the results dropdown
 .ajax-load-more .alm-license .alm-license-callout.end {
   margin: 0 !important;
   border-bottom: none;
-  border-right: none;
   border-left: none;
+  border-right: none;
   border-radius: 0;
 }
 .ajax-load-more .alm-license .alm-license-callout div {
@@ -2308,7 +2308,7 @@ disabled look for disabled choices in the results dropdown
   display: block;
   position: relative;
   top: 1px;
-  left: -2px;
+  right: -2px;
 }
 .ajax-load-more .alm-license-status {
   display: inline-block;
@@ -2320,7 +2320,7 @@ disabled look for disabled choices in the results dropdown
   font-weight: 400;
   font-size: 12px;
   position: absolute;
-  right: 8px;
+  left: 8px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
@@ -2360,7 +2360,7 @@ body.ajax-load-more_page_ajax-load-more-filters #wpcontent,
 body.ajax-load-more_page_ajax-load-more-pro #wpcontent,
 body.ajax-load-more_page_ajax-load-more-go-pro #wpcontent,
 body.ajax-load-more_page_ajax-load-more-woocommerce #wpcontent {
-  padding-left: 0;
+  padding-right: 0;
   padding-bottom: 20px;
 }
 body.toplevel_page_ajax-load-more #wpbody-content,
@@ -2431,19 +2431,19 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 }
 .ajax-load-more .offscreen {
   position: absolute;
-  left: -9999px;
+  right: -9999px;
 }
 .ajax-load-more img {
   max-width: 100%;
 }
 .ajax-load-more .text-left {
-  text-align: left;
+  text-align: right;
 }
 .ajax-load-more .text-center {
   text-align: center;
 }
 .ajax-load-more .text-right {
-  text-align: right;
+  text-align: left;
 }
 
 .main-cnkt-wrap {
@@ -2490,7 +2490,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.notice-updated.is-dismissible,
 .ajax-load-more div.notice-info.is-dismissible,
 .ajax-load-more div.notice-error.is-dismissible {
-  padding: 7px 7px 7px 15px !important;
+  padding: 7px 15px 7px 7px !important;
 }
 .ajax-load-more .notice p,
 .ajax-load-more div.updated p,
@@ -2520,7 +2520,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more div.notice-info button.notice-dismiss,
 .ajax-load-more div.notice-error button.notice-dismiss {
   position: static !important;
-  margin-left: auto;
+  margin-right: auto;
 }
 @media screen and (max-width: 640px) {
   .ajax-load-more .notice.nag-notice,
@@ -2590,7 +2590,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   .ajax-load-more div.notice-updated.nag-notice .alm-nag-buttons,
   .ajax-load-more div.notice-info.nag-notice .alm-nag-buttons,
   .ajax-load-more div.notice-error.nag-notice .alm-nag-buttons {
-    margin: 0 0 0 auto;
+    margin: 0 auto 0 0;
   }
 }
 .ajax-load-more .notice.nag-notice .alm-nag-buttons,
@@ -2644,7 +2644,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   background: #fbfbfb;
   color: #6a7178;
   margin: 0;
-  padding: 0 20px 0 25px;
+  padding: 0 25px 0 20px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -2670,8 +2670,8 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   color: #6a7178;
   background: transparent;
   cursor: default;
-  text-align: right;
-  padding-left: 0;
+  text-align: left;
+  padding-right: 0;
 }
 
 .ajax-load-more code {
@@ -2713,7 +2713,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 }
 .ajax-load-more a.layout-hover img {
   position: absolute;
-  left: 100%;
+  right: 100%;
   top: 0;
   z-index: 999;
   opacity: 0;
@@ -2721,7 +2721,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 }
 .ajax-load-more a.layout-hover:hover img {
   position: absolute;
-  left: 100%;
+  right: 100%;
   top: 0;
   z-index: 999;
   opacity: 1;
@@ -2758,7 +2758,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 
 .ajax-load-more button.reset-shortcode-builder {
   display: none;
-  margin-left: auto;
+  margin-right: auto;
   background-color: transparent !important;
   border-color: transparent !important;
 }
@@ -2766,7 +2766,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 /* Expand Collapse Headings */
 .ajax-load-more h3.heading {
   font-weight: 600;
-  padding: 15px 10px 15px 36px !important;
+  padding: 15px 36px 15px 10px !important;
   line-height: normal !important;
   margin: 0 !important;
   color: #393d41;
@@ -2793,7 +2793,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   content: "\f056";
   color: #e7e7e7;
   position: absolute;
-  left: 10px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   height: 20px;
@@ -2810,7 +2810,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 .ajax-load-more .toggle-all {
   position: static;
   top: -21px;
-  right: 20px;
+  left: 20px;
   width: auto;
   display: inline-block;
   font-size: 11px;
@@ -2838,7 +2838,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
 }
 .ajax-load-more .toggle-all .inner-wrap {
   position: relative;
-  padding-left: 16px;
+  padding-right: 16px;
   line-height: 24px;
 }
 .ajax-load-more .toggle-all .expand {
@@ -2861,7 +2861,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce #wpfooter p {
   content: "\f068";
   font-size: 10px;
   position: absolute;
-  left: 0;
+  right: 0;
   top: -5px;
 }
 .ajax-load-more .toggle-all.closed .inner-wrap:before {
@@ -2899,7 +2899,7 @@ a.button-small:focus {
 }
 
 .shortcode-builder--items li {
-  padding: 0 5% 0 0;
+  padding: 0 0 0 5%;
   margin: 0 0 5px;
   width: 48.666%;
   clear: both;
@@ -2944,14 +2944,14 @@ a.button-small:focus {
   position: relative;
   width: calc(100% + 40px);
   top: -20px;
-  left: -20px;
+  right: -20px;
   border-bottom: 1px solid #ebebeb;
   background: #f7f7f7;
   border-radius: 3px 3px 0 0;
 }
 
 .alm-settings-nav li {
-  float: left;
+  float: right;
   margin: 0;
   padding: 0;
   font-weight: 600;
@@ -2962,7 +2962,7 @@ a.button-small:focus {
 .alm-settings-nav a {
   text-decoration: none;
   padding: 8px 16px 8px 16px;
-  border-left: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
   display: block;
 }
 
@@ -2973,7 +2973,7 @@ a.button-small:focus {
 
 .alm-settings-nav li:first-of-type a {
   border: none;
-  border-radius: 3px 0 0 0;
+  border-radius: 0 3px 0 0;
 }
 
 #alm-meta-key .meta-query-wrap,
@@ -3030,7 +3030,7 @@ a.button-small:focus {
 .meta-query-wrap .remove-meta-query,
 .taxonomy-wrap .remove-tax-query {
   position: absolute;
-  right: 5px;
+  left: 5px;
   top: 5px;
   width: 23px;
   height: 23px;
@@ -3042,7 +3042,7 @@ a.button-small:focus {
   color: #fff;
   text-decoration: none;
   border-radius: 3px;
-  padding-left: 1px;
+  padding-right: 1px;
 }
 .meta-query-wrap .remove-meta-query:hover, .meta-query-wrap .remove-meta-query:hover,
 .taxonomy-wrap .remove-tax-query:hover,
@@ -3100,9 +3100,9 @@ a.button-small:focus {
 .ajax-load-more .row .wrap .inner .ajax-load-more p.warning {
   color: #d24646;
   font-size: 13px;
-  border-left: 3px solid #d24646;
+  border-right: 3px solid #d24646;
   margin: 0;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 0;
 }
 
 .ajax-load-more .row .wrap .inner.taxonomy {
@@ -3158,15 +3158,15 @@ a.button-small:focus {
 .checkboxes label,
 .radio input,
 .radio label {
-  float: left;
+  float: right;
   width: auto;
-  margin-right: 10px;
+  margin-left: 10px;
   padding: 0;
   clear: none;
 }
 
 .radio input {
-  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .ajax-load-more textarea,
@@ -3186,7 +3186,7 @@ a.button-small:focus {
 
 .ajax-load-more .wrap-30 {
   width: 32.333%;
-  padding-right: 3%;
+  padding-left: 3%;
   display: inline-block;
   vertical-align: top;
 }
@@ -3264,18 +3264,18 @@ a.button-small:focus {
 }
 
 .checkboxes label {
-  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .ajax-load-more .one_half {
   display: inline-block;
   width: 48%;
-  margin: 0 -2px 1% 2%;
+  margin: 0 2% 1% -2px;
   vertical-align: top;
 }
 
 .ajax-load-more .one_half:first-of-type {
-  margin: 0 2% 1% 0;
+  margin: 0 0 1% 2%;
 }
 
 .ajax-load-more .alm-row {
@@ -3374,7 +3374,7 @@ a.button-small:focus {
 }
 .pop-up-jump .jump-menu-wrap {
   position: relative;
-  float: right;
+  float: left;
   width: 30%;
 }
 .pop-up-jump .jump-menu-wrap .select2-container {
@@ -3385,9 +3385,9 @@ a.button-small:focus {
 }
 .pop-up-jump .intro-wrap {
   position: relative;
-  float: left;
+  float: right;
   width: 65%;
-  padding-right: 5%;
+  padding-left: 5%;
 }
 
 .ajax-load-more .jump-menu {
@@ -3414,7 +3414,7 @@ a.button-small:focus {
   display: inline-block;
   vertical-align: top;
   padding: 0;
-  margin: 5px 5px 5px 0;
+  margin: 5px 0 5px 5px;
 }
 
 .ajax-load-more .expand-wrap {
@@ -3434,18 +3434,18 @@ a.button-small:focus {
 
 hr.indented {
   width: calc(100% - 40px);
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .ajax-load-more .section-title {
-  float: left;
-  padding: 20px 0 25px 20px;
+  float: right;
+  padding: 20px 20px 25px 0;
   width: 35%;
 }
 .ajax-load-more .section-title.full {
   width: 100%;
   float: none;
-  padding-right: 25px;
+  padding-left: 25px;
 }
 .ajax-load-more .section-title p:last-of-type {
   margin-bottom: 0;
@@ -3516,7 +3516,7 @@ hr.indented {
 }
 
 .ajax-load-more .repeaters .section-title p {
-  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .ajax-load-more label input._alm_repeater_alias {
@@ -3539,18 +3539,18 @@ hr.indented {
 }
 
 .ajax-load-more .row .wrap {
-  padding: 20px 20px 0 5%;
+  padding: 20px 5% 0 20px;
   margin: 0;
   border: none;
   width: 65%;
-  float: left;
+  float: right;
   position: relative;
 }
 
 .ajax-load-more .row .wrap.full {
   float: none;
   width: 100%;
-  padding: 0 15px 15px 36px;
+  padding: 0 36px 15px 15px;
 }
 
 .ajax-load-more .output-wrap {
@@ -3640,7 +3640,7 @@ hr.indented {
 
 .form-table input,
 .form-table select {
-  margin-left: 0;
+  margin-right: 0;
 }
 .form-table label {
   display: block;
@@ -3685,7 +3685,7 @@ hr.indented {
   border: 1px solid #ccc;
   background: #efefef;
   color: #666;
-  text-shadow: 1px 1px 0 #fff;
+  text-shadow: -1px 1px 0 #fff;
   resize: none;
 }
 
@@ -3702,7 +3702,7 @@ hr.indented {
 
 .ajax-load-more .form-table input[type=radio],
 .ajax-load-more .form-table input[type=checkbox] {
-  margin-right: 10px;
+  margin-left: 10px;
   margin-top: 0 !important;
 }
 
@@ -3723,7 +3723,7 @@ hr.indented {
   display: none;
 }
 .ajax-load-more .ajax-load-more-wrap .alm-btn-wrap {
-  text-align: left;
+  text-align: right;
   padding: 0;
   margin: 0;
   padding: 15px;
@@ -3784,7 +3784,7 @@ hr.indented {
 .ajax-load-more.settings .form-table th {
   font-weight: 500;
   background-color: #f7f7f7;
-  border-right: 1px solid #efefef;
+  border-left: 1px solid #efefef;
   width: 25%;
 }
 .ajax-load-more.settings .form-table p {
@@ -3813,7 +3813,7 @@ hr.indented {
 }
 .ajax-load-more.settings .nextpage-option--shortcode {
   display: none;
-  padding: 10px 5px 5px 30px;
+  padding: 10px 30px 5px 5px;
 }
 .ajax-load-more.settings .nextpage-option--shortcode.active {
   display: block;
@@ -3855,14 +3855,14 @@ hr.indented {
 }
 .ajax-load-more .desc,
 .ajax-load-more p.writeable-title {
-  padding: 0 0 2px 28px;
+  padding: 0 28px 2px 0;
 }
 .ajax-load-more p.writeable-title {
   position: relative;
 }
 .ajax-load-more p.writeable-title i {
   position: absolute !important;
-  left: 0 !important;
+  right: 0 !important;
   top: 1px !important;
 }
 .ajax-load-more .saved-response,
@@ -3876,7 +3876,7 @@ hr.indented {
   width: auto;
   position: relative;
   top: 5px;
-  left: 15px;
+  right: 15px;
 }
 .ajax-load-more .saved-error {
   color: #e03e3e;
@@ -3895,12 +3895,12 @@ hr.indented {
 }
 .ajax-load-more .saved-response.loading,
 .ajax-load-more p.loading {
-  background: transparent url(../admin/img/ui/loader.gif) no-repeat left center;
-  padding-left: 24px;
+  background: transparent url(../admin/img/ui/loader.gif) no-repeat right center;
+  padding-right: 24px;
 }
 .ajax-load-more .restore-default {
-  float: right;
-  margin: 19px 20px 0 0;
+  float: left;
+  margin: 19px 0 0 20px;
   font-size: 12px;
 }
 .ajax-load-more .restore-default a {
@@ -3959,7 +3959,7 @@ hr.indented {
   position: relative;
 }
 .ajax-load-more .cnkt-main .alm-content-wrap .toggle-all {
-  right: -1px;
+  left: -1px;
   top: -45px;
 }
 .ajax-load-more .cnkt-main .alm-content-wrap .flexbox-wrap {
@@ -4042,7 +4042,7 @@ hr.indented {
   opacity: 0;
   transition: all 0.15s ease;
   position: absolute;
-  right: 20px;
+  left: 20px;
   bottom: 20px;
   border: none;
   border-radius: 3px;
@@ -4124,7 +4124,7 @@ hr.indented {
 }
 @media screen and (min-width: 768px) {
   #alm-add-ons .group.highlighted, #alm-add-ons .group.extend, #alm-add-ons .group.alm-pro-hero {
-    text-align: left;
+    text-align: right;
   }
   #alm-add-ons .group.highlighted a, #alm-add-ons .group.extend a, #alm-add-ons .group.alm-pro-hero a {
     padding: 20px;
@@ -4143,7 +4143,7 @@ hr.indented {
     max-width: 355px;
   }
   #alm-add-ons .group.highlighted .pro-details, #alm-add-ons .group.extend .pro-details, #alm-add-ons .group.alm-pro-hero .pro-details {
-    padding: 0 15px 0 35px;
+    padding: 0 35px 0 15px;
   }
   #alm-add-ons .group.highlighted img, #alm-add-ons .group.extend img, #alm-add-ons .group.alm-pro-hero img {
     position: static;
@@ -4176,7 +4176,7 @@ hr.indented {
 
 #alm-add-ons .group span.cnkt-button {
   position: absolute;
-  left: 20px;
+  right: 20px;
   bottom: 20px;
   width: 100%;
   width: calc(100% - 40px);
@@ -4185,8 +4185,8 @@ hr.indented {
   padding: 11px 14px;
   transition: all 0.15s ease;
   border-bottom: none;
-  border-left: none;
   border-right: none;
+  border-left: none;
 }
 #alm-add-ons .group img {
   padding: 0 15px 15px;
@@ -4238,12 +4238,12 @@ hr.indented {
 
 .ajax-load-more p.warning-callout {
   background-color: #eaf6fb;
-  border-left: 5px solid #3d8ed0;
+  border-right: 5px solid #3d8ed0;
   color: #333;
   font-size: 13px;
   margin: 0;
   display: block;
-  padding: 20px 100px 20px 20px;
+  padding: 20px 20px 20px 100px;
   border-radius: 3px;
   margin: 10px;
   width: auto;
@@ -4255,12 +4255,12 @@ hr.indented {
 }
 .ajax-load-more p.warning-callout a.button-small {
   position: absolute;
-  right: 14px;
+  left: 14px;
   top: 14px;
   font-size: 12px;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 0 10px;
+  margin: 0 10px 0 0;
 }
 .ajax-load-more p.warning-callout a.button-small:hover, .ajax-load-more p.warning-callout a.button-small:focus {
   background-color: #fff;
@@ -4284,12 +4284,12 @@ hr.indented {
 }
 .ajax-load-more .alm-form-notice {
   background-color: #fffbe7;
-  border-left: 5px solid #e2d8a8;
+  border-right: 5px solid #e2d8a8;
   font-size: 13px;
   margin: 0;
   display: grid;
   gap: 10px;
-  padding: 15px 100px 15px 20px;
+  padding: 15px 20px 15px 100px;
   border-radius: 3px;
   margin: 0;
   width: auto;
@@ -4318,9 +4318,9 @@ hr.indented {
 }
 .ajax-load-more .call-out p i {
   font-size: 15px;
-  margin-right: 5px;
+  margin-left: 5px;
   position: relative;
-  left: -4px;
+  right: -4px;
   display: block;
   font-size: 22px;
   opacity: 0.5;
@@ -4346,7 +4346,7 @@ hr.indented {
   margin-top: 10px;
 }
 .ajax-load-more .call-out.text-left {
-  text-align: left;
+  text-align: right;
 }
 .ajax-load-more .call-out.radius-normal {
   border-radius: 3px;
@@ -4372,7 +4372,7 @@ hr.indented {
 }
 .ajax-load-more .call-out.blue {
   background-color: #eaf6fb;
-  border-left: 6px solid #4e99bf;
+  border-right: 6px solid #4e99bf;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 .ajax-load-more .call-out.blue p {
@@ -4417,7 +4417,7 @@ hr.indented {
 }
 .ajax-load-more .call-out .button,
 .ajax-load-more .call-out .cnkt-button {
-  margin-left: auto;
+  margin-right: auto;
 }
 .ajax-load-more .call-out .cnkt-button {
   font-weight: 500;
@@ -4454,7 +4454,7 @@ span.cnkt-button {
 }
 a.cnkt-button i,
 span.cnkt-button i {
-  margin-right: 2px;
+  margin-left: 2px;
 }
 
 a.cnkt-button:hover,
@@ -4614,10 +4614,10 @@ span.cnkt-button.installed,
 
 .ajax-load-more .cnkt-sidebar a.visit {
   background: #ed7070;
-  padding: 17px 20px 18px 44px;
+  padding: 17px 44px 18px 20px;
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   display: block;
   color: #fff !important;
@@ -4630,10 +4630,10 @@ span.cnkt-button.installed,
 .ajax-load-more .cnkt-sidebar a.visit i {
   font-size: 21px;
   opacity: 0.6;
-  margin: 0 5px 0 0;
+  margin: 0 0 0 5px;
   position: absolute;
   top: 13px;
-  left: 18px;
+  right: 18px;
   display: inline-block;
 }
 
@@ -4785,7 +4785,7 @@ span.cnkt-button.installed,
   color: #c24243;
   margin: 0;
   position: relative;
-  left: -1px;
+  right: -1px;
   font-size: 18px;
 }
 .ajax-load-more .alm-add-template a:hover, .ajax-load-more .alm-add-template a:focus,
@@ -4813,7 +4813,7 @@ span.cnkt-button.installed,
   border: 1px solid #e7e7e7;
   color: #6a7178;
   opacity: 0.85;
-  box-shadow: inset 1px 1px 0 #fff, 0 0 0 3px rgba(0, 0, 0, 0.025);
+  box-shadow: inset -1px 1px 0 #fff, 0 0 0 3px rgba(0, 0, 0, 0.025);
 }
 .ajax-load-more .alm-add-template a[disabled] i, .ajax-load-more .alm-add-template a.active i,
 .ajax-load-more .alm-add-template button[disabled] i,
@@ -4840,11 +4840,11 @@ span.cnkt-button.installed,
 
 .ajax-load-more p.generate-id {
   margin: 10px 0 0 !important;
-  padding: 0 0 0 5px;
+  padding: 0 5px 0 0;
   font-size: 12px !important;
 }
 .ajax-load-more p.generate-id i {
-  margin: 0 2px 0 0;
+  margin: 0 0 0 2px;
   color: #999;
 }
 .ajax-load-more p.generate-id a {
@@ -4858,8 +4858,8 @@ span.cnkt-button.installed,
 }
 .ajax-load-more .alm-dir-listing ul li {
   margin: 0 !important;
-  padding: 5px 5px 5px 55px;
-  background: transparent url(../admin/img/ui/directory-list.gif) no-repeat left center;
+  padding: 5px 55px 5px 5px;
+  background: transparent url(../admin/img/ui/directory-list.gif) no-repeat right center;
   position: relative;
   display: block;
 }
@@ -4881,7 +4881,7 @@ span.cnkt-button.installed,
   width: 15px;
   color: #999;
   position: absolute;
-  left: 35px;
+  right: 35px;
   top: 12px;
 }
 .ajax-load-more .alm-dir-listing p.theme-title {
@@ -4896,7 +4896,7 @@ span.cnkt-button.installed,
 .ajax-load-more .alm-dir-listing.theme-repeaters ul li {
   display: block;
   width: 100%;
-  padding-left: 36px;
+  padding-right: 36px;
 }
 .ajax-load-more .alm-dir-listing.theme-repeaters ul li label {
   display: block;
@@ -4906,7 +4906,7 @@ span.cnkt-button.installed,
   display: none;
 }
 .ajax-load-more .alm-dir-listing.theme-repeaters ul li:nth-last-child(2) {
-  background: transparent url(../admin/img/ui/directory-list.gif) no-repeat left center;
+  background: transparent url(../admin/img/ui/directory-list.gif) no-repeat right center;
 }
 
 .alm-error {
@@ -4928,11 +4928,11 @@ span.cnkt-button.installed,
   padding: 10px;
   font-size: 12px;
   font-weight: 700;
-  border-right: 1px solid #e7e7e7;
+  border-left: 1px solid #e7e7e7;
 }
 .ajax-load-more .alm-styled-input input {
   border: none;
-  border-radius: 0 2px 2px 0;
+  border-radius: 2px 0 0 2px;
   margin: 0;
   width: 100%;
 }
@@ -4951,12 +4951,12 @@ span.cnkt-button.installed,
 .ajax-load-more .form-table input[type=checkbox] + label,
 .shortcode-builder input[type=radio] + label,
 .ajax-load-more .form-table input[type=radio] + label {
-  background: transparent url(../admin/img/ui/bkg-chkbox_off.png) no-repeat left 2px;
+  background: transparent url(../admin/img/ui/bkg-chkbox_off.png) no-repeat right 2px;
   height: auto;
   min-height: 23px;
   width: 100%;
   display: inline-block;
-  padding: 0.1em 0 0 30px;
+  padding: 0.1em 30px 0 0;
   margin: 0 0 5px;
   font-size: 14px;
   line-height: 1.5;
@@ -4973,7 +4973,7 @@ span.cnkt-button.installed,
 
 .shortcode-builder input[type=radio] + label,
 .ajax-load-more .form-table input[type=radio] + label {
-  background: transparent url(../admin/img/ui/bkg-radio_off.png) no-repeat left 2px;
+  background: transparent url(../admin/img/ui/bkg-radio_off.png) no-repeat right 2px;
 }
 
 .shortcode-builder input[type=checkbox]:hover + label,
@@ -5022,7 +5022,7 @@ span.cnkt-button.installed,
 
 .progress_bar_color_indicator {
   position: absolute;
-  left: 11px;
+  right: 11px;
   top: 9px;
   width: 0;
   height: 0;
@@ -5052,7 +5052,7 @@ span.cnkt-button.installed,
 .alm-drop-btn.alm-repeater-options {
   position: absolute;
   top: -41px;
-  right: 6px;
+  left: 6px;
   z-index: 8;
   width: 32px;
   height: 32px;
@@ -5094,7 +5094,7 @@ span.cnkt-button.installed,
 .alm-drop-btn a.target > i {
   color: #6a7178;
   font-size: 16px;
-  margin-right: 8px;
+  margin-left: 8px;
   opacity: 0.5;
 }
 .alm-drop-btn a.target:hover, .alm-drop-btn a.target:focus {
@@ -5123,19 +5123,19 @@ span.cnkt-button.installed,
 
 /* Layout Dropdown */
 .ajax-load-more .alm-drop-btn.alm-layout-selection {
-  float: left;
+  float: right;
   margin: -15px 0 15px;
 }
 @media screen and (min-width: 900px) {
   .ajax-load-more .alm-drop-btn.alm-layout-selection {
-    float: right;
+    float: left;
     margin: 0;
   }
 }
 @media screen and (max-width: 480px) {
   .ajax-load-more .alm-drop-btn.alm-layout-selection .alm-dropdown {
-    right: auto;
-    left: 0;
+    left: auto;
+    right: 0;
     float: none;
   }
   .ajax-load-more .alm-drop-btn.alm-layout-selection .alm-dropdown .alm-drop-inner {
@@ -5153,15 +5153,15 @@ span.cnkt-button.installed,
 @media screen and (max-width: 480px) {
   .alm-drop-btn.alm-layout-selection .alm-dropdown .alm-drop-inner:after,
   .alm-drop-btn.alm-layout-selection .alm-dropdown .alm-drop-inner:before {
-    right: auto;
-    left: 36px;
+    left: auto;
+    right: 36px;
   }
   .alm-drop-btn.alm-layout-selection .alm-dropdown .alm-drop-inner:after {
-    margin-left: 0;
+    margin-right: 0;
   }
   .alm-drop-btn.alm-layout-selection .alm-dropdown .alm-drop-inner:before {
-    right: auto;
-    left: 35px;
+    left: auto;
+    right: 35px;
   }
 }
 .alm-drop-btn {
@@ -5173,7 +5173,7 @@ span.cnkt-button.installed,
   opacity: 0;
   position: absolute;
   top: 109%;
-  right: -15px;
+  left: -15px;
   z-index: 9;
   transition: all 0.15s ease;
 }
@@ -5189,7 +5189,7 @@ span.cnkt-button.installed,
 }
 .alm-drop-btn .alm-dropdown .alm-drop-inner::after, .alm-drop-btn .alm-dropdown .alm-drop-inner::before {
   bottom: 100%;
-  right: 26px;
+  left: 26px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -5201,13 +5201,13 @@ span.cnkt-button.installed,
   border-color: rgba(247, 247, 247, 0);
   border-bottom-color: #fff;
   border-width: 7px;
-  margin-left: -7px;
+  margin-right: -7px;
 }
 .alm-drop-btn .alm-dropdown .alm-drop-inner::before {
   border-color: rgba(204, 204, 204, 0);
   border-bottom-color: #ccc;
   border-width: 8px;
-  right: 25px;
+  left: 25px;
 }
 .alm-drop-btn .alm-dropdown.active {
   opacity: 1;
@@ -5242,12 +5242,12 @@ span.cnkt-button.installed,
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 10px 10px 10px 3px;
+  padding: 10px 3px 10px 10px;
   line-height: 1;
   cursor: pointer;
 }
 .alm-drop-btn .alm-dropdown li button > i {
-  margin-right: 8px;
+  margin-left: 8px;
   opacity: 0.65;
   font-size: 14px;
   color: #6a7178;
@@ -5260,7 +5260,7 @@ span.cnkt-button.installed,
   color: #6a7178;
 }
 .alm-drop-btn .alm-dropdown li button.updating {
-  background: transparent url(../admin/img/ui/loader.gif) no-repeat left center;
+  background: transparent url(../admin/img/ui/loader.gif) no-repeat right center;
   cursor: wait;
 }
 .alm-drop-btn .alm-dropdown li button.updating i {
@@ -5281,7 +5281,7 @@ span.cnkt-button.installed,
 }
 .select-theme-repeater .or {
   position: absolute;
-  left: 70px;
+  right: 70px;
   top: -20px;
   background: #fff;
   color: #333;
@@ -5345,16 +5345,16 @@ span.cnkt-button.installed,
     width: 100%;
   }
   .share-alm .sharing {
-    padding-right: 0;
+    padding-left: 0;
     width: 100%;
-    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
   .share-alm .mailing {
     width: 100%;
-    margin-left: 0 !important;
-    padding-left: 0;
+    margin-right: 0 !important;
+    padding-right: 0;
     padding-top: 40px;
-    border-left: none;
+    border-right: none;
   }
 }
 @media screen and (max-width: 480px) {

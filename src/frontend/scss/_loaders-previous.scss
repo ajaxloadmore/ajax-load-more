@@ -1,4 +1,6 @@
-// Load Previous.
+@use '../../global/scss/colors' as *;
+@use '../../global/scss/functions' as *;
+
 .alm-btn-wrap {
 	&--prev {
 		display: flex;

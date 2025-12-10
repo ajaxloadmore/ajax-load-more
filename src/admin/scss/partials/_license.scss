@@ -1,4 +1,5 @@
-// License.
+@use '../variables' as *;
+
 .ajax-load-more {
 	.alm-license {
 		display: grid;
@@ -35,11 +36,15 @@
 					position: relative;
 					left: -1px;
 					background-color: $red;
-					box-shadow: inset 0 0 0 1px rgba(#000, 0.075), 0 0 0 3px rgba($red, 0.2);
+					box-shadow:
+						inset 0 0 0 1px rgba(#000, 0.075),
+						0 0 0 3px rgba($red, 0.2);
 
 					&.is-valid {
 						background-color: $green;
-						box-shadow: inset 0 0 0 1px rgba(#000, 0.075), 0 0 0 3px rgba($green, 0.2);
+						box-shadow:
+							inset 0 0 0 1px rgba(#000, 0.075),
+							0 0 0 3px rgba($green, 0.2);
 					}
 				}
 			}
@@ -204,11 +209,15 @@
 			z-index: 5;
 			&.active {
 				background-color: $green;
-				box-shadow: inset 0 0 0 1px rgba(#000, 0.075), 0 0 0 3px rgba($green, 0.2);
+				box-shadow:
+					inset 0 0 0 1px rgba(#000, 0.075),
+					0 0 0 3px rgba($green, 0.2);
 			}
 			&.inactive {
 				background-color: $red;
-				box-shadow: inset 0 0 0 1px rgba(#000, 0.075), 0 0 0 3px rgba($red, 0.2);
+				box-shadow:
+					inset 0 0 0 1px rgba(#000, 0.075),
+					0 0 0 3px rgba($red, 0.2);
 			}
 		}
 	}

@@ -1,4 +1,6 @@
-// Generic alm-listing Styles
+@use '../../global/scss/colors' as *;
+@use '../../global/scss/functions' as *;
+
 .alm-listing,
 .alm-paging-content {
 	outline: none;

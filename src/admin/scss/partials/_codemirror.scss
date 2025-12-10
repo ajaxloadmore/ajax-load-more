@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .ajax-load-more .CodeMirror {
 	height: auto;
 	border-radius: $radius;

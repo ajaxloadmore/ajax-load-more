@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .ajax-load-more .alm-tabbed-wrapper {
 	width: 100%;
 	@media screen and (min-width: $tablet) {

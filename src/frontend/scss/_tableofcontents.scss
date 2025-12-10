@@ -1,3 +1,6 @@
+@use '../../global/scss/colors' as *;
+@use '../../global/scss/functions' as *;
+
 .alm-toc {
 	display: flex;
 	width: auto;

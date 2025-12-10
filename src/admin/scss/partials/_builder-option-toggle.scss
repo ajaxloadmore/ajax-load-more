@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .ajax-load-more .builder-option-toggle {
 	display: flex;
 	flex-wrap: nowrap;
