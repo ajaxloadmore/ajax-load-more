@@ -931,17 +931,18 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			}
 			alm.fetchingPreviousPost = true; // Set loading flag.
 
-			const { rest_api } = alm_localize; // Get Rest API URL.
-			const url = `${rest_api}alm/single-post/next-post`;
-			const data = await apiRequest(url, singlepostsQueryParams(alm)); // Send fetch request.
+			const { single_posts_endpoint = '' } = alm_localize; // Pluck Single Posts API URL.
 
-			if (!data) {
+			if (!single_posts_endpoint) {
+				console.warn('Ajax Load More: Single Posts endpoint is not defined.');
 				alm.fetchingPreviousPost = false;
-				alm.addons.single_post_init = false;
 				return;
 			}
 
-			const { has_previous_post = false } = data;
+			// Send fetch request.
+			const data = await apiRequest(single_posts_endpoint, singlepostsQueryParams(alm));
+
+			const { has_previous_post = false } = data || {};
 			if (has_previous_post) {
 				// Update ALM instance variables.
 				alm.listing.dataset.singlePostId = data.prev_id;
@@ -1229,7 +1230,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					}, 500);
 				}
 				alm.window.addEventListener('scroll', alm.AjaxLoadMore.scroll); // Scroll
-				alm.window.addEventListener('touchstart', alm.AjaxLoadMore.scroll); // Touch Devices
+				alm.window.addEventListener('touchmove', alm.AjaxLoadMore.scroll, { passive: true }); // Touch Devices
 				alm.window.addEventListener('wheel', function (e) {
 					// Mousewheel
 					const direction = Math.sign(e.deltaY);

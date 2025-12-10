@@ -59,17 +59,17 @@ export function singlepostsCreateParams(alm) {
  */
 export function singlepostsQueryParams(alm) {
 	const { addons } = alm;
-	const params = {
+	return {
 		id: parseInt(addons.single_post_id),
 		order: addons.single_post_order,
+		post_type: alm.post_type,
 		taxonomy: addons.single_post_taxonomy,
 		excluded_terms: addons.single_post_excluded_terms,
-		post_type: alm.post_type,
 		initial_id: parseInt(addons.single_post_init_id),
 		init: addons.single_post_init,
+		target: addons.single_post_target,
+		action: 'alm_get_single',
 	};
-
-	return params;
 }
 
 /**
