@@ -43,7 +43,7 @@
 		"@wordpress/i18n": "^5.14.0",
 		"@wordpress/scripts": "^26.0.0",
 		"@wordpress/server-side-render": "^4.28.0",
-		"axios": "^1.9.0",
+		"axios": "^1.13.2",
 		"clean-webpack-plugin": "^4.0.0",
 		"copy-webpack-plugin": "^11.0.0",
 		"cross-env": "^7.0.3",
