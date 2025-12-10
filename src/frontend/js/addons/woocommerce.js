@@ -38,7 +38,7 @@ export function wooInit(alm) {
 	const container = document.querySelector(alm.addons.woocommerce_settings.container); // Get `ul.products`
 	if (!container) {
 		console.warn(
-			'ALM WooCommerce: Unable to locate container element. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_container'
+			'ALM WooCommerce: Unable to locate container element. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_container',
 		);
 		return;
 	}
@@ -59,7 +59,7 @@ export function wooInit(alm) {
 	if (count > 1) {
 		// Display warning if multiple containers were found.
 		console.warn(
-			'ALM WooCommerce: Multiple containers with the same classname or ID found. The WooCommerce add-on requires a single container to be defined. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/'
+			'ALM WooCommerce: Multiple containers with the same classname or ID found. The WooCommerce add-on requires a single container to be defined. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/',
 		);
 	}
 
@@ -75,7 +75,7 @@ export function wooInit(alm) {
 		item.dataset.pageTitle = document.title;
 	} else {
 		console.warn(
-			'ALM WooCommerce: Unable to locate products. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_products'
+			'ALM WooCommerce: Unable to locate products. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_products',
 		);
 	}
 

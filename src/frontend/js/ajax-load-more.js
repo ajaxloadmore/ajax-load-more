@@ -457,10 +457,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			alm.html = html;
 
 			if (!meta) {
-				// Display warning if `meta` is missing from response.
-				console.warn(
-					'Ajax Load More: Unable to access `meta` object in Ajax response. There may be an issue in your Repeater Template or another theme/plugin hook causing interference with the Ajax request.'
-				);
+				// Missing `meta` object in response.
+				console.warn('Ajax Load More: Unable to access `meta` object in Ajax response.');
 			}
 
 			// ALM Init: First run only.

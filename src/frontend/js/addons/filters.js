@@ -22,7 +22,7 @@ export function filtersCreateParams(alm) {
 		// Display warning when `filters_target` parameter is missing.
 		if (!alm.addons.filters_target) {
 			console.warn(
-				'Ajax Load More: Unable to locate a target for Filters. Make sure you set a target parameter in the core Ajax Load More shortcode - e.g. [ajax_load_more filters="true" target="filters"]'
+				'Ajax Load More: Unable to locate a target for Filters. Make sure you set a target parameter in the core Ajax Load More shortcode - e.g. [ajax_load_more filters="true" target="filters"]',
 			);
 		}
 
