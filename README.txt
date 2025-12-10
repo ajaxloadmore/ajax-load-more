@@ -4,8 +4,8 @@ Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.8
-Stable tag: 7.7.1
+Tested up to: 6.9
+Stable tag: 7.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -274,6 +274,12 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.7.2 - December 11, 2025 =
+* UPDATE: Updated SinglePosts fetch to use REST API endpoint to support custom post types.
+* Updated Axios and other project dependencies to latest versions.
+* UPDATE: WordPress 6.9 compatibility updates.
+* FIX: Added fix for touchstart event listener to use passive option for better performance on touch devices.
 
 = 7.7.1 - November 26, 2025 =
 * UPDATE: Added cache support to REST API queries.
