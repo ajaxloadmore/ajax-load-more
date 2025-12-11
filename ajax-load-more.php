@@ -14,6 +14,12 @@
  * @package AjaxLoadMore
  */
 
+/*
+* NEW: Added support for Ajax Load More Search add-on.
+* UPDATE: Refactored default WP_Query to use alm_do_query function for routing queries.
+* UPDATE: Various bug fixes and other improvements.
+*/
+
 define( 'ALM_VERSION', '7.7.2' );
 define( 'ALM_RELEASE', 'December 11, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
