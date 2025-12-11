@@ -10,7 +10,7 @@ export default function dispatchScrollEvent(delay = true) {
 			function () {
 				window.dispatchEvent(new CustomEvent('scroll'));
 			},
-			delay ? 150 : 1
+			delay ? 150 : 1,
 		);
 	}
 }

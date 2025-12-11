@@ -2918,7 +2918,6 @@ jQuery(document).ready(function ($) {
     if (inverse) {
       wrap.addClass(inverse); // Add inverse class if selected
     }
-
     $('#test-alm-button', wrap).removeClass('loading');
     if (color.indexOf('infinite') >= 0) {
       $('#test-alm-button', wrap).addClass('loading');

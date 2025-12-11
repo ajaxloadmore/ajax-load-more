@@ -6,7 +6,9 @@
  * @return {string}     The query param value.
  */
 export default function getParameterByName(name, url) {
-	if (!url) url = window.location.href;
+	if (!url) {
+		url = window.location.href;
+	}
 	name = name.replace(/[\[\]]/g, '\\$&');
 	const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
 	const results = regex.exec(url);

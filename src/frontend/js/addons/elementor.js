@@ -55,7 +55,7 @@ export function elementorCreateParams(alm) {
 		}
 		if (!alm.addons.elementor_next_page) {
 			console.warn(
-				'Ajax Load More: Unable to locate Elementor pagination. There are either no results or Ajax Load More is unable to locate the pagination widget?'
+				'Ajax Load More: Unable to locate Elementor pagination. There are either no results or Ajax Load More is unable to locate the pagination widget?',
 			);
 		}
 	}

@@ -7,21 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.7.1
+ * Version: 7.7.2
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-/*
-* NEW: Added support for Ajax Load More Search add-on.
-* UPDATE: Refactored default WP_Query to use alm_do_query function for routing queries.
-* UPDATE: Various bug fixes and other improvements.
-*/
-
-define( 'ALM_VERSION', '7.7.1' );
-define( 'ALM_RELEASE', 'November 26, 2025' );
+define( 'ALM_VERSION', '7.7.2' );
+define( 'ALM_RELEASE', 'December 11, 2025' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
@@ -250,8 +244,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$content = '';
 			$file    = ALM_PATH . 'admin/includes/layout/default.php';
 			if ( file_exists( $file ) ) {
-				// phpcs:ignore
-				$content = file_get_contents( $file );
+				$content = file_get_contents( $file ); // phpcs:ignore
 			}
 			return $content;
 		}
@@ -398,7 +391,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 * @return array
 		 */
 		public static function alm_get_localized_defaults() {
-			return [
+			$params = [
 				'pluginurl'          => ALM_URL,
 				'version'            => ALM_VERSION,
 				'adminurl'           => get_admin_url(),
@@ -419,6 +412,17 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				'site_tagline'       => get_bloginfo( 'description' ),
 				'button_label'       => self::alm_default_button_label(),
 			];
+
+			// Set Single Posts endpoint.
+			if ( has_action( 'alm_single_post_installed' ) && defined( 'ALM_PREV_POST_VERSION' ) ) {
+				if ( method_exists( 'ALM_Single_Post', 'alm_single_post_get_route' ) && apply_filters( 'alm_single_posts_use_rest_api', true ) ) {
+					$params['single_posts_endpoint'] = ALM_Single_Post::alm_single_post_get_route();
+				} else {
+					$params['single_posts_endpoint'] = $params['ajaxurl'];
+				}
+			}
+
+			return $params;
 		}
 
 		/**

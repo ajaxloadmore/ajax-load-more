@@ -131,8 +131,7 @@ function alm_get_current_repeater( $template, $type ) {
 
 	} elseif ( $type === 'template_' && defined( 'ALM_UNLIMITED_VERSION' ) ) {
 		// Custom Repeaters v2 add-on.
-		if ( ALM_UNLIMITED_VERSION >= '2.5' ) {
-			// Get path to repeater (alm_templates).
+		if ( version_compare( ALM_UNLIMITED_VERSION, '2.5', '>=' ) ) {
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
 			$include  = $base_dir . '/' . $template . '.php';
 		} else {
@@ -140,11 +139,9 @@ function alm_get_current_repeater( $template, $type ) {
 			$blog_id = $wpdb->blogid;
 			$include = ( $blog_id > 1 ) ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $template . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $template . '.php';
 		}
-
 	} elseif ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1 add-on.
 		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
-
 	} else {
 		// Default.
 		$include = alm_get_default_repeater();
@@ -215,7 +212,7 @@ function alm_is_valid_path( $path ) {
  * @param string $before The before date.
  * @param string $after The after date.
  * @param string $inclusive The inclusive value.
- * @return void
+ * @return array
  */
 function alm_get_date_query_before_after( array $args = [], string $before = '', string $after = '', string $inclusive = '' ) {
 	if ( empty( $before ) && empty( $after ) ) {
@@ -376,7 +373,7 @@ function alm_parse_tax_terms( $terms ) {
 }
 
 /**
- * do_shortcode fix (shortcode renders as HTML when using < OR  <==).
+ * A do_shortcode fix (shortcode renders as HTML when using < OR  <==).
  *
  * @param string $compare The compare operator.
  * @return void
@@ -761,9 +758,9 @@ function alm_print( $query = '', $title = '' ) {
  */
 function alm_log( $data ) {
 	if ( is_array( $data ) || is_object( $data ) ) {
-		error_log( print_r( $data, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+		error_log( print_r( $data, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 	} else {
-		error_log( $data ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+		error_log( $data ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 	}
 }
 
