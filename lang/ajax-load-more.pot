@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-10T17:06:06+00:00\n"
+"POT-Creation-Date: 2025-12-11T14:46:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -73,7 +73,7 @@ msgstr ""
 #: admin/admin.php:119
 #: admin/admin.php:127
 #: admin/views/settings.php:9
-#: ajax-load-more.php:323
+#: ajax-load-more.php:321
 #: src/blocks/core/inspector.js:17
 #: src/blocks/filters/inspector.js:28
 msgid "Settings"
@@ -105,6 +105,14 @@ msgstr ""
 #: admin/admin.php:190
 #: admin/admin.php:191
 #: admin/admin.php:200
+#: admin/shortcode-builder/shortcode-builder.php:1237
+#: admin/views/filters.php:35
+msgid "Search"
+msgstr ""
+
+#: admin/admin.php:209
+#: admin/admin.php:210
+#: admin/admin.php:219
 msgid "WooCommerce"
 msgstr ""
 
@@ -126,10 +134,10 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: admin/admin.php:247
-#: admin/admin.php:248
-#: admin/admin.php:256
-#: admin/admin.php:262
+#: admin/admin.php:266
+#: admin/admin.php:267
+#: admin/admin.php:275
+#: admin/admin.php:281
 msgid "Pro"
 msgstr ""
 
@@ -156,19 +164,19 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: admin/admin.php:532
+#: admin/admin.php:563
 msgid "Applying Layout"
 msgstr ""
 
-#: admin/admin.php:533
+#: admin/admin.php:564
 msgid "Template Updated"
 msgstr ""
 
-#: admin/admin.php:534
+#: admin/admin.php:565
 msgid "Updating Template..."
 msgstr ""
 
-#: admin/admin.php:535
+#: admin/admin.php:566
 msgid "Saving template..."
 msgstr ""
 
@@ -177,59 +185,59 @@ msgstr ""
 msgid "Something went wrong and the data could not be saved."
 msgstr ""
 
-#: admin/admin.php:538
+#: admin/admin.php:569
 msgid "Select Author(s)"
 msgstr ""
 
-#: admin/admin.php:539
+#: admin/admin.php:570
 msgid "Select Categories"
 msgstr ""
 
-#: admin/admin.php:540
+#: admin/admin.php:571
 msgid "Select Tags"
 msgstr ""
 
-#: admin/admin.php:541
+#: admin/admin.php:572
 msgid "Select"
 msgstr ""
 
-#: admin/admin.php:542
+#: admin/admin.php:573
 msgid "Jump to Option"
 msgstr ""
 
-#: admin/admin.php:543
+#: admin/admin.php:574
 msgid "Jump to Template"
 msgstr ""
 
-#: admin/admin.php:544
+#: admin/admin.php:575
 msgid "Are you sure you want to install this Ajax Load More extension?"
 msgstr ""
 
-#: admin/admin.php:545
+#: admin/admin.php:576
 msgid "Install Now"
 msgstr ""
 
-#: admin/admin.php:546
+#: admin/admin.php:577
 msgid "Activate"
 msgstr ""
 
-#: admin/admin.php:547
+#: admin/admin.php:578
 msgid "Saving Settings"
 msgstr ""
 
-#: admin/admin.php:548
+#: admin/admin.php:579
 msgid "Settings Saved Successfully"
 msgstr ""
 
-#: admin/admin.php:549
+#: admin/admin.php:580
 msgid "Error Saving Settings"
 msgstr ""
 
-#: admin/admin.php:550
+#: admin/admin.php:581
 msgid "There is a maximum of 3 tax_query objects while using the shortcode builder"
 msgstr ""
 
-#: admin/admin.php:597
+#: admin/admin.php:628
 msgid "No terms exist within this taxonomy"
 msgstr ""
 
@@ -465,7 +473,7 @@ msgstr ""
 #: admin/functions/settings.php:316
 #: admin/shortcode-builder/shortcode-builder.php:206
 #: admin/shortcode-builder/shortcode-builder.php:379
-#: ajax-load-more.php:436
+#: ajax-load-more.php:434
 msgid "Load More"
 msgstr ""
 
@@ -2466,11 +2474,6 @@ msgstr ""
 msgid "Select an Author to query(by ID)."
 msgstr ""
 
-#: admin/shortcode-builder/shortcode-builder.php:1237
-#: admin/views/filters.php:35
-msgid "Search"
-msgstr ""
-
 #: admin/shortcode-builder/shortcode-builder.php:1241
 msgid "Enter a search term to query."
 msgstr ""
@@ -2817,27 +2820,27 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:300
+#: ajax-load-more.php:298
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:409
+#: ajax-load-more.php:407
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:410
+#: ajax-load-more.php:408
 msgid "No results found."
 msgstr ""
 
-#: ajax-load-more.php:445
+#: ajax-load-more.php:443
 msgid "Load Previous"
 msgstr ""
 
-#: core/classes/class-alm-blocks.php:93
+#: core/classes/class-alm-blocks.php:91
 msgid "Remove"
 msgstr ""
 
-#: core/classes/class-alm-noscript.php:136
+#: core/classes/class-alm-noscript.php:139
 msgid "Pages: "
 msgstr ""
 
