@@ -92,13 +92,22 @@ function alm_loop( $repeater, $theme_repeater, $alm_found_posts = '', $alm_page 
 	}
 
 	if ( $theme_repeater !== 'null' && has_filter( 'alm_get_theme_repeater' ) ) {
-		// Theme Repeater.
+		// Theme Repeaters.
 		do_action( 'alm_get_theme_repeater', $theme_repeater, $alm_found_posts, $alm_page, $alm_item, $alm_current, $args );
 
 	} else {
-		// Standard Template.
-		$file = alm_get_current_repeater( $repeater, alm_get_repeater_type( $repeater ) );
-		include $file;
+		$type = alm_get_repeater_type( $repeater );
+
+		if ( $type === 'block_' && has_action( 'alm_templates_get_block_template' ) ) {
+			// Block Template.
+			do_action( 'alm_templates_get_block_template', $repeater );
+
+		} else {
+			// Repeater Template.
+			$file = alm_get_current_repeater( $repeater, $type );
+			include $file;
+
+		}
 	}
 
 	if ( $ob ) { // If Output Buffer is true.
@@ -119,10 +128,6 @@ function alm_loop( $repeater, $theme_repeater, $alm_found_posts = '', $alm_page 
 function alm_get_current_repeater( $template, $type ) {
 	$include = '';
 
-	// $content = get_the_content(null, null, 8879);
-	// $new_html = preg_replace("/(^<div[^>]*>|<\/div>$)/i", "", $content);
-	// echo apply_filters( 'the_content', $new_html );
-
 	if ( $type === 'template_' && class_exists( 'ALMTemplates' ) ) {
 		// Templates add-on.
 		$base_dir = AjaxLoadMore::alm_get_repeater_path();
@@ -141,6 +146,7 @@ function alm_get_current_repeater( $template, $type ) {
 	} elseif ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1 add-on.
 		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
+
 	} else {
 		// Default.
 		$include = alm_get_default_repeater();
@@ -506,7 +512,6 @@ function alm_get_repeater_type( $repeater ) {
  * @return string The URL.
  */
 function alm_get_canonical_url() {
-
 	$canonical_url   = '';
 	$frontpage_slash = apply_filters( 'alm_canonical_frontpage_trailing_slash', true ) ? '/' : ''; // e.g. add_filter('alm_canonical_frontpage_trailing_slash', '__return_false').
 

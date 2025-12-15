@@ -53,15 +53,15 @@ if ( ! class_exists( 'ALM_WOOCOMMERCE' ) ) :
 		/**
 		 * Get default WooCommerce props.
 		 *
-		 * @param string $type    Prop name.
-		 * @param string $default Default value.
-		 * @return string         The loop prop value.
+		 * @param string $type     Prop name.
+		 * @param string $fallback The default/fallback value.
+		 * @return string          The loop prop value.
 		 * @since 5.1.8
 		 */
-		public static function get_loop_prop( $type = '', $default = '' ) {
+		public static function get_loop_prop( $type = '', $fallback = '' ) {
 			if ( function_exists( 'wc_get_loop_prop' ) && ! empty( $type ) ) {
 				$prop  = wc_get_loop_prop( $type );
-				$value = $prop ? $prop : $default;
+				$value = $prop ? $prop : $fallback;
 				return $value;
 			}
 		}

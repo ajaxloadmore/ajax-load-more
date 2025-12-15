@@ -224,7 +224,7 @@ Repeater template data is saved into your WordPress database as well as written 
 = Can I use custom fields in a repeater? =
 
 Yes, but you will need to define $post at the top of the repeater before requesting your custom fields. Like so:
-global $post;theImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttpstheImplementationGuidehttps
+global $post;
 
 = Which browsers are supported? =
 
