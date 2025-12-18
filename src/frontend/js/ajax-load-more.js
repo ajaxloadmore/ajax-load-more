@@ -605,7 +605,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 					alm.init = false;
 
-					if (alm.prefetch && alm.rel === 'next') {
+					// Prefetch next batch of data.
+					if (alm.prefetch && alm.rel === 'next' && !alm.finished) {
 						alm.AjaxLoadMore.prefetch();
 					}
 					return;
@@ -747,8 +748,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			alm.init = false; // Set init flag.
 
-			// Prefetch next page of items if enabled.
-			if (alm.prefetch && !alm.addons.paging && alm.rel === 'next' && !alm.finished) {
+			// Prefetch next batch of data.
+			if (alm.prefetch && alm.rel === 'next' && !alm.addons.paging && !alm.finished) {
 				alm.AjaxLoadMore.prefetch();
 			}
 		};
@@ -1407,16 +1408,12 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 
 			// Single Post Add-on.
 			if (alm.addons.single_post) {
-				await timeout(200); // Add delay for setup and scripts to load.
+				await timeout(100); // Add delay for setup and scripts to load.
 				await alm.AjaxLoadMore.getSinglePost(); // Set next post on load.
 
 				// Trigger done if custom query and no posts to render
 				if (alm.addons.single_post_query && alm.addons.single_post_order === '') {
 					alm.AjaxLoadMore.triggerDone();
-				}
-
-				if (alm.prefetch) {
-					alm.AjaxLoadMore.prefetch();
 				}
 
 				alm.loading = false;
@@ -1500,7 +1497,8 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				}
 			}
 
-			if (!alm.addons.paging && alm.prefetch) {
+			// Prefetch data if not paging and paused.
+			if (alm.prefetch && !alm.addons.paging && alm.pause === 'true') {
 				alm.AjaxLoadMore.prefetch();
 			}
 
