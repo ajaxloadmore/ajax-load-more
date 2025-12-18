@@ -126,7 +126,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		alm.loading_style = alm.listing.dataset.loadingStyle;
 
 		// Prefetch Params
-		alm.prefetch = alm.listing.dataset.prefetch === 'true' ? true : true; // TODO: Change default to false for 3.0.0
+		alm.prefetch = alm.listing.dataset.prefetch === 'true' ? true : true; // TODO: Change default to false before release.
 		alm.is_prefetching = false;
 		alm.prefetched_data = false;
 
