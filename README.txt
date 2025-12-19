@@ -39,7 +39,7 @@ Ajax Load More differs from the other WordPress infinite scroll plugins because 
 
 ### What's New
 
-- **Data Prefetching** - Load the next set of posts into memory before the user interacts with the Load More button or infinite scroll. This improves the precieved performance of Ajax Load More by reducing wait times for users.
+- **[Data Prefetching](https://connekthq.com/plugins/ajax-load-more/examples/prefetch/)** - Load the next set of posts into memory before the user interacts with the Load More button or infinite scroll. This improves the precieved performance of Ajax Load More by reducing wait times for users.
 - **[Filters Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/filters/)** - The Filters add-on provides front-end and admin functionality for building and managing Ajax based filters and facets.
 - **[Query Loop](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/)** - Enable infinite scroll or load more functionality for the WordPress Query Loop block.
 - **[Pro Bundle](https://connekthq.com/plugins/ajax-load-more/pro/)** - Access to all premium Ajax Load More add-ons in a single installation.
