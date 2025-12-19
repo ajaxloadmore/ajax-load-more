@@ -231,6 +231,7 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 						'masonry_horizontalorder'      => '',
 						'progress_bar'                 => 'false',
 						'progress_bar_color'           => 'ed7070',
+						'prefetch'                     => 'false',
 						'images_loaded'                => 'false',
 						'button_label'                 => AjaxLoadMore::alm_default_button_label(),
 						'button_done_label'            => '',
@@ -1273,6 +1274,9 @@ if ( ! class_exists( 'ALM_SHORTCODE' ) ) :
 				];
 				$ajaxloadmore  .= ' data-masonry-config="' . htmlspecialchars( wp_json_encode( $masonry_config ), ENT_QUOTES, 'UTF-8' ) . '"';
 			}
+
+			// Prefetch.
+			$ajaxloadmore .= $prefetch !== 'false' ? ' data-prefetch="' . esc_attr( $prefetch ) . '"' : '';
 
 			// Images Loaded.
 			$ajaxloadmore .= $images_loaded !== 'false' ? ' data-images-loaded="' . esc_attr( $images_loaded ) . '"' : '';

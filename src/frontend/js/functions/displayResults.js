@@ -14,7 +14,7 @@ const imagesLoaded = require('imagesloaded');
 export default async function displayResults(alm, nodes) {
 	const { listing: container, transition, speed, images_loaded } = alm;
 
-	await timeout(250); // Add short delay for effect.
+	await timeout(75); // Add short delay for effect.
 
 	return new Promise((resolve) => {
 		if (!container || !nodes) {

@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.9
-Stable tag: 7.7.2
+Stable tag: 7.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,13 +39,14 @@ Ajax Load More differs from the other WordPress infinite scroll plugins because 
 
 ### What's New
 
--  **[Filters Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/filters/)** - The Filters add-on provides front-end and admin functionality for building and managing Ajax based filters and facets.
--  **[Query Loop](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/)** - Enable infinite scroll or load more functionality for the WordPress Query Loop block.
--  **[Pro Bundle](https://connekthq.com/plugins/ajax-load-more/pro/)** - Access to all premium Ajax Load More add-ons in a single installation.
--  **[Next Page Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/)** - Infinite scroll multi-page WordPress content with Ajax Load More.
--  **[Advanced Custom Fields](https://connekthq.com/plugins/ajax-load-more/examples/advanced-custom-fields/)** - Compatibility and integration added for infinite scrolling Flexible Content, Gallery, Relationship and Repeater fields for Advanced Custom Fields.
--  **[Progress Bars](https://connekthq.com/plugins/ajax-load-more/examples/progress-bar/)** - Display a Progress Bar load indicator with each Ajax request.
--  **[Scroll Container](https://connekthq.com/plugins/ajax-load-more/examples/scroll-container/)** - Constraining infinite scroll to a parent container.
+- **[Data Prefetching](https://connekthq.com/plugins/ajax-load-more/examples/prefetch/)** - Load the next set of posts into memory before the user interacts with the Load More button or infinite scroll. This improves the precieved performance of Ajax Load More by reducing wait times for users.
+- **[Filters Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/filters/)** - The Filters add-on provides front-end and admin functionality for building and managing Ajax based filters and facets.
+- **[Query Loop](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/)** - Enable infinite scroll or load more functionality for the WordPress Query Loop block.
+- **[Pro Bundle](https://connekthq.com/plugins/ajax-load-more/pro/)** - Access to all premium Ajax Load More add-ons in a single installation.
+- **[Next Page Add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/)** - Infinite scroll multi-page WordPress content with Ajax Load More.
+- **[Advanced Custom Fields](https://connekthq.com/plugins/ajax-load-more/examples/advanced-custom-fields/)** - Compatibility and integration added for infinite scrolling Flexible Content, Gallery, Relationship and Repeater fields for Advanced Custom Fields.
+- **[Progress Bars](https://connekthq.com/plugins/ajax-load-more/examples/progress-bar/)** - Display a Progress Bar load indicator with each Ajax request.
+- **[Scroll Container](https://connekthq.com/plugins/ajax-load-more/examples/scroll-container/)** - Constraining infinite scroll to a parent container.
 
 ### Content Types
 
@@ -274,6 +275,11 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.8.0 - December 19, 2025 =
+* NEW: Added prefetch functionality to Ajax Load More. Prefetching data will load the next set of posts into memory before the user interacts with the Load More button.
+To enable prefetching, add the `prefetch="true"` parameter to your ALM shortcode.
+* UPDATE: Code cleanup and various UI/UX improvements throughout the plugin.
 
 = 7.7.2 - December 11, 2025 =
 * UPDATE: Updated SinglePosts fetch to use REST API endpoint to support custom post types.
