@@ -78,7 +78,7 @@ module.exports = {
 		new CopyPlugin({
 			patterns: [
 				{
-					from: 'src/frontend/placeholder.png',
+					from: 'src/frontend/img/placeholder.png',
 					to: 'frontend/img/placeholder.png',
 					noErrorOnMissing: true,
 				},
