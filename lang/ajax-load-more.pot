@@ -2,14 +2,14 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.7.2\n"
+"Project-Id-Version: Ajax Load More 7.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-18T20:23:36+00:00\n"
+"POT-Creation-Date: 2025-12-19T16:45:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -2006,11 +2006,11 @@ msgid "Prefetch Data"
 msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:263
-msgid "Prefetching data will load the next set of posts into memory before the user clicks the Load More button."
+msgid "Prefetching data will improve the perceived load times of Ajax requests."
 msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:264
-msgid "Prefetching data will improve the perceived load times of the Ajax requests."
+msgid "Prefetching data will load the next set of posts into memory before the user interacts with the Load More button."
 msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:285

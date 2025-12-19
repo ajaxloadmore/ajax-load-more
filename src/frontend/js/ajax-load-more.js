@@ -126,7 +126,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		alm.loading_style = alm.listing.dataset.loadingStyle;
 
 		// Prefetch Params
-		alm.prefetch = alm.listing.dataset.prefetch === 'true' ? true : true; // TODO: Change default to false before release.
+		alm.prefetch = alm.listing.dataset.prefetch === 'true' ? true : false;
 		alm.is_prefetching = false;
 		alm.prefetched_data = false;
 
@@ -581,15 +581,15 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					(async function () {
 						if (alm.addons.woocommerce) {
 							await woocommerce(temp, alm);
-							woocommerceLoaded(alm);
+							await woocommerceLoaded(alm);
 						}
 						if (alm.addons.elementor) {
 							await elementor(temp, alm);
-							elementorLoaded(alm);
+							await elementorLoaded(alm);
 						}
 						if (alm.addons.queryloop) {
 							await queryLoop(temp, alm);
-							queryLoopLoaded(alm);
+							await queryLoopLoaded(alm);
 						}
 					})().catch((e) => {
 						if (alm.addons.woocommerce) {
@@ -606,7 +606,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 					alm.init = false;
 
 					// Prefetch next batch of data.
-					if (alm.prefetch && alm.rel === 'next' && !alm.finished) {
+					if (alm.prefetch && alm.rel === 'next') {
 						alm.AjaxLoadMore.prefetch();
 					}
 					return;
@@ -749,7 +749,7 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 			alm.init = false; // Set init flag.
 
 			// Prefetch next batch of data.
-			if (alm.prefetch && alm.rel === 'next' && !alm.addons.paging && !alm.finished) {
+			if (alm.prefetch && alm.rel === 'next' && !alm.addons.paging) {
 				alm.AjaxLoadMore.prefetch();
 			}
 		};
@@ -1087,7 +1087,11 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				return; // Exit if in Block Editor with Query Loop add-on or already prefetching.
 			}
 
-			await timeout(250);
+			await timeout(125); // Small delay to avoid multiple prefetch calls.
+
+			if (alm.finished) {
+				return; // Exit if already finished.
+			}
 
 			if (alm.pause !== 'true') {
 				alm.page++; // Increment page for prefetched data.

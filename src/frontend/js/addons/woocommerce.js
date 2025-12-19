@@ -187,9 +187,9 @@ export function wooGetContent(alm, url, html = '') {
  * Handle WooCommerce loaded functionality and dispatch actions.
  *
  * @param {Object} alm ALM object.
- * @since 5.5.0
+ * @return {Promise}   Resolves when done.
  */
-export function woocommerceLoaded(alm) {
+export async function woocommerceLoaded(alm) {
 	const { addons } = alm;
 
 	const nextPageNum = alm.page + 2;
@@ -223,6 +223,10 @@ export function woocommerceLoaded(alm) {
 	}
 
 	dispatchScrollEvent();
+
+	return new Promise((resolve) => {
+		resolve(true);
+	});
 }
 
 /**

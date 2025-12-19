@@ -260,8 +260,8 @@ $show_max                = 100; // Max number of items to show.
 						<!-- Prefetch Data -->
 						<section>
 							<div class="shortcode-builder--label">
-								<h4><?php esc_html_e( 'Prefetch Data', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php esc_html_e( 'Prefetching data will load the next set of posts into memory before the user clicks the Load More button.', 'ajax-load-more' ); ?>"></a></h4>
-								<p><?php esc_html_e( 'Prefetching data will improve the perceived load times of the Ajax requests.', 'ajax-load-more' ); ?></p>
+								<h4><?php esc_html_e( 'Prefetch Data', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php esc_html_e( 'Prefetching data will improve the perceived load times of Ajax requests.', 'ajax-load-more' ); ?>"></a></h4>
+								<p><?php esc_html_e( 'Prefetching data will load the next set of posts into memory before the user interacts with the Load More button.', 'ajax-load-more' ); ?></p>
 							</div>
 							<div class="shortcode-builder--fields alm-prefetch-data">
 								<div class="inner">
