@@ -218,8 +218,9 @@ export function elementor(content, alm) {
  * Elementor loaded and dispatch actions.
  *
  * @param {Object} alm The alm object.
+ * @return {Promise}   Resolves when done.
  */
-export function elementorLoaded(alm) {
+export async function elementorLoaded(alm) {
 	const { page, AjaxLoadMore, addons, rel = 'next' } = alm;
 	const nextPage = page + 1;
 	const { elementor_max_pages } = addons;
@@ -237,6 +238,10 @@ export function elementorLoaded(alm) {
 	AjaxLoadMore.transitionEnd();
 
 	dispatchScrollEvent();
+
+	return new Promise((resolve) => {
+		resolve(true);
+	});
 }
 
 /**

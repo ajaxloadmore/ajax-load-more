@@ -187,8 +187,9 @@ export function queryLoop(content, alm) {
  * Query Loop loaded and dispatch actions.
  *
  * @param {Object} alm The alm object.
+ * @return {Promise}   Resolves when done.
  */
-export function queryLoopLoaded(alm) {
+export async function queryLoopLoaded(alm) {
 	const { AjaxLoadMore } = alm;
 
 	lazyImages(alm); // Lazy load images if necessary.
@@ -199,6 +200,10 @@ export function queryLoopLoaded(alm) {
 
 	AjaxLoadMore.transitionEnd(); // End transitions.
 	dispatchScrollEvent();
+
+	return new Promise((resolve) => {
+		resolve(true);
+	});
 }
 
 /**
