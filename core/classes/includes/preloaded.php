@@ -19,7 +19,7 @@ if ( $paging === 'true' ) {
 }
 
 /**
- * CTA Add-on.Paging Add-on.
+ * CTA Add-on.
  * Parse $cta_position.
  */
 if ( $cta ) {

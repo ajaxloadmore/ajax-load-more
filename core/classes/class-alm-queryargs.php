@@ -456,7 +456,9 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			 */
 			$args['alm_id'] = $id;
 
-			// Return the arguments.
+			// Get the current page.
+			$args['alm_current_page'] = $a['currentPage'] ?? 1;
+
 			return $args;
 		}
 
