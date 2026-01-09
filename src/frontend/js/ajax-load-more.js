@@ -391,8 +391,6 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 		 */
 		alm.AjaxLoadMore.adminajax = async function (params, type) {
 			let { ajaxurl: url } = alm_localize; // Get Ajax URL
-			const { cache_id = '' } = params; // Deconstruct query params.
-			const is_paging_query = ['totalposts', 'totalpages'].includes(type);
 
 			/**
 			 * Single Posts.
@@ -408,6 +406,18 @@ const isBlockEditor = document.body.classList.contains('wp-admin');
 				url = getButtonURL(alm, alm.rel);
 				params = '';
 			}
+
+			if (alm.addons.nextpage) {
+				const { nextpage_endpoint = '' } = alm_localize; // Pluck Next Page API URL.
+				if (!nextpage_endpoint) {
+					console.warn('Ajax Load More: Next Page endpoint is not defined.');
+					return;
+				}
+				url = nextpage_endpoint;
+			}
+
+			const { cache_id = '' } = params; // Deconstruct query params.
+			const is_paging_query = ['totalposts', 'totalpages'].includes(type);
 
 			// Make API request.
 			const data = await axios
