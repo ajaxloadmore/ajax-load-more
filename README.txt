@@ -1,11 +1,11 @@
-=== Ajax Load More – Infinite Scroll, Lazy Load & Load More ===
+=== Ajax Load More – Infinite Scroll, Load More, & Lazy Load ===
 Contributors: dcooney, connekthq
 Donate link: https://connekthq.com/donate/
 Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.9
-Stable tag: 7.8.0
+Stable tag: 7.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,6 +275,10 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.8.1 - January 9, 2026 =
+* UPDATE: Updated core plugin to support Next Page version 1.10.0.
+* UPDATE: Code cleanup and dependency updates.
 
 = 7.8.0 - December 19, 2025 =
 * NEW: Added prefetch functionality to Ajax Load More. Prefetching data will load the next set of posts into memory before the user interacts with the Load More button.

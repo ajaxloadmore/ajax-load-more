@@ -7,7 +7,7 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.8.0
+ * Version: 7.8.1
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
@@ -20,8 +20,8 @@
 * UPDATE: Various bug fixes and other improvements.
 */
 
-define( 'ALM_VERSION', '7.8.0' );
-define( 'ALM_RELEASE', 'December 19, 2025' );
+define( 'ALM_VERSION', '7.8.1' );
+define( 'ALM_RELEASE', 'January 9, 2026' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
@@ -419,12 +419,21 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				'button_label'       => self::alm_default_button_label(),
 			];
 
-			// Set Single Posts endpoint.
+			// Single Posts API endpoint.
 			if ( has_action( 'alm_single_post_installed' ) && defined( 'ALM_PREV_POST_VERSION' ) ) {
 				if ( method_exists( 'ALM_Single_Post', 'alm_single_post_get_route' ) && apply_filters( 'alm_single_posts_use_rest_api', true ) ) {
 					$params['single_posts_endpoint'] = ALM_Single_Post::alm_single_post_get_route();
 				} else {
 					$params['single_posts_endpoint'] = $params['ajaxurl'];
+				}
+			}
+
+			// Next Page/Pagebreak API endpoint.
+			if ( has_action( 'alm_nextpage_installed' ) && defined( 'ALM_NEXTPAGE_VERSION' ) ) {
+				if ( method_exists( 'ALM_Nextpage', 'alm_nextpage_get_route' ) && apply_filters( 'alm_nextpage_use_rest_api', true ) ) {
+					$params['nextpage_endpoint'] = ALM_Nextpage::alm_nextpage_get_route();
+				} else {
+					$params['nextpage_endpoint'] = $params['ajaxurl'];
 				}
 			}
 
