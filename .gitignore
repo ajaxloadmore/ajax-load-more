@@ -3,6 +3,7 @@ node_modules/
 .sass-cache
 .sass-cache/*
 .DS_Store
+.claude
 *.DS_Store
 */.DS_Store
 npm-shrinkwrap.json
