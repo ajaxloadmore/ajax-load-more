@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.9
-Stable tag: 7.8.1
+Stable tag: 7.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,6 +275,9 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.8.2 - January 28, 2026 =
+* UPDATE: Various security fixes.
 
 = 7.8.1 - January 9, 2026 =
 * UPDATE: Updated core plugin to support Next Page version 1.10.0.
@@ -585,10 +588,8 @@ Users who were previously using `meta_key` for custom field ordering will need t
 * UPDATE: Code cleanup and organization.
 * FIX: Fixed various issue with Filters add-on and JS `<noscript/>` fallback URLs when accessing paged results.
 
-
 = 5.5.4.1 - August 24, 2022 =
 * SECURITY: Patched and improved the data sanitization of some admin level operations.
-
 
 = 5.5.4 - August 19, 2022 =
 * NEW - Added new core setting for adding custom JavaScript. This new setting will allow for adding callbacks directly from the ALM settings page.
@@ -603,11 +604,9 @@ Users who were previously using `meta_key` for custom field ordering will need t
 * SECURITY - Fix for potential admin level exploit with getting taxonomy terms in the Shortcode Builder.
 * SECURITY - Fix for potential admin level exploit with getting layout templates in the Repeater Template section of ALM.
 
-
 = 5.5.3 - June 24, 2022 =
 * UPDATE: Added support for lazy loading images with Blocksy Pro theme.
 * FIX: Fixed issue with potential xs scriptiing issue. [report](https://github.com/dcooney/wordpress-ajax-load-more/issues/183)
-
 
 = 5.5.2 - March 7, 2022 =
 * NEW: Added `alm_ajaxurl` filter that allows for filtering the admin-ajax URL.
@@ -617,7 +616,6 @@ Users who were previously using `meta_key` for custom field ordering will need t
 * FIX: Fixed issue with SEO and Preloaded element not getting the 'alm-preloaded' classname.
 * FIX: Fixed issue with PHP warning around ALM settings.
 
-
 = 5.5.1 - January 10, 2022 =
 
 - UPDATE - Added required functionality for updated to the Next Page add-on that allows for auto implementation across post types.
@@ -625,7 +623,6 @@ Users who were previously using `meta_key` for custom field ordering will need t
 - UPDATE - Cleaned and refactored the meta query functionality.
 - UPDATE - Various admin UI and UX updates.
 - FIX - Fixed issue with null taxonomy query being added to some tax_query. This did not affect the overall query, but was being returned by mistake an dis now removed.
-
 
 = 5.5.0.1 - September 15, 2021 =
 
@@ -774,9 +771,3 @@ What's New in 5.1.0
 -  Ajax Load More
 
 == Upgrade Notice ==
-
-= 6.1.0 =
-Varsion 6.1.0 includes a breaking change for ordering by `meta_key`. Ordering by `meta_key` (Custom Field) is now handled by the new `sort_key` parameter. Please update your shortcodes accordingly.
-
-= 6.0.0 =
-Version 6.0+ of Ajax Load More includes breaking changes with the Cache-addon version 1.x. Please upgrade the add-on to 2.0 or greater if you wish to continue using the Cache add-on.
