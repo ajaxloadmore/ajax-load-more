@@ -10,5 +10,6 @@ npm-shrinkwrap.json
 *.map
 _out
 /vendor
+/.claude
 .nvmrc.old
 

@@ -491,7 +491,6 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			return $args;
 		}
 
-
 		/**
 		 * Parse `custom_args` string parameter into array.
 		 *
@@ -500,21 +499,27 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 		 * @return array         The modified arguments.
 		 */
 		public static function parse_custom_args( $args, $param ) {
-			$array = explode( ';', $param ); // Split the $param at `;`.
+			$array = explode( ';', $param );
+
+			// Exclude certain keys from being added via custom_args.
+			$exlude_keys = [ 'post_status', 'perm', 'post_password', 'post__in', 'meta_query', 'tax_query', 'date_query', 'alm_vars' ];
 
 			// Loop each $argument.
 			foreach ( $array as $arg ) {
-				$arg     = preg_replace( '/\s+/', '', $arg ); // Remove all whitespace.
-				$arg     = explode( ':', $arg );  // Split at each colon.
-				$arg_arr = explode( ',', $arg[1] );  // Split at each comma.
-				if ( count( $arg_arr ) > 1 ) {
-					$args[ $arg[0] ] = $arg_arr;
+				$arg   = explode( ':', preg_replace( '/\s+/', '', $arg ) );  // Split at each colon & remove whitespace.
+				$value = explode( ',', $arg[1] );  // Split at each comma.
+
+				if ( in_array( $arg[0], $exlude_keys, true ) ) {
+					continue; // Skip excluded keys.
+				}
+
+				if ( count( $value ) > 1 ) {
+					$args[ $arg[0] ] = $value;
 				} else {
 					$args[ $arg[0] ] = $arg[1];
 				}
 			}
 
-			// Return parsed $args.
 			return $args;
 		}
 	}
