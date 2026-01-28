@@ -404,10 +404,8 @@ To enable prefetching, add the `prefetch="true"` parameter to your ALM shortcode
 * UPDATE: Code cleanup and other minor bug fixes.
 * UPDATE: Various admin UI/UX updates.
 
-
 = 7.1.3 - October 1, 2024 =
 * UPDATE: Various security fixes.
-
 
 = 7.1.2 - May 30, 2024 =
 * FIX: Fixed issue with full article loading in Next Page add-on.
