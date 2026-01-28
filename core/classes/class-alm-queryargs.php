@@ -489,7 +489,6 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			return $args;
 		}
 
-
 		/**
 		 * Parse `custom_args` string parameter into array.
 		 *
