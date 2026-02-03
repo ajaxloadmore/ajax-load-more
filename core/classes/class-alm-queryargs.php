@@ -95,7 +95,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$date_query_relation  = isset( $a['date_query_relation'] ) ? $a['date_query_relation'] : '';
 
 			// Search.
-			$s      = isset( $a['search'] ) ? trim( $a['search'] ) : '';
+			$s      = isset( $a['search'] ) ? trim( urldecode( $a['search'] ) ) : '';
 			$engine = isset( $a['engine'] ) ? $a['engine'] : '';
 
 			// Custom Args.
