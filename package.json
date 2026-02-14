@@ -60,7 +60,7 @@
 		"postcss-preset-env": "^8.0.1",
 		"postcss-scss": "^4.0.6",
 		"prettier": "^3.5.0",
-		"qs": "^6.6.0",
+		"qs": "^6.14.2",
 		"sass": "^1.63.6",
 		"sass-loader": "^13.3.2",
 		"style-loader": "^3.3.3",
