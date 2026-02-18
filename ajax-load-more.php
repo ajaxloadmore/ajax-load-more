@@ -14,6 +14,21 @@
  * @package AjaxLoadMore
  */
 
+/*
+* NEW: Added new fallback for missing template files.
+* NEW: Added `alm_create_templates` hook to disable the automatic creation of templates on the fly.
+
+
+Add-ons
+Templates
+* NEW: Added new fallback for missing template files.
+
+Custom Repeaters
+* NEW: Added new fallback for missing template files.
+/Users/darrencooney/_work/Github/ajax-load-more-addons/ajax-load-more-repeaters-v2/ajax-load-more-repeaters-v2.php
+
+*/
+
 define( 'ALM_VERSION', '7.8.2' );
 define( 'ALM_RELEASE', 'January 28, 2026' );
 define( 'ALM_STORE_URL', 'https://connekthq.com' );

@@ -53,7 +53,7 @@ function alm_save_repeater() {
 				$f = $blog_id > 1 ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $n . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $n . '.php';
 			}
 		} else {
-			// Ajax Load More Templates
+			// Ajax Load More Templates.
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
 			AjaxLoadMore::alm_mkdir( $base_dir );
 			$f = $base_dir . '/' . $n . '.php';
