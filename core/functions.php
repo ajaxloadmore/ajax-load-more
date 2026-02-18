@@ -119,10 +119,6 @@ function alm_loop( $repeater, $theme_repeater, $alm_found_posts = '', $alm_page 
 function alm_get_current_repeater( $template, $type ) {
 	$include = '';
 
-	// $content = get_the_content(null, null, 8879);
-	// $new_html = preg_replace("/(^<div[^>]*>|<\/div>$)/i", "", $content);
-	// echo apply_filters( 'the_content', $new_html );
-
 	if ( $type === 'template_' && class_exists( 'ALMTemplates' ) ) {
 		// Templates add-on.
 		$base_dir = AjaxLoadMore::alm_get_repeater_path();
@@ -138,14 +134,15 @@ function alm_get_current_repeater( $template, $type ) {
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
 			$include  = $base_dir . '/' . $template . '.php';
 			if ( ! file_exists( $include ) ) {
-				$table_name = 'alm_unlimited';
-				alm_create_template( $template, $table_name ); // Create the template file if it doesn't exist.
+				alm_create_template( $template, 'alm_unlimited' ); // Create the template file if it doesn't exist.
 			}
+
 		} else {
 			global $wpdb;
 			$blog_id = $wpdb->blogid;
 			$include = ( $blog_id > 1 ) ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $template . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $template . '.php';
 		}
+
 	} elseif ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1 add-on.
 		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
