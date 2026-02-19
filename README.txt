@@ -5,7 +5,7 @@ Tags: infinite scroll, load more, lazy load, endless scroll, ajax load more
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.9
-Stable tag: 7.8.2
+Stable tag: 7.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,6 +275,11 @@ How to install Ajax Load More.
 5. Implementation: Insert the Ajax Load More shortcode directly into the WordPress block editor or a theme template file.
 
 == Changelog ==
+
+= 7.8.3 - February 19, 2026 =
+* NEW: Added new fallback for missing template files.
+* NEW: Added `alm_create_templates` hook to disable the automatic creation of templates on the fly.
+* UPDATE: Various code cleanup tasks.
 
 = 7.8.2 - January 28, 2026 =
 * UPDATE: Various security fixes.
