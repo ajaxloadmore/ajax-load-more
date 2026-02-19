@@ -2,14 +2,14 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.8.1\n"
+"Project-Id-Version: Ajax Load More 7.8.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-09T13:29:04+00:00\n"
+"POT-Creation-Date: 2026-02-19T13:17:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -617,40 +617,40 @@ msgstr ""
 msgid "Copy Template"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:42
+#: admin/includes/components/repeater-templates.php:45
 msgid "Default Template"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:51
+#: admin/includes/components/repeater-templates.php:54
 msgid "Template Code:"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:52
+#: admin/includes/components/repeater-templates.php:55
 msgid "The PHP and HTML markup for this template."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:74
-msgid "This default ALM template is missing from the filesystem! Click the \"Save Template\" button to save the template."
+#: admin/includes/components/repeater-templates.php:78
+msgid "This default Ajax Load More template is missing from the filesystem. Click the \"Save Template\" button to save the template to the filesystem."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:100
+#: admin/includes/components/repeater-templates.php:104
 msgid "Save Template"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:116
+#: admin/includes/components/repeater-templates.php:120
 msgid "Repeater Templates editing has been disabled for this instance of Ajax Load More. To enable the template editing, please remove the <strong>ALM_DISABLE_REPEATER_TEMPLATES</strong> PHP constant from your wp-config.php (or functions.php) and re-activate the plugin."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:129
+#: admin/includes/components/repeater-templates.php:133
 msgid "You're loading the <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/#default-template\" target=\"_blank\"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:133
+#: admin/includes/components/repeater-templates.php:137
 #: admin/includes/components/theme-templates.php:66
 msgid "Template Location"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:148
+#: admin/includes/components/repeater-templates.php:153
 msgid "Add New Template"
 msgstr ""
 

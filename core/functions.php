@@ -119,25 +119,30 @@ function alm_loop( $repeater, $theme_repeater, $alm_found_posts = '', $alm_page 
 function alm_get_current_repeater( $template, $type ) {
 	$include = '';
 
-	// $content = get_the_content(null, null, 8879);
-	// $new_html = preg_replace("/(^<div[^>]*>|<\/div>$)/i", "", $content);
-	// echo apply_filters( 'the_content', $new_html );
-
 	if ( $type === 'template_' && class_exists( 'ALMTemplates' ) ) {
 		// Templates add-on.
 		$base_dir = AjaxLoadMore::alm_get_repeater_path();
 		$include  = $base_dir . '/' . $template . '.php';
 
+		if ( ! file_exists( $include ) ) {
+			$table_name = defined( 'ALM_TEMPLATES_TABLE_NAME' ) ? ALM_TEMPLATES_TABLE_NAME : 'alm_unlimited';
+			alm_create_template( $template, $table_name ); // Create the template file if it doesn't exist.
+		}
 	} elseif ( $type === 'template_' && defined( 'ALM_UNLIMITED_VERSION' ) ) {
 		// Custom Repeaters v2 add-on.
 		if ( version_compare( ALM_UNLIMITED_VERSION, '2.5', '>=' ) ) {
 			$base_dir = AjaxLoadMore::alm_get_repeater_path();
 			$include  = $base_dir . '/' . $template . '.php';
+			if ( ! file_exists( $include ) ) {
+				alm_create_template( $template, 'alm_unlimited' ); // Create the template file if it doesn't exist.
+			}
+
 		} else {
 			global $wpdb;
 			$blog_id = $wpdb->blogid;
 			$include = ( $blog_id > 1 ) ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $template . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $template . '.php';
 		}
+
 	} elseif ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1 add-on.
 		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
@@ -161,10 +166,9 @@ function alm_get_current_repeater( $template, $type ) {
  * @since 2.5.0
  */
 function alm_get_default_repeater() {
-	$file = null;
-	$dir  = apply_filters( 'alm_template_path', 'alm_templates' );
-
-	// Allow user to load template from theme directory.
+	$file     = '';
+	$template = '';
+	$dir      = apply_filters( 'alm_template_path', 'alm_templates' );
 
 	// Load repeater template from current theme folder.
 	if ( is_child_theme() ) {
@@ -179,14 +183,63 @@ function alm_get_default_repeater() {
 
 	// If theme or child theme contains the template, use that file.
 	if ( file_exists( $template ) ) {
-		$file = $template;
+		return $template;
 	}
 
-	if ( $file === null ) {
+	// Fallback to plugin template if not found in theme or child theme.
+	if ( ! $file ) {
 		$file = AjaxLoadMore::alm_get_repeater_path() . '/default.php';
 	}
 
+	// Create the default template file if it doesn't exist.
+	if ( ! file_exists( $file ) ) {
+		alm_create_template( 'default', 'alm' );
+	}
+
 	return $file;
+}
+
+/**
+ * Create template file.
+ *
+ * @param string $id Repeater template name.
+ * @param string $table_name The database table name.
+ * @param string $col The database column name.
+ * @return void
+ */
+function alm_create_template( $id = null, $table_name = null, $col = 'repeaterDefault' ) {
+	if ( ! $id || ! $table_name || ! $col || apply_filters( 'alm_create_templates', false ) ) {
+		return;
+	}
+
+	$allowed_tables = [ 'alm', 'alm_unlimited' ];
+	if ( ! in_array( $table_name, $allowed_tables, true ) ) {
+		return; // Exit if table name is not allowed.
+	}
+
+	global $wpdb;
+	$table   = $wpdb->prefix . $table_name;
+	$row     = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE name = %s", $id ) ); // Get first result only.
+	$content = ! empty( $row ) && $row->$col ? $row->$col : '';
+
+	if ( ! $content ) {
+		error_log( __( 'Ajax Load More: Template content not found: ' . $id ) ); // phpcs:ignore
+		return;
+	}
+
+	$file = AjaxLoadMore::alm_get_repeater_path() . "/{$id}.php";
+	if ( ! alm_is_valid_path( $file ) ) {
+		return; // Exit if file path is not valid.
+	}
+
+	// Create the file using WP_Filesystem.
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	WP_Filesystem();
+	global $wp_filesystem;
+
+	if ( ! $wp_filesystem->put_contents( $file, $content ) ) {
+		error_log( __( 'Error writing file' ) ); // phpcs:ignore
+	}
 }
 
 /**
