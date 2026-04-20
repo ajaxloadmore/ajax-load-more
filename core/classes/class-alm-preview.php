@@ -6,7 +6,6 @@
  * @since 7.2.0
  */
 
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -32,14 +31,14 @@ if ( ! class_exists( 'ALM_PREVIEW' ) ) :
 		 */
 		public function alm_preview() {
 			$params    = filter_input_array( INPUT_GET );
-			$shortcode = isset( $params['alm_preview'] ) ? $params['alm_preview'] : false;
+			$shortcode = isset( $params['alm_preview'] ) ? wp_strip_all_tags( $params['alm_preview'] ) : false;
 
 			if ( $shortcode && str_contains( $shortcode, '[ajax_load_more' ) && current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) ) ) {
 				get_header();
 
-				// Set cache to false.
-				$shortcode = str_replace( 'cache="true"', '', $shortcode );
-				// Create Preview
+				$shortcode = str_replace( 'cache="true"', '', $shortcode ); // Set cache to false.
+
+				// Create Preview.
 				?>
 				<style>
 					html {
@@ -159,17 +158,16 @@ if ( ! class_exists( 'ALM_PREVIEW' ) ) :
 						<p>
 							<?php echo wp_kses_post( __( '<strong>Note:</strong> Styling and functionality within this preview environment may not be 100% reflective of how Ajax Load More will appear once added directly to a page on your website.', 'ajax-load-more' ) ); ?>
 						</p>
-						<pre id="alm-pre"><?php echo wp_kses_post( $shortcode ); ?></pre>
+						<pre id="alm-pre"><?php echo esc_html( $shortcode ); ?></pre>
 					</div>
 					<div id="alm-preview-wrap">
 						<?php echo do_shortcode( $shortcode ); ?>
 					</div>
 				</div>
 				<script>
-					// Move elements with JS.
 					document.title = "Ajax Load More: Preview";
 					var container = document.querySelector("#alm-preview");
-					document.body.append(container);
+					document.body.append(container); // Move container with JS.
 				</script>
 				<?php
 				get_footer();
