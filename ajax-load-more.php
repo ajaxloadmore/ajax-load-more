@@ -500,7 +500,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			$filters_facets = $is_filters && $filters_target && isset( $params['facets'] ) && $params['facets'] === 'true' ? true : false;
 
 			// Offset.
-			$offset = isset( $params['offset'] ) ? $params['offset'] : 0;
+			$offset = isset( $params['offset'] ) ? (int) $params['offset'] : 0;
 
 			// Repeater Templates.
 			$repeater       = isset( $params['repeater'] ) ? sanitize_file_name( $params['repeater'] ) : 'default';
@@ -508,15 +508,15 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 
 			// Post Parameters.
 			$post_type      = isset( $params['post_type'] ) ? $params['post_type'] : 'post';
-			$posts_per_page = isset( $params['posts_per_page'] ) ? $params['posts_per_page'] : 5;
-			$page           = isset( $params['page'] ) ? $params['page'] : 0;
+			$posts_per_page = isset( $params['posts_per_page'] ) ? (int) $params['posts_per_page'] : 5;
+			$page           = isset( $params['page'] ) ? (int) $params['page'] : 0;
 
 			// Paging Add-on.
 			$paging = isset( $params['paging'] ) ? $params['paging'] : 'false';
 
 			// Preload Add-on.
 			$preloaded        = isset( $params['preloaded'] ) ? $params['preloaded'] : 'false';
-			$preloaded_amount = isset( $params['preloaded_amount'] ) ? $params['preloaded_amount'] : '5';
+			$preloaded_amount = isset( $params['preloaded_amount'] ) ? (int) $params['preloaded_amount'] : 5;
 			if ( has_action( 'alm_preload_installed' ) && $preloaded === 'true' ) {
 				// If preloaded - offset the ajax posts by posts_per_page + preload_amount val.
 				$old_offset = $preloaded_amount;
