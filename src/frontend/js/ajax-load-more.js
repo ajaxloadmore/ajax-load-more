@@ -1773,7 +1773,7 @@ export const analytics = function (type = '') {
 	/**
 	 * ALM Callback Function (URL Change)
 	 *
-	 * @see https://connekthq.com/plugins/ajax-load-more/docs/callback-functions/#url-update
+	 * @see https://ajaxloadmore.com/docs/callback-functions/#url-update
 	 */
 	if (typeof almUrlUpdate === 'function') {
 		window.almUrlUpdate(pathname + search, type);

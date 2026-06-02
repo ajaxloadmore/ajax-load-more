@@ -59,7 +59,7 @@ $alm_admin_heading = __( 'Ajax Load More Pro', 'ajax-load-more' );
 					<p style="padding: 15px 0 0 0; border-top: 1px solid #efefef; font-size: 12px;"><strong><?php esc_attr_e( 'Note:', 'ajax-load-more' ); ?></strong> <?php echo wp_kses_post( __( 'The core Ajax Load More plugin is required to be installed and activated when using the Pro add-on.', 'ajax-load-more' ) ); ?></p>
 				</div>
 				<div class="major-publishing-actions">
-					<a href="https://connekthq.com/plugins/ajax-load-more/pro/?utm_source=WP%20Admin&utm_medium=Go%20Pro%20Dashboard&utm_campaign=ProUpgrade" class="button button-primary" target="_blank">
+					<a href="https://ajaxloadmore.com/pro/?utm_source=WP%20Admin&utm_medium=Go%20Pro%20Dashboard&utm_campaign=ProUpgrade" class="button button-primary" target="_blank">
 						<?php esc_attr_e( 'Learn More', 'ajax-load-more' ); ?>
 					</a>
 				</div>

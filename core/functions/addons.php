@@ -13,7 +13,7 @@
  */
 function alm_get_pro_addon() {
 	$path = 'ajax-load-more-';
-	$url  = 'https://connekthq.com/plugins/ajax-load-more/pro/';
+	$url  = 'https://ajaxloadmore.com/pro/';
 
 	$addons = [
 		[
@@ -43,7 +43,7 @@ function alm_get_pro_addon() {
  */
 function alm_get_addons() {
 	$path = 'ajax-load-more-';
-	$url  = 'https://connekthq.com/plugins/ajax-load-more/add-ons/';
+	$url  = 'https://ajaxloadmore.com/add-ons/';
 
 	$addons = [
 		[
@@ -283,7 +283,7 @@ function alm_get_addons() {
  */
 function alm_get_deprecated_addons() {
 	$path = 'ajax-load-more-';
-	$url  = 'https://connekthq.com/plugins/ajax-load-more/add-ons/';
+	$url  = 'https://ajaxloadmore.com/add-ons/';
 
 	return [
 		[

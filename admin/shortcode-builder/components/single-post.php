@@ -48,7 +48,7 @@ if(has_action('alm_single_post_installed')){ ?>
    	            <h4><?php _e('Target', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('Repeater Templates are not required when using the Target implementation.', 'ajax-load-more'); ?>"></a></h4>
    	   		 	<p><?php _e('Enter the ID or classname of HTML element that wraps your single post content.', 'ajax-load-more'); ?>
    	   		 	<small>e.g. #container or .post-wrapper</small></p>
-   	   		 	<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/add-ons/single-posts/#implementation" target="_blank"><?php _e('View Guide', 'ajax-load-more'); ?></a></p>
+   	   		 	<p><a class="button-small" href="https://ajaxloadmore.com/add-ons/single-posts/#implementation" target="_blank"><?php _e('View Guide', 'ajax-load-more'); ?></a></p>
    	   		 </div>
    	         <div class="shortcode-builder--fields">
    		         <div class="inner">
@@ -61,7 +61,7 @@ if(has_action('alm_single_post_installed')){ ?>
    	         <div class="shortcode-builder--label">
    	            <h4><?php _e('Post Ordering', 'ajax-load-more'); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e('By default, the Single Posts add-on will use the core WordPress `get_previous_post` function, but you can adjust that here.', 'ajax-load-more'); ?>"></a></h4>
    	   		 	<p><?php _e('Select the posts loading order.', 'ajax-load-more'); ?></p>
-   	   		 	<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/add-ons/single-post/#ordering" target="_blank"><?php _e('View Docs', 'ajax-load-more'); ?></a></p>
+   	   		 	<p><a class="button-small" href="https://ajaxloadmore.com/add-ons/single-post/#ordering" target="_blank"><?php _e('View Docs', 'ajax-load-more'); ?></a></p>
    	   		 </div>
    	         <div class="shortcode-builder--fields">
    	            <div class="inner">
@@ -153,7 +153,7 @@ if(has_action('alm_single_post_installed')){ ?>
    	         <div class="shortcode-builder--label">
    		         <h4><?php _e('Post Preview', 'ajax-load-more'); ?></h4>
    	   		 	<p><?php _e('Show a preview of Ajax loaded posts and have the user click to load the remainder of the post.', 'ajax-load-more'); ?></p>
-						 <p><a class="button-small" href="https://connekthq.com/accessibility-and-ajax-load-more/?showpreview=true" target="_blank"><?php _e('View Example', 'ajax-load-more'); ?></a></p>
+						 <p><a class="button-small" href="https://ajaxloadmore.com/accessibility-and-ajax-load-more/?showpreview=true" target="_blank"><?php _e('View Example', 'ajax-load-more'); ?></a></p>
    	   		 </div>
    	         <div class="shortcode-builder--fields">
    	            <div class="inner">
@@ -202,7 +202,7 @@ if(has_action('alm_single_post_installed')){ ?>
 					<div class="shortcode-builder--label">
 						<h4><?php _e('Reading Progress Bar', 'ajax-load-more'); ?></h4>
 						<p><?php _e('Display a reading progress bar indicator at the top or bottom of the browser window.', 'ajax-load-more'); ?></p>
-						 <p><a class="button-small" href="https://connekthq.com/accessibility-and-ajax-load-more/?progressbar=true" target="_blank"><?php _e('View Example', 'ajax-load-more'); ?></a></p>
+						 <p><a class="button-small" href="https://ajaxloadmore.com/accessibility-and-ajax-load-more/?progressbar=true" target="_blank"><?php _e('View Example', 'ajax-load-more'); ?></a></p>
 					</div>
    	         <div class="shortcode-builder--fields">
    	            <div class="inner">
@@ -302,7 +302,7 @@ if(has_action('alm_single_post_installed')){ ?>
 		         <div class="shortcode-builder--label">
 			         <h4><?php _e('Elementor', 'ajax-load-more'); ?></h4>
 		   		 	<p><?php _e('Set Elementor <b>true</b> if you are using Elementor templates to build single posts.', 'ajax-load-more'); ?></p>
-		   		 	<p><a class="button-small" href="https://connekthq.com/elementor-infinite-scrolling/" target="_blank"><?php _e('View Blog Post', 'ajax-load-more'); ?></a></p>
+		   		 	<p><a class="button-small" href="https://ajaxloadmore.com/elementor-infinite-scrolling/" target="_blank"><?php _e('View Blog Post', 'ajax-load-more'); ?></a></p>
 		   		</div>
 		         <div class="shortcode-builder--fields">
 			         <div class="inner">
@@ -324,7 +324,7 @@ if(has_action('alm_single_post_installed')){ ?>
 	         <div class="clear"></div>
 
 	         <p class="warning-callout">
-	            <?php _e('You must add the Single Post shortcode directly to your single template file using the <a href="https://developer.wordpress.org/reference/functions/do_shortcode/" target="_blank">do_shortcode</a> method.', 'ajax-load-more'); ?> <a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/add-ons/single-post/" target="_blank"><?php _e('View Docs', 'ajax-load-more'); ?></a>
+	            <?php _e('You must add the Single Post shortcode directly to your single template file using the <a href="https://developer.wordpress.org/reference/functions/do_shortcode/" target="_blank">do_shortcode</a> method.', 'ajax-load-more'); ?> <a class="button-small" href="https://ajaxloadmore.com/add-ons/single-post/" target="_blank"><?php _e('View Docs', 'ajax-load-more'); ?></a>
 	         </p>
 	      </div>
 

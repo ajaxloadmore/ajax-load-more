@@ -163,7 +163,7 @@ $show_max                = 100; // Max number of items to show.
 									<?php _e( 'Set a unique ID for this Ajax Load More instance.', 'ajax-load-more' ); ?>
 									<small><?php _e( 'Lowercase alphanumeric characters only.', 'ajax-load-more' ); ?><br/>e.g. my_alm_listing</small>
 								</p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_query_args" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/docs/filter-hooks/#alm_query_args" target="_blank"><?php _e( 'Learn More', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">
@@ -306,7 +306,7 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<h4><?php _e( 'Destroy After', 'ajax-load-more' ); ?></h4>
 								<p><?php _e( 'Remove Ajax Load More functionality after {<em>n</em>} number of pages have been loaded.', 'ajax-load-more' ); ?></p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/destroy-after/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/examples/destroy-after/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields alm-destroy-after">
 								<div class="inner">
@@ -320,7 +320,7 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<h4><?php _e( 'Images Loaded', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'Background images are not supported.', 'ajax-load-more' ); ?>"></a></h4>
 								<p><?php _e( 'Wait for all images to load before displaying ajax loaded content.', 'ajax-load-more' ); ?></p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/images-loaded/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/examples/images-loaded/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields alm-images-loaded">
 								<div class="inner">
@@ -343,7 +343,7 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<h4><?php _e( 'Loading Placeholder', 'ajax-load-more' ); ?> <a href="javascript:void(0)" class="fa fa-question-circle tooltip" title="<?php _e( 'A loading placeholder can help the understand content is about to rendered.', 'ajax-load-more' ); ?>"></a></h4>
 								<p><?php _e( 'Display a placeholder image while Ajax content is being loaded.', 'ajax-load-more' ); ?></p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/placeholder/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/examples/placeholder/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields alm-placeholder-wrap">
 								<div class="inner">
@@ -464,7 +464,7 @@ $show_max                = 100; // Max number of items to show.
 											<small><?php _e( 'Note: Delay in milliseconds.', 'ajax-load-more' ); ?></small>
 										</p>
 										<p>
-											<a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/transition-delay/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a>
+											<a class="button-small" href="https://ajaxloadmore.com/examples/transition-delay/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a>
 										</p>
 									</div>
 									<div class="shortcode-builder--fields">
@@ -587,7 +587,7 @@ $show_max                = 100; // Max number of items to show.
 
 								<p class="warning-callout">
 									<?php _e( 'Don\'t see your favorite Masonry option listed? You can always add your own!', 'ajax-load-more' ); ?>
-									<a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/masonry/" target="_blank"><?php _e( 'View Docs', 'ajax-load-more' ); ?></a>
+									<a class="button-small" href="https://ajaxloadmore.com/docs/masonry/" target="_blank"><?php _e( 'View Docs', 'ajax-load-more' ); ?></a>
 								</p>
 							</div>
 
@@ -755,7 +755,7 @@ $show_max                = 100; // Max number of items to show.
 						<section class="first">
 							<div class="shortcode-builder--label">
 								<p><?php _e( 'Display progress bar indicator at the top of the window while loading Ajax content.', 'ajax-load-more' ); ?></p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/progress-bar/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/examples/progress-bar/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">
@@ -1262,7 +1262,7 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<p><?php _e( 'Enter a search term to query.', 'ajax-load-more' ); ?></p>
 								<p><?php _e( 'Search uses the default WordPress search, however Ajax Load More does offer integrations with SearchWP and Relevanssi.', 'ajax-load-more' ); ?></p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/examples/search-results/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/examples/search-results/" target="_blank"><?php _e( 'View Example', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">
@@ -1444,7 +1444,7 @@ $show_max                = 100; // Max number of items to show.
 							<div class="shortcode-builder--label">
 								<p><?php _e( 'Ajax Load More can automatically create an archive query on archive pages.', 'ajax-load-more' ); ?></p>
 								<p><?php _e( 'Search, taxonomy, category, tag, date (year, month, day), post type and author archives are currently supported.', 'ajax-load-more' ); ?></p>
-								<p><a class="button-small" href="https://connekthq.com/plugins/ajax-load-more/docs/archives/" target="_blank"><?php _e( 'View Docs', 'ajax-load-more' ); ?></a></p>
+								<p><a class="button-small" href="https://ajaxloadmore.com/docs/archives/" target="_blank"><?php _e( 'View Docs', 'ajax-load-more' ); ?></a></p>
 							</div>
 							<div class="shortcode-builder--fields">
 								<div class="inner">

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 7.8.3\n"
+"Project-Id-Version: Ajax Load More 8.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-19T13:17:22+00:00\n"
+"POT-Creation-Date: 2026-06-02T15:47:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: ajax-load-more.php
-msgid "https://connekthq.com/plugins/ajax-load-more"
+msgid "https://ajaxloadmore.com"
 msgstr ""
 
 #. Description of the plugin
@@ -292,7 +292,7 @@ msgid "%s license deactivated."
 msgstr ""
 
 #: admin/classes/licensing.php:286
-msgid "You have an invalid or expired <a href=\"admin.php?page=ajax-load-more\">Ajax Load More Pro</a> license key. Visit the <a href=\"admin.php?page=ajax-load-more-licenses\">License</a> section to input your key or <a href=\"https://connekthq.com/plugins/ajax-load-more/pro/\" target=\"_blank\">purchase</a> one now."
+msgid "You have an invalid or expired <a href=\"admin.php?page=ajax-load-more\">Ajax Load More Pro</a> license key. Visit the <a href=\"admin.php?page=ajax-load-more-licenses\">License</a> section to input your key or <a href=\"https://ajaxloadmore.com/pro/\" target=\"_blank\">purchase</a> one now."
 msgstr ""
 
 #: admin/classes/licensing.php:289
@@ -304,7 +304,7 @@ msgid "Looks like your subscription has expired."
 msgstr ""
 
 #: admin/classes/licensing.php:429
-msgid "Please login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
+msgid "Please login to your <a href=\"https://ajaxloadmore.com/account/\" target=\"_blank\">Account</a> to renew the license."
 msgstr ""
 
 #: admin/classes/licensing.php:436
@@ -312,7 +312,7 @@ msgid "Looks like your license is inactive and/or invalid."
 msgstr ""
 
 #: admin/classes/licensing.php:437
-msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> or login to your <a href=\"https://connekthq.com/account/\" target=\"_blank\">Account</a> to renew the license."
+msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> or login to your <a href=\"https://ajaxloadmore.com/account/\" target=\"_blank\">Account</a> to renew the license."
 msgstr ""
 
 #: admin/classes/licensing.php:444
@@ -642,7 +642,7 @@ msgid "Repeater Templates editing has been disabled for this instance of Ajax Lo
 msgstr ""
 
 #: admin/includes/components/repeater-templates.php:133
-msgid "You're loading the <a href=\"https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/#default-template\" target=\"_blank\"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server."
+msgid "You're loading the <a href=\"https://ajaxloadmore.com/docs/repeater-templates/#default-template\" target=\"_blank\"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server."
 msgstr ""
 
 #: admin/includes/components/repeater-templates.php:137
@@ -2693,7 +2693,7 @@ msgid "Example Library"
 msgstr ""
 
 #: admin/views/help.php:78
-msgid "View our collection of over 40 real world Ajax Load More <a href=\"https://connekthq.com/plugins/ajax-load-more/examples/\" target=\"_blank\">examples</a> available on the plugin website."
+msgid "View our collection of over 40 real world Ajax Load More <a href=\"https://ajaxloadmore.com/examples/\" target=\"_blank\">examples</a> available on the plugin website."
 msgstr ""
 
 #: admin/views/help.php:83
@@ -2792,11 +2792,11 @@ msgid "About Licenses"
 msgstr ""
 
 #: admin/views/licenses.php:271
-msgid "License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target=\"_blank\" href=\"https://connekthq.com/account/\">Account</a> section on our website"
+msgid "License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target=\"_blank\" href=\"https://ajaxloadmore.com/account/\">Account</a> section on our website"
 msgstr ""
 
 #: admin/views/licenses.php:272
-msgid "If you cannot locate your key please open a support ticket by filling out the <a href=\"https://connekthq.com/support/\">support form</a> and reference the email address used when you completed the purchase."
+msgid "If you cannot locate your key please open a support ticket by filling out the <a href=\"https://ajaxloadmore.com/support/\">support form</a> and reference the email address used when you completed the purchase."
 msgstr ""
 
 #: admin/views/licenses.php:273
@@ -2855,11 +2855,11 @@ msgstr ""
 msgid "Pages: "
 msgstr ""
 
-#: core/classes/class-alm-preview.php:157
+#: core/classes/class-alm-preview.php:156
 msgid "Ajax Load More: Preview"
 msgstr ""
 
-#: core/classes/class-alm-preview.php:160
+#: core/classes/class-alm-preview.php:159
 msgid "<strong>Note:</strong> Styling and functionality within this preview environment may not be 100% reflective of how Ajax Load More will appear once added directly to a page on your website."
 msgstr ""
 

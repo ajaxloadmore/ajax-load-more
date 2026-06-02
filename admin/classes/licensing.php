@@ -283,7 +283,7 @@ class ALM_Licensing {
 
 		if ( has_action( 'alm_pro_installed' ) ) { // Pro.
 			$addons  = alm_get_pro_addon();
-			$message = __( 'You have an invalid or expired <a href="admin.php?page=ajax-load-more">Ajax Load More Pro</a> license key. Visit the <a href="admin.php?page=ajax-load-more-licenses">License</a> section to input your key or <a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank">purchase</a> one now.', 'ajax-load-more' );
+			$message = __( 'You have an invalid or expired <a href="admin.php?page=ajax-load-more">Ajax Load More Pro</a> license key. Visit the <a href="admin.php?page=ajax-load-more-licenses">License</a> section to input your key or <a href="https://ajaxloadmore.com/pro/" target="_blank">purchase</a> one now.', 'ajax-load-more' );
 		} else { // Other Addons.
 			$addons  = alm_get_addons();
 			$message = __( 'You have invalid or expired <a href="admin.php?page=ajax-load-more">Ajax Load More</a> license keys. Visit the <a href="admin.php?page=ajax-load-more-licenses">Licenses</a> section to input your keys.', 'ajax-load-more' );
@@ -426,7 +426,7 @@ class ALM_Licensing {
 					printf(
 						'<span style="' . esc_html( $style ) . '">%s %s</span>',
 						esc_html__( 'Looks like your subscription has expired.', 'ajax-load-more' ),
-						wp_kses_post( __( 'Please login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
+						wp_kses_post( __( 'Please login to your <a href="https://ajaxloadmore.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 					);
 				}
 				if ( $status === 'invalid' || $status === 'disabled' ) {
@@ -434,7 +434,7 @@ class ALM_Licensing {
 					printf(
 						'<span style="' . esc_html( $style ) . '">%s %s</span>',
 						esc_html__( 'Looks like your license is inactive and/or invalid.', 'ajax-load-more' ),
-						wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> or login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
+						wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> or login to your <a href="https://ajaxloadmore.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 					);
 				}
 				if ( $status === 'deactivated' ) {
