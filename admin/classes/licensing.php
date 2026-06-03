@@ -59,13 +59,13 @@ class ALM_Licensing {
 		}
 
 		if ( $activate ) {
-			$item_id = $_POST['alm_activate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_activate_license'] ) ) : '';
+			$item_id = $_POST['alm_activate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_activate_license'] ) ) : ''; // phpcs:ignore
 			$action  = 'activate_license';
 		} elseif ( $deactivate ) {
-			$item_id = $_POST['alm_deactivate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_deactivate_license'] ) ) : '';
+			$item_id = $_POST['alm_deactivate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_deactivate_license'] ) ) : ''; // phpcs:ignore
 			$action  = 'deactivate_license';
 		} elseif ( $refresh ) {
-			$item_id = $_POST['alm_refresh_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_refresh_license'] ) ) : '';
+			$item_id = $_POST['alm_refresh_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_refresh_license'] ) ) : ''; // phpcs:ignore
 			$action  = 'check_license';
 		} else {
 			return; // Bail early if no item found.
@@ -109,8 +109,6 @@ class ALM_Licensing {
 				$this->do_activation( $license_data, $name, $item_option, $item_key, $license, $transient_name, $action, $refresh );
 				break;
 		}
-
-		return;
 	}
 
 	/**
@@ -212,8 +210,8 @@ class ALM_Licensing {
 	/**
 	 * Deactivate a license.
 	 *
-	 * @param array  $response       The response from the license request.
-	 * @param string $item_option    The option name for the item, e.g., 'alm_pro_license'.
+	 * @param string $name           The plugin name.
+	 * @param string $option         The option name for the item, e.g., 'alm_pro_license'.
 	 * @param string $transient_name The transient name for the license key.
 	 * @return void
 	 */

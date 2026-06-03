@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-02T15:47:16+00:00\n"
+"POT-Creation-Date: 2026-06-03T15:25:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -135,7 +135,7 @@ msgstr ""
 
 #: admin/admin.php:263
 #: admin/admin.php:271
-#: admin/views/licenses.php:261
+#: admin/views/licenses.php:260
 msgid "Go Pro"
 msgstr ""
 
@@ -234,7 +234,7 @@ msgid "No terms exist within this taxonomy"
 msgstr ""
 
 #: admin/classes/licensing.php:92
-#: admin/classes/licensing.php:182
+#: admin/classes/licensing.php:180
 msgid "An error occurred, please try again."
 msgstr ""
 
@@ -243,88 +243,88 @@ msgid "Plugin"
 msgstr ""
 
 #. translators: %1$s is the plugin name, %2$s is the expiration date, %3$s is the renewal link, %4$s is the renewal text.
-#: admin/classes/licensing.php:137
+#: admin/classes/licensing.php:135
 msgid "Your %1$s license key expired on %2$s &rarr; <a href=\"%3$s\">%4$s</a>"
 msgstr ""
 
-#: admin/classes/licensing.php:141
+#: admin/classes/licensing.php:139
 msgid "Renew Now"
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:149
+#: admin/classes/licensing.php:147
 msgid "Your %s license key has been disabled."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:157
+#: admin/classes/licensing.php:155
 msgid "Invalid %s license key. Are you sure this license is correct?."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:166
+#: admin/classes/licensing.php:164
 msgid "Your license is not active for this URL."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:173
+#: admin/classes/licensing.php:171
 msgid "This appears to be an invalid license key for %s."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:178
+#: admin/classes/licensing.php:176
 msgid "This %s license key has reached its activation limit."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:193
+#: admin/classes/licensing.php:191
 msgid "%s license data has been refreshed."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:197
+#: admin/classes/licensing.php:195
 msgid "%s license activated."
 msgstr ""
 
 #. translators: %s is the plugin name.
-#: admin/classes/licensing.php:226
+#: admin/classes/licensing.php:224
 msgid "%s license deactivated."
 msgstr ""
 
-#: admin/classes/licensing.php:286
+#: admin/classes/licensing.php:284
 msgid "You have an invalid or expired <a href=\"admin.php?page=ajax-load-more\">Ajax Load More Pro</a> license key. Visit the <a href=\"admin.php?page=ajax-load-more-licenses\">License</a> section to input your key or <a href=\"https://ajaxloadmore.com/pro/\" target=\"_blank\">purchase</a> one now."
 msgstr ""
 
-#: admin/classes/licensing.php:289
+#: admin/classes/licensing.php:287
 msgid "You have invalid or expired <a href=\"admin.php?page=ajax-load-more\">Ajax Load More</a> license keys. Visit the <a href=\"admin.php?page=ajax-load-more-licenses\">Licenses</a> section to input your keys."
 msgstr ""
 
-#: admin/classes/licensing.php:428
+#: admin/classes/licensing.php:426
 msgid "Looks like your subscription has expired."
 msgstr ""
 
-#: admin/classes/licensing.php:429
+#: admin/classes/licensing.php:427
 msgid "Please login to your <a href=\"https://ajaxloadmore.com/account/\" target=\"_blank\">Account</a> to renew the license."
 msgstr ""
 
-#: admin/classes/licensing.php:436
+#: admin/classes/licensing.php:434
 msgid "Looks like your license is inactive and/or invalid."
 msgstr ""
 
-#: admin/classes/licensing.php:437
+#: admin/classes/licensing.php:435
 msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> or login to your <a href=\"https://ajaxloadmore.com/account/\" target=\"_blank\">Account</a> to renew the license."
 msgstr ""
 
-#: admin/classes/licensing.php:444
+#: admin/classes/licensing.php:442
 msgid "Looks like your license has been deactivated."
 msgstr ""
 
-#: admin/classes/licensing.php:445
+#: admin/classes/licensing.php:443
 msgid "Please activate the <a href=\"admin.php?page=ajax-load-more-licenses\" target=\"_blank\">license</a> to update."
 msgstr ""
 
 #. translators: %1$s is the opening tag, %2$s is the closing tag, %3$s is the addon name, %4$s is the purchase link, %5$s is the closing tag.
-#: admin/classes/licensing.php:476
+#: admin/classes/licensing.php:474
 msgid "%1$sRegister%2$s your copy of %3$s to receive access to plugin updates and support. Need a license key? %4$sPurchase Now%5$s"
 msgstr ""
 
@@ -2749,65 +2749,65 @@ msgstr ""
 msgid "Refresh Status"
 msgstr ""
 
-#: admin/views/licenses.php:165
+#: admin/views/licenses.php:164
 msgid "Renew License"
 msgstr ""
 
-#: admin/views/licenses.php:181
+#: admin/views/licenses.php:180
 msgid "Expires:"
 msgstr ""
 
-#: admin/views/licenses.php:185
+#: admin/views/licenses.php:184
 msgid "Lifetime"
 msgstr ""
 
-#: admin/views/licenses.php:198
-#: admin/views/licenses.php:211
+#: admin/views/licenses.php:197
+#: admin/views/licenses.php:210
 msgid "Activations:"
 msgstr ""
 
-#: admin/views/licenses.php:200
+#: admin/views/licenses.php:199
 msgid "Unlimited"
 msgstr ""
 
-#: admin/views/licenses.php:215
+#: admin/views/licenses.php:214
 msgid "View Upgrades"
 msgstr ""
 
 #. translators: the license key expiration date
-#: admin/views/licenses.php:239
+#: admin/views/licenses.php:238
 msgid "Activation limit reached. You can purchase additional %1$s licenses from <a href=\"%2$s\" target=\"_blank\">your account</a>."
 msgstr ""
 
-#: admin/views/licenses.php:261
+#: admin/views/licenses.php:260
 msgid "You do not have any Ajax Load More add-ons installed"
 msgstr ""
 
-#: admin/views/licenses.php:261
+#: admin/views/licenses.php:260
 msgid "Browse Add-ons"
 msgstr ""
 
-#: admin/views/licenses.php:268
+#: admin/views/licenses.php:267
 msgid "About Licenses"
 msgstr ""
 
-#: admin/views/licenses.php:271
+#: admin/views/licenses.php:270
 msgid "License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target=\"_blank\" href=\"https://ajaxloadmore.com/account/\">Account</a> section on our website"
 msgstr ""
 
-#: admin/views/licenses.php:272
+#: admin/views/licenses.php:271
 msgid "If you cannot locate your key please open a support ticket by filling out the <a href=\"https://ajaxloadmore.com/support/\">support form</a> and reference the email address used when you completed the purchase."
 msgstr ""
 
-#: admin/views/licenses.php:273
+#: admin/views/licenses.php:272
 msgid "Are you having issues updating an add-on?"
 msgstr ""
 
-#: admin/views/licenses.php:274
+#: admin/views/licenses.php:273
 msgid "Try deactivating and re-activating the license. Once you've done that, try running the update again."
 msgstr ""
 
-#: admin/views/licenses.php:279
+#: admin/views/licenses.php:278
 msgid "Your Account"
 msgstr ""
 

@@ -126,9 +126,7 @@ body.ajax-load-more_page_ajax-load-more-woocommerce {
 	border-radius: 5px;
 	overflow: hidden;
 	padding: 15px !important;
-	&.is-dismissible {
-		padding: 7px 7px 7px 15px !important;
-	}
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.075);
 	p {
 		margin: 0;
 		width: 100%;
@@ -1131,7 +1129,9 @@ hr.indented {
 	margin: 15px 0;
 	line-height: normal !important;
 	height: auto !important;
-	box-shadow: inset 0 -15px 15px rgba(0, 0, 0, 0.1), 0 1px 0px #ca5252;
+	box-shadow:
+		inset 0 -15px 15px rgba(0, 0, 0, 0.1),
+		0 1px 0px #ca5252;
 	text-shadow: none !important;
 	max-width: 20%;
 	border-radius: 2px;
@@ -1139,7 +1139,9 @@ hr.indented {
 		display: none;
 	}
 	&:hover {
-		box-shadow: inset 0 -15px 15px rgba(0, 0, 0, 0.1), 0 0 3px rgba(255, 255, 255, 1);
+		box-shadow:
+			inset 0 -15px 15px rgba(0, 0, 0, 0.1),
+			0 0 3px rgba(255, 255, 255, 1);
 	}
 	&:active {
 		background: #d0413f !important;
@@ -2337,7 +2339,9 @@ span.cnkt-button.installed,
 				border: 1px solid $border;
 				color: $paragraph;
 				opacity: 0.85;
-				box-shadow: inset 1px 1px 0 #fff, 0 0 0 3px rgba(0, 0, 0, 0.025);
+				box-shadow:
+					inset 1px 1px 0 #fff,
+					0 0 0 3px rgba(0, 0, 0, 0.025);
 				i {
 					color: $paragraph;
 					opacity: 0.5;
