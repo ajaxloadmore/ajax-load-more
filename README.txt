@@ -276,8 +276,9 @@ How to install Ajax Load More.
 
 == Changelog ==
 
-= 8.0.0 - June 3, 2026 =
+= 8.0.0 - June 4, 2026 =
 * UPDATE: Moving Ajax Load More to it's own custom domain -> [ajaxloadmore.com](https://ajaxloadmore.com).
+* UPDATE: Various code cleanup and optimizations throughout the plugin for WordPress 7.0 compatibility.
 
 = 7.8.4 - April 20, 2026 =
 * FIX: Various security fixes.

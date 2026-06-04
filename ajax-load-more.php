@@ -15,7 +15,7 @@
  */
 
 define( 'ALM_VERSION', '8.0.0' );
-define( 'ALM_RELEASE', 'June 3, 2026' );
+define( 'ALM_RELEASE', 'June 4, 2026' );
 define( 'ALM_STORE_URL', 'https://ajaxloadmore.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
