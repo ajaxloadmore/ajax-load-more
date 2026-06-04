@@ -38,8 +38,8 @@ add_action( 'admin_init', 'alm_admin_hooks' );
  */
 function alm_pro_transient_notification() {
 	if ( ! has_action( 'alm_pro_installed' ) ) {
-		$msg  = '🔥&nbsp; <strong><a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank">Ajax Load More Pro</a></strong> &rarr; ';
-		$msg .= 'Get access to all 15+ add-ons in a single installation! &nbsp; <strong><a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank" class="button button-primary">Upgrade Now</a></strong>';
+		$msg  = '🔥&nbsp; <strong><a href="https://ajaxloadmore.com/pro/" target="_blank">Ajax Load More Pro</a></strong> &rarr; ';
+		$msg .= 'Get access to all 15+ add-ons in a single installation! &nbsp; <strong><a href="https://ajaxloadmore.com/pro/" target="_blank" class="button button-primary">Upgrade Now</a></strong>';
 		alm_transient_notification( $msg, 'alm_pro_upgrade', 'YEAR_IN_SECONDS', true );
 	}
 }
@@ -629,9 +629,9 @@ function alm_filter_admin_footer_text( $text ) {
 		return $text;
 	}
 
-	$text = '<strong>Ajax Load More</strong> is made with <span style="color: #e25555;">♥</span> by <a href="https://connekthq.com" target="_blank" style="font-weight: 500;">Connekt</a> | <a href="https://wordpress.org/support/plugin/ajax-load-more/reviews/" target="_blank" style="font-weight: 500;">Leave a Review</a> | <a href="https://connekthq.com/plugins/ajax-load-more/support/" target="_blank" style="font-weight: 500;">Get Support</a>';
+	$text = '<strong>Ajax Load More</strong> is made with <span style="color: #e25555;">♥</span> by <a href="https://connekthq.com" target="_blank" style="font-weight: 500;">Connekt</a> | <a href="https://wordpress.org/support/plugin/ajax-load-more/reviews/" target="_blank" style="font-weight: 500;">Leave a Review</a> | <a href="https://ajaxloadmore.com/support/" target="_blank" style="font-weight: 500;">Get Support</a>';
 	if ( ! has_action( 'alm_pro_installed' ) ) {
-		$text .= ' | <a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank" style="font-weight: 500;">Go Pro</a>';
+		$text .= ' | <a href="https://ajaxloadmore.com/pro/" target="_blank" style="font-weight: 500;">Go Pro</a>';
 	}
 	return wp_kses_post( $text );
 }

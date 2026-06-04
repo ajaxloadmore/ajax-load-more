@@ -130,7 +130,7 @@ if ( has_action( 'alm_custom_repeaters' ) || has_action( 'alm_unlimited_repeater
 			?>
 			<div class="alm-row no-padding-top">
 				<div class="column">
-					<p class="warning-callout" style="margin: 0;"><?php echo wp_kses_post( __( 'You\'re loading the <a href="https://connekthq.com/plugins/ajax-load-more/docs/repeater-templates/#default-template" target="_blank"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server.', 'ajax-load-more' ) ); ?></p>
+					<p class="warning-callout" style="margin: 0;"><?php echo wp_kses_post( __( 'You\'re loading the <a href="https://ajaxloadmore.com/docs/repeater-templates/#default-template" target="_blank"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server.', 'ajax-load-more' ) ); ?></p>
 				</div>
 			</div>
 			<div class="file-location">

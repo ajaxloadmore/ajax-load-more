@@ -7,7 +7,7 @@
  */
 
 // Layout add-on path.
-$alm_layouts_href = 'https://connekthq.com/plugins/ajax-load-more/add-ons/layouts/?utm_source=WP%20Admin&utm_medium=Extend&utm_campaign=Layouts';
+$alm_layouts_href = 'https://ajaxloadmore.com/add-ons/layouts/?utm_source=WP%20Admin&utm_medium=Extend&utm_campaign=Layouts';
 
 ?>
 <div class="alm-drop-btn alm-layout-selection">

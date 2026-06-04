@@ -11,14 +11,14 @@
 	<div class="cta-inner">
 		<ul>
 			<li>
-				<a target="blank" href="https://connekthq.com/plugins/ajax-load-more/"><i class="fa fa-desktop"></i> <?php esc_attr_e( 'Ajax Load More Demo Site', 'ajax-load-more' ); ?></a>
+				<a target="blank" href="https://ajaxloadmore.com/"><i class="fa fa-desktop"></i> <?php esc_attr_e( 'Ajax Load More Demo Site', 'ajax-load-more' ); ?></a>
 			</li>
 
 			<li>
-				<a target="blank" href="https://connekthq.com/plugins/ajax-load-more/docs/implementation-guide/"><i class="fa fa-file-text" aria-hidden="true"></i> <?php _e( 'Implementation Guide', 'ajax-load-more' ); ?></a>
+				<a target="blank" href="https://ajaxloadmore.com/docs/implementation-guide/"><i class="fa fa-file-text" aria-hidden="true"></i> <?php _e( 'Implementation Guide', 'ajax-load-more' ); ?></a>
 			</li>
 			<li>
-				<a target="blank" href="https://connekthq.com/plugins/ajax-load-more/docs/"><i class="fa fa-pencil"></i> <?php esc_attr_e( 'Documentation', 'ajax-load-more' ); ?></a>
+				<a target="blank" href="https://ajaxloadmore.com/docs/"><i class="fa fa-pencil"></i> <?php esc_attr_e( 'Documentation', 'ajax-load-more' ); ?></a>
 			</li>
 			<?php if ( ! alm_has_addon_shortcodes() ) { ?>
 			<li>
@@ -26,7 +26,7 @@
 			</li>
 			<?php } else { ?>
 			<li>
-				<a target="blank" href="https://connekthq.com/support/?product=Ajax%20Load%20More"><i class="fa fa-question-circle"></i> <?php esc_attr_e( 'Get Support', 'ajax-load-more' ); ?></a>
+				<a target="blank" href="https://ajaxloadmore.com/support/?product=Ajax%20Load%20More"><i class="fa fa-question-circle"></i> <?php esc_attr_e( 'Get Support', 'ajax-load-more' ); ?></a>
 			</li>
 			<?php } ?>
 		</ul>

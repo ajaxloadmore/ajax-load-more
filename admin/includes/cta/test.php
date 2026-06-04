@@ -24,7 +24,7 @@ if ( isset( $options['_alm_use_rest_api'] ) && $options['_alm_use_rest_api'] !==
 				<?php echo __( 'Unable to access the WordPress REST API. Are you running a security plugin or have your server configured in a way that may be preventing access to the REST API?', 'ajax-load-more' ); ?>
 			 </p>
 			 <p class="writeable-title">
-				<a href="https://connekthq.com/plugins/ajax-load-more/support" target="_blank" class="button button-primary"><?php _e( 'Get Plugin Support', 'ajax-load-more' ); ?></a>
+				<a href="https://ajaxloadmore.com/support" target="_blank" class="button button-primary"><?php _e( 'Get Plugin Support', 'ajax-load-more' ); ?></a>
 			 </p>
 		   </div>
 	   </div>

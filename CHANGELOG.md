@@ -122,7 +122,7 @@
 
 = 7.2.0 - January 17, 2025 =
 
-- NEW: Added required updates for the new [Query Loop add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/query-loop/).
+- NEW: Added required updates for the new [Query Loop add-on](https://ajaxloadmore.com/add-ons/query-loop/).
 - NEW: Added new `alm_single_post_querystring` hook to remove the querystring from Single Post add-on URLs.
 - NEW: Added preview functionality for previewing an ALM instance while building a shortcode.
 - NEW: Added new `template` parameter to the core ALM shortcode. This new parameter will normalize the template selection and replace the `repeater` and `theme_repeater` parameters.
@@ -198,7 +198,7 @@ This Ajax Load More update may introduce breaking changes for core plugin CSS st
 Major changes in this release includes the removal of the `transition_container` parameter which affects the rendered HTML of the plugin by removing the `.alm-reveal` div used to display the Ajax loaded content.
 If you are using the Filters, SEO or Paging add-ons please be sure to update these add-ons after updating the core Ajax Load More plugin.
 
-[View Release Notes](https://connekthq.com/ajax-load-more-7-0/)
+[View Release Notes](https://ajaxloadmore.com/ajax-load-more-7-0/)
 
 - NEW: Removed `alm-reveal` div and transition container. This affects all add-ons and core plugin as there is no more a transition container appended for each load more action.
 - NEW: Added `transition_delay` parameter that allows for staggering the display of each post incrementally as content is loaded.
@@ -267,7 +267,7 @@ Users who were previously using `meta_key` for custom field ordering will need t
 
 - HOTFIX: Fixed issue with Single Posts add-on not receiving correct post ID and caused issues with loading the proper post.
 - FIX: Attempted compatibility fix for WPML and Single Posts add-on loading incorrect language because of WPML language cookies.
-- Fix: Fixed issue with broken [Results Text](https://connekthq.com/plugins/ajax-load-more/docs/results-text/)
+- Fix: Fixed issue with broken [Results Text](https://ajaxloadmore.com/docs/results-text/)
 
 = 6.0.1 - June 13, 2023 =
 
@@ -300,7 +300,7 @@ Users who were previously using `meta_key` for custom field ordering will need t
 
 = 5.6.0.3 - February 24, 2023 =
 
-- NEW: Add new `getTotalRemaining` public JS function that returns the total number of posts remaining to be loaded by ALM instance ID. [See Docs](https://connekthq.com/plugins/ajax-load-more/docs/public-functions/#getTotalRemaining)
+- NEW: Add new `getTotalRemaining` public JS function that returns the total number of posts remaining to be loaded by ALM instance ID. [See Docs](https://ajaxloadmore.com/docs/public-functions/#getTotalRemaining)
 - Update: Added support for disabling Images Loaded functionality in WooCommerce add-on.
 - Update: Cleaned up localized post count variables to make it easier to access across the plugin.
 - UPDATE: Various code cleanup and refactoring.
@@ -352,7 +352,7 @@ Users who were previously using `meta_key` for custom field ordering will need t
 - NEW - Added new `alm_canonical_frontpage_trailing_slash` filter to remove the trailing slash from frontpage URLs. This is useful for add-ons to update the browser URL.
 - NEW - Added new `alm_allow_future_posts` filter to allow future posts for non-logged in users. `add_filter('alm_allow_future_posts', '__return_true');`
 - NEW - Added new `alm_button_wrap_classes` filter to add classes to the button wrapper element.
-- UPDATE: Added new `start` and `end` variables in the [Results](https://connekthq.com/plugins/ajax-load-more/docs/results-text) Text feature. This adds support for using Results Text with the Paging Add-on.
+- UPDATE: Added new `start` and `end` variables in the [Results](https://ajaxloadmore.com/docs/results-text) Text feature. This adds support for using Results Text with the Paging Add-on.
 - UPDATE: Normalized how the default.php Repeater Template is created on plugin activation.
 - FIX - Fixed PHP warnings displayed if ALM was added to a 404 page.
 - SECURITY - Fix for potential admin level exploit with Repeater exports.
@@ -450,12 +450,12 @@ Ajax Load More no longer uses the `Numbers` pagination type, please follow the s
 1. Visit your page in Elementor.
 2. Locate the Posts Widget.
 3. Update the `Pagination` type in the Posts Widget from `Numbers` to `Numbers + Previous/Next` or just `Previous/Next`.
-4. View the [Guide](https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/#configuration) if you require addtional information.
+4. View the [Guide](https://ajaxloadmore.com/add-ons/elementor/#configuration) if you require addtional information.
 
 **OTHER UPDATES**
 
 - NEW - Added new `scroll_direction` parameter that allows for horizontal scrolling of Ajax Load More by setting `scroll_direction="horizontal"` in your shortcode or `alm_render` method.
-  - To horizontal scroll ALM you MUST use a `scroll_container` as seen in the [Scroll Direction example](https://connekthq.com/plugins/ajax-load-more/examples/scroll-direction/).
+  - To horizontal scroll ALM you MUST use a `scroll_container` as seen in the [Scroll Direction example](https://ajaxloadmore.com/examples/scroll-direction/).
   - Horizontal scroll uses a custom Flexbox layout for aligning items.
   - RTL support will be coming soon.
 - FIX - Fixed issue with Single Posts and the Table of Contents functionality duplicating the first post entry in the list.
@@ -463,13 +463,13 @@ Ajax Load More no longer uses the `Numbers` pagination type, please follow the s
 
 = 5.4.0 - November 11, 2020 =
 
-- NEW - Added required functionality for new [Elementor add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/).
+- NEW - Added required functionality for new [Elementor add-on](https://ajaxloadmore.com/add-ons/elementor/).
 - NEW - Added new `alm_disable_noscript` filter to disable all `<noscript/>` tags generated by ALM. `add_filter( 'alm_disable_noscript', '__return_true' );`
 - UPDATE - Updated [Pace.js](https://github.com/CodeByZach/pace) library that is used for progress bar functionality.
 
 = 5.3.0 - April 22, 2020 =
 
-- NEW - Added support and core functionality for new [WooCommerce add-on](https://connekthq.com/plugins/ajax-load-more/add-ons/woocommerce/).
+- NEW - Added support and core functionality for new [WooCommerce add-on](https://ajaxloadmore.com/add-ons/woocommerce/).
 - NEW - Added new `White` & `Light Grey` loading style.
 - NEW - Added loading preview toggle on ALM Settings screen.
 - NEW - Added `alm_a11y_focus` filter to allow users to remove the focus accessibility feature of Ajax Load More.
@@ -480,11 +480,11 @@ Ajax Load More no longer uses the `Numbers` pagination type, please follow the s
 
 = 5.2.0 - March 13, 2020 =
 
-- NEW - Added new [Table of Contents](https://connekthq.com/plugins/ajax-load-more/examples/table-of-contents/) functionality. Table of Contents creates a pagination anchor links with every page loaded via Ajax Load More.
+- NEW - Added new [Table of Contents](https://ajaxloadmore.com/examples/table-of-contents/) functionality. Table of Contents creates a pagination anchor links with every page loaded via Ajax Load More.
 - NEW - Added support for new [Term Query](https://wordpress.org/plugins/ajax-load-more-for-terms/) extension.
-- UPDATE - Added support for Post Type archives in the [Archives](https://connekthq.com/plugins/ajax-load-more/docs/archives/) integration.
+- UPDATE - Added support for Post Type archives in the [Archives](https://ajaxloadmore.com/docs/archives/) integration.
 - UPDATE - Updated `.alm-listing` CSS styles to better integrate with WooCommerce.
-- UPDATE - Added new Single Post [implementation](https://connekthq.com/plugins/ajax-load-more/add-ons/single-posts/#implementation) technique.
+- UPDATE - Added new Single Post [implementation](https://ajaxloadmore.com/add-ons/single-posts/#implementation) technique.
 
 = 5.1.2 - June 24, 2019 =
 
@@ -508,7 +508,7 @@ Please update all your add-ons and extensions when you update Ajax Load More as 
 What's New in 5.1.0
 
 - NEW - ALM now uses the REST API for all Ajax queries 👏. This includes all add-ons and extensions.
-- NEW - Added new Results Text display for displaying the current page number to users. [view example](https://connekthq.com/plugins/ajax-load-more/examples/results-text/)
+- NEW - Added new Results Text display for displaying the current page number to users. [view example](https://ajaxloadmore.com/examples/results-text/)
 - NEW - Added custom JavaScript fix for reply links in Comment query causing page refresh.
 - NEW - Added custom WP_Query parameter, `alm_query` that can be used in hooks/filters to modify the current query.
 - UPDATE - Added `aria` attributes and focus position after Ajax load to improve plugin accessibility.

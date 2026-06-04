@@ -59,13 +59,13 @@ class ALM_Licensing {
 		}
 
 		if ( $activate ) {
-			$item_id = $_POST['alm_activate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_activate_license'] ) ) : '';
+			$item_id = $_POST['alm_activate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_activate_license'] ) ) : ''; // phpcs:ignore
 			$action  = 'activate_license';
 		} elseif ( $deactivate ) {
-			$item_id = $_POST['alm_deactivate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_deactivate_license'] ) ) : '';
+			$item_id = $_POST['alm_deactivate_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_deactivate_license'] ) ) : ''; // phpcs:ignore
 			$action  = 'deactivate_license';
 		} elseif ( $refresh ) {
-			$item_id = $_POST['alm_refresh_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_refresh_license'] ) ) : '';
+			$item_id = $_POST['alm_refresh_license'] ? sanitize_text_field( wp_unslash( $_POST['alm_refresh_license'] ) ) : ''; // phpcs:ignore
 			$action  = 'check_license';
 		} else {
 			return; // Bail early if no item found.
@@ -109,8 +109,6 @@ class ALM_Licensing {
 				$this->do_activation( $license_data, $name, $item_option, $item_key, $license, $transient_name, $action, $refresh );
 				break;
 		}
-
-		return;
 	}
 
 	/**
@@ -212,8 +210,8 @@ class ALM_Licensing {
 	/**
 	 * Deactivate a license.
 	 *
-	 * @param array  $response       The response from the license request.
-	 * @param string $item_option    The option name for the item, e.g., 'alm_pro_license'.
+	 * @param string $name           The plugin name.
+	 * @param string $option         The option name for the item, e.g., 'alm_pro_license'.
 	 * @param string $transient_name The transient name for the license key.
 	 * @return void
 	 */
@@ -283,7 +281,7 @@ class ALM_Licensing {
 
 		if ( has_action( 'alm_pro_installed' ) ) { // Pro.
 			$addons  = alm_get_pro_addon();
-			$message = __( 'You have an invalid or expired <a href="admin.php?page=ajax-load-more">Ajax Load More Pro</a> license key. Visit the <a href="admin.php?page=ajax-load-more-licenses">License</a> section to input your key or <a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank">purchase</a> one now.', 'ajax-load-more' );
+			$message = __( 'You have an invalid or expired <a href="admin.php?page=ajax-load-more">Ajax Load More Pro</a> license key. Visit the <a href="admin.php?page=ajax-load-more-licenses">License</a> section to input your key or <a href="https://ajaxloadmore.com/pro/" target="_blank">purchase</a> one now.', 'ajax-load-more' );
 		} else { // Other Addons.
 			$addons  = alm_get_addons();
 			$message = __( 'You have invalid or expired <a href="admin.php?page=ajax-load-more">Ajax Load More</a> license keys. Visit the <a href="admin.php?page=ajax-load-more-licenses">Licenses</a> section to input your keys.', 'ajax-load-more' );
@@ -426,7 +424,7 @@ class ALM_Licensing {
 					printf(
 						'<span style="' . esc_html( $style ) . '">%s %s</span>',
 						esc_html__( 'Looks like your subscription has expired.', 'ajax-load-more' ),
-						wp_kses_post( __( 'Please login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
+						wp_kses_post( __( 'Please login to your <a href="https://ajaxloadmore.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 					);
 				}
 				if ( $status === 'invalid' || $status === 'disabled' ) {
@@ -434,7 +432,7 @@ class ALM_Licensing {
 					printf(
 						'<span style="' . esc_html( $style ) . '">%s %s</span>',
 						esc_html__( 'Looks like your license is inactive and/or invalid.', 'ajax-load-more' ),
-						wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> or login to your <a href="https://connekthq.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
+						wp_kses_post( __( 'Please activate the <a href="admin.php?page=ajax-load-more-licenses" target="_blank">license</a> or login to your <a href="https://ajaxloadmore.com/account/" target="_blank">Account</a> to renew the license.', 'ajax-load-more' ) )
 					);
 				}
 				if ( $status === 'deactivated' ) {

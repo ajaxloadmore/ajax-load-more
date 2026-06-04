@@ -1,22 +1,22 @@
 <?php
 /**
  * Plugin Name: Ajax Load More
- * Plugin URI: https://connekthq.com/plugins/ajax-load-more
+ * Plugin URI: https://ajaxloadmore.com
  * Description: The ultimate solution to add infinite scroll and load more functionality to your website.
  * Text Domain: ajax-load-more
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 7.8.4
+ * Version: 8.0.0
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-define( 'ALM_VERSION', '7.8.4' );
-define( 'ALM_RELEASE', 'April 20, 2026' );
-define( 'ALM_STORE_URL', 'https://connekthq.com' );
+define( 'ALM_VERSION', '8.0.0' );
+define( 'ALM_RELEASE', 'June 4, 2026' );
+define( 'ALM_STORE_URL', 'https://ajaxloadmore.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
 
@@ -581,7 +581,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			/**
 			 * ALM Core Query Filter Hook.
 			 *
-			 * @see https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_query_args
+			 * @see https://ajaxloadmore.com/docs/filter-hooks/#alm_query_args
 			 * @return array
 			 */
 			$args = apply_filters( 'alm_query_args_' . $id, $args, $post_id );
@@ -618,7 +618,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				/**
 				 * ALM Core Filter Hook
 				 *
-				 * @see https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_debug
+				 * @see https://ajaxloadmore.com/docs/filter-hooks/#alm_debug
 				 */
 				$debug = apply_filters( 'alm_debug', false ) ? $args : false;
 

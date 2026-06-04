@@ -75,11 +75,11 @@ if ( isset( $_GET['section'] ) ) {
 			</h3>
 			<div class="cta-inner">
 				<p>
-					<?php echo wp_kses_post( __( 'View our collection of over 40 real world Ajax Load More <a href="https://connekthq.com/plugins/ajax-load-more/examples/" target="_blank">examples</a> available on the plugin website.', 'ajax-load-more' ) ); ?>
+					<?php echo wp_kses_post( __( 'View our collection of over 40 real world Ajax Load More <a href="https://ajaxloadmore.com/examples/" target="_blank">examples</a> available on the plugin website.', 'ajax-load-more' ) ); ?>
 				</p>
 			</div>
 			<div class="major-publishing-actions">
-				<a href="https://connekthq.com/plugins/ajax-load-more/examples/" class="button button-primary" target="_blank">
+				<a href="https://ajaxloadmore.com/examples/" class="button button-primary" target="_blank">
 					<?php esc_attr_e( 'View All Examples', 'ajax-load-more' ); ?>
 				</a>
 			</div>

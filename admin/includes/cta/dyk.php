@@ -18,11 +18,11 @@
 		</div>
 		<div class="text">
 			<p class="lg">You can cache your server requests with Ajax Load More!</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/cache/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Cache">Cache</a> add-on creates static HTML files of Ajax Load More requests then delivers those static files to your visitors.</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://ajaxloadmore.com/add-ons/cache/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Cache">Cache</a> add-on creates static HTML files of Ajax Load More requests then delivers those static files to your visitors.</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/cache/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Cache">Learn More</a>
+		<a target="blank" class="button" href="https://ajaxloadmore.com/add-ons/cache/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Cache">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -33,11 +33,11 @@
 		</div>
 		<div class="text">
 			<p class="lg">You can infinite scroll single posts with Ajax Load More!</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Single Post</a> add-on will load single posts as you scroll and update the browser URL to the current post.</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://ajaxloadmore.com/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Single Post</a> add-on will load single posts as you scroll and update the browser URL to the current post.</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Learn More</a>
+		<a target="blank" class="button" href="https://ajaxloadmore.com/add-ons/previous-post/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=PreviousPost">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -48,11 +48,11 @@
 		</div>
 		<div class="text">
 			<p class="lg">You can lazy load blog comments with Ajax Load More!</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/comments/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Comments">Comments</a> add-on will load and display blog comments using the core Ajax Load More infinite scroll functionality.</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://ajaxloadmore.com/add-ons/comments/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Comments">Comments</a> add-on will load and display blog comments using the core Ajax Load More infinite scroll functionality.</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/comments/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Comments">Learn More</a>
+		<a target="blank" class="button" href="https://ajaxloadmore.com/add-ons/comments/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Comments">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -63,11 +63,11 @@
 		</div>
 		<div class="text">
 			<p class="lg">You can infinite scroll just about anything with the Next Page add-on!</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Next Page</a> add-on will allow you to infinite scroll post content using the Page Break block or the <span style="display: inline-block; font-style: italic; color: #999;">&lt;!--nextpage--&gt;</span> <a href="https://codex.wordpress.org/Write_Post_SubPanel#Quicktags" target="_blank">Quicktag</a>.</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://ajaxloadmore.com/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Next Page</a> add-on will allow you to infinite scroll post content using the Page Break block or the <span style="display: inline-block; font-style: italic; color: #999;">&lt;!--nextpage--&gt;</span> <a href="https://codex.wordpress.org/Write_Post_SubPanel#Quicktags" target="_blank">Quicktag</a>.</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Learn More</a>
+		<a target="blank" class="button" href="https://ajaxloadmore.com/add-ons/next-page/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Next Page">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -78,11 +78,11 @@
 		</div>
 		<div class="text">
 			<p class="lg">Ajax Load More PRO</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/pro/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Pro">Pro</a> add-on bundle provides access to all current and future Ajax Load More add-ons in a single installation!</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://ajaxloadmore.com/pro/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Pro">Pro</a> add-on bundle provides access to all current and future Ajax Load More add-ons in a single installation!</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/pro/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Pro">Learn More</a>
+		<a target="blank" class="button" href="https://ajaxloadmore.com/pro/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Pro">Learn More</a>
 	</div>
 	<?php } ?>
 
@@ -93,11 +93,11 @@
 		</div>
 		<div class="text">
 			<p class="lg">Ajax Load More integrates directly with Elementor!</p>
-			<p>The <a target="blank" style="font-weight: 600;" href="https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Elementor">Elementor</a> add-on provides integration for the Elementor Posts and WooCommerce Products widget.</p>
+			<p>The <a target="blank" style="font-weight: 600;" href="https://ajaxloadmore.com/add-ons/elementor/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=Elementor">Elementor</a> add-on provides integration for the Elementor Posts and WooCommerce Products widget.</p>
 		</div>
 	</div>
 	<div class="major-publishing-actions">
-		<a target="blank" class="button" href="https://connekthq.com/plugins/ajax-load-more/add-ons/elementor/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=elementor">Learn More</a>
+		<a target="blank" class="button" href="https://ajaxloadmore.com/add-ons/elementor/?utm_source=WP%20Admin&utm_medium=ALM%20DYK&utm_campaign=elementor">Learn More</a>
 	</div>
 	<?php } ?>
 </div>

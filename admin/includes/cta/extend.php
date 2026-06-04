@@ -5,7 +5,7 @@
  * @package AjaxLoadMore
  */
 
-$alm_extend_url = 'https://connekthq.com/plugins/ajax-load-more/add-ons/templates/?utm_source=WP%20Admin&utm_medium=Repeater%20Templates%20Extend&utm_campaign=templates';
+$alm_extend_url = 'https://ajaxloadmore.com/add-ons/templates/?utm_source=WP%20Admin&utm_medium=Repeater%20Templates%20Extend&utm_campaign=templates';
 ?>
 
 <div class="call-out radius-normal">

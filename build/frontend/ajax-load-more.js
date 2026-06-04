@@ -19107,7 +19107,7 @@ function wooInit(alm) {
   }
   var container = document.querySelector(alm.addons.woocommerce_settings.container); // Get `ul.products`
   if (!container) {
-    console.warn('ALM WooCommerce: Unable to locate container element. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_container');
+    console.warn('ALM WooCommerce: Unable to locate container element. Get more information -> https://ajaxloadmore.com/docs/add-ons/woocommerce/#alm_woocommerce_container');
     return;
   }
   alm.button.dataset.page = alm.addons.woocommerce_settings.paged + 1; // Page
@@ -19123,7 +19123,7 @@ function wooInit(alm) {
   var page = alm.addons.woocommerce_settings.paged;
   if (count > 1) {
     // Display warning if multiple containers were found.
-    console.warn('ALM WooCommerce: Multiple containers with the same classname or ID found. The WooCommerce add-on requires a single container to be defined. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/');
+    console.warn('ALM WooCommerce: Multiple containers with the same classname or ID found. The WooCommerce add-on requires a single container to be defined. Get more information -> https://ajaxloadmore.com/docs/add-ons/woocommerce/');
   }
 
   // Set attributes on containers.
@@ -19137,7 +19137,7 @@ function wooInit(alm) {
     item.dataset.page = alm.page;
     item.dataset.pageTitle = document.title;
   } else {
-    console.warn('ALM WooCommerce: Unable to locate products. Get more information -> https://connekthq.com/plugins/ajax-load-more/docs/add-ons/woocommerce/#alm_woocommerce_products');
+    console.warn('ALM WooCommerce: Unable to locate products. Get more information -> https://ajaxloadmore.com/docs/add-ons/woocommerce/#alm_woocommerce_products');
   }
 
   // Paged URL: Create previous button.
@@ -20409,7 +20409,7 @@ function triggerWindowResize() {
 /**
  * Display Ajax Load More debug results.
  *
- * @see https://connekthq.com/plugins/ajax-load-more/docs/filter-hooks/#alm_debug
+ * @see https://ajaxloadmore.com/docs/filter-hooks/#alm_debug
  * @param {Object} alm ALM object.
  * @since 5.1.6
  */
@@ -23411,7 +23411,7 @@ var analytics = function analytics() {
   /**
    * ALM Callback Function (URL Change)
    *
-   * @see https://connekthq.com/plugins/ajax-load-more/docs/callback-functions/#url-update
+   * @see https://ajaxloadmore.com/docs/callback-functions/#url-update
    */
   if (typeof almUrlUpdate === 'function') {
     window.almUrlUpdate(pathname + search, type);

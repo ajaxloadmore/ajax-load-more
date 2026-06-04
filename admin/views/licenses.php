@@ -149,7 +149,7 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
 								</svg>
-									<?php _e( 'Refresh Status', 'ajax-load-more' ); ?>
+									<?php esc_html_e( 'Refresh Status', 'ajax-load-more' ); ?>
 							</button>
 							<?php } ?>
 								<?php
@@ -158,11 +158,10 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 									$url = ALM_STORE_URL . "/checkout/?edd_license_key={$license}&download_id={$item_id}";
 									?>
 								<a class="button button-link button-large" href="<?php echo esc_url( $url ); ?>" target="_blank">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-	<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-</svg>
-
-									<?php _e( 'Renew License', 'ajax-load-more' ); ?>
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+									</svg>
+									<?php esc_html_e( 'Renew License', 'ajax-load-more' ); ?>
 								</a>
 								<?php } ?>
 						</div>
@@ -184,7 +183,7 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 										if ( $expires === 'lifetime' ) {
 											echo esc_html__( 'Lifetime', 'ajax-load-more' );
 										} else {
-											echo date_i18n( get_option( 'date_format' ), strtotime( $expires ) );
+											echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $expires ) ) );
 										}
 										?>
 									</span>
@@ -258,7 +257,7 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 				?>
 			<div class="spacer"></div>
 			<div class="license-no-addons">
-				<p><?php esc_attr_e( 'You do not have any Ajax Load More add-ons installed', 'ajax-load-more' ); ?> | <a href="admin.php?page=ajax-load-more-add-ons"><strong><?php esc_attr_e( 'Browse Add-ons', 'ajax-load-more' ); ?></strong></a> | <a href="https://connekthq.com/plugins/ajax-load-more/pro/" target="_blank"><strong><?php esc_attr_e( 'Go Pro', 'ajax-load-more' ); ?></strong></a></p>
+				<p><?php esc_attr_e( 'You do not have any Ajax Load More add-ons installed', 'ajax-load-more' ); ?> | <a href="admin.php?page=ajax-load-more-add-ons"><strong><?php esc_attr_e( 'Browse Add-ons', 'ajax-load-more' ); ?></strong></a> | <a href="https://ajaxloadmore.com/pro/" target="_blank"><strong><?php esc_attr_e( 'Go Pro', 'ajax-load-more' ); ?></strong></a></p>
 			</div>
 							<?php endif; ?>
 		</div>
@@ -268,14 +267,14 @@ $alm_pg_desc       = has_action( 'alm_pro_installed' ) ? __( 'Enter your Pro lic
 				<h3><?php esc_attr_e( 'About Licenses', 'ajax-load-more' ); ?></h3>
 				<div class="cta-inner">
 					<ul>
-						<li><?php _e( 'License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target="_blank" href="https://connekthq.com/account/">Account</a> section on our website', 'ajax-load-more' ); ?></li>
-						<li><?php _e( 'If you cannot locate your key please open a support ticket by filling out the <a href="https://connekthq.com/support/">support form</a> and reference the email address used when you completed the purchase.', 'ajax-load-more' ); ?></li>
+						<li><?php _e( 'License keys are found in the purchase receipt email that was sent immediately after purchase and in the <a target="_blank" href="https://ajaxloadmore.com/account/">Account</a> section on our website', 'ajax-load-more' ); ?></li>
+						<li><?php _e( 'If you cannot locate your key please open a support ticket by filling out the <a href="https://ajaxloadmore.com/support/">support form</a> and reference the email address used when you completed the purchase.', 'ajax-load-more' ); ?></li>
 						<li><strong><?php esc_attr_e( 'Are you having issues updating an add-on?', 'ajax-load-more' ); ?></strong><br/>
 						<?php esc_attr_e( 'Try deactivating and re-activating the license. Once you\'ve done that, try running the update again.', 'ajax-load-more' ); ?></li>
 					</ul>
 				</div>
 				<div class="major-publishing-actions">
-					<a class="button button-primary" target="_blank" href="https://connekthq.com/account/">
+					<a class="button button-primary" target="_blank" href="https://ajaxloadmore.com/account/">
 						<?php esc_attr_e( 'Your Account', 'ajax-load-more' ); ?>
 					</a>
 				</div>

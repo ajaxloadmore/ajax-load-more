@@ -1,5 +1,5 @@
 <section class="alm-cta-upgrade">
-	<a href="https://connekthq.com/plugins/ajax-load-more/add-ons/templates/?utm_source=WP%20Admin&amp;utm_medium=ALM%20Add-ons&amp;utm_campaign=templates" target="_blank">
+	<a href="https://ajaxloadmore.com/add-ons/templates/?utm_source=WP%20Admin&amp;utm_medium=ALM%20Add-ons&amp;utm_campaign=templates" target="_blank">
 		<div class="img">
 			<img src="https://wpdev.local/wp-content/plugins/ajax-load-more/admin/img/add-ons/pro-bundle-add-on.png" alt="">
 		</div>
