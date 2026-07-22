@@ -496,25 +496,55 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 		 * @param  string $param The parameter to parse.
 		 * @return array         The modified arguments.
 		 */
-		public static function parse_custom_args( $args, $param ) {
+		private static function parse_custom_args( $args, $param ) {
 			$array = explode( ';', $param );
 
 			// Exclude certain keys from being added via custom_args.
-			$exlude_keys = [ 'post_status', 'perm', 'post_password', 'post__in', 'meta_query', 'tax_query', 'date_query', 'alm_vars' ];
+			$exlude_keys = [
+				'suppress_filters',
+				'has_password',
+				'paged',
+				'page',
+				'post_status',
+				'perm',
+				'post_password',
+				'post__in',
+				'meta_query',
+				'tax_query',
+				'date_query',
+				'alm_vars',
+			];
+
+			$numbered_vars = [ 'author__in', 'author__not_in', 'post__not_in', 'post__in' ];
 
 			// Loop each $argument.
 			foreach ( $array as $arg ) {
-				$arg   = explode( ':', preg_replace( '/\s+/', '', $arg ) );  // Split at each colon & remove whitespace.
-				$value = explode( ',', $arg[1] );  // Split at each comma.
+				$arg = explode( ':', preg_replace( '/\s+/', '', $arg ) );  // Split at each colon & remove whitespace.
 
-				if ( in_array( $arg[0], $exlude_keys, true ) ) {
-					continue; // Skip excluded keys.
+				// Skip malformed pairs (missing key or `:value`).
+				if ( count( $arg ) < 2 || $arg[0] === '' ) {
+					continue;
 				}
 
+				$key = $arg[0];
+
+				// Skip excluded keys.
+				if ( in_array( $key, $exlude_keys, true ) ) {
+					continue;
+				}
+
+				// Force ID-list arguments to arrays of positive integers.
+				if ( in_array( $key, $numbered_vars, true ) ) {
+					$args[ $key ] = wp_parse_id_list( $arg[1] );
+					continue;
+				}
+
+				$value = explode( ',', $arg[1] );  // Split at each comma.
+
 				if ( count( $value ) > 1 ) {
-					$args[ $arg[0] ] = $value;
+					$args[ $key ] = $value;
 				} else {
-					$args[ $arg[0] ] = $arg[1];
+					$args[ $key ] = $arg[1];
 				}
 			}
 
