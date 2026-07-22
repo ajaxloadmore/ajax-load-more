@@ -20,7 +20,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 		/**
 		 * Element tag.
 		 *
-		 * @var element
+		 * @var string
 		 */
 		public static $element = 'noscript';
 
@@ -28,11 +28,11 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 		 * This function will return a generated query for the noscript.
 		 *
 		 * @since 1.8
-		 * @param array  $params       ALM params.
-		 * @param string $container    The HTML container.
-		 * @param string $css_classes  The css classnames.
-		 * @param string $permalink    The current permalink.
-		 * @return HTMLElement
+		 * @param array  $params      ALM params.
+		 * @param string $container   The HTML container.
+		 * @param string $css_classes The css classnames.
+		 * @param string $permalink   The current permalink.
+		 * @return string             HTML output of the <noscript/> element.
 		 */
 		public static function alm_get_noscript( $params, $container = 'ul', $css_classes = '', $permalink = '' ) {
 			$paged   = $params['paged'] ? $params['paged'] : 1;
@@ -69,7 +69,8 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 
 				$filters = $params['filters'];
 				if ( $filters ) {
-					$paged = $_GET && isset( $_GET['pg'] ) ? $_GET['pg'] : 1; // Set page number when using filters.
+					$paged = isset( $_GET['pg'] ) ? absint( $_GET['pg'] ) : 1; // Set page number when using filters.
+					$paged = $paged ? $paged : 1; // Fallback to page 1 for non-numeric or zero values.
 				}
 
 				/**
@@ -117,7 +118,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 		 * @param array   $query     The current query array.
 		 * @param boolean $filters   Is this a Filters add-on URL.
 		 * @param string  $permalink The current permalink.
-		 * @return HTMLElement
+		 * @return string            HTML output of the <noscript/> element.
 		 */
 		public static function build_noscript_paging( $query = [], $filters = false, $permalink = '' ) {
 			// Set up query variables.
@@ -160,7 +161,7 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 		 * @param string $container   The ALM container.
 		 * @param string $paging      ALM paging.
 		 * @param string $css_classes Custom CSS classes.
-		 * @return HTMLElement
+		 * @return string              HTML output of the <noscript/> element.
 		 */
 		public static function render( $output, $container, $paging, $css_classes ) {
 			return ( ! empty( $output ) ) ? '<' . esc_attr( self::$element ) . '><' . esc_attr( $container ) . ' class="alm-listing alm-noscript' . esc_attr( $css_classes ) . '">' . $output . '</' . esc_attr( $container ) . '>' . $paging . '</' . esc_attr( self::$element ) . '>' : '';
@@ -176,6 +177,10 @@ if ( ! class_exists( 'ALM_NOSCRIPT' ) ) :
 		 * @return int
 		 */
 		public static function set_offset( $paged, $per_page, $offset ) {
+			$paged    = absint( $paged ) ? absint( $paged ) : 1;
+			$per_page = absint( $per_page );
+			$offset   = absint( $offset );
+
 			return ( $paged * $per_page ) - $per_page + $offset;
 		}
 	}
