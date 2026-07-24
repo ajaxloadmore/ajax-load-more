@@ -32,7 +32,7 @@
 	],
 	"dependencies": {
 		"crypto-js": "^4.1.1",
-		"dompurify": "^3.2.6"
+		"dompurify": "^3.4.12"
 	},
 	"devDependencies": {
 		"@wordpress/block-editor": "^12.19.0",
