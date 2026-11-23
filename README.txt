@@ -278,6 +278,7 @@ How to install Ajax Load More.
 
 = 8.0.2 - November 23, 2026 =
 * SECURITY: Various security patches. Credit to the security researcher, Respect, who reported the issue discreetly.
+* UPDATE: Updated third-party JavaScript libraries (DOMPurify, Axios, qs) to their latest versions.
 
 = 8.0.1 - July 22, 2026 =
 * FIX: Adding fix for possible noscript fatal error.
