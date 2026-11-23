@@ -34,7 +34,7 @@ A version bump touches: the `Version:` header, `ALM_VERSION` and `ALM_RELEASE` i
 2. **Init (JS).** `src/frontend/js/ajax-load-more.js` finds each `.ajax-load-more-wrap`, reads the data attributes into an `alm` object (stored on `window.ajax_load_more` or `window.ajax_load_more_{id}`), and lets each add-on/extension module (`addons/*.js`, `extensions/*.js`) add its own params (`*CreateParams`).
 3. **Fetch.** By default it sends a GET to `admin-ajax.php` with `action=alm_get_posts` (params built in `functions/queryParams.js`). Several add-ons swap the URL: REST API extension, Next Page, Single Posts, Query Loop/WooCommerce/Elementor (these fetch the next page's HTML instead), and ACF (`action=alm_acf`).
 4. **Query (PHP).** `AjaxLoadMore::alm_query_posts()` in `ajax-load-more.php` builds `WP_Query` args via `ALM_QUERY_ARGS::alm_build_queryargs()` (`core/classes/class-alm-queryargs.php`). It applies the `alm_query_args_{id}` and `alm_query_after_{id}` filters, renders each post through `alm_loop()`, and returns JSON `{ html, meta: { postcount, totalposts, debug }, facets? }`. `query_type=totalposts` returns counts only (Paging/Preloaded).
-5. **Display (JS).** The HTML is sanitized with DOMPurify, inserted with a transition, and then public callbacks fire (`almComplete`, `almDone`, `almEmpty`, `almOnLoad`, etc.).
+5. **Display (JS).** The returned HTML is inserted as-is (it is *not* sanitized client-side, so escaping must happen in PHP/templates) with a transition, and then public callbacks fire (`almComplete`, `almDone`, `almEmpty`, `almOnLoad`, etc.).
 
 ### Repeater templates
 
@@ -59,4 +59,6 @@ Every resolved path passes through `alm_is_valid_path()`. Repeater names coming 
 
 - PHP follows WordPress Coding Standards via `phpcs.xml`, with these project deviations: short array syntax `[]` is **required**, Yoda conditions are not required, and globals must be prefixed `alm` / `ajax_load_more` / `AjaxLoadMore`. The text domain is `ajax-load-more`. PHP compatibility target is 7.4 (Composer platform).
 - Public extension points are WordPress filters/actions named `alm_*` and JS callbacks named `window.alm*`. Treat both as public API, since third-party sites and the add-ons depend on them.
+- Button labels are sanitized twice: in PHP by `ALM_SHORTCODE::alm_strip_tags()` (allows only `span`, `i`, `b`, `strong`) and in JS by DOMPurify before they are written to `innerHTML`. DOMPurify is used only for these labels.
+- `axios`, `qs`, `imagesloaded` and `dompurify` are bundled into `build/frontend/`, so they belong in `dependencies` (not `devDependencies`) so that `npm audit --omit=dev` covers them.
 - Values from AJAX requests come in as strings. Cast numeric params to `(int)` before doing arithmetic (fixed for PHP 8 TypeErrors in #263).
