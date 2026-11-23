@@ -127,35 +127,8 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			$original_offset = isset( $a['original_offset'] ) ? $a['original_offset'] : 0;
 
 			// Post Status.
-			$post_status      = isset( $a['post_status'] ) && ! empty( $a['post_status'] ) ? $a['post_status'] : 'publish'; // Default to publish.
-			$allowed_statuses = [ 'publish', 'inherit' ];
-
-			if ( ! in_array( $post_status, $allowed_statuses, true ) ) {
-				// Handle post status exceptions.
-				if ( current_user_can( apply_filters( 'alm_user_role_post_status', 'edit_theme_options' ) ) ) {
-					// Admin users can view all post statuses.
-					$post_status = $post_status;
-				} else {
-					// Switch over the post status and check if it's allowed via filter.
-					switch ( $post_status ) {
-						case 'private':
-							$post_status = apply_filters( 'alm_allow_private_posts', false ) ? $post_status : 'publish';
-							break;
-						case 'future':
-							$post_status = apply_filters( 'alm_allow_future_posts', false ) ? $post_status : 'publish';
-							break;
-						case 'draft':
-							$post_status = apply_filters( 'alm_allow_draft_posts', false ) ? $post_status : 'publish';
-							break;
-						case 'pending':
-							$post_status = apply_filters( 'alm_allow_pending_posts', false ) ? $post_status : 'publish';
-							break;
-						case 'trash':
-							$post_status = apply_filters( 'alm_allow_trash_posts', false ) ? $post_status : 'publish';
-							break;
-					}
-				}
-			}
+			$post_status = isset( $a['post_status'] ) && ! empty( $a['post_status'] ) ? $a['post_status'] : 'publish'; // Default to publish.
+			$post_status = self::sanitize_post_status( $post_status );
 
 			/**
 			 * Advanced Custom Fields.
@@ -487,6 +460,60 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 
 			// Return parsed $array.
 			return $args;
+		}
+
+		/**
+		 * Sanitize the requested post status against the current user's permissions.
+		 *
+		 * Non-admins only get `publish`, `inherit`, registered public statuses, and statuses
+		 * explicitly enabled via the `alm_allow_{status}_posts` filters. Anything else
+		 * (e.g. `any`, unregistered values) is dropped, falling back to `publish`.
+		 *
+		 * @param  string|array $post_status The requested post status (comma-separated string or array).
+		 * @return string                    The sanitized, comma-separated post status.
+		 */
+		private static function sanitize_post_status( $post_status ) {
+			// Normalize to an array of sanitized status keys (accepts `a,b` strings or arrays).
+			$statuses = is_array( $post_status ) ? $post_status : explode( ',', (string) $post_status );
+			$statuses = array_values( array_unique( array_filter( array_map( 'sanitize_key', array_map( 'strval', $statuses ) ) ) ) );
+
+			if ( empty( $statuses ) ) {
+				return 'publish';
+			}
+
+			// Admin users can view all post statuses.
+			if ( current_user_can( apply_filters( 'alm_user_role_post_status', 'edit_theme_options' ) ) ) {
+				return implode( ',', $statuses );
+			}
+
+			// Statuses that require an explicit opt-in via filter.
+			$opt_in = [
+				'private' => 'alm_allow_private_posts',
+				'future'  => 'alm_allow_future_posts',
+				'draft'   => 'alm_allow_draft_posts',
+				'pending' => 'alm_allow_pending_posts',
+				'trash'   => 'alm_allow_trash_posts',
+			];
+
+			$allowed = [];
+			foreach ( $statuses as $status ) {
+				if ( in_array( $status, [ 'publish', 'inherit' ], true ) ) {
+					$allowed[] = $status;
+				} elseif ( isset( $opt_in[ $status ] ) ) {
+					if ( apply_filters( $opt_in[ $status ], false ) ) {
+						$allowed[] = $status;
+					}
+				} else {
+					// Only allow other registered statuses that are public (e.g. custom public statuses).
+					// Rejects `any`, unregistered values and non-public statuses.
+					$status_object = get_post_status_object( $status );
+					if ( $status_object && $status_object->public ) {
+						$allowed[] = $status;
+					}
+				}
+			}
+
+			return ! empty( $allowed ) ? implode( ',', $allowed ) : 'publish';
 		}
 
 		/**
