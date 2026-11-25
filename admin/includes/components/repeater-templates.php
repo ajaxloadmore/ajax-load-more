@@ -100,9 +100,15 @@ if ( has_action( 'alm_custom_repeaters' ) || has_action( 'alm_unlimited_repeater
 			<?php if ( ! $alm_local_template ) { ?>
 			<div class="alm-row">
 				<div class="column">
-					<?php if ( ! defined( 'ALM_DISABLE_REPEATER_TEMPLATES' ) || ( defined( 'ALM_DISABLE_REPEATER_TEMPLATES' ) && ! ALM_DISABLE_REPEATER_TEMPLATES ) ) { ?>
+					<?php if ( ! alm_templates_disabled() ) { ?>
+						<?php if ( alm_current_user_can_edit_templates() ) { ?>
 						<input type="submit" value="<?php esc_html_e( 'Save Template', 'ajax-load-more' ); ?>" class="button button-primary save-repeater" data-editor-id="template-default">
 						<div class="saved-response">&nbsp;</div>
+						<?php } else { ?>
+						<p class="warning-callout notify" style="margin-right: 0; margin-left: 0;">
+							<?php esc_html_e( 'You do not have permission to edit templates. Templates contain PHP code and can only be saved by users who are able to edit theme or plugin files.', 'ajax-load-more' ); ?>
+						</p>
+						<?php } ?>
 						<?php
 						$repeater_options = [  // phpcs:ignore
 							'path' => $filename,
@@ -114,7 +120,7 @@ if ( has_action( 'alm_custom_repeaters' ) || has_action( 'alm_unlimited_repeater
 					}
 
 					// Disbaled Repeater Templates warning.
-					if ( defined( 'ALM_DISABLE_REPEATER_TEMPLATES' ) && ALM_DISABLE_REPEATER_TEMPLATES ) {
+					if ( alm_templates_disabled() ) {
 						?>
 						<p class="warning-callout notify" style="margin-right: 0; margin-left: 0; margin-bottom: 0;">
 							<?php echo wp_kses_post( __( 'Repeater Templates editing has been disabled for this instance of Ajax Load More. To enable the template editing, please remove the <strong>ALM_DISABLE_REPEATER_TEMPLATES</strong> PHP constant from your wp-config.php (or functions.php) and re-activate the plugin.', 'ajax-load-more' ) ); ?>

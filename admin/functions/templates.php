@@ -22,6 +22,10 @@ function alm_save_repeater() {
 		wp_die( esc_attr__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) ); // Verify nonce.
 	}
 
+	if ( ! alm_current_user_can_edit_templates() ) {
+		wp_die( esc_html__( 'You do not have permission to edit templates.', 'ajax-load-more' ) ); // Templates contain PHP, user must be able to edit code.
+	}
+
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'alm';
 	$blog_id    = $wpdb->blogid;
@@ -29,7 +33,7 @@ function alm_save_repeater() {
 
 	// Get form variables.
 	$c = trim( stripslashes( $form_data['value'] ) ); // Value.
-	$n = trim( stripslashes( str_replace( '/', '', $form_data['repeater'] ) ) ); // Name.
+	$n = sanitize_file_name( trim( stripslashes( $form_data['repeater'] ) ) ); // Name.
 	$t = trim( stripslashes( $form_data['type'] ) ); // Type.
 	$a = trim( stripslashes( $form_data['alias'] ) ); // Alias.
 

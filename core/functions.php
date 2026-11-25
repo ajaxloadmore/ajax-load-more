@@ -241,6 +241,31 @@ function alm_create_template( $id = null, $table_name = null, $col = 'repeaterDe
 }
 
 /**
+ * Has editing of Repeater Templates been disabled.
+ *
+ * @since 8.0.3
+ * @return boolean
+ */
+function alm_templates_disabled() {
+	return defined( 'ALM_DISABLE_REPEATER_TEMPLATES' ) && ALM_DISABLE_REPEATER_TEMPLATES;
+}
+
+/**
+ * Can the current user edit Repeater Templates.
+ * Note: Templates contain executable PHP, so the user must already be able to edit code.
+ * On multisite, only Super Admins have these capabilities.
+ *
+ * @since 8.0.3
+ * @return boolean
+ */
+function alm_current_user_can_edit_templates() {
+	return ! alm_templates_disabled()
+		&& current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) )
+		&& current_user_can( 'unfiltered_html' )
+		&& ( current_user_can( 'edit_themes' ) || current_user_can( 'edit_plugins' ) );
+}
+
+/**
  * Confirm directory or file path does not contain relative path.
  *
  * @since 7.1.0
