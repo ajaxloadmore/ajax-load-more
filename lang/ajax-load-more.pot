@@ -2,14 +2,14 @@
 # This file is distributed under the GPL.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ajax Load More 8.0.2\n"
+"Project-Id-Version: Ajax Load More 8.0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ajax-load-more\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-23T15:23:43+00:00\n"
+"POT-Creation-Date: 2026-11-25T18:12:47+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: ajax-load-more\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: admin/admin.php:568
 #: admin/functions/layouts.php:18
 #: admin/functions/templates.php:18
-#: admin/functions/templates.php:130
+#: admin/functions/templates.php:136
 msgid "You don't belong here."
 msgstr ""
 
@@ -54,7 +54,8 @@ msgstr ""
 #: admin/admin.php:572
 #: admin/functions/layouts.php:23
 #: admin/functions/templates.php:22
-#: admin/functions/templates.php:134
+#: admin/functions/templates.php:140
+#: admin/functions/templates.php:180
 msgid "Error - unable to verify nonce, please try again."
 msgstr ""
 
@@ -73,7 +74,7 @@ msgstr ""
 #: admin/admin.php:119
 #: admin/admin.php:127
 #: admin/views/settings.php:9
-#: ajax-load-more.php:323
+#: ajax-load-more.php:324
 #: src/blocks/core/inspector.js:17
 #: src/blocks/filters/inspector.js:28
 msgid "Settings"
@@ -173,7 +174,7 @@ msgid "Saving template..."
 msgstr ""
 
 #: admin/admin.php:536
-#: admin/functions/templates.php:113
+#: admin/functions/templates.php:119
 msgid "Something went wrong and the data could not be saved."
 msgstr ""
 
@@ -465,7 +466,7 @@ msgstr ""
 #: admin/functions/settings.php:316
 #: admin/shortcode-builder/shortcode-builder.php:206
 #: admin/shortcode-builder/shortcode-builder.php:401
-#: ajax-load-more.php:445
+#: ajax-load-more.php:446
 msgid "Load More"
 msgstr ""
 
@@ -505,15 +506,19 @@ msgstr ""
 msgid "* Database Tables, Options and Repeater Templates"
 msgstr ""
 
-#: admin/functions/templates.php:111
+#: admin/functions/templates.php:26
+msgid "You do not have permission to edit templates."
+msgstr ""
+
+#: admin/functions/templates.php:117
 msgid "Template Saved Successfully"
 msgstr ""
 
-#: admin/functions/templates.php:113
+#: admin/functions/templates.php:119
 msgid "Error Writing File"
 msgstr ""
 
-#: admin/functions/templates.php:178
+#: admin/functions/templates.php:200
 msgid "Something isn't right here..."
 msgstr ""
 
@@ -594,63 +599,67 @@ msgstr ""
 msgid "Upgrade Now"
 msgstr ""
 
-#: admin/includes/components/repeater-options.php:4
+#: admin/includes/components/repeater-options.php:11
 #: admin/shortcode-builder/shortcode-builder.php:153
 msgid "Options"
 msgstr ""
 
-#: admin/includes/components/repeater-options.php:13
+#: admin/includes/components/repeater-options.php:20
 msgid "Update from Database"
 msgstr ""
 
-#: admin/includes/components/repeater-options.php:28
+#: admin/includes/components/repeater-options.php:36
 msgid "Download Template"
 msgstr ""
 
-#: admin/includes/components/repeater-options.php:34
+#: admin/includes/components/repeater-options.php:42
 #: admin/views/shortcode-builder.php:30
 msgid "Copied!"
 msgstr ""
 
-#: admin/includes/components/repeater-options.php:34
-#: admin/includes/components/repeater-options.php:36
+#: admin/includes/components/repeater-options.php:42
+#: admin/includes/components/repeater-options.php:44
 msgid "Copy Template"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:45
+#: admin/includes/components/repeater-templates.php:46
 msgid "Default Template"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:54
+#: admin/includes/components/repeater-templates.php:55
 msgid "Template Code:"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:55
+#: admin/includes/components/repeater-templates.php:56
 msgid "The PHP and HTML markup for this template."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:78
+#: admin/includes/components/repeater-templates.php:79
 msgid "This default Ajax Load More template is missing from the filesystem. Click the \"Save Template\" button to save the template to the filesystem."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:104
+#: admin/includes/components/repeater-templates.php:106
 msgid "Save Template"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:120
+#: admin/includes/components/repeater-templates.php:110
+msgid "You do not have permission to edit templates. Templates contain PHP code and can only be saved by users who are able to edit theme or plugin files."
+msgstr ""
+
+#: admin/includes/components/repeater-templates.php:127
 msgid "Repeater Templates editing has been disabled for this instance of Ajax Load More. To enable the template editing, please remove the <strong>ALM_DISABLE_REPEATER_TEMPLATES</strong> PHP constant from your wp-config.php (or functions.php) and re-activate the plugin."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:133
+#: admin/includes/components/repeater-templates.php:140
 msgid "You're loading the <a href=\"https://ajaxloadmore.com/docs/repeater-templates/#default-template\" target=\"_blank\"><b>Default Template</b></a> (<em>default.php</em>) from your active theme directory. To modify this template, you must edit the file directly on your server."
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:137
-#: admin/includes/components/theme-templates.php:66
+#: admin/includes/components/repeater-templates.php:144
+#: admin/includes/components/theme-templates.php:69
 msgid "Template Location"
 msgstr ""
 
-#: admin/includes/components/repeater-templates.php:153
+#: admin/includes/components/repeater-templates.php:160
 msgid "Add New Template"
 msgstr ""
 
@@ -664,7 +673,7 @@ msgstr ""
 
 #: admin/includes/components/sidebar-repeater-templates.php:29
 #: admin/includes/components/sidebar-theme-templates.php:23
-#: admin/includes/components/theme-templates.php:94
+#: admin/includes/components/theme-templates.php:97
 #: admin/shortcode-builder/shortcode-builder.php:166
 #: admin/views/filters.php:41
 #: admin/views/go-pro.php:63
@@ -685,15 +694,15 @@ msgid "Manage and maintain Ajax Load More templates with your favorite code edit
 msgstr ""
 
 #: admin/includes/components/sidebar-theme-templates.php:26
-#: admin/includes/components/theme-templates.php:95
+#: admin/includes/components/theme-templates.php:98
 msgid "Manage Directory"
 msgstr ""
 
-#: admin/includes/components/theme-templates.php:89
+#: admin/includes/components/theme-templates.php:92
 msgid "Templates Not Found!"
 msgstr ""
 
-#: admin/includes/components/theme-templates.php:91
+#: admin/includes/components/theme-templates.php:94
 msgid "Templates must be uploaded to your selected Theme Templates directory before this feature can be used."
 msgstr ""
 
@@ -2518,7 +2527,7 @@ msgid "Post Status"
 msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:1306
-msgid "Post Status parameters are only available for logged in (admin) users. Non logged in users will only have access to view content in a 'publish' or 'inherit' state."
+msgid "Post Status parameters are only available for logged in (admin) users. Non logged in users will only have access to view content in a 'publish' state, or 'inherit' when the parent post is public."
 msgstr ""
 
 #: admin/shortcode-builder/shortcode-builder.php:1307
@@ -2831,19 +2840,19 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ajax-load-more.php:300
+#: ajax-load-more.php:301
 msgid "Error creating repeater template directory"
 msgstr ""
 
-#: ajax-load-more.php:409
+#: ajax-load-more.php:410
 msgid "Viewing {post_count} of {total_posts} results."
 msgstr ""
 
-#: ajax-load-more.php:410
+#: ajax-load-more.php:411
 msgid "No results found."
 msgstr ""
 
-#: ajax-load-more.php:454
+#: ajax-load-more.php:455
 msgid "Load Previous"
 msgstr ""
 

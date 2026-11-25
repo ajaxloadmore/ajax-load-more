@@ -1,1 +1,9 @@
-.editor-styles-wrapper .alm-filters{pointer-events:none}.editor-styles-wrapper .alm-filters.alm-filters-facets{opacity:1}
+/*!****************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/blocks/filters/index.scss ***!
+  \****************************************************************************************************************************************************/
+.editor-styles-wrapper .alm-filters {
+  pointer-events: none;
+}
+.editor-styles-wrapper .alm-filters.alm-filters-facets {
+  opacity: 1;
+}

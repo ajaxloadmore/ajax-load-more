@@ -278,8 +278,11 @@ How to install Ajax Load More.
 
 = 8.0.3 - November 30, 2026 =
 * SECURITY: Various security patches. Credit to the researcher, Vaibhav Sharma (itvaibhavsharma), who reported the issues discreetly.
-* UPDATE: Various code cleanup and optimizations.
+* NEW: Added `alm_allowed_post_types` filter to allow post types that are not publicly viewable to be queried.
+* UPDATE: Post types that are not publicly viewable (e.g. `publicly_queryable => false`) are no longer returned to visitors. Use the `alm_allowed_post_types` filter to restore them.
+* UPDATE: Sites using `DISALLOW_FILE_EDIT`, `DISALLOW_FILE_MODS` or `DISALLOW_UNFILTERED_HTML` can no longer save templates in the admin. Existing templates are not affected.
 * FIX: Fixed issue where the "Delete on Uninstall" setting did not remove plugin data.
+* FIX: Fixed canonical URL on day archives.
 
 = 8.0.2 - November 23, 2026 =
 * SECURITY: Various security patches. Credit to the security researcher, Respect, who reported the issue discreetly.
