@@ -169,22 +169,32 @@ function alm_repeaters_export() {
 	// Confirm post data and WP capabilities.
 	if ( isset( $form_data['alm_repeaters_export'] ) && ! wp_doing_ajax() && current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) ) ) {
 
-		$type = esc_attr( $form_data['alm_repeaters_export_type'] );
-		$name = sanitize_file_name( $form_data['alm_repeaters_export_name'] );
+		// Verify nonce.
+		if ( ! isset( $form_data['alm_repeaters_export_nonce'] ) || ! wp_verify_nonce( $form_data['alm_repeaters_export_nonce'], 'alm_repeaters_export' ) ) {
+			wp_die( esc_html__( 'Error - unable to verify nonce, please try again.', 'ajax-load-more' ) );
+		}
 
-		// Security checker.
-		// Note: Confirm filename name does not contain relative server path.
-		if ( false !== strpos( $name, './' ) ) {
+		$type = isset( $form_data['alm_repeaters_export_type'] ) ? $form_data['alm_repeaters_export_type'] : '';
+		$name = isset( $form_data['alm_repeaters_export_name'] ) ? sanitize_file_name( $form_data['alm_repeaters_export_name'] ) : '';
+
+		if ( $type === 'theme-repeater' ) {
+			$base_dir = AjaxLoadMore::alm_get_theme_repeater_path();
+			$file     = $base_dir . '/' . $name;
+			$allowed  = [ 'php', 'html' ];
+		} else {
+			$base_dir = AjaxLoadMore::alm_get_repeater_path();
+			$file     = $base_dir . '/' . $name . '.php';
+			$allowed  = [ 'php' ];
+		}
+
+		// Security check.
+		// Note: Confirm the file resolves to a template inside the template directory.
+		$file = $name && $base_dir && alm_is_path_inside( $file, $base_dir ) ? realpath( $file ) : '';
+		if ( ! $file || ! in_array( strtolower( pathinfo( $file, PATHINFO_EXTENSION ) ), $allowed, true ) ) {
 			wp_die( esc_html__( 'Something isn\'t right here...', 'ajax-load-more' ) );
 		}
 
-		if ( $type === 'theme-repeater' ) {
-			$file = AjaxLoadMore::alm_get_theme_repeater_path() . '/' . $name;
-		} else {
-			$file = AjaxLoadMore::alm_get_repeater_path() . '/' . $name . '.php';
-		}
-
-		if ( file_exists( $file ) ) {
+		if ( is_file( $file ) ) {
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-Type: application/octet-stream' );
 			header( 'Content-Disposition: attachment; filename="' . basename( $file ) . '"' );

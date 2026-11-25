@@ -1,4 +1,11 @@
-<?php if ( isset( $repeater_options ) ) { ?>
+<?php
+/**
+ * Repeater Options Display.
+ *
+ * @package AjaxLoadMore
+ */
+
+if ( isset( $repeater_options ) ) { ?>
 <div class="alm-drop-btn alm-repeater-options">
 	<a href="javascript:void(0);" class="target">
 		<i class="fa fa-cog"></i><span class="offscreen"><?php esc_attr_e( 'Options', 'ajax-load-more' ); ?></span>
@@ -17,13 +24,14 @@
 
 				<?php
 				if ( isset( $repeater_options['path'] ) ) {
-					$path = str_replace( '/', '_', $repeater_options['path'] );
+					$repeater_path = str_replace( '/', '_', $repeater_options['path'] );
 					?>
 				<li class="option download">
-					<form action="" method="POST" id="<?php echo esc_attr( $path ); ?>">
-						<input type="hidden" name="alm_repeaters_export_type" value="<?php echo $repeater_options['type']; ?>">
-						<input type="hidden" name="alm_repeaters_export" value="<?php echo AjaxLoadMore::alm_get_repeater_path(); ?>">
-						<input type="hidden" name="alm_repeaters_export_name" value="<?php echo $repeater_options['name']; ?>">
+					<form action="" method="POST" id="<?php echo esc_attr( $repeater_path ); ?>">
+						<input type="hidden" name="alm_repeaters_export_type" value="<?php echo esc_attr( $repeater_options['type'] ); ?>">
+						<input type="hidden" name="alm_repeaters_export" value="<?php echo esc_attr( AjaxLoadMore::alm_get_repeater_path() ); ?>">
+						<input type="hidden" name="alm_repeaters_export_name" value="<?php echo esc_attr( $repeater_options['name'] ); ?>">
+						<input type="hidden" name="alm_repeaters_export_nonce" value="<?php echo esc_attr( wp_create_nonce( 'alm_repeaters_export' ) ); ?>">
 						<button type="button" class="download-repeater">
 							<i class="fa fa-download"></i> <?php esc_attr_e( 'Download Template', 'ajax-load-more' ); ?>
 						</button>

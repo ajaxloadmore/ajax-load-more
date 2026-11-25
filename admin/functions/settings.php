@@ -122,7 +122,7 @@ function alm_admin_init() {
 
 	$settings = [
 		'alm_cache_settings',
-		'alm_unlimited_settings', // Deprecated 7.4.3
+		'alm_unlimited_settings', // Deprecated 7.4.3.
 		'alm_filters_settings',
 		'alm_layouts_settings',
 		'alm_nextpage_settings',
@@ -132,7 +132,7 @@ function alm_admin_init() {
 		'alm_seo_settings',
 		'alm_prev_post_settings',
 		'alm_templates_settings',
-		'alm_theme_repeaters_settings', // Deprecated 7.4.3
+		'alm_theme_repeaters_settings', // Deprecated 7.4.3.
 	];
 
 	foreach ( $settings as $setting ) {
@@ -168,7 +168,7 @@ function alm_admin_settings_callback() {
  * @since 2.0.0
  */
 function alm_sanitize_settings( $input ) {
-	return $input;
+	return alm_filter_settings_option( $input ); // Sanitize the Theme Repeater directory.
 }
 
 /**
@@ -302,7 +302,7 @@ function alm_btn_color_callback() {
 			foreach ( $loader['loaders'] as $option ) {
 				$selected  = $type === $option['value'] ? ' selected="selected"' : '';
 				$pre_class = strpos( $option['value'], 'infinite' ) === false ? ' alm-color' : '';
-				echo '<option value="' . esc_attr( $option['value'] ) . '" class="' . esc_attr( $option['value'] ) . $pre_class . '"' . esc_attr( $selected ) . '>' . esc_html( $option['label'] ) . '</option>';
+				echo '<option value="' . esc_attr( $option['value'] ) . '" class="' . esc_attr( $option['value'] ) . esc_attr( $pre_class ) . '"' . esc_attr( $selected ) . '>' . esc_html( $option['label'] ) . '</option>';
 			}
 			echo '</optgroup>';
 		}

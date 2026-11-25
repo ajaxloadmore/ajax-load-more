@@ -266,23 +266,24 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		/**
 		 * Get absolute path to theme repeater directory base.
 		 *
-		 * @return string The directory path.
+		 * @return string The directory path, or an empty string if a valid directory is not found.
 		 * @since 5.5.4
 		 */
 		public static function alm_get_theme_repeater_path() {
 			$options = get_option( 'alm_settings' );
-			if ( ! isset( $options['_alm_theme_repeaters_dir'] ) ) {
-				$options['_alm_theme_repeaters_dir'] = 'alm_templates';
+			$default = 'alm_templates';
+			$dir     = isset( $options['_alm_theme_repeaters_dir'] ) ? alm_sanitize_theme_repeater_dir( $options['_alm_theme_repeaters_dir'] ) : $default;
+			$theme   = is_child_theme() ? get_stylesheet_directory() : get_template_directory();
+
+			// Directory must resolve to a location inside the active theme.
+			foreach ( [ $dir, $default ] as $name ) {
+				$path = realpath( $theme . '/' . $name );
+				if ( $path && is_dir( $path ) && alm_is_path_inside( $path, $theme ) ) {
+					return $path;
+				}
 			}
 
-			// Get template location.
-			if ( is_child_theme() ) {
-				$path = get_stylesheet_directory() . '/' . $options['_alm_theme_repeaters_dir'];
-			} else {
-				$path = get_template_directory() . '/' . $options['_alm_theme_repeaters_dir'];
-			}
-
-			return $path;
+			return '';
 		}
 
 		/**

@@ -136,13 +136,11 @@ function alm_get_current_repeater( $template, $type ) {
 			if ( ! file_exists( $include ) ) {
 				alm_create_template( $template, 'alm_unlimited' ); // Create the template file if it doesn't exist.
 			}
-
 		} else {
 			global $wpdb;
 			$blog_id = $wpdb->blogid;
 			$include = ( $blog_id > 1 ) ? ALM_UNLIMITED_PATH . 'repeaters/' . $blog_id . '/' . $template . '.php' : ALM_UNLIMITED_PATH . 'repeaters/' . $template . '.php';
 		}
-
 	} elseif ( $type === 'repeater' && has_action( 'alm_repeater_installed' ) ) {
 		// Custom Repeaters v1 add-on.
 		$include = ALM_REPEATER_PATH . 'repeaters/' . $template . '.php';
@@ -219,7 +217,7 @@ function alm_create_template( $id = null, $table_name = null, $col = 'repeaterDe
 
 	global $wpdb;
 	$table   = $wpdb->prefix . $table_name;
-	$row     = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE name = %s", $id ) ); // Get first result only.
+	$row     = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE name = %s", $id ) ); // phpcs:ignore
 	$content = ! empty( $row ) && $row->$col ? $row->$col : '';
 
 	if ( ! $content ) {
@@ -255,6 +253,64 @@ function alm_is_valid_path( $path ) {
 	}
 	return false !== strpos( $path, './' ) || false !== strpos( $path, '.\\' ) ? false : true;
 }
+
+/**
+ * Confirm a path resolves to a location inside a base directory.
+ * Note: Symlinks and relative segments are resolved before comparing.
+ *
+ * @since 8.0.3
+ * @param string $path The path to check.
+ * @param string $base The base directory.
+ * @return boolean     Return true if the path exists and is inside the base directory.
+ */
+function alm_is_path_inside( $path, $base ) {
+	if ( ! $path || ! $base ) {
+		return false;
+	}
+	$path = realpath( $path );
+	$base = realpath( $base );
+	if ( ! $path || ! $base ) {
+		return false;
+	}
+	return 0 === strpos( wp_normalize_path( $path ), trailingslashit( wp_normalize_path( $base ) ) );
+}
+
+/**
+ * Sanitize the Theme Repeater directory setting.
+ * Value must be a directory name relative to the active theme.
+ *
+ * @since 8.0.3
+ * @param mixed $dir The directory.
+ * @return string    The sanitized directory.
+ */
+function alm_sanitize_theme_repeater_dir( $dir ) {
+	$default = 'alm_templates';
+	if ( ! is_string( $dir ) || false !== strpos( $dir, '\\' ) || false !== strpos( $dir, "\0" ) ) {
+		return $default;
+	}
+
+	$dir = trim( trim( $dir ), '/' );
+	if ( $dir === '' || 0 !== validate_file( $dir ) || array_intersect( [ '', '.', '..' ], explode( '/', $dir ) ) ) {
+		return $default;
+	}
+	return $dir;
+}
+
+/**
+ * Sanitize the Theme Repeater directory each time the ALM settings are read.
+ * Note: Protects against unsafe values stored before 8.0.3 and covers add-ons that read the option directly.
+ *
+ * @since 8.0.3
+ * @param mixed $options The ALM settings.
+ * @return mixed         The ALM settings.
+ */
+function alm_filter_settings_option( $options ) {
+	if ( is_array( $options ) && isset( $options['_alm_theme_repeaters_dir'] ) ) {
+		$options['_alm_theme_repeaters_dir'] = alm_sanitize_theme_repeater_dir( $options['_alm_theme_repeaters_dir'] );
+	}
+	return $options;
+}
+add_filter( 'option_alm_settings', 'alm_filter_settings_option' );
 
 /**
  * Construct a date query before/after query.
@@ -357,8 +413,8 @@ function alm_get_post_format( $post_format ) {
 		// If query is for standard then we need to filter by NOT IN.
 		if ( 'post-format-standard' === $format ) {
 			$post_formats = get_theme_support( 'post-formats' );
+			$terms        = [];
 			if ( $post_formats && is_array( $post_formats[0] ) && count( $post_formats[0] ) ) {
-				$terms = [];
 				foreach ( $post_formats[0] as $format ) {
 					$terms[] = 'post-format-' . $format;
 				}
@@ -428,7 +484,7 @@ function alm_parse_tax_terms( $terms ) {
  * A do_shortcode fix (shortcode renders as HTML when using < OR  <==).
  *
  * @param string $compare The compare operator.
- * @return void
+ * @return string The parsed compare operator.
  */
 function alm_parse_query_compare( $compare ) {
 	if ( ! $compare ) {
@@ -455,10 +511,8 @@ function alm_get_meta_query( $params ) {
 	$meta_type    = esc_sql( $params['type'] );
 
 	if ( ! empty( $meta_key ) ) {
-		$meta_compare = alm_parse_query_compare( $meta_compare );
-
-		// Get optimized `meta_value` parameter.
-		$meta_values = alm_parse_meta_value( $meta_value, $meta_compare );
+		$meta_compare = alm_parse_query_compare( $meta_compare ); // Get optimized `meta_compare` parameter.
+		$meta_values  = alm_parse_meta_value( $meta_value, $meta_compare ); // Get optimized `meta_value` parameter.
 
 		// Clear $meta_values if empty.
 		if ( $meta_values === '' ) {
@@ -575,7 +629,7 @@ function alm_get_canonical_url() {
 			$canonical_url = get_month_link( $archive_year, $archive_month );
 		}
 		if ( is_day() ) {
-			$canonical_url = get_month_link( $archive_year, $archive_month, $archive_day );
+			$canonical_url = get_day_link( $archive_year, $archive_month, $archive_day );
 		}
 	} elseif ( is_front_page() ) {
 		// Frontpage.
