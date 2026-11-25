@@ -7,15 +7,15 @@
  * Author: Darren Cooney
  * Twitter: @KaptonKaos
  * Author URI: https://connekthq.com
- * Version: 8.0.2
+ * Version: 8.0.3
  * License: GPL
  * Copyright: Darren Cooney & Connekt Media
  *
  * @package AjaxLoadMore
  */
 
-define( 'ALM_VERSION', '8.0.2' );
-define( 'ALM_RELEASE', 'November 23, 2026' );
+define( 'ALM_VERSION', '8.0.3' );
+define( 'ALM_RELEASE', 'November 30, 2026' );
 define( 'ALM_STORE_URL', 'https://ajaxloadmore.com' );
 
 require_once plugin_dir_path( __FILE__ ) . 'core/functions/install.php';
@@ -215,7 +215,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 				return;
 			}
 			include_once ALM_PATH . 'core/classes/class-alm-noscript.php'; // Load Noscript Class.
-			$noscript = ALM_NOSCRIPT::alm_get_noscript( $args, $container_element, $css_classes, $transition_classes, $permalink );
+			$noscript = ALM_NOSCRIPT::alm_get_noscript( $args, $container_element, $css_classes, $permalink );
 			return $noscript;
 		}
 
@@ -307,7 +307,7 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 		 * Returns add-on data (admin/admin-functions.php).
 		 *
 		 * @since 2.0.0
-		 * @return @addons
+		 * @return array The array of add-ons.
 		 */
 		public function alm_return_addons() {
 			return alm_get_addons();

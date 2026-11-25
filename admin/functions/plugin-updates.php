@@ -23,5 +23,11 @@ function alm_upgrade_routine() {
 		// Delete alm_version option.
 		delete_option( 'alm_version' );
 	}
+
+	// Prevent direct access to the template directory.
+	if ( get_option( 'alm_templates_protected' ) !== 'true' && is_dir( AjaxLoadMore::alm_get_repeater_path() ) ) {
+		alm_protect_template_dir();
+		update_option( 'alm_templates_protected', 'true' );
+	}
 }
 add_action( 'admin_init', 'alm_upgrade_routine' );

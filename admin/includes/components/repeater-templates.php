@@ -40,7 +40,7 @@ if ( has_action( 'alm_custom_repeaters' ) || has_action( 'alm_unlimited_repeater
 		global $wp_filesystem;
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		WP_Filesystem();
-		$content = $wp_filesystem->get_contents( $filename );
+		$content = alm_strip_template_guard( $wp_filesystem->get_contents( $filename ) );
 	}
 	?>
 	<h3 class="heading" tabindex="0"><?php esc_attr_e( 'Default Template', 'ajax-load-more' ); ?></h3>

@@ -32,7 +32,7 @@ function alm_save_repeater() {
 	$options    = get_option( 'alm_settings' );
 
 	// Get form variables.
-	$c = trim( stripslashes( $form_data['value'] ) ); // Value.
+	$c = trim( alm_strip_template_guard( trim( stripslashes( $form_data['value'] ) ) ) ); // Value.
 	$n = sanitize_file_name( trim( stripslashes( $form_data['repeater'] ) ) ); // Name.
 	$t = trim( stripslashes( $form_data['type'] ) ); // Type.
 	$a = trim( stripslashes( $form_data['alias'] ) ); // Alias.
@@ -75,7 +75,7 @@ function alm_save_repeater() {
 			throw new Exception( '[Ajax Load More] Unable to open repeater template - ' . $f . ' - Please check your file path and ensure your server is configured to allow Ajax Load More to read and write files.' );
 		}
 		// phpcs:ignore
-		$w = fwrite( $o, $c ); // Save the file.
+		$w = fwrite( $o, alm_add_template_guard( $c ) ); // Save the file.
 		if ( ! $w ) {
 			throw new Exception( '[Ajax Load More] Error saving repeater template - ' . $f . ' - Please check your file path and ensure your server is configured to allow Ajax Load More to read and write files.', 'ajax-load-more' );
 		}
@@ -88,6 +88,8 @@ function alm_save_repeater() {
 			echo '<script>console.log("' . wp_kses_post( $e->getMessage() ) . '");</script>';
 		}
 	}
+
+	alm_protect_template_dir();
 
 	// Save to database.
 	if ( $t === 'default' ) {
@@ -203,7 +205,7 @@ function alm_repeaters_export() {
 			header( 'Content-Type: application/octet-stream' );
 			header( 'Content-Disposition: attachment; filename="' . basename( $file ) . '"' );
 			// phpcs:ignore
-			readfile( $file );
+			echo alm_strip_template_guard( file_get_contents( $file ) );
 			exit();
 		}
 	}

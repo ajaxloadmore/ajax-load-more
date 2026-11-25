@@ -244,9 +244,11 @@ function alm_create_template( $id = null, $table_name = null, $col = 'repeaterDe
 	WP_Filesystem();
 	global $wp_filesystem;
 
-	if ( ! $wp_filesystem->put_contents( $file, $content ) ) {
+	if ( ! $wp_filesystem->put_contents( $file, alm_add_template_guard( $content ) ) ) {
 		error_log( __( 'Error writing file' ) ); // phpcs:ignore
 	}
+
+	alm_protect_template_dir();
 }
 
 /**
@@ -272,6 +274,92 @@ function alm_current_user_can_edit_templates() {
 		&& current_user_can( apply_filters( 'alm_user_role', 'edit_theme_options' ) )
 		&& current_user_can( 'unfiltered_html' )
 		&& ( current_user_can( 'edit_themes' ) || current_user_can( 'edit_plugins' ) );
+}
+
+/**
+ * Get the guard added to the top of template files to prevent direct access.
+ *
+ * @since 8.0.3
+ * @return string
+ */
+function alm_get_template_guard() {
+	return "<?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>";
+}
+
+/**
+ * Add the direct access guard to template content before writing it to a file.
+ * Note: Skipped if the template starts with `namespace` or `declare`, as these must be the first statement in a file.
+ *
+ * @since 8.0.3
+ * @param string $content The template content.
+ * @return string         The template content with the guard.
+ */
+function alm_add_template_guard( $content ) {
+	$content = alm_strip_template_guard( $content );
+	if ( preg_match( '/^\s*<\?php\b(?:\s|\/\*.*?\*\/|(?:\/\/|#)[^\n]*\n)*(?:declare\s*\(|namespace\b)/is', $content ) ) {
+		return $content;
+	}
+	return alm_get_template_guard() . "\n" . $content;
+}
+
+/**
+ * Remove the direct access guard from template content.
+ *
+ * @since 8.0.3
+ * @param string $content The template content.
+ * @return string         The template content without the guard.
+ */
+function alm_strip_template_guard( $content ) {
+	$guard   = alm_get_template_guard();
+	$content = (string) $content;
+	while ( 0 === strpos( $content, $guard ) ) {
+		// Remove the guard and the single line break that follows.
+		$content = preg_replace( '/^\r?\n/', '', substr( $content, strlen( $guard ) ) );
+	}
+	return $content;
+}
+
+/**
+ * Prevent direct access to PHP files in the template directory.
+ * Note: Only directories inside of uploads are modified, as `alm_repeater_path` may be set to a theme directory.
+ *
+ * @since 8.0.3
+ * @return void
+ */
+function alm_protect_template_dir() {
+	$dir     = AjaxLoadMore::alm_get_repeater_path();
+	$uploads = wp_upload_dir( null, false );
+	if ( ! is_dir( $dir ) || ! wp_is_writable( $dir ) || ! alm_is_path_inside( $dir, $uploads['basedir'] ) ) {
+		return;
+	}
+
+	$rules = implode(
+		"\n",
+		[
+			'# Ajax Load More: Prevent direct access to template files.',
+			'<FilesMatch "(?i)\.(php[0-9]?|phtml|phar)$">',
+			'	<IfModule mod_authz_core.c>',
+			'		Require all denied',
+			'	</IfModule>',
+			'	<IfModule !mod_authz_core.c>',
+			'		Order deny,allow',
+			'		Deny from all',
+			'	</IfModule>',
+			'</FilesMatch>',
+			'',
+		]
+	);
+
+	$files = [
+		'index.php' => "<?php\n// Silence is golden.\n",
+		'.htaccess' => $rules,
+	];
+	foreach ( $files as $name => $content ) {
+		$file = trailingslashit( $dir ) . $name;
+		if ( ! file_exists( $file ) ) {
+			file_put_contents( $file, $content ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		}
+	}
 }
 
 /**

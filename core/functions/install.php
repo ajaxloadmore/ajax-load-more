@@ -26,10 +26,12 @@ function alm_create_table() {
 	if ( ! file_exists( $file ) ) {
 		// phpcs:disable
 		$tmp = fopen( $file, 'w+' );
-		$w   = fwrite( $tmp, $repeater );
+		$w   = fwrite( $tmp, alm_add_template_guard( $repeater ) );
 		fclose( $tmp );
 		// phpcs:enable
 	}
+
+	alm_protect_template_dir();
 
 	if ( defined( 'ALM_DISABLE_REPEATER_TEMPLATES' ) && ALM_DISABLE_REPEATER_TEMPLATES ) {
 		return;  // Exit if disabled, we don't want to create the table.
