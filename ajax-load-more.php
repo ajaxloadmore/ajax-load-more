@@ -571,6 +571,9 @@ if ( ! class_exists( 'AjaxLoadMore' ) ) :
 			 */
 			$args = $single_post && has_action( 'alm_single_post_installed' ) ? apply_filters( 'alm_single_post_args', $single_post_id, $post_type ) : $args;
 
+			// Single Post add-on replaces $args, restrict to public content again.
+			$args = ALM_QUERY_ARGS::restrict_args( $args );
+
 			/**
 			 * ALM Core Query Filter Hook
 			 *

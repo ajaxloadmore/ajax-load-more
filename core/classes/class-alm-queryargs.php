@@ -347,6 +347,9 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 				$args['lang'] = $lang;
 			}
 
+			// Restrict to public content. Note: Must run before the sticky posts query.
+			$args = self::restrict_args( $args );
+
 			// Sticky Posts.
 			if ( $sticky ) {
 				$sticky_posts        = get_option( 'sticky_posts' ); // Get all sticky post ids.
@@ -463,6 +466,95 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 		}
 
 		/**
+		 * Can the current user query non-public content.
+		 *
+		 * @since 8.0.3
+		 * @return boolean
+		 */
+		private static function can_view_restricted() {
+			return current_user_can( apply_filters( 'alm_user_role_post_status', 'edit_theme_options' ) );
+		}
+
+		/**
+		 * Get the post types available to users who cannot view restricted content.
+		 *
+		 * @since 8.0.3
+		 * @return array The post type names.
+		 */
+		private static function get_allowed_post_types() {
+			$viewable = array_filter( get_post_types(), 'is_post_type_viewable' );
+
+			/**
+			 * ALM Core Filter Hook.
+			 * Allow post types that are not publicly viewable to be queried by all users.
+			 *
+			 * @since 8.0.3
+			 * @return array
+			 */
+			$additional = (array) apply_filters( 'alm_allowed_post_types', [] );
+
+			return array_values( array_unique( array_merge( array_values( $viewable ), $additional ) ) );
+		}
+
+		/**
+		 * Restrict query args to public content for users who cannot view restricted content.
+		 *
+		 * @since 8.0.3
+		 * @param  array $args The query args.
+		 * @return array       The modified args.
+		 */
+		public static function restrict_args( $args ) {
+			if ( ! is_array( $args ) || self::can_view_restricted() ) {
+				return $args;
+			}
+
+			// Normalize the same way as WP_Query.
+			$types = ! empty( $args['post_type'] ) ? $args['post_type'] : 'post';
+			$types = is_array( $types ) ? $types : explode( ',', (string) $types );
+			$types = array_filter( array_map( 'sanitize_key', array_filter( $types, 'is_scalar' ) ) );
+
+			$allowed = self::get_allowed_post_types();
+			if ( in_array( 'any', $types, true ) ) {
+				$types = array_merge( array_diff( $types, [ 'any' ] ), get_post_types( [ 'exclude_from_search' => false ] ) );
+			}
+			$types = array_values( array_unique( array_intersect( $types, $allowed ) ) );
+
+			// Use an unregistered post type to return zero results, as WP_Query would fallback to `post` if empty.
+			$args['post_type'] = $types ? $types : [ 'alm_no_results' ];
+
+			// Only query `inherit` posts with a public parent. See `restrict_inherit_where`.
+			$args['alm_restrict_inherit'] = true;
+
+			return $args;
+		}
+
+		/**
+		 * Only return posts with an `inherit` status (attachments) if unattached or the parent post is public.
+		 *
+		 * @since 8.0.3
+		 * @param  string   $where The WHERE clause.
+		 * @param  WP_Query $query The current query.
+		 * @return string          The modified WHERE clause.
+		 */
+		public static function restrict_inherit_where( $where, $query ) {
+			if ( ! $query->get( 'alm_restrict_inherit' ) ) {
+				return $where;
+			}
+
+			global $wpdb;
+			$statuses = "'" . implode( "','", array_map( 'esc_sql', get_post_stati( [ 'public' => true ] ) ) ) . "'";
+			$types    = "'" . implode( "','", array_map( 'esc_sql', self::get_allowed_post_types() ) ) . "'";
+
+			return $where . " AND ( {$wpdb->posts}.post_status <> 'inherit' OR {$wpdb->posts}.post_parent = 0 OR EXISTS (
+				SELECT 1 FROM {$wpdb->posts} AS alm_parent
+				WHERE alm_parent.ID = {$wpdb->posts}.post_parent
+				AND alm_parent.post_status IN ({$statuses})
+				AND alm_parent.post_type IN ({$types})
+				AND alm_parent.post_password = ''
+			) )";
+		}
+
+		/**
 		 * Sanitize the requested post status against the current user's permissions.
 		 *
 		 * Non-admins only get `publish`, `inherit`, registered public statuses, and statuses
@@ -482,7 +574,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			}
 
 			// Admin users can view all post statuses.
-			if ( current_user_can( apply_filters( 'alm_user_role_post_status', 'edit_theme_options' ) ) ) {
+			if ( self::can_view_restricted() ) {
 				return implode( ',', $statuses );
 			}
 
@@ -533,6 +625,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 				'paged',
 				'page',
 				'post_status',
+				'post_type',
 				'perm',
 				'post_password',
 				'post__in',
@@ -540,6 +633,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 				'tax_query',
 				'date_query',
 				'alm_vars',
+				'alm_restrict_inherit',
 			];
 
 			$numbered_vars = [ 'author__in', 'author__not_in', 'post__not_in', 'post__in' ];
@@ -578,5 +672,7 @@ if ( ! class_exists( 'ALM_QUERY_ARGS' ) ) :
 			return $args;
 		}
 	}
+
+	add_filter( 'posts_where', [ 'ALM_QUERY_ARGS', 'restrict_inherit_where' ], 10, 2 );
 
 endif;
