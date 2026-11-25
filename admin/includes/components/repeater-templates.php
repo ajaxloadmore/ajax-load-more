@@ -35,7 +35,8 @@ if ( has_action( 'alm_custom_repeaters' ) || has_action( 'alm_unlimited_repeater
 
 	$filename = alm_get_default_repeater(); // Get default repeater template.
 	$content  = '';
-	if ( file_exists( $filename ) ) {
+	// Note: Skip the bundled fallback so a missing template is loaded from the database below.
+	if ( file_exists( $filename ) && ALM_PATH . 'admin/includes/layout/default.php' !== $filename ) {
 		global $wp_filesystem;
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		WP_Filesystem();

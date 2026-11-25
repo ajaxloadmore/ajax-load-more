@@ -194,6 +194,11 @@ function alm_get_default_repeater() {
 		alm_create_template( 'default', 'alm' );
 	}
 
+	// Fallback to the bundled template if the file could not be created.
+	if ( ! file_exists( $file ) ) {
+		$file = ALM_PATH . 'admin/includes/layout/default.php';
+	}
+
 	return $file;
 }
 
@@ -208,6 +213,10 @@ function alm_get_default_repeater() {
 function alm_create_template( $id = null, $table_name = null, $col = 'repeaterDefault' ) {
 	if ( ! $id || ! $table_name || ! $col || apply_filters( 'alm_create_templates', false ) ) {
 		return;
+	}
+
+	if ( alm_templates_disabled() ) {
+		return; // Never write stored template code to disk if templates are disabled.
 	}
 
 	$allowed_tables = [ 'alm', 'alm_unlimited' ];
